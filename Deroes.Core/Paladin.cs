@@ -8,6 +8,9 @@
 		public override double ManaPerLevel => 1.5;
 		public override double LifePerVitality => 3;
 		public override double ManaPerEnergy => 2;
+		public override int StaminaInitial => 89;
+		public override int StaminaPerVitality => 1;
+		public override int StaminaPerLevel => 1;
 
 		public Paladin()
 		{

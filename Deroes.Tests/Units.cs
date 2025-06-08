@@ -192,6 +192,7 @@ namespace Deroes.Tests
 			Assert.AreEqual(26, hero.Level);
 			Assert.AreEqual(105, hero.Life);
 			Assert.AreEqual(52.5, hero.Mana);
+			Assert.AreEqual(114, hero.Stamina);
 		}
 
 		[TestMethod]
@@ -205,6 +206,7 @@ namespace Deroes.Tests
 			Assert.AreEqual(50, lvl50.Level);
 			Assert.AreEqual(153, lvl50.Life);
 			Assert.AreEqual(88.5, lvl50.Mana);
+			Assert.AreEqual(138, lvl50.Stamina);
 		}
 
 		[TestMethod]
@@ -235,6 +237,8 @@ namespace Deroes.Tests
 			hero.AddVitality();
 
 			Assert.AreEqual(hero.LifeInitial + hero.LifePerLevel * 5, hero.Life);
+			Assert.AreEqual(hero.StaminaInitial + hero.StaminaPerVitality * 5, hero.Stamina);
+
 		}
 
 		[TestMethod]
@@ -248,6 +252,7 @@ namespace Deroes.Tests
 			}
 
 			Assert.AreEqual(hero.LifeInitial + hero.LifePerLevel * 50, hero.Life);
+			Assert.AreEqual(hero.StaminaInitial + hero.StaminaPerVitality * 50, hero.Stamina);
 		}
 
 		[TestMethod]

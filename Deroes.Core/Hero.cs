@@ -8,6 +8,9 @@
 		public abstract int ManaInitial { get; }
 		public abstract double ManaPerLevel { get; }
 		public abstract double ManaPerEnergy { get; }
+		public abstract int StaminaInitial { get; }
+		public abstract int StaminaPerVitality { get; }
+		public abstract int StaminaPerLevel { get; }
 
 		public long Experience { get; private set; }
 		public double Mana { get; protected set; }
@@ -23,6 +26,7 @@
 			Experience = 0;
 			Life = LifeInitial;
 			Mana = ManaInitial;
+			Stamina = StaminaInitial;
 		}
 
 		public void AddStrenght()
@@ -39,6 +43,7 @@
 		{
 			Vitality++;
 			Life += LifePerLevel;
+			Stamina += StaminaPerLevel;
 		}
 
 		public void AddEnergy()
@@ -79,6 +84,7 @@
 			Level++;
 			Life += LifePerLevel;
 			Mana += ManaPerLevel;
+			Stamina += StaminaPerLevel;
 		}
 	}
 }
