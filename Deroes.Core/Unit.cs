@@ -4,7 +4,7 @@
 	{
 		public const int MAX_LEVEL = 99;
 		public int Level { get; protected set; }
-		public int Life { get; protected set; }
+		public double Life { get; protected set; }
 		public int Defense { get; protected set; }
 
 		public string? Name { get; protected set; }

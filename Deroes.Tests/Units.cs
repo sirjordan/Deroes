@@ -169,14 +169,14 @@ namespace Deroes.Tests
 			lvl2.AddExperience(Hero.XpToLevelUp(1));
 
 			Assert.AreEqual(2, lvl2.Level);
-			Assert.AreEqual(59, lvl2.Life);
-			Assert.AreEqual(18, lvl2.Mana);
+			Assert.AreEqual(57, lvl2.Life);
+			Assert.AreEqual(16.5, lvl2.Mana);
 
 			lvl2.AddExperience(Hero.XpToLevelUp(2));
 
 			Assert.AreEqual(3, lvl2.Level);
-			Assert.AreEqual(61, lvl2.Life);
-			Assert.AreEqual(20, lvl2.Mana);
+			Assert.AreEqual(59, lvl2.Life);
+			Assert.AreEqual(18, lvl2.Mana);
 		}
 
 		[TestMethod]
@@ -190,8 +190,8 @@ namespace Deroes.Tests
 
 			// Assert
 			Assert.AreEqual(26, hero.Level);
-			Assert.AreEqual(107, hero.Life);
-			Assert.AreEqual(54, hero.Mana);
+			Assert.AreEqual(105, hero.Life);
+			Assert.AreEqual(52.5, hero.Mana);
 		}
 
 		[TestMethod]
@@ -203,8 +203,8 @@ namespace Deroes.Tests
 			lvl50.AddExperience(xpToLevel50);
 
 			Assert.AreEqual(50, lvl50.Level);
-			Assert.AreEqual(155, lvl50.Life);
-			Assert.AreEqual(90, lvl50.Mana);
+			Assert.AreEqual(153, lvl50.Life);
+			Assert.AreEqual(88.5, lvl50.Mana);
 		}
 
 		[TestMethod]
@@ -219,8 +219,62 @@ namespace Deroes.Tests
 
 			// Assert
 			Assert.AreEqual(95, hero.Level);
-			Assert.AreEqual(245, hero.Life);
-			Assert.AreEqual(158, hero.Mana);
+			Assert.AreEqual(243, hero.Life);
+			Assert.AreEqual(156, hero.Mana);
+		}
+
+		[TestMethod]
+		public void Hero_Paladin_AddVitality_5Points()
+		{
+			var hero = new Paladin();
+
+			hero.AddVitality();
+			hero.AddVitality();
+			hero.AddVitality();
+			hero.AddVitality();
+			hero.AddVitality();
+
+			Assert.AreEqual(hero.LifeInitial + hero.LifePerLevel * 5, hero.Life);
+		}
+
+		[TestMethod]
+		public void Hero_Paladin_AddVitality_50Points()
+		{
+			var hero = new Paladin();
+
+			for (int i = 0; i < 50; i++)
+			{
+				hero.AddVitality();
+			}
+
+			Assert.AreEqual(hero.LifeInitial + hero.LifePerLevel * 50, hero.Life);
+		}
+
+		[TestMethod]
+		public void Hero_Paladin_AddEnergy_5Points()
+		{
+			var hero = new Paladin();
+
+			hero.AddEnergy();
+			hero.AddEnergy();
+			hero.AddEnergy();
+			hero.AddEnergy();
+			hero.AddEnergy();
+
+			Assert.AreEqual(hero.ManaInitial + hero.ManaPerEnergy * 5, hero.Mana);
+		}
+
+		[TestMethod]
+		public void Hero_Paladin_AddEnergy_50Points()
+		{
+			var hero = new Paladin();
+
+			for (int i = 0; i < 50; i++)
+			{
+				hero.AddEnergy();
+			}
+
+			Assert.AreEqual(hero.ManaInitial + hero.ManaPerEnergy * 50, hero.Mana);
 		}
 	}
 }

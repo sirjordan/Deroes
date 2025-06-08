@@ -2,16 +2,49 @@
 {
 	public abstract class Hero : Unit
 	{
-		public long Experience { get; private set; }
-		public int Mana { get; protected set; }
 		public abstract int LifeInitial { get; }
 		public abstract double LifePerLevel { get; }
+		public abstract double LifePerVitality { get; }
 		public abstract int ManaInitial { get; }
 		public abstract double ManaPerLevel { get; }
+		public abstract double ManaPerEnergy { get; }
+
+		public long Experience { get; private set; }
+		public double Mana { get; protected set; }
+		public int Stamina { get; private set; }
+
+		public int Strength { get; private set; }
+		public int Dexterity { get; private set; }
+		public int Vitality { get; private set; }
+		public int Energy { get; private set; }
 
 		protected Hero()
 		{
 			Experience = 0;
+			Life = LifeInitial;
+			Mana = ManaInitial;
+		}
+
+		public void AddStrenght()
+		{
+			Strength++;
+		}
+
+		public void AddDexterity()
+		{
+			Dexterity++;
+		}
+
+		public void AddVitality()
+		{
+			Vitality++;
+			Life += LifePerLevel;
+		}
+
+		public void AddEnergy()
+		{
+			Energy++;
+			Mana += ManaPerEnergy;
 		}
 
 		public void AddExperience(long xp)
@@ -44,8 +77,8 @@
 		private void LevelUp()
 		{
 			Level++;
-			Life = LifeInitial + (int)Math.Ceiling(Level * LifePerLevel);
-			Mana = ManaInitial + (int)Math.Ceiling(Level * ManaPerLevel);
+			Life += LifePerLevel;
+			Mana += ManaPerLevel;
 		}
 	}
 }
