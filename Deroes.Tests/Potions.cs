@@ -5,12 +5,12 @@ namespace Deroes.Tests;
 [TestClass]
 public class Potions
 {
-	private Paladin _paladin;
+	private Hero _paladin;
 
 	[TestInitialize]
 	public void Setup()
 	{
-		_paladin = new Paladin();
+		_paladin = Hero.CreatePaladin();
 		_paladin.AddVitality();
 		_paladin.AddVitality();
 		_paladin.AddVitality();

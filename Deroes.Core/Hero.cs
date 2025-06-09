@@ -1,18 +1,64 @@
 ﻿namespace Deroes.Core
 {
-	public abstract class Hero : Unit
+	public class Hero : Unit
 	{
-		public Stat Mana { get; protected set; }
-		public Stat Stamina { get; protected set; }
-		public long Experience { get; private set; }	
+		// Stats
+		public Stat Mana { get; private init; }
+		public Stat Stamina { get; private init; }
+		public long Experience { get; private set; }
+
+		// Attributes
 		public int Strength { get; private set; }
 		public int Dexterity { get; private set; }
 		public int Vitality { get; private set; }
 		public int Energy { get; private set; }
 
-		protected Hero()
+		// Inventory
+		public Item? Helm { get; private set; }
+		public Item? Armor { get; private set; }
+		public Item? Belt { get; private set; }
+		public Item? LeftHand { get; private set; }
+		public Item? RightHand { get; private set; }
+		public Item? Gloves { get; private set; }
+		public Item? Boots { get; private set; }
+		public Item? LeftRing { get; private set; }
+		public Item? RightRing { get; private set; }
+		public Item? Amulet { get; private set; }
+
+		private Hero()
 		{
 			Experience = 0;
+		}
+
+		public static Hero CreatePaladin()
+		{
+			return new Hero
+			{
+				Name = "Paladin",
+				Damage = 10,
+				Defense = 5,
+
+				Mana = new(@base: 15, levelCoef: 1.5, attrCoef: 2),
+				Stamina = new(@base: 89, levelCoef: 1, attrCoef: 1),
+				Life = new(@base: 55, levelCoef: 2, attrCoef: 3),
+			}; 
+		}
+
+		public static long XpToLevelUp(int fromLevel)
+		{
+			double xp;
+			if (fromLevel <= 20)
+			{
+				// Lower levels: Gentle curve
+				xp = 45.0 * Math.Pow(fromLevel, 2.8) + 400.0;
+			}
+			else
+			{
+				// Higher levels: Steeper progression
+				xp = 0.00021 * Math.Pow(fromLevel, 6.7) + 50000.0;
+			}
+
+			return (long)Math.Round(xp);
 		}
 
 		public void DrinkPotion(IPotion p)
@@ -51,23 +97,6 @@
 			{
 				LevelUp();
 			}
-		}
-
-		public static long XpToLevelUp(int fromLevel)
-		{
-			double xp;
-			if (fromLevel <= 20)
-			{
-				// Lower levels: Gentle curve
-				xp = 45.0 * Math.Pow(fromLevel, 2.8) + 400.0;
-			}
-			else
-			{
-				// Higher levels: Steeper progression
-				xp = 0.00021 * Math.Pow(fromLevel, 6.7) + 50000.0;
-			}
-
-			return (long)Math.Round(xp);
 		}
 
 		private void LevelUp()

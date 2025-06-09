@@ -8,7 +8,7 @@ namespace Deroes.Tests
 		[TestMethod]
 		public void Unit_Paladin_Attack_Monster()
 		{
-			var player = new Paladin();
+			var player = Hero.CreatePaladin();
 			var enemy = new Monster();
 
 			player.Attack(enemy);
@@ -20,7 +20,7 @@ namespace Deroes.Tests
 		[TestMethod]
 		public void Unit_Monster_Attack_Paladin()
 		{
-			var player = new Paladin();
+			var player = Hero.CreatePaladin();
 			var enemy = new Monster();
 
 			enemy.Attack(player);
@@ -32,7 +32,7 @@ namespace Deroes.Tests
 		[TestMethod]
 		public void Attack_By_Hero()
 		{
-			var player = new Paladin();
+			var player = Hero.CreatePaladin();
 			var enemy = new Monster();
 
 			new Attack(player, enemy).ByHero();
@@ -44,7 +44,7 @@ namespace Deroes.Tests
 		[TestMethod]
 		public void Attack_By_Monster()
 		{
-			var player = new Paladin();
+			var player = Hero.CreatePaladin();
 			var enemy = new Monster();
 
 			new Attack(player, enemy).ByMonster();
@@ -57,7 +57,7 @@ namespace Deroes.Tests
 		public void Hero_AddExperience()
 		{
 			// Arrange
-			var hero = new Paladin();
+			var hero = Hero.CreatePaladin();
 			int xpToAdd = 100;
 
 			// Act
@@ -72,7 +72,7 @@ namespace Deroes.Tests
 		public void Hero_AddExperience_Level_Up_Single_From_1()
 		{
 			// Arrange
-			var hero = new Paladin();
+			var hero = Hero.CreatePaladin();
 			int xpToLevel2 = 500; // XP needed from level 1 to 2
 
 			// Act
@@ -87,7 +87,7 @@ namespace Deroes.Tests
 		public void Hero_AddExperience_Level_Up_To_13_From_1()
 		{
 			// Arrange
-			var hero = new Paladin();
+			var hero = Hero.CreatePaladin();
 
 			var xpToLevel13 = 57810;
 
@@ -103,7 +103,7 @@ namespace Deroes.Tests
 		public void Hero_AddExperience_Level_Up_To_26_From_1()
 		{
 			// Arrange
-			var hero = new Paladin();
+			var hero = Hero.CreatePaladin();
 
 			var xpToLevel26 = 538100;
 
@@ -118,7 +118,7 @@ namespace Deroes.Tests
 		public void Hero_AddExperience_Level_Up_To_50_From_1()
 		{
 			// Arrange
-			var hero = new Paladin();
+			var hero = Hero.CreatePaladin();
 
 			var xpToLevel50 = 47254998;
 
@@ -133,7 +133,7 @@ namespace Deroes.Tests
 		public void Hero_AddExperience_Reach_Level_95_From_1()
 		{
 			// Arrange
-			var hero = new Paladin();
+			var hero = Hero.CreatePaladin();
 			var lvl95Xp = 3520485254;
 
 			// Act
@@ -148,7 +148,7 @@ namespace Deroes.Tests
 		public void Hero_AddExperience_Level_To_Max_Limit_From_1()
 		{
 			// Arrange
-			var hero = new Paladin();
+			var hero = Hero.CreatePaladin();
 			var lvl99Xp = 3520485254765675;
 
 			// Act
@@ -164,7 +164,7 @@ namespace Deroes.Tests
 		[TestMethod]
 		public void Hero_Paladin_Mana_Life_Leveling_lvl1_lvl_2()
 		{
-			var lvl2 = new Paladin();
+			var lvl2 = Hero.CreatePaladin();
 			lvl2.AddExperience(Hero.XpToLevelUp(1));
 
 			Assert.AreEqual(2, lvl2.Level);
@@ -182,7 +182,7 @@ namespace Deroes.Tests
 		public void Hero_Paladin_Mana_Life_Leveling_lvl_26()
 		{
 			// Arrange
-			var hero = new Paladin();
+			var hero = Hero.CreatePaladin();
 			var xpToLevel26 = 538100;
 			// Act
 			hero.AddExperience(xpToLevel26);
@@ -197,7 +197,7 @@ namespace Deroes.Tests
 		[TestMethod]
 		public void Hero_Paladin_Mana_Life_Leveling_lvl_50()
 		{
-			var lvl50 = new Paladin();
+			var lvl50 = Hero.CreatePaladin();
 			var xpToLevel50 = 47254998;
 
 			lvl50.AddExperience(xpToLevel50);
@@ -212,7 +212,7 @@ namespace Deroes.Tests
 		public void Hero_Paladin_Mana_Life_Leveling_lvl_95()
 		{
 			// Arrange
-			var hero = new Paladin();
+			var hero = Hero.CreatePaladin();
 			var lvl95Xp = 3520485254;
 
 			// Act
@@ -227,7 +227,7 @@ namespace Deroes.Tests
 		[TestMethod]
 		public void Hero_Paladin_AddVitality_5Points()
 		{
-			var hero = new Paladin();
+			var hero = Hero.CreatePaladin();
 
 			hero.AddVitality();
 			hero.AddVitality();
@@ -235,7 +235,7 @@ namespace Deroes.Tests
 			hero.AddVitality();
 			hero.AddVitality();
 
-			Assert.AreEqual(hero.Life.Base + hero.Life.LevelCoef * 5, hero.Life.Max);
+			Assert.AreEqual(hero.Life.Base + hero.Life.AttributeCoef * 5, hero.Life.Max);
 			Assert.AreEqual(hero.Stamina.Base + hero.Stamina.AttributeCoef * 5, hero.Stamina.Max);
 
 		}
@@ -243,21 +243,21 @@ namespace Deroes.Tests
 		[TestMethod]
 		public void Hero_Paladin_AddVitality_50Points()
 		{
-			var hero = new Paladin();
+			var hero = Hero.CreatePaladin();
 
 			for (int i = 0; i < 50; i++)
 			{
 				hero.AddVitality();
 			}
 
-			Assert.AreEqual(hero.Life.Base + hero.Life.LevelCoef * 50, hero.Life.Max);
+			Assert.AreEqual(hero.Life.Base + hero.Life.AttributeCoef * 50, hero.Life.Max);
 			Assert.AreEqual(hero.Stamina.Base + hero.Stamina.AttributeCoef * 50, hero.Stamina.Max);
 		}
 
 		[TestMethod]
 		public void Hero_Paladin_AddEnergy_5Points()
 		{
-			var hero = new Paladin();
+			var hero = Hero.CreatePaladin();
 
 			hero.AddEnergy();
 			hero.AddEnergy();
@@ -271,7 +271,7 @@ namespace Deroes.Tests
 		[TestMethod]
 		public void Hero_Paladin_AddEnergy_50Points()
 		{
-			var hero = new Paladin();
+			var hero = Hero.CreatePaladin();
 
 			for (int i = 0; i < 50; i++)
 			{

@@ -9,7 +9,7 @@
 			return 100;
 		}
 
-		public object[] DropItems()
+		public Item[] DropItems()
 		{
 			return []; 
 		}
