@@ -14,7 +14,7 @@ namespace Deroes.Tests
 
 			player.Attack(enemy);
 
-			Assert.IsTrue(enemy.Life <= 0);
+			Assert.IsTrue(enemy.Life.Remaining <= 0);
 			Assert.IsFalse(enemy.IsAlive);
 		}
 
@@ -27,7 +27,7 @@ namespace Deroes.Tests
 			enemy.Attack(player);
 
 			Assert.IsTrue(player.IsAlive);
-			Assert.AreEqual(54, player.Life);
+			Assert.AreEqual(54, player.Life.Remaining);
 		}
 
 		[TestMethod]
@@ -51,7 +51,7 @@ namespace Deroes.Tests
 			new Attack(player, enemy).ByMonster();
 
 			Assert.IsTrue(player.IsAlive);
-			Assert.AreEqual(54, player.Life);
+			Assert.AreEqual(54, player.Life.Remaining);
 		}
 
 		[TestMethod]
@@ -169,14 +169,14 @@ namespace Deroes.Tests
 			lvl2.AddExperience(Hero.XpToLevelUp(1));
 
 			Assert.AreEqual(2, lvl2.Level);
-			Assert.AreEqual(57, lvl2.Life);
-			Assert.AreEqual(16.5, lvl2.Mana);
+			Assert.AreEqual(57, lvl2.Life.Max);
+			Assert.AreEqual(16.5, lvl2.Mana.Max);
 
 			lvl2.AddExperience(Hero.XpToLevelUp(2));
 
 			Assert.AreEqual(3, lvl2.Level);
-			Assert.AreEqual(59, lvl2.Life);
-			Assert.AreEqual(18, lvl2.Mana);
+			Assert.AreEqual(59, lvl2.Life.Max);
+			Assert.AreEqual(18, lvl2.Mana.Max);
 		}
 
 		[TestMethod]
@@ -190,9 +190,9 @@ namespace Deroes.Tests
 
 			// Assert
 			Assert.AreEqual(26, hero.Level);
-			Assert.AreEqual(105, hero.Life);
-			Assert.AreEqual(52.5, hero.Mana);
-			Assert.AreEqual(114, hero.Stamina);
+			Assert.AreEqual(105, hero.Life.Max);
+			Assert.AreEqual(52.5, hero.Mana.Max);
+			Assert.AreEqual(114, hero.Stamina.Max);
 		}
 
 		[TestMethod]
@@ -204,9 +204,9 @@ namespace Deroes.Tests
 			lvl50.AddExperience(xpToLevel50);
 
 			Assert.AreEqual(50, lvl50.Level);
-			Assert.AreEqual(153, lvl50.Life);
-			Assert.AreEqual(88.5, lvl50.Mana);
-			Assert.AreEqual(138, lvl50.Stamina);
+			Assert.AreEqual(153, lvl50.Life.Max);
+			Assert.AreEqual(88.5, lvl50.Mana.Max);
+			Assert.AreEqual(138, lvl50.Stamina.Max);
 		}
 
 		[TestMethod]
@@ -221,8 +221,8 @@ namespace Deroes.Tests
 
 			// Assert
 			Assert.AreEqual(95, hero.Level);
-			Assert.AreEqual(243, hero.Life);
-			Assert.AreEqual(156, hero.Mana);
+			Assert.AreEqual(243, hero.Life.Max);
+			Assert.AreEqual(156, hero.Mana.Max);
 		}
 
 		[TestMethod]
@@ -236,8 +236,8 @@ namespace Deroes.Tests
 			hero.AddVitality();
 			hero.AddVitality();
 
-			Assert.AreEqual(hero.LifeInitial + hero.LifePerLevel * 5, hero.Life);
-			Assert.AreEqual(hero.StaminaInitial + hero.StaminaPerVitality * 5, hero.Stamina);
+			Assert.AreEqual(hero.Life.Base + hero.Life.PerLevel * 5, hero.Life.Max);
+			Assert.AreEqual(hero.Stamina.Base + hero.Stamina.PerAttribute * 5, hero.Stamina.Max);
 
 		}
 
@@ -251,8 +251,8 @@ namespace Deroes.Tests
 				hero.AddVitality();
 			}
 
-			Assert.AreEqual(hero.LifeInitial + hero.LifePerLevel * 50, hero.Life);
-			Assert.AreEqual(hero.StaminaInitial + hero.StaminaPerVitality * 50, hero.Stamina);
+			Assert.AreEqual(hero.Life.Base + hero.Life.PerLevel * 50, hero.Life.Max);
+			Assert.AreEqual(hero.Stamina.Base + hero.Stamina.PerAttribute * 50, hero.Stamina.Max);
 		}
 
 		[TestMethod]
@@ -266,7 +266,7 @@ namespace Deroes.Tests
 			hero.AddEnergy();
 			hero.AddEnergy();
 
-			Assert.AreEqual(hero.ManaInitial + hero.ManaPerEnergy * 5, hero.Mana);
+			Assert.AreEqual(hero.Mana.Base + hero.Mana.PerAttribute * 5, hero.Mana.Max);
 		}
 
 		[TestMethod]
@@ -279,7 +279,7 @@ namespace Deroes.Tests
 				hero.AddEnergy();
 			}
 
-			Assert.AreEqual(hero.ManaInitial + hero.ManaPerEnergy * 50, hero.Mana);
+			Assert.AreEqual(hero.Mana.Base + hero.Mana.PerAttribute * 50, hero.Mana.Max);
 		}
 	}
 }

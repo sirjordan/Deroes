@@ -2,20 +2,9 @@
 {
 	public abstract class Hero : Unit
 	{
-		public abstract int LifeInitial { get; }
-		public abstract double LifePerLevel { get; }
-		public abstract double LifePerVitality { get; }
-		public abstract int ManaInitial { get; }
-		public abstract double ManaPerLevel { get; }
-		public abstract double ManaPerEnergy { get; }
-		public abstract int StaminaInitial { get; }
-		public abstract int StaminaPerVitality { get; }
-		public abstract int StaminaPerLevel { get; }
-
-		public long Experience { get; private set; }
-		public double Mana { get; protected set; }
-		public int Stamina { get; private set; }
-
+		public Stat Mana { get; protected set; }
+		public Stat Stamina { get; protected set; }
+		public long Experience { get; private set; }	
 		public int Strength { get; private set; }
 		public int Dexterity { get; private set; }
 		public int Vitality { get; private set; }
@@ -24,9 +13,10 @@
 		protected Hero()
 		{
 			Experience = 0;
-			Life = LifeInitial;
-			Mana = ManaInitial;
-			Stamina = StaminaInitial;
+		}
+
+		public void DrinkPotion(Potion p)
+		{ 
 		}
 
 		public void AddStrenght()
@@ -42,14 +32,14 @@
 		public void AddVitality()
 		{
 			Vitality++;
-			Life += LifePerLevel;
-			Stamina += StaminaPerLevel;
+			Life.OnAddAttribute();
+			Stamina.OnAddAttribute();
 		}
 
 		public void AddEnergy()
 		{
 			Energy++;
-			Mana += ManaPerEnergy;
+			Mana.OnAddAttribute();
 		}
 
 		public void AddExperience(long xp)
@@ -82,9 +72,10 @@
 		private void LevelUp()
 		{
 			Level++;
-			Life += LifePerLevel;
-			Mana += ManaPerLevel;
-			Stamina += StaminaPerLevel;
+
+			Life.OnLevelUp();
+			Mana.OnLevelUp();
+			Stamina.OnLevelUp();
 		}
 	}
 }
