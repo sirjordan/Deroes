@@ -3,16 +3,22 @@
 	public class Stat
 	{
 		public double Remaining { get; private set; }
-		public double Base { get; init; }
-		public double PerLevel { get; init; }
-		public double PerAttribute { get; init; }
+		public double Base { get; private init; }
+		/// <summary>
+		/// Value received per level
+		/// </summary>
+		public double LevelCoef { get; private init; }
+		/// <summary>
+		/// Value received per arrtibute
+		/// </summary>
+		public double AttributeCoef { get; private init; }
 		public double Max { get; private set; }
 
-		public Stat(double @base, double perLevel, double perAttribute)
+		public Stat(double @base, double levelCoef, double attrCoef)
 		{
 			Base = @base;
-			PerLevel = perLevel;
-			PerAttribute = perAttribute;
+			LevelCoef = levelCoef;
+			AttributeCoef = attrCoef;
 
 			Max = Base;
 			Remaining = Base;
@@ -20,12 +26,12 @@
 
 		public void OnAddAttribute()
 		{
-			Max += PerAttribute;
+			Max += AttributeCoef;
 		}
 
 		public void OnLevelUp()
 		{
-			Max += PerLevel;
+			Max += LevelCoef;
 			Remaining = Max;
 		}
 
@@ -36,7 +42,7 @@
 		/// <param name="actionPoints">Points to add/remove</param>
 		public void OnAction(double actionPoints)
 		{
-			Remaining += actionPoints;
+			Remaining = Math.Clamp(Remaining + actionPoints, 0, Max);
 		}
 	}
 }

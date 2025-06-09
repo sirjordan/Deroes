@@ -8,29 +8,9 @@
 			Damage = 10;
 			Defense = 5;
 
-			Mana = new(@base: 15, perLevel: 1.5, perAttribute: 2);
-			Stamina = new(@base: 89, perLevel: 1, perAttribute: 1);
-			Life = new(@base: 55, perLevel: 2, perAttribute: 2);
+			Mana = new(@base: 15, levelCoef: 1.5, attrCoef: 2);
+			Stamina = new(@base: 89, levelCoef: 1, attrCoef: 1);
+			Life = new(@base: 55, levelCoef: 2, attrCoef: 3);
 		}
-	}
-
-	public abstract class Potion()
-	{
-
-	}
-
-	public class HealthPotion : Potion
-	{
-
-	}
-
-	public class StaminaPotion : Potion
-	{
-
-	}
-
-	public class AntidotePotion : Potion
-	{
-
 	}
 }

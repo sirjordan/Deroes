@@ -15,8 +15,9 @@
 			Experience = 0;
 		}
 
-		public void DrinkPotion(Potion p)
-		{ 
+		public void DrinkPotion(IPotion p)
+		{
+			p.Drink(this);
 		}
 
 		public void AddStrenght()
