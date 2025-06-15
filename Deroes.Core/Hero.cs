@@ -14,20 +14,24 @@
 		public int Energy { get; private set; }
 
 		// Inventory
-		public Item? Helm { get; private set; }
-		public Item? Armor { get; private set; }
-		public Item? Belt { get; private set; }
-		public Item? LeftHand { get; private set; }
-		public Item? RightHand { get; private set; }
-		public Item? Gloves { get; private set; }
-		public Item? Boots { get; private set; }
-		public Item? LeftRing { get; private set; }
-		public Item? RightRing { get; private set; }
-		public Item? Amulet { get; private set; }
+		public Helm? Helm { get; private set; }
+		public Armor? Armor { get; private set; }
+		public IWearableItem? Belt { get; private set; }
+		public HandItem? LeftHand { get; private set; }
+		public HandItem? RightHand { get; private set; }
+		public IWearableItem? Gloves { get; private set; }
+		public IWearableItem? Boots { get; private set; }
+		public IWearableItem? LeftRing { get; private set; }
+		public IWearableItem? RightRing { get; private set; }
+		public IWearableItem? Amulet { get; private set; }
+		public Stash Inventory { get; private set; }
+		public int Gold { get; private set; }
 
 		private Hero()
 		{
 			Experience = 0;
+			Inventory = new Stash(10, 4);
+			Gold = 0;
 		}
 
 		public static Hero CreatePaladin()
@@ -41,7 +45,12 @@
 				Mana = new(@base: 15, levelCoef: 1.5, attrCoef: 2),
 				Stamina = new(@base: 89, levelCoef: 1, attrCoef: 1),
 				Life = new(@base: 55, levelCoef: 2, attrCoef: 3),
-			}; 
+
+				Strength = 25,
+				Dexterity = 20,
+				Vitality = 25,
+				Energy = 15
+			};
 		}
 
 		public static long XpToLevelUp(int fromLevel)

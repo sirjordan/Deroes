@@ -14,6 +14,11 @@
 			return []; 
 		}
 
+		public int DropGold()
+		{
+			return 0;
+		}
+
 		public Monster()
 		{
 			Name = "Monster";

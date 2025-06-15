@@ -2,25 +2,63 @@
 {
 	public abstract class Item
 	{
-		public string Name { get; protected set; }
+		public virtual string Name { get; protected set; }
 		/// <summary>
 		/// Width in the inventory
 		/// </summary>
-		public byte Width { get; protected set; }
+		public virtual byte Width { get; protected set; }
 		/// <summary>
 		/// Height in the inventory
 		/// </summary>
-		public byte Height { get; protected set; }
+		public virtual byte Height { get; protected set; }
+
+		public virtual int RequiredLevel { get; protected set; }
+
+		protected Item()
+		{
+			Name = GetType().Name;
+			Width = 1;
+			Height = 1;
+			RequiredLevel = 1;
+		}
 	}
 
-	public class Helm : Item
+	public interface IWearableItem
 	{
-		public int Defense { get; set; }
+		int RequiredStrength { get; }
+		int RequiredDexterity { get;  }
 	}
 
-	public abstract class HandItem : Item
-	{ }
+	public interface IDefenseItem
+	{
+		int Defense { get; }
+	}
+
+	public class Helm : IWearableItem, IDefenseItem
+	{
+		public int Defense { get; private set; }
+		public int RequiredStrength => throw new NotImplementedException();
+		public int RequiredDexterity => throw new NotImplementedException();
+	}
+
+	public class Armor : IWearableItem, IDefenseItem
+	{
+		public int Defense { get; private set; }
+		public int RequiredStrength => throw new NotImplementedException();
+		public int RequiredDexterity => throw new NotImplementedException();
+	}
+
+	public abstract class HandItem : IWearableItem
+	{
+		public int RequiredStrength => throw new NotImplementedException();
+		public int RequiredDexterity => throw new NotImplementedException();
+	}
 
 	public class Weapon : HandItem
-	{ }
+	{
+	}
+
+	public class Shield : HandItem
+	{
+	}
 }
