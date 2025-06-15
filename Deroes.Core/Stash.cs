@@ -23,9 +23,9 @@
 		{
 			var added = false;
 
-			for (int row = 0; row < Space.GetLength(0) - item.Width; row++)
+			for (int row = 0; row <= Space.GetLength(0) - item.Width ; row++)
 			{
-				for (int col = 0; col < Space.GetLength(1) - item.Height; col++)
+				for (int col = 0; col <= Space.GetLength(1) - item.Height; col++)
 				{
 					if (Peek(row, col) == null)
 					{
@@ -34,6 +34,9 @@
 						break;
 					}
 				}
+
+				if (added)
+					break;
 			}
 
 			return added;

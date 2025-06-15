@@ -11,7 +11,7 @@ public class StashTests
 	[TestInitialize]
 	public void Setup()
 	{
-		stash = new Stash(10, 4); 
+		stash = new Stash(10, 4);
 	}
 
 	private Item CreateMockItem(string name, int width, int height)
@@ -132,7 +132,7 @@ public class StashTests
 		var item3 = CreateMockItem("c", 1, 1);
 		var item4 = CreateMockItem("d", 1, 1);
 
-		Assert.IsTrue(stash.Add(item1)); 
+		Assert.IsTrue(stash.Add(item1));
 		Assert.IsTrue(stash.Add(item2));
 		Assert.IsTrue(stash.Add(item3));
 		Assert.IsTrue(stash.Add(item4));
@@ -143,6 +143,6 @@ public class StashTests
 
 		var d = stash.Peek(1, 0);
 		Assert.IsNotNull(d);
-		Assert.AreEqual("d", a.Name);
+		Assert.AreEqual("d", d.Name);
 	}
 }
