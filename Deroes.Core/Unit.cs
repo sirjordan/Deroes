@@ -24,6 +24,11 @@
 		public double Attack(Unit other)
 		{
 			var hitPoints = (Damage - other.Defense);
+			if (hitPoints < 1)
+			{
+				hitPoints = 1;
+			}
+
 			other.Life.OnAction(-hitPoints);
 			
 			return hitPoints;

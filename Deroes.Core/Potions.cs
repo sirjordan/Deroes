@@ -5,7 +5,7 @@
 		public void Drink(Hero h);
 	}
 
-	public class HealthPotion : IPotion
+	public class HealthPotion : Item, IPotion
 	{
 		public double Value { get; private init; }
 

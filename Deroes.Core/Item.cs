@@ -22,43 +22,4 @@
 			RequiredLevel = 1;
 		}
 	}
-
-	public interface IWearableItem
-	{
-		int RequiredStrength { get; }
-		int RequiredDexterity { get;  }
-	}
-
-	public interface IDefenseItem
-	{
-		int Defense { get; }
-	}
-
-	public class Helm : IWearableItem, IDefenseItem
-	{
-		public int Defense { get; private set; }
-		public int RequiredStrength => throw new NotImplementedException();
-		public int RequiredDexterity => throw new NotImplementedException();
-	}
-
-	public class Armor : IWearableItem, IDefenseItem
-	{
-		public int Defense { get; private set; }
-		public int RequiredStrength => throw new NotImplementedException();
-		public int RequiredDexterity => throw new NotImplementedException();
-	}
-
-	public abstract class HandItem : IWearableItem
-	{
-		public int RequiredStrength => throw new NotImplementedException();
-		public int RequiredDexterity => throw new NotImplementedException();
-	}
-
-	public class Weapon : HandItem
-	{
-	}
-
-	public class Shield : HandItem
-	{
-	}
 }

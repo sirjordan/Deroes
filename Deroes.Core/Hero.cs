@@ -13,17 +13,19 @@
 		public int Vitality { get; private set; }
 		public int Energy { get; private set; }
 
-		// Inventory
+		// Gear
 		public Helm? Helm { get; private set; }
 		public Armor? Armor { get; private set; }
-		public IWearableItem? Belt { get; private set; }
-		public HandItem? LeftHand { get; private set; }
-		public HandItem? RightHand { get; private set; }
-		public IWearableItem? Gloves { get; private set; }
-		public IWearableItem? Boots { get; private set; }
-		public IWearableItem? LeftRing { get; private set; }
-		public IWearableItem? RightRing { get; private set; }
-		public IWearableItem? Amulet { get; private set; }
+		public Belt? Belt { get; private set; }
+		public Weapon? LeftHand { get; private set; }
+		public Shield? RightHand { get; private set; }
+		public Gloves? Gloves { get; private set; }
+		public Boots? Boots { get; private set; }
+		public Ring? LeftRing { get; private set; }
+		public Ring? RightRing { get; private set; }
+		public Amulet? Amulet { get; private set; }
+
+		// Inventory
 		public Stash Inventory { get; private set; }
 		public int Gold { get; private set; }
 
