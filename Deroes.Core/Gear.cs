@@ -17,6 +17,7 @@
 		public int MinDamage { get; protected set; }
 		public int MaxDamage { get; protected set; }
 		public int AttackSpeed { get; protected set; }
+		public bool IsTwoHanded { get; protected set; }
 	}
 
 	public class Helm : DefenseItem { }

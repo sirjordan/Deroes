@@ -10,6 +10,8 @@
 		public int Defense { get; protected set; }
 		public int Damage { get; protected set; }
 
+		public Resistanse<Cold> ColdRes { get; protected set; }
+
 		public bool IsAlive => (Life.Remaining > 0);
 		
 		protected Unit()
