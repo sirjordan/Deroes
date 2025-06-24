@@ -1,14 +1,55 @@
 ﻿namespace Deroes.Core
 {
-	//public class Damage
-	//{
-	//	// Combined all damage<t>
-	//}
+	public class AttackDamage
+	{
+		public Damage Physical { get; private set; }
+		public Damage Cold { get; private set; }
+		public Damage Fire { get; private set; }
+		public Damage Poison { get; private set; }
+		public Damage Lightining { get; private set; }
 
-	//public class Resistanse
-	//{
-	//	// Combined all res<t>
-	//}
+		public Damage[] All => [Physical, Cold, Fire, Poison, Lightining];
+		public int Min => All.Sum(d => d.Min);
+		public int Max => All.Sum(d => d.Max);
+
+		public AttackDamage()
+		{
+			Physical = new Physical(1, 2);
+			Cold = new Cold(0, 0);
+			Fire = new Fire(0, 0);
+			Poison = new Poison(0, 0);
+			Lightining = new Lightining(0, 0);
+		}
+
+		public int Apply(Unit defender)
+		{
+			var hitPoints = 0;
+			foreach (var dmg in All)
+			{
+				hitPoints += dmg.Apply(defender);
+			}
+
+			return hitPoints;
+		}
+	}
+
+	public class AttackResistanse
+	{
+		public Resistanse Physical { get; private set; }
+		public Resistanse Cold { get; private set; }
+		public Resistanse Fire { get; private set; }
+		public Resistanse Poison { get; private set; }
+		public Resistanse Lightining { get; private set; }
+
+		public AttackResistanse()
+		{
+			Physical = new Resistanse();
+			Cold = new Resistanse();
+			Fire = new Resistanse();
+			Poison = new Resistanse();
+			Lightining = new Resistanse();
+		}
+	}
 
 	/// <summary>
 	/// Phisycal, Cold, Fire, Lightining, Poison?, Magic
@@ -20,7 +61,7 @@
 
 		public Damage(int min, int max)
 		{
-			ArgumentOutOfRangeException.ThrowIfNegativeOrZero(min);
+			ArgumentOutOfRangeException.ThrowIfNegative(min);
 
 			Min = min;
 			Max = max;
@@ -32,10 +73,10 @@
 		/// <returns>Damage dealt calculated</returns>
 		public abstract int Apply(Unit defender);
 
-		protected int GetActualDamage()
+		protected int GetYieldedDamage()
 		{
 			var rnd = new Random();
-			var dmg = rnd.Next(Min, Max);
+			var dmg = rnd.Next(Min, Max + 1);
 
 			return dmg;
 		}
@@ -44,11 +85,16 @@
 	/// <summary>
 	/// Phisycal, Cold, Fire, Lightining, Poison?, Magic
 	/// </summary>
-	/// <typeparam name="T">Type of damage</typeparam>
-	public class Resistanse<T> where T : Damage
+	public class Resistanse
 	{
 		public bool Immune { get; private set; }
 		public int Amount { get; private set; }
+
+		public Resistanse()
+		{
+			Amount = 0;
+			Immune = false;
+		}
 	}
 
 	/// <summary>
@@ -58,17 +104,17 @@
 	{
 		public override int Apply(Unit defender)
 		{
-			if (defender.ColdRes.Immune)
+			if (defender.Resistanses.Cold.Immune)
 			{
 				return 0;
 			}
 
-			// 
-			var dmg = GetActualDamage();
-			var hitPoints = (int)Math.Round((defender.ColdRes.Amount * 0.01) * dmg);
+			var dmg = GetYieldedDamage();
+			var hitPoints = (int)Math.Round((defender.Resistanses.Cold.Amount / 100.0) * dmg);
+
+			// TODO: Freeze/chill
 
 			defender.Life.OnAction(-hitPoints);
-			// TODO: Freeze/chill
 
 			return hitPoints;
 		}
@@ -81,20 +127,51 @@
 	{
 		public override int Apply(Unit defender)
 		{
-			// TODO: If immune to physical - skip
+			if (defender.Resistanses.Physical.Immune)
+			{
+				return 0;
+			}
 
-			var dmg = GetActualDamage();
-			var hitPoints = (dmg - defender.Defense);
+			// TODO: If immune to physical - skip
+			// TODO: Take AttackRating in mind
+
+			var dmg = GetYieldedDamage();
+			var hitPoints = (dmg - defender.Resistanses.Physical.Amount);
 
 			if (hitPoints < 1)
 			{
 				hitPoints = 1;
 			}
 
-			defender.Life.OnAction(-hitPoints);
 			// TODO: if running - stop
 
+			defender.Life.OnAction(-hitPoints);
+
 			return hitPoints;
+		}
+	}
+
+	public class Fire(int min, int max) : Damage(min, max)
+	{
+		public override int Apply(Unit defender)
+		{
+			throw new NotImplementedException();
+		}
+	}
+
+	public class Lightining(int min, int max) : Damage(min, max)
+	{
+		public override int Apply(Unit defender)
+		{
+			throw new NotImplementedException();
+		}
+	}
+
+	public class Poison(int min, int max) : Damage(min, max)
+	{
+		public override int Apply(Unit defender)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

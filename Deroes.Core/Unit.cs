@@ -7,16 +7,16 @@
 		public string Name { get; protected set; }
 		public Stat Life { get; protected set; }
 		public int Level { get; protected set; }
-		public int Defense { get; protected set; }
-		public int Damage { get; protected set; }
-
-		public Resistanse<Cold> ColdRes { get; protected set; }
+		public AttackDamage Damage { get; protected set; }
+		public AttackResistanse Resistanses { get; protected set; }
 
 		public bool IsAlive => (Life.Remaining > 0);
 		
 		protected Unit()
 		{
 			Level = 1;
+			Damage = new AttackDamage();
+			Resistanses = new AttackResistanse();
 		}
 
 		/// <summary>
@@ -25,15 +25,11 @@
 		/// <returns>Damage dealt calculated</returns>
 		public double Attack(Unit other)
 		{
-			var hitPoints = (Damage - other.Defense);
-			if (hitPoints < 1)
-			{
-				hitPoints = 1;
-			}
+			var hitpoins = Damage.Apply(other);
 
-			other.Life.OnAction(-hitPoints);
-			
-			return hitPoints;
+			Console.WriteLine($"{Name} did {hitpoins} of damage to {other.Name}");
+
+			return hitpoins;
 		}
 
 		public void Die() 

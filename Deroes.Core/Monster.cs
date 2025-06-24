@@ -23,8 +23,6 @@
 		{
 			Name = "Monster";
 			Life = new Stat(@base: 10, 0, 0);
-			Damage = 6;
-			Defense = 0;
 		}
 	}
 }
