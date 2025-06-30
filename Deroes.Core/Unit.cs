@@ -26,7 +26,6 @@
 		public double Attack(Unit other)
 		{
 			var hitpoins = Damage.Apply(other);
-
 			Console.WriteLine($"{Name} did {hitpoins} of damage to {other.Name}");
 
 			return hitpoins;

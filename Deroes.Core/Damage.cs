@@ -13,12 +13,15 @@
 		public int Max => All.Sum(d => d.Max);
 
 		public AttackDamage()
+			: this(new Physical(), new Cold(), new Fire(), new Poison(), new Lightining()) { }
+
+		public AttackDamage(Physical ph, Cold c, Fire f, Poison p, Lightining l)
 		{
-			Physical = new Physical(1, 2);
-			Cold = new Cold(0, 0);
-			Fire = new Fire(0, 0);
-			Poison = new Poison(0, 0);
-			Lightining = new Lightining(0, 0);
+			Physical = ph;
+			Cold = c;
+			Fire = f;
+			Poison = p;
+			Lightining = l;
 		}
 
 		public int Apply(Unit defender)
@@ -30,24 +33,6 @@
 			}
 
 			return hitPoints;
-		}
-	}
-
-	public class AttackResistanse
-	{
-		public Resistanse Physical { get; private set; }
-		public Resistanse Cold { get; private set; }
-		public Resistanse Fire { get; private set; }
-		public Resistanse Poison { get; private set; }
-		public Resistanse Lightining { get; private set; }
-
-		public AttackResistanse()
-		{
-			Physical = new Resistanse();
-			Cold = new Resistanse();
-			Fire = new Resistanse();
-			Poison = new Resistanse();
-			Lightining = new Resistanse();
 		}
 	}
 
@@ -83,25 +68,14 @@
 	}
 
 	/// <summary>
-	/// Phisycal, Cold, Fire, Lightining, Poison?, Magic
-	/// </summary>
-	public class Resistanse
-	{
-		public bool Immune { get; private set; }
-		public int Amount { get; private set; }
-
-		public Resistanse()
-		{
-			Amount = 0;
-			Immune = false;
-		}
-	}
-
-	/// <summary>
 	/// Freze/chill and do damage
 	/// </summary>
-	public class Cold(int min, int max) : Damage(min, max)
+	public class Cold : Damage
 	{
+		public Cold(int min, int max) : base(min, max) { }
+
+		public Cold() : this(0, 0) { }
+
 		public override int Apply(Unit defender)
 		{
 			if (defender.Resistanses.Cold.Immune)
@@ -123,8 +97,12 @@
 	/// <summary>
 	/// Do damage and if running - stop
 	/// </summary>
-	public class Physical(int min, int max) : Damage(min, max)
+	public class Physical : Damage
 	{
+		public Physical(int min, int max) : base(min, max) { }
+
+		public Physical() : this(1, 2) { }
+
 		public override int Apply(Unit defender)
 		{
 			if (defender.Resistanses.Physical.Immune)
@@ -151,27 +129,39 @@
 		}
 	}
 
-	public class Fire(int min, int max) : Damage(min, max)
+	public class Fire : Damage
 	{
+		public Fire(int min, int max) : base(min, max) { }
+
+		public Fire() : this(0, 0) { }
+
 		public override int Apply(Unit defender)
 		{
-			throw new NotImplementedException();
+			return 0;
 		}
 	}
 
-	public class Lightining(int min, int max) : Damage(min, max)
+	public class Lightining : Damage
 	{
+		public Lightining(int min, int max) : base(min, max) { }
+
+		public Lightining() : this(0, 0) { }
+
 		public override int Apply(Unit defender)
 		{
-			throw new NotImplementedException();
+			return 0;
 		}
 	}
 
-	public class Poison(int min, int max) : Damage(min, max)
+	public class Poison : Damage
 	{
+		public Poison(int min, int max) : base(min, max) { }
+
+		public Poison() : this(0, 0) { }
+
 		public override int Apply(Unit defender)
 		{
-			throw new NotImplementedException();
+			return 0;
 		}
 	}
 }

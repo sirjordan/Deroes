@@ -30,7 +30,7 @@ namespace Deroes.Tests
 		}
 
 		[TestMethod]
-		public void Attack_By_Hero()
+		public void Attack_By_Hero_Kill()
 		{
 			var player = Hero.CreatePaladin();
 			var enemy = new Monster();
