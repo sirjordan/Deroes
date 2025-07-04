@@ -1,10 +1,20 @@
 ﻿namespace Deroes.Core
 {
+	public class StatsModifierHero : Hero
+	{
+		private readonly Hero _base;
+		
+		public StatsModifierHero(Hero @base)
+		{
+			_base = @base;
+		}
+	}
+
 	public class Hero : Unit
 	{
 		// Stats
-		public Stat Mana { get; private init; }
-		public Stat Stamina { get; private init; }
+		public Vital Mana { get; private init; }
+		public Vital Stamina { get; private init; }
 		public long Experience { get; private set; }
 
 		// Attributes
@@ -29,7 +39,7 @@
 		public Stash Inventory { get; private set; }
 		public int Gold { get; private set; }
 
-		private Hero()
+		protected Hero()
 		{
 			Experience = 0;
 			Inventory = new Stash(10, 4);

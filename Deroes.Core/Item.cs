@@ -3,10 +3,12 @@
 	public abstract class Item
 	{
 		public virtual string Name { get; protected set; }
+
 		/// <summary>
 		/// Width in the inventory
 		/// </summary>
 		public virtual byte Width { get; protected set; }
+
 		/// <summary>
 		/// Height in the inventory
 		/// </summary>

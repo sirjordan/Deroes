@@ -14,8 +14,7 @@
 
 	public abstract class Weapon : WearableItem
 	{
-		public int MinDamage { get; protected set; }
-		public int MaxDamage { get; protected set; }
+		public Physical Damage { get; protected set; }
 		public int AttackSpeed { get; protected set; }
 		public bool IsTwoHanded { get; protected set; }
 	}

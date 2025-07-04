@@ -5,7 +5,7 @@
 		public const int MAX_LEVEL = 99;
 
 		public string Name { get; protected set; }
-		public Stat Life { get; protected set; }
+		public Vital Life { get; protected set; }
 		public int Level { get; protected set; }
 		public AttackDamage Damage { get; protected set; }
 		public AttackResistanse Resistanses { get; protected set; }
