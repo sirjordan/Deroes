@@ -1,4 +1,7 @@
-﻿namespace Deroes.Core
+﻿using Deroes.Core.Items;
+using Deroes.Core.Stats;
+
+namespace Deroes.Core
 {
 	public class StatsModifierHero : Hero
 	{

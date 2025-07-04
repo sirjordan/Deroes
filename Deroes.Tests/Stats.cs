@@ -1,4 +1,4 @@
-using Deroes.Core;
+using Deroes.Core.Stats;
 
 namespace Deroes.Tests;
 
@@ -111,6 +111,19 @@ public class Stats
 		stat.AddModifier(new VitalModifier(20));
 		stat.AddModifier(new VitalPercentageModifier(10)); // +10%
 
+		Assert.AreEqual(132, stat.Value.Max); // 100 + 20 + 10%(120)
+	}
+
+	[TestMethod]
+	public void Stat_Should_Apply_Combined_Modifiers_InCorrect_Order()
+	{
+		var baseVital = new Vital(100, 10, 5);
+		var stat = new Stat<Vital>(baseVital);
+
+		stat.AddModifier(new VitalPercentageModifier(10)); // +10%
+		stat.AddModifier(new VitalModifier(20));
+		
+		// Percentage should be last
 		Assert.AreEqual(132, stat.Value.Max); // 100 + 20 + 10%(120)
 	}
 

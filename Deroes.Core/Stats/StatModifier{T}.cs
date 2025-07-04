@@ -1,11 +1,6 @@
-﻿namespace Deroes.Core
+﻿namespace Deroes.Core.Stats
 {
-	public interface IStatModifiable<T>
-	{
-		public T Modify(int modificator);
-	}
-
-	public interface IStatsModifier<T>
+	public interface IStatModifier<T>
 	{
 		public string Description { get; }
 
@@ -16,7 +11,7 @@
 		public int GetModificator(T @base);
 	}
 
-	public class DamageModifier : IStatsModifier<Damage>
+	public class DamageModifier : IStatModifier<Damage>
 	{
 		private Damage _bonus;
 
@@ -33,7 +28,7 @@
 		}
 	}
 
-	public class VitalModifier : IStatsModifier<Vital>
+	public class VitalModifier : IStatModifier<Vital>
 	{
 		private readonly int _value;
 
@@ -50,7 +45,7 @@
 		}
 	}
 
-	public class VitalPercentageModifier : IStatsModifier<Vital>
+	public class VitalPercentageModifier : IStatModifier<Vital>
 	{
 		private readonly int _value;
 

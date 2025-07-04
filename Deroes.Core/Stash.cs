@@ -1,4 +1,6 @@
-﻿namespace Deroes.Core
+﻿using Deroes.Core.Items;
+
+namespace Deroes.Core
 {
 	/// <summary>
 	/// Inventory, Private Stash, Belt, Cube

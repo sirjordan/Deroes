@@ -1,4 +1,4 @@
-﻿namespace Deroes.Core
+﻿namespace Deroes.Core.Items
 {
 	public interface IPotion
 	{
@@ -53,8 +53,8 @@
 
 		public void Drink(Hero h)
 		{
-			var life = (Value / 100) * h.Life.Max;
-			var mana = (Value / 100) * h.Mana.Max;
+			var life = Value / 100 * h.Life.Max;
+			var mana = Value / 100 * h.Mana.Max;
 
 			h.Life.OnAction(life);
 			h.Mana.OnAction(mana);

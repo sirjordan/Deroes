@@ -1,4 +1,4 @@
-﻿namespace Deroes.Core
+﻿namespace Deroes.Core.Stats
 {
 	public class Vital : IStatModifiable<Vital>
 	{

@@ -1,4 +1,5 @@
 using Deroes.Core;
+using Deroes.Core.Items;
 using Moq;
 
 namespace Deroes.Tests;

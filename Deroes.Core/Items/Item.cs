@@ -1,4 +1,4 @@
-﻿namespace Deroes.Core
+﻿namespace Deroes.Core.Items
 {
 	public abstract class Item
 	{

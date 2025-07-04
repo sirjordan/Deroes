@@ -1,4 +1,6 @@
-﻿namespace Deroes.Core
+﻿using Deroes.Core.Stats;
+
+namespace Deroes.Core
 {
 	public abstract class Unit
 	{

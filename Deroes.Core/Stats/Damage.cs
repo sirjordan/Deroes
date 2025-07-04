@@ -1,4 +1,4 @@
-﻿namespace Deroes.Core
+﻿namespace Deroes.Core.Stats
 {
 	public class AttackDamage
 	{
@@ -84,7 +84,7 @@
 			}
 
 			var dmg = GetYieldedDamage();
-			var hitPoints = (int)Math.Round((defender.Resistanses.Cold.Amount / 100.0) * dmg);
+			var hitPoints = (int)Math.Round(defender.Resistanses.Cold.Amount / 100.0 * dmg);
 
 			// TODO: Freeze/chill
 
@@ -114,7 +114,7 @@
 			// TODO: Take AttackRating in mind
 
 			var dmg = GetYieldedDamage();
-			var hitPoints = (dmg - defender.Resistanses.Physical.Amount);
+			var hitPoints = dmg - defender.Resistanses.Physical.Amount;
 
 			if (hitPoints < 1)
 			{

@@ -1,8 +1,8 @@
-﻿namespace Deroes.Core
+﻿namespace Deroes.Core.Stats
 {
 	public class Stat<T> where T: IStatModifiable<T>
 	{
-		private readonly List<IStatsModifier<T>> _modifiers = new();
+		private readonly List<IStatModifier<T>> _modifiers = new();
 
 		public T BaseValue { get; private set; }
 		public T Value
@@ -24,12 +24,12 @@
 			BaseValue = baseValue;
 		}
 
-		public void AddModifier(IStatsModifier<T> modifier)
+		public void AddModifier(IStatModifier<T> modifier)
 		{
 			_modifiers.Add(modifier);
 		}
 
-		public void RemoveModifier(IStatsModifier<T> modifier)
+		public void RemoveModifier(IStatModifier<T> modifier)
 		{
 			_modifiers.Remove(modifier);
 		}
