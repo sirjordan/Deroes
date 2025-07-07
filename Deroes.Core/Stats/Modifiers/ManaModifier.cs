@@ -10,7 +10,6 @@
 		public int GetModificator(Vital @base) => _value;
 		public void ApplyModification(Hero h) => h.Mana.AddModifier(this);
 		public void RemoveModification(Hero h) => h.Mana.RemoveModifier(this);
-
 	}
 
 	public class ManaPercentageModifier(int value) : IStatModifier<Vital>, IStatModifier
@@ -23,6 +22,5 @@
 		public int GetModificator(Vital @base) => (int)(@base.Max * (_value / 100.0));
 		public void ApplyModification(Hero h) => h.Mana.AddModifier(this);
 		public void RemoveModification(Hero h) => h.Mana.RemoveModifier(this);
-
 	}
 }

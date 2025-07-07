@@ -6,7 +6,7 @@ namespace Deroes.Core
 	public class Hero : Unit
 	{
 		public Stat<Vital> Mana { get; private init; }
-		public Vital Stamina { get; private init; }
+		public Stat<Vital> Stamina { get; private init; }
 		public long Experience { get; private set; }
 
 		// Attributes
@@ -35,8 +35,8 @@ namespace Deroes.Core
 				Name = "Paladin",
 
 				Mana = new Stat<Vital>(new(@base: 15, levelCoef: 1.5, attrCoef: 2)),
-				Stamina = new(@base: 89, levelCoef: 1, attrCoef: 1),
-				Life = new(@base: 55, levelCoef: 2, attrCoef: 3),
+				Stamina = new Stat<Vital>(new(@base: 89, levelCoef: 1, attrCoef: 1)),
+				Life = new Stat<Vital>(new(@base: 55, levelCoef: 2, attrCoef: 3)),
 
 				Strength = 25,
 				Dexterity = 20,
@@ -80,8 +80,8 @@ namespace Deroes.Core
 		public void AddVitality()
 		{
 			Vitality++;
-			Life.OnAddAttribute();
-			Stamina.OnAddAttribute();
+			Life.BaseValue.OnAddAttribute();
+			Stamina.BaseValue.OnAddAttribute();
 		}
 
 		public void AddEnergy()
@@ -104,9 +104,9 @@ namespace Deroes.Core
 		{
 			Level++;
 
-			Life.OnLevelUp();
+			Life.BaseValue.OnLevelUp();
 			Mana.BaseValue.OnLevelUp();
-			Stamina.OnLevelUp();
+			Stamina.BaseValue.OnLevelUp();
 		}
 	}
 }

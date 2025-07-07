@@ -56,10 +56,8 @@
 	/// <summary>
 	/// Phisycal, Cold, Fire, Lightining, Poison?, Magic
 	/// </summary>
-	public abstract class DamageRange
+	public abstract class DamageRange //: IStatModifiable<DamageRange>
 	{
-		// TODO: Unit test this!
-
 		public Stat<Damage> Min { get; protected set; }
 		public Stat<Damage> Max { get; protected set; }
 
@@ -85,6 +83,8 @@
 
 			return dmg;
 		}
+
+		//public abstract DamageRange Modify(int modificator);
 	}
 
 	/// <summary>
@@ -108,7 +108,7 @@
 
 			// TODO: Freeze/chill
 
-			defender.Life.OnAction(-hitPoints);
+			defender.Life.Value.OnAction(-hitPoints);
 
 			return hitPoints;
 		}
@@ -143,7 +143,7 @@
 
 			// TODO: if running - stop
 
-			defender.Life.OnAction(-hitPoints);
+			defender.Life.Value.OnAction(-hitPoints);
 
 			return hitPoints;
 		}

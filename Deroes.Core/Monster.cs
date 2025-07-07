@@ -25,7 +25,7 @@ namespace Deroes.Core
 		public Monster()
 		{
 			Name = "Monster";
-			Life = new Vital(@base: 10, 0, 0);
+			Life = new Stat<Vital>(new Vital(@base: 10, 0, 0));
 		}
 	}
 }

@@ -1,6 +1,6 @@
 ﻿namespace Deroes.Core
 {
-	public class Attack(Hero h, Monster m)
+	public class Combat(Hero h, Monster m)
 	{
 		private Hero _hero = h;
 		private Monster _monster = m;
