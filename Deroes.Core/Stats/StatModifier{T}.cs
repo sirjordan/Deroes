@@ -7,6 +7,7 @@
 	public interface IStatModifier
 	{
 		public void ApplyModification(Hero h);
+		public void RemoveModification(Hero h);
 	}
 
 	/// <summary>

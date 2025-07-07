@@ -1,10 +1,12 @@
 ﻿using Deroes.Core.Items;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace Deroes.Core
 {
-	public class Gear
+	public class Gear(Hero h)
 	{
-		private readonly Hero _hero;
+		private readonly Hero _hero = h;
 
 		public Helm? Helm { get; private set; }
 		public Armor? Armor { get; private set; }
@@ -17,48 +19,79 @@ namespace Deroes.Core
 		public Ring? RightRing { get; private set; }
 		public Amulet? Amulet { get; private set; }
 
-		public Gear(Hero h)
+		/// <returns>If gear can be equiped or compatible</returns>
+		public bool CanEquip(WearableItem item)
 		{
-			_hero = h;
-		}
-
-		private void AddModification()
-		{
-			// On Equip
-		}
-
-		private void ChangeLook()
-		{
-			// On Equip
-		}
-
-		public bool Equip(WearableItem item)
-		{
-			if (_hero.Strength >= item.RequiredStrength &&
+			return (_hero.Strength >= item.RequiredStrength &&
 				_hero.Dexterity >= item.RequiredDexterity &&
-				_hero.Level >= item.RequiredLevel)
-			{
-				// TODO:
-				// Equip
+				_hero.Level >= item.RequiredLevel);
+		}
 
-				return true;
+		/// <summary>
+		/// Equip a specific gear slot
+		/// </summary>
+		/// <param name="to">Slot to equip</param>
+		/// <returns>If gear can be equiped or compatible</returns>
+		public bool Equip<T>(T? item, Expression<Func<Gear, T?>> to) where T : WearableItem
+		{
+			ArgumentNullException.ThrowIfNull(item);
+
+			if (to.Body is MemberExpression memberExpr &&
+				memberExpr.Member is PropertyInfo propInfo)
+			{
+				var existing = propInfo.GetValue(this);
+				if (existing == null)
+				{
+					if (CanEquip(item))
+					{
+						propInfo.SetValue(this, item);
+						foreach (var m in item.Modifiers)
+						{
+							m.ApplyModification(_hero);
+						}
+
+						return true;
+					}
+
+					return false;
+				}
+				else
+				{
+					throw new InvalidOperationException("You must uneqip first");
+				}
 			}
 			else
 			{
-				return false;
+				throw new ArgumentException("Selector must be a property");
 			}
-			// Equip if empty gear slot
-			// Apply modifications and change look
 		}
 
-		public void Unequip()
+		/// <summary>
+		/// Unequip a slot and returns the item
+		/// </summary>
+		/// <returns>Item from the slot</returns>
+		public T Unequip<T>(Expression<Func<Gear, T>> to) where T : WearableItem
 		{
+			if (to.Body is MemberExpression memberExpr &&
+				memberExpr.Member is PropertyInfo propInfo)
+			{
+				var existingObj = propInfo.GetValue(this);
+				ArgumentNullException.ThrowIfNull(existingObj);
 
-		}
+				var item = (T)existingObj;
+				foreach (var m in item.Modifiers)
+				{
+					m.RemoveModification(_hero);
+				}
 
-		public void DropAll()
-		{
-			// You get killed and drop all gear
+				propInfo.SetValue(this, null);
+
+				return item;
+			}
+			else
+			{
+				throw new InvalidOperationException("You must uneqip first");
+			}
 		}
 	}
 }

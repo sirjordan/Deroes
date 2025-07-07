@@ -1,5 +1,4 @@
 ﻿using Deroes.Core.Stats;
-using Deroes.Core.Stats.Modifiers;
 
 namespace Deroes.Core.Items
 {
@@ -8,44 +7,80 @@ namespace Deroes.Core.Items
 		public int RequiredStrength { get; protected set; }
 		public int RequiredDexterity { get; protected set; }
 		public int Durability { get; protected set; }
+		public IEnumerable<IStatModifier> Modifiers { get; protected set; }
+
+		protected WearableItem(int requiredStrength, int requiredDexterity, int durability, IEnumerable<IStatModifier> modifiers)
+		{
+			RequiredStrength = requiredStrength;
+			RequiredDexterity = requiredDexterity;
+			Durability = durability;
+			Modifiers = modifiers;
+		}
 	}
 
-	public abstract class DefenseItem : WearableItem
+	public abstract class DefenseItem(int requiredStrength, int requiredDexterity, int durability, IEnumerable<IStatModifier> modifiers) 
+		: WearableItem(requiredStrength, requiredDexterity, durability, modifiers)
 	{
 		public int Defense { get; protected set; }
 	}
 
-	public abstract class Weapon : WearableItem
+	public class Weapon(int requiredStrength, int requiredDexterity, int durability, IEnumerable<IStatModifier> modifiers) 
+		: WearableItem(requiredStrength, requiredDexterity, durability, modifiers)
 	{
 		public Physical Damage { get; protected set; }
 		public int AttackSpeed { get; protected set; }
 		public bool IsTwoHanded { get; protected set; }
 	}
 
-	public class Helm : DefenseItem { }
-
-	public class Armor : DefenseItem { }
-
-	public class Shield : DefenseItem
+	public class Helm : DefenseItem
 	{
-		public List<IStatModifier> Modifiers { get; }
-
-		public int ChanceToBlock { get; private set; }
-
-		public Shield()
+		public Helm(int requiredStrength, int requiredDexterity, int durability, IEnumerable<IStatModifier> modifiers) : base(requiredStrength, requiredDexterity, durability, modifiers)
 		{
-			Modifiers = new List<IStatModifier>();
-			Modifiers.Add(new ManaFlatModifier(5));
 		}
 	}
 
-	public class Gloves : DefenseItem { }
+	public class Armor : DefenseItem
+	{
+		public Armor(int requiredStrength, int requiredDexterity, int durability, IEnumerable<IStatModifier> modifiers) : base(requiredStrength, requiredDexterity, durability, modifiers)
+		{
+		}
+	}
 
-	public class Boots : DefenseItem { }
+	public class Shield : DefenseItem
+	{
+		public Shield(int requiredStrength, int requiredDexterity, int durability, IEnumerable<IStatModifier> modifiers) : base(requiredStrength, requiredDexterity, durability, modifiers)
+		{
+		}
 
-	public class Belt : DefenseItem { }
+		public int ChanceToBlock { get; private set; }
+	}
 
-	public class Ring : Item { }
+	public class Gloves : DefenseItem
+	{
+		public Gloves(int requiredStrength, int requiredDexterity, int durability, IEnumerable<IStatModifier> modifiers) : base(requiredStrength, requiredDexterity, durability, modifiers)
+		{
+		}
+	}
 
-	public class Amulet : Item { }
+	public class Boots : DefenseItem
+	{
+		public Boots(int requiredStrength, int requiredDexterity, int durability, IEnumerable<IStatModifier> modifiers) : base(requiredStrength, requiredDexterity, durability, modifiers)
+		{
+		}
+	}
+
+	public class Belt : DefenseItem
+	{
+		public Belt(int requiredStrength, int requiredDexterity, int durability, IEnumerable<IStatModifier> modifiers) : base(requiredStrength, requiredDexterity, durability, modifiers)
+		{
+		}
+	}
+
+	public class Ring() : WearableItem(0, 0, 0, [])
+	{
+	}
+
+	public class Amulet() : WearableItem(0, 0, 0, [])
+	{
+	}
 }

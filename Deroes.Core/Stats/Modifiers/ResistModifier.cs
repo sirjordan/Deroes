@@ -15,5 +15,10 @@
 		{
 			throw new NotImplementedException();
 		}
+
+		public void RemoveModification(Hero h)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

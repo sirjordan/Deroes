@@ -1,4 +1,5 @@
 using Deroes.Core.Stats;
+using Deroes.Core.Stats.Modifiers;
 
 namespace Deroes.Tests;
 
