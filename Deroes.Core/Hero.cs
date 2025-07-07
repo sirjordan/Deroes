@@ -3,20 +3,9 @@ using Deroes.Core.Stats;
 
 namespace Deroes.Core
 {
-	public class StatsModifierHero : Hero
-	{
-		private readonly Hero _base;
-		
-		public StatsModifierHero(Hero @base)
-		{
-			_base = @base;
-		}
-	}
-
 	public class Hero : Unit
 	{
-		// Stats
-		public Vital Mana { get; private init; }
+		public Stat<Vital> Mana { get; private init; }
 		public Vital Stamina { get; private init; }
 		public long Experience { get; private set; }
 
@@ -26,27 +15,17 @@ namespace Deroes.Core
 		public int Vitality { get; private set; }
 		public int Energy { get; private set; }
 
-		// Gear
-		public Helm? Helm { get; private set; }
-		public Armor? Armor { get; private set; }
-		public Belt? Belt { get; private set; }
-		public Weapon? LeftHand { get; private set; }
-		public Shield? RightHand { get; private set; }
-		public Gloves? Gloves { get; private set; }
-		public Boots? Boots { get; private set; }
-		public Ring? LeftRing { get; private set; }
-		public Ring? RightRing { get; private set; }
-		public Amulet? Amulet { get; private set; }
-
 		// Inventory
-		public Stash Inventory { get; private set; }
+		public Stash Stash { get; private set; }
 		public int Gold { get; private set; }
+		public Gear Gear { get; private set; }
 
 		protected Hero()
 		{
 			Experience = 0;
-			Inventory = new Stash(10, 4);
+			Stash = new Stash(10, 4);
 			Gold = 0;
+			Gear = new Gear(this);
 		}
 
 		public static Hero CreatePaladin()
@@ -55,7 +34,7 @@ namespace Deroes.Core
 			{
 				Name = "Paladin",
 
-				Mana = new(@base: 15, levelCoef: 1.5, attrCoef: 2),
+				Mana = new Stat<Vital>(new(@base: 15, levelCoef: 1.5, attrCoef: 2)),
 				Stamina = new(@base: 89, levelCoef: 1, attrCoef: 1),
 				Life = new(@base: 55, levelCoef: 2, attrCoef: 3),
 
@@ -108,7 +87,7 @@ namespace Deroes.Core
 		public void AddEnergy()
 		{
 			Energy++;
-			Mana.OnAddAttribute();
+			Mana.BaseValue.OnAddAttribute();
 		}
 
 		public void AddExperience(long xp)
@@ -126,7 +105,7 @@ namespace Deroes.Core
 			Level++;
 
 			Life.OnLevelUp();
-			Mana.OnLevelUp();
+			Mana.BaseValue.OnLevelUp();
 			Stamina.OnLevelUp();
 		}
 	}

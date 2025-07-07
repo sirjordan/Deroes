@@ -36,8 +36,8 @@
 
 		public void Drink(Hero h)
 		{
-			var mana = Value * h.Mana.LevelCoef;
-			h.Mana.OnAction(mana);
+			var mana = Value * h.Mana.Value.LevelCoef;
+			h.Mana.Value.OnAction(mana);
 		}
 
 		public static ManaPotion Minor => new() { Value = 20 };
@@ -54,10 +54,10 @@
 		public void Drink(Hero h)
 		{
 			var life = Value / 100 * h.Life.Max;
-			var mana = Value / 100 * h.Mana.Max;
+			var mana = Value / 100 * h.Mana.Value.Max;
 
 			h.Life.OnAction(life);
-			h.Mana.OnAction(mana);
+			h.Mana.Value.OnAction(mana);
 		}
 
 		public static RejuvenationPotion Normal => new() { Value = 35 };

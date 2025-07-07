@@ -169,13 +169,13 @@ namespace Deroes.Tests
 
 			Assert.AreEqual(2, lvl2.Level);
 			Assert.AreEqual(57, lvl2.Life.Max);
-			Assert.AreEqual(16.5, lvl2.Mana.Max);
+			Assert.AreEqual(16.5, lvl2.Mana.Value.Max);
 
 			lvl2.AddExperience(Hero.XpToLevelUp(2));
 
 			Assert.AreEqual(3, lvl2.Level);
 			Assert.AreEqual(59, lvl2.Life.Max);
-			Assert.AreEqual(18, lvl2.Mana.Max);
+			Assert.AreEqual(18, lvl2.Mana.Value.Max);
 		}
 
 		[TestMethod]
@@ -190,7 +190,7 @@ namespace Deroes.Tests
 			// Assert
 			Assert.AreEqual(26, hero.Level);
 			Assert.AreEqual(105, hero.Life.Max);
-			Assert.AreEqual(52.5, hero.Mana.Max);
+			Assert.AreEqual(52.5, hero.Mana.Value.Max);
 			Assert.AreEqual(114, hero.Stamina.Max);
 		}
 
@@ -204,7 +204,7 @@ namespace Deroes.Tests
 
 			Assert.AreEqual(50, lvl50.Level);
 			Assert.AreEqual(153, lvl50.Life.Max);
-			Assert.AreEqual(88.5, lvl50.Mana.Max);
+			Assert.AreEqual(88.5, lvl50.Mana.Value.Max);
 			Assert.AreEqual(138, lvl50.Stamina.Max);
 		}
 
@@ -221,7 +221,7 @@ namespace Deroes.Tests
 			// Assert
 			Assert.AreEqual(95, hero.Level);
 			Assert.AreEqual(243, hero.Life.Max);
-			Assert.AreEqual(156, hero.Mana.Max);
+			Assert.AreEqual(156, hero.Mana.Value.Max);
 		}
 
 		[TestMethod]
@@ -265,7 +265,7 @@ namespace Deroes.Tests
 			hero.AddEnergy();
 			hero.AddEnergy();
 
-			Assert.AreEqual(hero.Mana.Base + hero.Mana.AttributeCoef * 5, hero.Mana.Max);
+			Assert.AreEqual(hero.Mana.Value.Base + hero.Mana.Value.AttributeCoef * 5, hero.Mana.Value.Max);
 		}
 
 		[TestMethod]
@@ -278,7 +278,7 @@ namespace Deroes.Tests
 				hero.AddEnergy();
 			}
 
-			Assert.AreEqual(hero.Mana.Base + hero.Mana.AttributeCoef * 50, hero.Mana.Max);
+			Assert.AreEqual(hero.Mana.Value.Base + hero.Mana.Value.AttributeCoef * 50, hero.Mana.Value.Max);
 		}
 	}
 }

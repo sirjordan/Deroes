@@ -2,15 +2,15 @@
 {
 	public class AttackDamage
 	{
-		public Damage Physical { get; private set; }
-		public Damage Cold { get; private set; }
-		public Damage Fire { get; private set; }
-		public Damage Poison { get; private set; }
-		public Damage Lightining { get; private set; }
+		public DamageRange Physical { get; private set; }
+		public DamageRange Cold { get; private set; }
+		public DamageRange Fire { get; private set; }
+		public DamageRange Poison { get; private set; }
+		public DamageRange Lightining { get; private set; }
 
-		public Damage[] All => [Physical, Cold, Fire, Poison, Lightining];
-		public int Min => All.Sum(d => d.Min);
-		public int Max => All.Sum(d => d.Max);
+		public DamageRange[] All => [Physical, Cold, Fire, Poison, Lightining];
+		public int Min => All.Sum(d => d.Min.Value.Amount);
+		public int Max => All.Sum(d => d.Max.Value.Amount);
 
 		public AttackDamage()
 			: this(new Physical(), new Cold(), new Fire(), new Poison(), new Lightining()) { }
@@ -36,20 +36,40 @@
 		}
 	}
 
+	public class Damage : IStatModifiable<Damage>
+	{
+		public int Amount { get; private set; }
+
+		public Damage(int value)
+		{
+			ArgumentOutOfRangeException.ThrowIfNegative(value);
+
+			Amount = value;
+		}
+
+		public Damage Modify(int modificator)
+		{
+			return new Damage(Amount + modificator);
+		}
+	}
+
 	/// <summary>
 	/// Phisycal, Cold, Fire, Lightining, Poison?, Magic
 	/// </summary>
-	public abstract class Damage
+	public abstract class DamageRange
 	{
-		public int Min { get; protected set; }
-		public int Max { get; protected set; }
+		// TODO: Unit test this!
 
-		public Damage(int min, int max)
+		public Stat<Damage> Min { get; protected set; }
+		public Stat<Damage> Max { get; protected set; }
+
+		public DamageRange(int min, int max)
 		{
 			ArgumentOutOfRangeException.ThrowIfNegative(min);
+			ArgumentOutOfRangeException.ThrowIfNegative(max);
 
-			Min = min;
-			Max = max;
+			Min = new Stat<Damage>(new Damage(min));
+			Max = new Stat<Damage>(new Damage(max));
 		}
 
 		/// <summary>
@@ -61,7 +81,7 @@
 		protected int GetYieldedDamage()
 		{
 			var rnd = new Random();
-			var dmg = rnd.Next(Min, Max + 1);
+			var dmg = rnd.Next(Min.Value.Amount, Max.Value.Amount + 1);
 
 			return dmg;
 		}
@@ -70,7 +90,7 @@
 	/// <summary>
 	/// Freze/chill and do damage
 	/// </summary>
-	public class Cold : Damage
+	public class Cold : DamageRange
 	{
 		public Cold(int min, int max) : base(min, max) { }
 
@@ -97,7 +117,7 @@
 	/// <summary>
 	/// Do damage and if running - stop
 	/// </summary>
-	public class Physical : Damage
+	public class Physical : DamageRange
 	{
 		public Physical(int min, int max) : base(min, max) { }
 
@@ -129,7 +149,7 @@
 		}
 	}
 
-	public class Fire : Damage
+	public class Fire : DamageRange
 	{
 		public Fire(int min, int max) : base(min, max) { }
 
@@ -141,7 +161,7 @@
 		}
 	}
 
-	public class Lightining : Damage
+	public class Lightining : DamageRange
 	{
 		public Lightining(int min, int max) : base(min, max) { }
 
@@ -153,7 +173,7 @@
 		}
 	}
 
-	public class Poison : Damage
+	public class Poison : DamageRange
 	{
 		public Poison(int min, int max) : base(min, max) { }
 

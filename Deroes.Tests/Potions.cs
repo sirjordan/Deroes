@@ -28,7 +28,7 @@ public class Potions
 		_paladin.AddEnergy();
 		_paladin.AddEnergy();
 		_paladin.Life.OnAction(-_paladin.Life.Max);     // drain to 0
-		_paladin.Mana.OnAction(-_paladin.Mana.Max);
+		_paladin.Mana.Value.OnAction(-_paladin.Mana.Value.Max);
 		_paladin.Stamina.OnAction(-_paladin.Stamina.Max);
 	}
 
@@ -47,11 +47,11 @@ public class Potions
 	public void ManaPotion_Minor_AddsExpectedMana()
 	{
 		var potion = ManaPotion.Minor;
-		double expected = potion.Value * _paladin.Mana.LevelCoef;
+		double expected = potion.Value * _paladin.Mana.Value.LevelCoef;
 
 		potion.Drink(_paladin);
 
-		Assert.AreEqual(expected, _paladin.Mana.Remaining, 0.001);
+		Assert.AreEqual(expected, _paladin.Mana.Value.Remaining, 0.001);
 	}
 
 	[TestMethod]
@@ -69,12 +69,12 @@ public class Potions
 	{
 		var potion = RejuvenationPotion.Normal;
 		double expectedLife = (potion.Value / 100.0) * _paladin.Life.Max;
-		double expectedMana = (potion.Value / 100.0) * _paladin.Mana.Max;
+		double expectedMana = (potion.Value / 100.0) * _paladin.Mana.Value.Max;
 
 		potion.Drink(_paladin);
 
 		Assert.AreEqual(expectedLife, _paladin.Life.Remaining, 0.001);
-		Assert.AreEqual(expectedMana, _paladin.Mana.Remaining, 0.001);
+		Assert.AreEqual(expectedMana, _paladin.Mana.Value.Remaining, 0.001);
 	}
 
 	[TestMethod]
@@ -85,7 +85,7 @@ public class Potions
 		potion.Drink(_paladin);
 
 		Assert.AreEqual(_paladin.Life.Max, _paladin.Life.Remaining, 0.001);
-		Assert.AreEqual(_paladin.Mana.Max, _paladin.Mana.Remaining, 0.001);
+		Assert.AreEqual(_paladin.Mana.Value.Max, _paladin.Mana.Value.Remaining, 0.001);
 	}
 
 	[TestMethod]
@@ -102,11 +102,11 @@ public class Potions
 	[TestMethod]
 	public void ManaPotion_DoesNotExceedMax()
 	{
-		_paladin.Mana.OnAction(_paladin.Mana.Max - 5); // near max
+		_paladin.Mana.Value.OnAction(_paladin.Mana.Value.Max - 5); // near max
 
 		var potion = ManaPotion.Super;
 		potion.Drink(_paladin);
 
-		Assert.AreEqual(_paladin.Mana.Max, _paladin.Mana.Remaining, 0.001);
+		Assert.AreEqual(_paladin.Mana.Value.Max, _paladin.Mana.Value.Remaining, 0.001);
 	}
 }

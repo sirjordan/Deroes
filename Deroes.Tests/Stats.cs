@@ -77,7 +77,7 @@ public class Stats
 		var baseVital = new Vital(100, 10, 5);
 		var stat = new Stat<Vital>(baseVital);
 
-		stat.AddModifier(new VitalModifier(25));
+		stat.AddModifier(new ManaFlatModifier(25));
 		Assert.AreEqual(125, stat.Value.Max);
 	}
 
@@ -87,8 +87,8 @@ public class Stats
 		var baseVital = new Vital(100, 10, 5);
 		var stat = new Stat<Vital>(baseVital);
 
-		stat.AddModifier(new VitalModifier(20));
-		stat.AddModifier(new VitalModifier(25));
+		stat.AddModifier(new ManaFlatModifier(20));
+		stat.AddModifier(new ManaFlatModifier(25));
 		Assert.AreEqual(145, stat.Value.Max);
 	}
 
@@ -98,7 +98,7 @@ public class Stats
 		var baseVital = new Vital(100, 10, 5);
 		var stat = new Stat<Vital>(baseVital);
 
-		stat.AddModifier(new VitalPercentageModifier(10));
+		stat.AddModifier(new ManaPercentageModifier(10));
 		Assert.AreEqual(110, stat.Value.Max); // 100 + 10%
 	}
 
@@ -108,8 +108,8 @@ public class Stats
 		var baseVital = new Vital(100, 10, 5);
 		var stat = new Stat<Vital>(baseVital);
 
-		stat.AddModifier(new VitalModifier(20));
-		stat.AddModifier(new VitalPercentageModifier(10)); // +10%
+		stat.AddModifier(new ManaFlatModifier(20));
+		stat.AddModifier(new ManaPercentageModifier(10)); // +10%
 
 		Assert.AreEqual(132, stat.Value.Max); // 100 + 20 + 10%(120)
 	}
@@ -120,8 +120,8 @@ public class Stats
 		var baseVital = new Vital(100, 10, 5);
 		var stat = new Stat<Vital>(baseVital);
 
-		stat.AddModifier(new VitalPercentageModifier(10)); // +10%
-		stat.AddModifier(new VitalModifier(20));
+		stat.AddModifier(new ManaPercentageModifier(10)); // +10%
+		stat.AddModifier(new ManaFlatModifier(20));
 		
 		// Percentage should be last
 		Assert.AreEqual(132, stat.Value.Max); // 100 + 20 + 10%(120)
@@ -131,7 +131,7 @@ public class Stats
 	public void Stat_Should_Remove_Modifier_Correctly()
 	{
 		var baseVital = new Vital(100, 10, 5);
-		var modifier = new VitalModifier(50);
+		var modifier = new ManaFlatModifier(50);
 		var stat = new Stat<Vital>(baseVital);
 
 		stat.AddModifier(modifier);
