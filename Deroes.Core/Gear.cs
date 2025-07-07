@@ -70,9 +70,9 @@ namespace Deroes.Core
 		/// Unequip a slot and returns the item
 		/// </summary>
 		/// <returns>Item from the slot</returns>
-		public T Unequip<T>(Expression<Func<Gear, T>> to) where T : WearableItem
+		public T Unequip<T>(Expression<Func<Gear, T?>> from) where T : WearableItem
 		{
-			if (to.Body is MemberExpression memberExpr &&
+			if (from.Body is MemberExpression memberExpr &&
 				memberExpr.Member is PropertyInfo propInfo)
 			{
 				var existingObj = propInfo.GetValue(this);
