@@ -22,10 +22,10 @@ namespace Deroes.Core
 			return 0;
 		}
 
-		public Monster()
+		public Monster(double health)
 		{
 			Name = "Monster";
-			Life = new Stat<Vital>(new Vital(@base: 10, 0, 0));
+			Life = new Stat<Vital>(new Vital(@base: health, 0, 0));
 		}
 	}
 }

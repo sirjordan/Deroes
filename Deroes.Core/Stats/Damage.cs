@@ -1,41 +1,5 @@
 ﻿namespace Deroes.Core.Stats
 {
-	public class AttackDamage
-	{
-		public DamageRange Physical { get; private set; }
-		public DamageRange Cold { get; private set; }
-		public DamageRange Fire { get; private set; }
-		public DamageRange Poison { get; private set; }
-		public DamageRange Lightining { get; private set; }
-
-		public DamageRange[] All => [Physical, Cold, Fire, Poison, Lightining];
-		public int Min => All.Sum(d => d.Min.Value.Amount);
-		public int Max => All.Sum(d => d.Max.Value.Amount);
-
-		public AttackDamage()
-			: this(new Physical(), new Cold(), new Fire(), new Poison(), new Lightining()) { }
-
-		public AttackDamage(Physical ph, Cold c, Fire f, Poison p, Lightining l)
-		{
-			Physical = ph;
-			Cold = c;
-			Fire = f;
-			Poison = p;
-			Lightining = l;
-		}
-
-		public int Apply(Unit defender)
-		{
-			var hitPoints = 0;
-			foreach (var dmg in All)
-			{
-				hitPoints += dmg.Apply(defender);
-			}
-
-			return hitPoints;
-		}
-	}
-
 	public class Damage : IStatModifiable<Damage>
 	{
 		public int Amount { get; private set; }
@@ -56,7 +20,7 @@
 	/// <summary>
 	/// Phisycal, Cold, Fire, Lightining, Poison?, Magic
 	/// </summary>
-	public abstract class DamageRange //: IStatModifiable<DamageRange>
+	public abstract class DamageRange 
 	{
 		public Stat<Damage> Min { get; protected set; }
 		public Stat<Damage> Max { get; protected set; }
@@ -83,8 +47,6 @@
 
 			return dmg;
 		}
-
-		//public abstract DamageRange Modify(int modificator);
 	}
 
 	/// <summary>
@@ -98,13 +60,13 @@
 
 		public override int Apply(Unit defender)
 		{
-			if (defender.Resistanses.Cold.Immune)
+			if (defender.Resistanse.Cold.Immune)
 			{
 				return 0;
 			}
 
 			var dmg = GetYieldedDamage();
-			var hitPoints = (int)Math.Round(defender.Resistanses.Cold.Amount / 100.0 * dmg);
+			var hitPoints = (int)Math.Round(dmg - (defender.Resistanse.Cold.Amount / 100.0 * dmg));
 
 			// TODO: Freeze/chill
 
@@ -125,7 +87,7 @@
 
 		public override int Apply(Unit defender)
 		{
-			if (defender.Resistanses.Physical.Immune)
+			if (defender.Resistanse.Physical.Immune)
 			{
 				return 0;
 			}
@@ -134,7 +96,7 @@
 			// TODO: Take AttackRating in mind
 
 			var dmg = GetYieldedDamage();
-			var hitPoints = dmg - defender.Resistanses.Physical.Amount;
+			var hitPoints = dmg - defender.Resistanse.Physical.Amount;
 
 			if (hitPoints < 1)
 			{

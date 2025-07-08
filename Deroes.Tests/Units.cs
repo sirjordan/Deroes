@@ -1,4 +1,6 @@
 ﻿using Deroes.Core;
+using Deroes.Core.Items;
+using Deroes.Core.Stats.Modifiers;
 
 namespace Deroes.Tests
 {
@@ -9,7 +11,10 @@ namespace Deroes.Tests
 		public void Unit_Paladin_Attack_Monster()
 		{
 			var player = Hero.CreatePaladin();
-			var enemy = new Monster();
+			var enemy = new Monster(4);
+
+			var sword = new Weapon(1, 1, 10, [new PhysicalDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10))]);
+			player.Gear.Equip(sword, _ => _.LeftHand);
 
 			player.Attack(enemy);
 
@@ -18,10 +23,30 @@ namespace Deroes.Tests
 		}
 
 		[TestMethod]
+		public void Unit_Paladin_Attack_Monster_Multiple_Damage()
+		{
+			var player = Hero.CreatePaladin();
+			var enemy = new Monster(4000);
+
+			var sword = new Weapon(1, 1, 10, [
+				new PhysicalDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)),
+				new PhysicalDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)),
+				new ColdDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)),
+			]);
+			
+			player.Gear.Equip(sword, _ => _.LeftHand);
+
+			player.Attack(enemy);
+
+			Assert.IsTrue(enemy.IsAlive);
+			Assert.IsTrue(enemy.Life.Value.Remaining <= (4000 - 15));
+		}
+
+		[TestMethod]
 		public void Unit_Monster_Attack_Paladin()
 		{
 			var player = Hero.CreatePaladin();
-			var enemy = new Monster();
+			var enemy = new Monster(10);
 
 			enemy.Attack(player);
 
@@ -33,7 +58,11 @@ namespace Deroes.Tests
 		public void Attack_By_Hero_Kill()
 		{
 			var player = Hero.CreatePaladin();
-			var enemy = new Monster();
+			var enemy = new Monster(4);
+
+			var sword = new Weapon(1, 1, 10, [new PhysicalDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10))]);
+			player.Gear.Equip(sword, _ => _.LeftHand);
+
 
 			new Combat(player, enemy).ByHero();
 
@@ -45,7 +74,7 @@ namespace Deroes.Tests
 		public void Attack_By_Monster()
 		{
 			var player = Hero.CreatePaladin();
-			var enemy = new Monster();
+			var enemy = new Monster(10);
 
 			new Combat(player, enemy).ByMonster();
 

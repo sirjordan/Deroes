@@ -9,16 +9,16 @@ namespace Deroes.Core
 		public string Name { get; protected set; }
 		public Stat<Vital> Life { get; protected set; }
 		public int Level { get; protected set; }
-		public AttackDamage Damage { get; protected set; }
-		public AttackResistanse Resistanses { get; protected set; }
+		public Attack Damage { get; protected set; }
+		public Defense Resistanse { get; protected set; }
 
 		public bool IsAlive => (Life.Value.Remaining > 0);
 		
 		protected Unit()
 		{
 			Level = 1;
-			Damage = new AttackDamage();
-			Resistanses = new AttackResistanse();
+			Damage = new Attack();
+			Resistanse = new Defense();
 		}
 
 		/// <summary>
