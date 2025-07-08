@@ -60,13 +60,13 @@
 
 		public override int Apply(Unit defender)
 		{
-			if (defender.Resistanse.Cold.Immune)
+			if (defender.Resistanse.Cold.Value.Immune)
 			{
 				return 0;
 			}
 
 			var dmg = GetYieldedDamage();
-			var hitPoints = (int)Math.Round(dmg - (defender.Resistanse.Cold.Amount / 100.0 * dmg));
+			var hitPoints = (int)Math.Round(dmg - (defender.Resistanse.Cold.Value.Amount / 100.0 * dmg));
 
 			// TODO: Freeze/chill
 
@@ -87,16 +87,15 @@
 
 		public override int Apply(Unit defender)
 		{
-			if (defender.Resistanse.Physical.Immune)
+			if (defender.Resistanse.Physical.Value.Immune)
 			{
 				return 0;
 			}
 
-			// TODO: If immune to physical - skip
 			// TODO: Take AttackRating in mind
 
 			var dmg = GetYieldedDamage();
-			var hitPoints = dmg - defender.Resistanse.Physical.Amount;
+			var hitPoints = dmg - defender.Resistanse.Physical.Value.Amount;
 
 			if (hitPoints < 1)
 			{

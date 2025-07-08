@@ -3,15 +3,22 @@
 	/// <summary>
 	/// Phisycal, Cold, Fire, Lightining, Poison?, Magic
 	/// </summary>
-	public class Resistanse
+	public class Resistanse : IStatModifiable<Resistanse>
 	{
 		public bool Immune { get; private set; }
 		public int Amount { get; private set; }
 
-		public Resistanse()
+		public Resistanse() : this(0) { }
+
+		public Resistanse(int  amount)
 		{
-			Amount = 0;
+			Amount = amount;
 			Immune = false;
+		}
+
+		public Resistanse Modify(int modificator)
+		{
+			return new Resistanse(Amount + modificator);
 		}
 	}
 }

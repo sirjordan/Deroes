@@ -2,19 +2,19 @@
 {
 	public class Defense
 	{
-		public Resistanse Physical { get; private set; }
-		public Resistanse Cold { get; private set; }
-		public Resistanse Fire { get; private set; }
-		public Resistanse Poison { get; private set; }
-		public Resistanse Lightining { get; private set; }
+		public Stat<Resistanse> Physical { get; private set; }
+		public Stat<Resistanse> Cold { get; private set; }
+		public Stat<Resistanse> Fire { get; private set; }
+		public Stat<Resistanse> Poison { get; private set; }
+		public Stat<Resistanse> Lightining { get; private set; }
 
 		public Defense()
 		{
-			Physical = new Resistanse();
-			Cold = new Resistanse();
-			Fire = new Resistanse();
-			Poison = new Resistanse();
-			Lightining = new Resistanse();
+			Physical = new Stat<Resistanse>(new Resistanse());
+			Cold = new Stat<Resistanse>(new Resistanse());
+			Fire = new Stat<Resistanse>(new Resistanse());
+			Poison = new Stat<Resistanse>(new Resistanse());
+			Lightining = new Stat<Resistanse>(new Resistanse());
 		}
 	}
 }

@@ -43,6 +43,51 @@ namespace Deroes.Tests
 		}
 
 		[TestMethod]
+		public void Unit_Min_Max_Damage()
+		{
+			var defaultDmg_min = 1;
+			var defaultDmg_max = 2;
+
+			var player = Hero.CreatePaladin();
+
+			var sword = new Weapon(1, 1, 10, [
+				new PhysicalDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)),
+				new PhysicalDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)),
+				new ColdDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)),
+			]);
+
+			player.Gear.Equip(sword, _ => _.LeftHand);
+
+			Assert.AreEqual(15 + defaultDmg_min, player.Damage.Min);
+			Assert.AreEqual(30 + defaultDmg_max, player.Damage.Max);
+		}
+
+		[TestMethod]
+		public void Unit_Min_Max_Damage_On_Equip_Unequip()
+		{
+			var defaultDmg_min = 1;
+			var defaultDmg_max = 2;
+
+			var player = Hero.CreatePaladin();
+
+			var sword = new Weapon(1, 1, 10, [
+				new PhysicalDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)),
+				new PhysicalDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)),
+				new ColdDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)),
+			]);
+
+			player.Gear.Equip(sword, _ => _.LeftHand);
+
+			Assert.AreEqual(15 + defaultDmg_min, player.Damage.Min);
+			Assert.AreEqual(30 + defaultDmg_max, player.Damage.Max);
+
+			var droped = player.Gear.Unequip(_ => _.LeftHand);
+
+			Assert.AreEqual(defaultDmg_min, player.Damage.Min);
+			Assert.AreEqual(defaultDmg_max, player.Damage.Max);
+		}
+
+		[TestMethod]
 		public void Unit_Monster_Attack_Paladin()
 		{
 			var player = Hero.CreatePaladin();
