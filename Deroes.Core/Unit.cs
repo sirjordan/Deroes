@@ -4,13 +4,11 @@ namespace Deroes.Core
 {
 	public abstract class Unit
 	{
-		public const int MAX_LEVEL = 99;
-
 		public string Name { get; protected set; }
 		public Stat<Vital> Life { get; protected set; }
 		public int Level { get; protected set; }
-		public Attack Damage { get; protected set; }
-		public Defense Resistanse { get; protected set; }
+		public Attack Damage { get; private set; }
+		public Defense Resistanse { get; private set; }
 
 		public bool IsAlive => (Life.Value.Remaining > 0);
 		

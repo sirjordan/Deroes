@@ -26,7 +26,7 @@ namespace Deroes.Tests
 		public void Unit_Paladin_Attack_Monster_Multiple_Damage()
 		{
 			var player = Hero.CreatePaladin();
-			var enemy = new Monster(4000);
+			var enemy = new Monster(84);
 
 			var sword = new Weapon(1, 1, 10, [
 				new PhysicalDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)),
@@ -109,7 +109,7 @@ namespace Deroes.Tests
 			player.Gear.Equip(sword, _ => _.LeftHand);
 
 
-			new Combat(player, enemy).ByHero();
+			new Combat(player, enemy).HeroAttacks();
 
 			Assert.IsFalse(enemy.IsAlive);
 			Assert.IsTrue(player.Experience > 0);
@@ -121,7 +121,7 @@ namespace Deroes.Tests
 			var player = Hero.CreatePaladin();
 			var enemy = new Monster(10);
 
-			new Combat(player, enemy).ByMonster();
+			new Combat(player, enemy).MonsterAttacks();
 
 			Assert.IsTrue(player.IsAlive);
 			Assert.AreEqual(54, player.Life.Value.Remaining);
@@ -232,7 +232,7 @@ namespace Deroes.Tests
 			hero.AddExperience(lvl99Xp);
 
 			// Assert
-			Assert.AreEqual(Unit.MAX_LEVEL, hero.Level);
+			Assert.AreEqual(Hero.MAX_LEVEL, hero.Level);
 		}
 
 		[TestMethod]

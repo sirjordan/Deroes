@@ -5,7 +5,7 @@
 		private Hero _hero = h;
 		private Monster _monster = m;
 
-		public void ByHero()
+		public void HeroAttacks()
 		{
 			_hero.Attack(_monster);
 
@@ -21,7 +21,7 @@
 			}
 		}
 
-		public void ByMonster()
+		public void MonsterAttacks()
 		{
 			_monster.Attack(_hero);
 			if (!_hero.IsAlive)

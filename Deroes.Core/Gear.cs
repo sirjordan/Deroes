@@ -90,7 +90,7 @@ namespace Deroes.Core
 			}
 			else
 			{
-				throw new InvalidOperationException("You must uneqip first");
+				throw new InvalidOperationException("Selector must be a property");
 			}
 		}
 	}
