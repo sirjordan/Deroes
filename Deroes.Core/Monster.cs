@@ -7,7 +7,7 @@ namespace Deroes.Core
 	{
 		// TODO:
 		// 1. Chance to drop (62.5% chance to NO Drop)
-		// 2. Fine tune monster health per level
+		// 2. Fine tune (and test) monster health per level
 
 		public const int MAX_LEVEL = 85;
 
@@ -51,7 +51,7 @@ namespace Deroes.Core
 			Level = level;
 			Name = "Monster";
 
-			var hp = 50 + (level * 3 * 2); // base + (level * 3 vitalityPerLevel * 2 coef)
+			var hp = 5 + (level * 3 * 2); // base + (level * 3 vitalityPerLevel * 2 coef)
 			Life = new Stat<Vital>(new Vital(@base: hp, 0, 0));
 		}
 	}

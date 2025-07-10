@@ -5,29 +5,37 @@
 		private Hero _hero = h;
 		private Monster _monster = m;
 
-		public void HeroAttacks()
+		public Combat HeroAttacks()
 		{
-			_hero.Attack(_monster);
-
-			if (!_monster.IsAlive)
+			if (_monster.IsAlive)
 			{
-				var xp = _monster.CalcExperience();
-				_hero.AddExperience(xp);
+				_hero.Attack(_monster);
 
-				var drop = _monster.DropItems();
-				var gold = _monster.DropGold();
+				if (!_monster.IsAlive)
+				{
+					var xp = _monster.CalcExperience();
+					_hero.AddExperience(xp);
 
-				_monster.Die();
+					var drop = _monster.DropItems();
+					var gold = _monster.DropGold();
+
+					_monster.Die();
+				}
 			}
+
+			return this;
+
 		}
 
-		public void MonsterAttacks()
+		public Combat MonsterAttacks()
 		{
 			_monster.Attack(_hero);
 			if (!_hero.IsAlive)
 			{
 				_hero.Die();
 			}
+
+			return this;
 		}
 	}
 }

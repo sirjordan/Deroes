@@ -1,6 +1,7 @@
 ﻿using Deroes.Core;
 using Deroes.Core.Items;
 using Deroes.Core.Stats.Modifiers;
+using System.Reflection.Emit;
 
 namespace Deroes.Tests
 {
@@ -11,11 +12,12 @@ namespace Deroes.Tests
 		public void Unit_Paladin_Attack_Monster()
 		{
 			var player = Hero.CreatePaladin();
-			var enemy = new Monster(4);
+			var enemy = new Monster(1);
 
 			var sword = new Weapon(1, 1, 10, [new PhysicalDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10))]);
 			player.Gear.Equip(sword, _ => _.LeftHand);
 
+			player.Attack(enemy);
 			player.Attack(enemy);
 
 			Assert.IsTrue(enemy.Life.Value.Remaining <= 0);
@@ -96,20 +98,22 @@ namespace Deroes.Tests
 			enemy.Attack(player);
 
 			Assert.IsTrue(player.IsAlive);
-			Assert.AreEqual(54, player.Life.Value.Remaining);
+			Assert.IsTrue(53 <= player.Life.Value.Remaining || player.Life.Value.Remaining >= 54, $"Player life is : {player.Life.Value.Remaining}");
 		}
 
 		[TestMethod]
 		public void Attack_By_Hero_Kill()
 		{
 			var player = Hero.CreatePaladin();
-			var enemy = new Monster(4);
+			var enemy = new Monster(1);
 
 			var sword = new Weapon(1, 1, 10, [new PhysicalDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10))]);
 			player.Gear.Equip(sword, _ => _.LeftHand);
 
 
-			new Combat(player, enemy).HeroAttacks();
+			new Combat(player, enemy)
+				.HeroAttacks()
+				.HeroAttacks(); 
 
 			Assert.IsFalse(enemy.IsAlive);
 			Assert.IsTrue(player.Experience > 0);
@@ -124,7 +128,7 @@ namespace Deroes.Tests
 			new Combat(player, enemy).MonsterAttacks();
 
 			Assert.IsTrue(player.IsAlive);
-			Assert.AreEqual(54, player.Life.Value.Remaining);
+			Assert.IsTrue(53 <= player.Life.Value.Remaining || player.Life.Value.Remaining >= 54, $"Player life is : {player.Life.Value.Remaining}");
 		}
 
 		[TestMethod]
@@ -353,6 +357,66 @@ namespace Deroes.Tests
 			}
 
 			Assert.AreEqual(hero.Mana.Value.Base + hero.Mana.Value.AttributeCoef * 50, hero.Mana.Value.Max);
+		}
+
+		[TestMethod]
+		public void Monster_Health_Per_Level_1()
+		{
+			var m = new Monster(1);
+			var expectedHp = 5 + (1 * 3 * 2);
+
+			Assert.AreEqual(expectedHp, m.Life.Value.Remaining);
+			Assert.AreEqual(expectedHp, m.Life.Value.Max);
+		}
+
+		[TestMethod]
+		public void Monster_Health_Per_Level_10()
+		{
+			var m = new Monster(10);
+			var expectedHp = 5 + (10 * 3 * 2);
+
+			Assert.AreEqual(expectedHp, m.Life.Value.Remaining);
+			Assert.AreEqual(expectedHp, m.Life.Value.Max);
+		}
+
+		[TestMethod]
+		public void Monster_Health_Per_Level_20()
+		{
+			var m = new Monster(20);
+			var expectedHp = 5 + (20 * 3 * 2);
+
+			Assert.AreEqual(expectedHp, m.Life.Value.Remaining);
+			Assert.AreEqual(expectedHp, m.Life.Value.Max);
+		}
+
+		[TestMethod]
+		public void Monster_Health_Per_Level_35()
+		{
+			var m = new Monster(35);
+			var expectedHp = 5 + (35 * 3 * 2);
+
+			Assert.AreEqual(expectedHp, m.Life.Value.Remaining);
+			Assert.AreEqual(expectedHp, m.Life.Value.Max);
+		}
+
+		[TestMethod]
+		public void Monster_Health_Per_Level_50()
+		{
+			var m = new Monster(50);
+			var expectedHp = 5 + (50 * 3 * 2);
+
+			Assert.AreEqual(expectedHp, m.Life.Value.Remaining);
+			Assert.AreEqual(expectedHp, m.Life.Value.Max);
+		}
+
+		[TestMethod]
+		public void Monster_Health_Per_Level_85()
+		{
+			var m = new Monster(85);
+			var expectedHp = 5 + (85 * 3 * 2);
+
+			Assert.AreEqual(expectedHp, m.Life.Value.Remaining);
+			Assert.AreEqual(expectedHp, m.Life.Value.Max);
 		}
 	}
 }

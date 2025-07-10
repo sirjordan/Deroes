@@ -1,5 +1,7 @@
 using Deroes.Core;
+using Deroes.Core.Items;
 using Deroes.Core.Stats;
+using Deroes.Core.Stats.Modifiers;
 
 namespace Deroes.Tests;
 
@@ -25,11 +27,16 @@ public class DamageTests
 	[TestMethod]
 	public void PhysicalDamageRange_Apply_ShouldDealMin1Damage_WhenResistanceTooHigh()
 	{
-		// Unit_with_a_lot_physical_resistance - 9999
 		var unit = Hero.CreatePaladin();
+
+		var armor = new Armor(1, 1, 10, [
+			new PhysicalResistModifier(9999)
+		]);
+		unit.Gear.Equip(armor, _ => _.Armor);
+
 		var originalLife = unit.Life.Value.Remaining;
 
-		var physical = new Physical(1, 2);
+		var physical = new Physical(9, 10);
 		int dmg = physical.Apply(unit);
 
 		Assert.AreEqual(1, dmg);
@@ -39,15 +46,19 @@ public class DamageTests
 	[TestMethod]
 	public void PhysicalDamageRange_Apply_ShouldDealReducedDamage_WhenResistsPresent()
 	{
-		// Unit with 1 defense
 		var unit = Hero.CreatePaladin();
+		var armor = new Armor(1, 1, 10, [
+			new PhysicalResistModifier(5)
+		]);
+		unit.Gear.Equip(armor, _ => _.Armor);
+
 		var originalLife = unit.Life.Value.Remaining;
 
 		var physical = new Physical(10, 10);
 		int dmg = physical.Apply(unit);
 
-		Assert.AreEqual(9, dmg);
-		Assert.AreEqual(originalLife - 9, unit.Life.Value.Remaining);
+		Assert.AreEqual(5, dmg);
+		Assert.AreEqual(originalLife - 5, unit.Life.Value.Remaining);
 	}
 
 	[TestMethod]
@@ -68,6 +79,11 @@ public class DamageTests
 	public void ColdDamageRange_Apply_ShouldDealPercentageReducedDamage()
 	{
 		var unit = Hero.CreatePaladin(); // 50% resistance
+		var armor = new Armor(1, 1, 10, [
+			new ColdResistModifier(50)
+		]);
+		unit.Gear.Equip(armor, _ => _.Armor);
+
 		var originalLife = unit.Life.Value.Remaining;
 
 		var cold = new Cold(10, 10);
@@ -88,5 +104,26 @@ public class DamageTests
 
 		Assert.AreEqual(0, dmg);
 		Assert.AreEqual(originalLife, unit.Life.Value.Remaining);
+	}
+
+	[TestMethod]
+	public void CombinedDamage_ShouldDealReducedDamage()
+	{
+		var unit = Hero.CreatePaladin(); // 50% resistance + 5 defence
+		var armor = new Armor(1, 1, 10, [
+			new ColdResistModifier(50),
+			new PhysicalResistModifier(6)
+		]);
+		unit.Gear.Equip(armor, _ => _.Armor);
+
+		var originalLife = unit.Life.Value.Remaining;
+
+		var cold = new Cold(10, 10);
+		int dmg = cold.Apply(unit);
+
+		var ph = new Physical(10, 10);
+		ph.Apply(unit);
+
+		Assert.AreEqual(originalLife - 9, unit.Life.Value.Remaining);
 	}
 }
