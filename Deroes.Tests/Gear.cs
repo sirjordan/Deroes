@@ -74,4 +74,6 @@ public class Gear
 		modifier.Verify(m => m.ApplyModification(_hero), Times.Once);
 		modifier.Verify(m => m.RemoveModification(_hero), Times.Once);
 	}
+
+
 }

@@ -36,10 +36,11 @@ public class Potions
 	public void HealthPotion_Minor_AddsExpectedLife()
 	{
 		var potion = HealthPotion.Minor;
-		double expected = potion.Value * _paladin.Life.Value.LevelCoef;
+		double expected = potion.Units * _paladin.Life.Value.LevelCoef;
 
 		potion.Drink(_paladin);
 
+		Assert.IsTrue(potion.Empty);
 		Assert.AreEqual(expected, _paladin.Life.Value.Remaining, 0.001);
 	}
 
@@ -47,10 +48,11 @@ public class Potions
 	public void ManaPotion_Minor_AddsExpectedMana()
 	{
 		var potion = ManaPotion.Minor;
-		double expected = potion.Value * _paladin.Mana.Value.LevelCoef;
+		double expected = potion.Units * _paladin.Mana.Value.LevelCoef;
 
 		potion.Drink(_paladin);
 
+		Assert.IsTrue(potion.Empty);
 		Assert.AreEqual(expected, _paladin.Mana.Value.Remaining, 0.001);
 	}
 
@@ -68,8 +70,8 @@ public class Potions
 	public void RejuvenationPotion_Normal_PartialRecovery()
 	{
 		var potion = RejuvenationPotion.Normal;
-		double expectedLife = (potion.Value / 100.0) * _paladin.Life.Value.Max;
-		double expectedMana = (potion.Value / 100.0) * _paladin.Mana.Value.Max;
+		double expectedLife = (potion.Units / 100.0) * _paladin.Life.Value.Max;
+		double expectedMana = (potion.Units / 100.0) * _paladin.Mana.Value.Max;
 
 		potion.Drink(_paladin);
 

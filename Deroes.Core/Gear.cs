@@ -4,13 +4,13 @@ using System.Reflection;
 
 namespace Deroes.Core
 {
-	public class Gear(Hero h)
+	public class Gear
 	{
-		private readonly Hero _hero = h;
+		private readonly Hero _hero;
 
 		public Helm? Helm { get; private set; }
 		public Armor? Armor { get; private set; }
-		public Belt? Belt { get; private set; }
+		public Belt Belt { get; private set; }
 		public Weapon? LeftHand { get; private set; }
 		public Shield? RightHand { get; private set; }
 		public Gloves? Gloves { get; private set; }
@@ -18,6 +18,12 @@ namespace Deroes.Core
 		public Ring? LeftRing { get; private set; }
 		public Ring? RightRing { get; private set; }
 		public Amulet? Amulet { get; private set; }
+
+		public Gear(Hero h)
+		{
+			_hero = h;
+			Belt = new Belt(new BeltItemSpec(0, 1));
+		}
 
 		/// <returns>If gear can be equiped or compatible</returns>
 		public bool CanEquip(Wearable item)

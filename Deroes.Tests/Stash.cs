@@ -7,12 +7,12 @@ namespace Deroes.Tests;
 [TestClass]
 public class StashTests
 {
-	private Stash stash = null!;
+	private Stash<Item> stash = null!;
 
 	[TestInitialize]
 	public void Setup()
 	{
-		stash = new Stash(10, 4);
+		stash = new Stash<Item>(10, 4);
 	}
 
 	private Item CreateMockItem(string name, int width, int height)
@@ -116,7 +116,7 @@ public class StashTests
 	[TestMethod]
 	public void Add_1x1_Item_To_Empty_Stash_Should_Succeed()
 	{
-		var stash = new Stash(10, 4);
+		var stash = new Stash<Item>(10, 4);
 		var item = CreateMockItem("P", 1, 1);
 
 		var result = stash.Add(item);
@@ -127,7 +127,7 @@ public class StashTests
 	[TestMethod]
 	public void Add_Item_To_Occupied_Space_Should_Find_Next_Free_Space()
 	{
-		var stash = new Stash(3, 2);
+		var stash = new Stash<Item>(3, 2);
 		var item1 = CreateMockItem("a", 1, 1);
 		var item2 = CreateMockItem("b", 1, 1);
 		var item3 = CreateMockItem("c", 1, 1);

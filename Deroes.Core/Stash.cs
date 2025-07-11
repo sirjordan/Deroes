@@ -5,23 +5,23 @@ namespace Deroes.Core
 	/// <summary>
 	/// Inventory, Private Stash, Belt, Cube
 	/// </summary>
-	public class Stash	
+	public class Stash<T> where T : Item
 	{
-		private Item?[,] Space { get; set; }
+		private T?[,] Space { get; set; }
 
 		public Stash(int width, int height)
 		{
 			ArgumentOutOfRangeException.ThrowIfLessThan(width, 1);
 			ArgumentOutOfRangeException.ThrowIfLessThan(height, 1);
 
-			Space = new Item[height, width];
+			Space = new T[height, width];
 		}
 
 		/// <summary>
 		/// Adds an item at the first free space
 		/// </summary>
 		/// <returns>If adding is done/possible</returns>
-		public bool Add(Item item) 
+		public bool Add(T item) 
 		{
 			var added = false;
 
@@ -48,7 +48,7 @@ namespace Deroes.Core
 		/// Adds an item at the specific location
 		/// </summary>
 		/// <returns>If adding is done/possible</returns>
-		public bool Add(Item item, int top, int left) 
+		public bool Add(T item, int top, int left) 
 		{
 			if (Peek(top, left) != null) 
 				return false;
@@ -67,12 +67,12 @@ namespace Deroes.Core
 		/// <summary>
 		/// Get/peek an item from specific location
 		/// </summary>
-		public Item? Peek(int top, int left) 
+		public T? Peek(int top, int left) 
 		{
 			return Space[top, left];
 		}
 
-		public Item Drop(int top, int left)
+		public T Drop(int top, int left)
 		{
 			var item = Space[top, left];
 

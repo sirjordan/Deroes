@@ -32,18 +32,18 @@ namespace Deroes.Core
 		// Attributes
 		public int Strength { get; private set; }
 		public int Dexterity { get; private set; }
-		public int Vitality { get; private set; }                                   
+		public int Vitality { get; private set; }
 		public int Energy { get; private set; }
 
 		// Inventory
-		public Stash Stash { get; private set; }
+		public Stash<Item> Stash { get; private set; }
 		public int Gold { get; private set; }
 		public Gear Gear { get; private set; }
 
 		protected Hero()
 		{
 			Experience = 0;
-			Stash = new Stash(10, 4);
+			Stash = new Stash<Item>(10, 4);
 			Gold = 0;
 			Gear = new Gear(this);
 		}
@@ -85,6 +85,15 @@ namespace Deroes.Core
 		public void DrinkPotion(IPotion p)
 		{
 			p.Drink(this);
+		}
+
+		public void DrinkPotion(int beltRow, int beltCol)
+		{
+			var potion = Gear.Belt.Drop(beltRow, beltCol);
+			if (potion != null)
+			{
+				DrinkPotion(potion);
+			}
 		}
 
 		public void AddStrenght()

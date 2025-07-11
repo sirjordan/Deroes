@@ -23,13 +23,13 @@ namespace Deroes.Core.Items.Wearables
 	public record DefenseItemSpec : WearableItemSpec
 	{
 		/// <summary>
-		/// Initial
+		/// Initial/base
 		/// </summary>
 		public int Defense { get; init; }
 
 		public DefenseItemSpec(int defense)
 		{
-			ArgumentOutOfRangeException.ThrowIfNegativeOrZero(defense);
+			ArgumentOutOfRangeException.ThrowIfNegative(defense);
 
 			Defense = defense;
 		}
@@ -37,7 +37,13 @@ namespace Deroes.Core.Items.Wearables
 
 	public record WeaponItemSpec : WearableItemSpec
 	{
+		/// <summary>
+		/// Initial/base
+		/// </summary>
 		public int Min { get; init; }
+		/// <summary>
+		/// Initial/base
+		/// </summary>
 		public int Max { get; init; }
 
 		public WeaponItemSpec(int min, int max)
@@ -47,6 +53,23 @@ namespace Deroes.Core.Items.Wearables
 
 			Min = min;
 			Max = max;
+		}
+	}
+
+	public record BeltItemSpec : DefenseItemSpec
+	{
+		public const int MAX_ROWS = 4;
+		public int Rows { get; private set; }
+
+		/// <summary>
+		/// 1-4 rows
+		/// </summary>
+		public BeltItemSpec(int defense, int rows) : base(defense)
+		{
+			ArgumentOutOfRangeException.ThrowIfGreaterThan(rows, MAX_ROWS);
+			ArgumentOutOfRangeException.ThrowIfLessThan(rows, 1);
+
+			Rows = rows;
 		}
 	}
 }

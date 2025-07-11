@@ -11,7 +11,7 @@ namespace Deroes.Core.Items.Wearables
 	{
 		protected DefenseItem(DefenseItemSpec itemSpec) : base(itemSpec)
 		{
-			ArgumentOutOfRangeException.ThrowIfNegativeOrZero(itemSpec.Defense);
+			ArgumentOutOfRangeException.ThrowIfNegative(itemSpec.Defense);
 
 			ItemSpec.Modifiers.Add(new PhysicalResistModifier(itemSpec.Defense));
 		}
@@ -23,7 +23,7 @@ namespace Deroes.Core.Items.Wearables
 		{
 			ItemSpec.Modifiers.Add(
 				new PhysicalDamageModifier(
-					new FlatDamageModifier(itemSpec.Min), 
+					new FlatDamageModifier(itemSpec.Min),
 					new FlatDamageModifier(itemSpec.Max)));
 		}
 	}
@@ -48,9 +48,45 @@ namespace Deroes.Core.Items.Wearables
 	{
 	}
 
-	public class Belt(DefenseItemSpec itemSpec) : DefenseItem(itemSpec)
+	public class Belt : DefenseItem
 	{
-		// TDOO: Stash, Invisible belt for begining
+		public const int COLS = 4;
+		private Stash<Potion> _potions;
+
+		public Belt(BeltItemSpec itemSpec) : base(itemSpec)
+		{
+			_potions = new Stash<Potion>(COLS, itemSpec.Rows);
+		}
+
+		/// <summary>
+		/// Add potion at free space in belt
+		/// </summary>
+		public bool Add(Potion p)
+		{
+			// TODO: If existing potions, place it under the same type
+			return _potions.Add(p);
+		}
+
+		public bool Add(Potion p, int row, int col)
+		{
+			// TODO: Add at bottom of the stash (reverse row)
+			return _potions.Add(p, row, col);
+		}
+
+		/// <summary>
+		/// Gets and removes it from the belt
+		/// </summary>
+		public Potion? Drop(int row, int col)
+		{
+			if (_potions.Peek(row, col) != null)
+			{
+				var p = _potions.Drop(row, col);
+				// TODO: Reaggrange potions to be stacked at the bottom
+				return p;
+			}
+
+			return null;
+		}
 	}
 
 	public class Ring(WearableItemSpec itemSpec) : Wearable(itemSpec)

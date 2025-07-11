@@ -5,62 +5,78 @@
 		public void Drink(Hero h);
 	}
 
-	public class HealthPotion : Item, IPotion
+	public abstract class Potion : Item, IPotion
 	{
-		public double Value { get; private init; }
+		public double Units { get; protected init; }
+		public bool Empty { get; private set; }
+
+		protected Potion()
+		{
+			Empty = false;
+		}
 
 		public void Drink(Hero h)
 		{
-			var hp = Value * h.Life.Value.LevelCoef;
+			if (!Empty)
+			{
+				ApplyEffect(h);
+				Empty = true;
+			}
+		}
+
+		protected abstract void ApplyEffect(Hero h);
+	}
+
+	public class HealthPotion : Potion
+	{
+		protected override void ApplyEffect(Hero h)
+		{
+			var hp = Units * h.Life.Value.LevelCoef;
 			h.Life.Value.OnAction(hp);
 		}
 
-		public static HealthPotion Minor => new() { Value = 30 };
-		public static HealthPotion Light => new() { Value = 60 };
-		public static HealthPotion Normal => new() { Value = 100 };
-		public static HealthPotion Greater => new() { Value = 180 };
-		public static HealthPotion Super => new() { Value = 320 };
+		public static HealthPotion Minor => new() { Units = 30 };
+		public static HealthPotion Light => new() { Units = 60 };
+		public static HealthPotion Normal => new() { Units = 100 };
+		public static HealthPotion Greater => new() { Units = 180 };
+		public static HealthPotion Super => new() { Units = 320 };
 	}
 
-	public class StaminaPotion : IPotion
+	public class StaminaPotion : Potion
 	{
-		public void Drink(Hero h)
+		protected override void ApplyEffect(Hero h)
 		{
 			h.Stamina.Value.OnAction(h.Stamina.Value.Max);
 		}
 	}
 
-	public class ManaPotion : IPotion
+	public class ManaPotion : Potion
 	{
-		public double Value { get; private init; }
-
-		public void Drink(Hero h)
+		protected override void ApplyEffect(Hero h)
 		{
-			var mana = Value * h.Mana.Value.LevelCoef;
+			var mana = Units * h.Mana.Value.LevelCoef;
 			h.Mana.Value.OnAction(mana);
 		}
 
-		public static ManaPotion Minor => new() { Value = 20 };
-		public static ManaPotion Light => new() { Value = 40 };
-		public static ManaPotion Normal => new() { Value = 80 };
-		public static ManaPotion Greater => new() { Value = 150 };
-		public static ManaPotion Super => new() { Value = 250 };
+		public static ManaPotion Minor => new() { Units = 20 };
+		public static ManaPotion Light => new() { Units = 40 };
+		public static ManaPotion Normal => new() { Units = 80 };
+		public static ManaPotion Greater => new() { Units = 150 };
+		public static ManaPotion Super => new() { Units = 250 };
 	}
 
-	public class RejuvenationPotion : IPotion
+	public class RejuvenationPotion : Potion
 	{
-		public double Value { get; private init; }
-
-		public void Drink(Hero h)
+		protected override void ApplyEffect(Hero h)
 		{
-			var life = Value / 100 * h.Life.Value.Max;
-			var mana = Value / 100 * h.Mana.Value.Max;
+			var life = Units / 100 * h.Life.Value.Max;
+			var mana = Units / 100 * h.Mana.Value.Max;
 
 			h.Life.Value.OnAction(life);
 			h.Mana.Value.OnAction(mana);
 		}
 
-		public static RejuvenationPotion Normal => new() { Value = 35 };
-		public static RejuvenationPotion Full => new() { Value = 100 };
+		public static RejuvenationPotion Normal => new() { Units = 35 };
+		public static RejuvenationPotion Full => new() { Units = 100 };
 	}
 }
