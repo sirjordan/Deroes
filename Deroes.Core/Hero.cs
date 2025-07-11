@@ -3,47 +3,50 @@ using Deroes.Core.Stats;
 
 namespace Deroes.Core
 {
+	// TODO:
+	// 1. Range attack
+	// 2. Auras
+	// 3. Spells
+	// 4. Strenth, Dex, Vitality and Energy as stats or something advanced? (modifing the hero)
+	// 5. Attack rating
+	// 6. Attack speed and any other speed concept
+	// 8. Primary and secondary attack
+	// 9. 1 and 2 handed weapons
+	// 10. Class only gear (ex. Amazon only)
+	// 11. Item drop factory
+	// 13. Rare, Set and Unique items
+	// 14. Per character level modifiers
+	// 15. Sockets
+	// 16. Durability
+	// 17. Charms
+	// 18. Chest/Private stash - Stash (10x10) + Gold (with max per level * 2.5 * HeroMaxGoldPerLevel)
+	// 19, Anti-spells (aka Curses)
+
 	public class Hero : Unit
 	{
 		public const int MAX_LEVEL = 99;
-
-		// TODO:
-		// 1. Range attack
-		// 2. Auras
-		// 3. Spells
-		// 4. Strenth, Dex, Vitality and Energy as stats or something advanced? (modifing the hero)
-		// 5. Attack rating
-		// 6. Attack speed and any other speed concept
-		// 7. Belt as stash
-		// 8. Primary and secondary attack
-		// 9. 1 and 2 handed weapons
-		// 10. Class only gear (ex. Amazon only)
-		// 11. Item drop factory
-		// 13. Rare, Set and Unique items
-		// 14. Per character level modifiers
-		// 15. Sockets
-		// 16. Item durability
-
 		public int MaxGold => Level * 10000;
+
 		public Stat<Vital> Mana { get; private init; }
 		public Stat<Vital> Stamina { get; private init; }
 		public long Experience { get; private set; }
 
-		// Attributes
 		public int Strength { get; private set; }
 		public int Dexterity { get; private set; }
 		public int Vitality { get; private set; }
 		public int Energy { get; private set; }
 
-		// Inventory
-		public Stash<Item> Stash { get; private set; }
+		public Stash<Item> Inventory { get; private set; }
+		public Chest Chest { get; private set; }
+
 		public int Gold { get; private set; }
 		public Gear Gear { get; private set; }
 
 		protected Hero()
 		{
 			Experience = 0;
-			Stash = new Stash<Item>(10, 4);
+			Inventory = new Stash<Item>(10, 4);
+			Chest = new Chest(this);
 			Gold = 0;
 			Gear = new Gear(this);
 		}
@@ -129,11 +132,11 @@ namespace Deroes.Core
 			}
 		}
 
-		public void CollectGold(int gold)
+		public void CollectGold(int amount)
 		{
-			ArgumentOutOfRangeException.ThrowIfLessThan(gold, 0);
+			ArgumentOutOfRangeException.ThrowIfLessThan(amount, 0);
 
-			Gold += gold;
+			Gold += amount;
 
 			if (Gold > MaxGold)
 			{
@@ -143,9 +146,9 @@ namespace Deroes.Core
 			}
 		}
 
-		public void DropGold(int gold)
+		public void DropGold(int amount)
 		{
-			Gold -= gold;
+			Gold -= amount;
 			// TODO: Drop to the ground event
 		}
 

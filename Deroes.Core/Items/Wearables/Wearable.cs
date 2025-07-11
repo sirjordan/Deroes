@@ -63,7 +63,8 @@ namespace Deroes.Core.Items.Wearables
 		/// </summary>
 		public bool Add(Potion p)
 		{
-			// TODO: If existing potions, place it under the same type
+			// TODO: If there are potions, place it under the same type (consider 1st only)
+		
 			return _potions.Add(p);
 		}
 

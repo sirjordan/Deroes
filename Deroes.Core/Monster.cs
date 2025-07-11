@@ -62,6 +62,8 @@ namespace Deroes.Core
 			var drop = DropItems();
 			var gold = DropGold();
 
+			// TODO: Drop to the ground event
+
 			base.Die();
 		}
 	}
