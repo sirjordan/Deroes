@@ -1,5 +1,6 @@
 using Deroes.Core;
 using Deroes.Core.Items;
+using Deroes.Core.Items.Wearables;
 using Deroes.Core.Stats;
 using Deroes.Core.Stats.Modifiers;
 
@@ -29,9 +30,8 @@ public class DamageTests
 	{
 		var unit = Hero.CreatePaladin();
 
-		var armor = new Armor(1, 1, 10, [
-			new PhysicalResistModifier(9999)
-		]);
+		var armor = new Armor(new DefenseItemSpec(999));
+
 		unit.Gear.Equip(armor, _ => _.Armor);
 
 		var originalLife = unit.Life.Value.Remaining;
@@ -47,9 +47,7 @@ public class DamageTests
 	public void PhysicalDamageRange_Apply_ShouldDealReducedDamage_WhenResistsPresent()
 	{
 		var unit = Hero.CreatePaladin();
-		var armor = new Armor(1, 1, 10, [
-			new PhysicalResistModifier(5)
-		]);
+		var armor = new Armor(new DefenseItemSpec(5));
 		unit.Gear.Equip(armor, _ => _.Armor);
 
 		var originalLife = unit.Life.Value.Remaining;
@@ -79,9 +77,10 @@ public class DamageTests
 	public void ColdDamageRange_Apply_ShouldDealPercentageReducedDamage()
 	{
 		var unit = Hero.CreatePaladin(); // 50% resistance
-		var armor = new Armor(1, 1, 10, [
-			new ColdResistModifier(50)
-		]);
+		var armor = new Armor(new DefenseItemSpec(1)
+		{
+			Modifiers = [new ColdResistModifier(50)]
+		});
 		unit.Gear.Equip(armor, _ => _.Armor);
 
 		var originalLife = unit.Life.Value.Remaining;
@@ -110,10 +109,13 @@ public class DamageTests
 	public void CombinedDamage_ShouldDealReducedDamage()
 	{
 		var unit = Hero.CreatePaladin(); // 50% resistance + 5 defence
-		var armor = new Armor(1, 1, 10, [
-			new ColdResistModifier(50),
-			new PhysicalResistModifier(6)
-		]);
+		var armor = new Armor(new DefenseItemSpec(1)
+		{
+			Modifiers = [
+				new ColdResistModifier(50), 
+				new PhysicalResistModifier(6)
+				]
+		});
 		unit.Gear.Equip(armor, _ => _.Armor);
 
 		var originalLife = unit.Life.Value.Remaining;

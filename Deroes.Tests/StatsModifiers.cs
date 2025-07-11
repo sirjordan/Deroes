@@ -1,5 +1,6 @@
 using Deroes.Core;
 using Deroes.Core.Items;
+using Deroes.Core.Items.Wearables;
 using Deroes.Core.Stats.Modifiers;
 
 namespace Deroes.Tests;
@@ -70,7 +71,7 @@ public class StatsModifiers
 		var startMana = hero.Mana.Value.Max;
 
 		var modifier = new ManaFlatModifier(10);
-		var helm = new Helm(10, 10, 1,[modifier]);
+		var helm = new Helm(new DefenseItemSpec(10) { Modifiers = [modifier] });
 
 		// Act
 		bool equipped = hero.Gear.Equip(helm, g => g.Helm);
@@ -90,7 +91,15 @@ public class StatsModifiers
 
 		var modifier = new ManaFlatModifier(20);
 		// Requirements too high
-		var helm = new Helm(999, 999, 999, [modifier]);
+		var itemSpec = new DefenseItemSpec(5)
+		{
+			Modifiers = [modifier],
+			RequiredStrength = 999,
+			RequiredDexterity = 999,
+			RequiredLevel = 99
+		}; 
+
+		var helm = new Helm(itemSpec);
 
 		// Act
 		bool equipped = hero.Gear.Equip(helm, g => g.Helm);
@@ -106,7 +115,7 @@ public class StatsModifiers
 		// Arrange
 		var hero = Hero.CreatePaladin();
 		var modifier = new ManaFlatModifier(15);
-		var helm = new Helm(10, 10, 1, [modifier]);
+		var helm = new Helm(new DefenseItemSpec(10) { Modifiers = [modifier] });
 
 		hero.Gear.Equip(helm, g => g.Helm);
 		var manaWithHelm = hero.Mana.Value.Max;
@@ -126,8 +135,8 @@ public class StatsModifiers
 	{
 		// Arrange
 		var hero = Hero.CreatePaladin();
-		var helm1 = new Helm(10, 10, 1,[]);
-		var helm2 = new Helm(10, 10, 1, []);
+		var helm1 = new Helm(new DefenseItemSpec(10));
+		var helm2 = new Helm(new DefenseItemSpec(10));
 
 		// Act
 		hero.Gear.Equip(helm1, g => g.Helm);

@@ -1,5 +1,6 @@
 using Deroes.Core;
 using Deroes.Core.Items;
+using Deroes.Core.Items.Wearables;
 using Deroes.Core.Stats;
 using Moq;
 
@@ -19,13 +20,7 @@ public class Gear
 	[TestMethod]
 	public void Equip_ValidHelm_ShouldEquip()
 	{
-		var helm = new Helm
-		(
-			requiredStrength: _hero.Strength - 1,
-			requiredDexterity: _hero.Dexterity - 1,
-			durability: 10,
-			modifiers: []
-		);
+		var helm = new Helm(new DefenseItemSpec(1));
 
 		var success = _hero.Gear.Equip(helm, g => g.Helm);
 
@@ -36,13 +31,11 @@ public class Gear
 	[TestMethod]
 	public void Equip_ValidHelm_Should_NOT_Equip_Strength()
 	{
-		var helm = new Helm
-		(
-			requiredStrength: _hero.Strength + 1,
-			requiredDexterity: _hero.Dexterity - 1,
-			durability: 10,
-			modifiers: []
-		);
+		var itemSpec = new DefenseItemSpec(1)
+		{
+			RequiredStrength = _hero.Strength + 1
+		};
+		var helm = new Helm(itemSpec);
 
 		var success = _hero.Gear.Equip(helm, g => g.Helm);
 
@@ -55,21 +48,8 @@ public class Gear
 	[ExpectedException(typeof(InvalidOperationException))]
 	public void Equip_AlreadyEquippedSlot_ShouldThrow()
 	{
-		var helm1 = new Helm
-		(
-			requiredStrength: _hero.Strength - 1,
-			requiredDexterity: _hero.Dexterity - 1,
-			durability: 10,
-			modifiers: []
-		);
-
-		var helm2 = new Helm
-		(
-			requiredStrength: _hero.Strength - 1,
-			requiredDexterity: _hero.Dexterity - 1,
-			durability: 10,
-			modifiers: []
-		);
+		var helm1 = new Helm(new DefenseItemSpec(1));
+		var helm2 = new Helm(new DefenseItemSpec(1));
 
 		_hero.Gear.Equip(helm1, g => g.Helm);
 		_hero.Gear.Equip(helm2, g => g.Helm); // Should throw
@@ -82,14 +62,8 @@ public class Gear
 		modifier.Setup(m => m.ApplyModification(_hero)).Verifiable();
 		modifier.Setup(m => m.RemoveModification(_hero)).Verifiable();
 
-		var helm = new Helm
-		(
-			requiredStrength: _hero.Strength - 1,
-			requiredDexterity: _hero.Dexterity - 1,
-			durability: 10,
-			modifiers: [modifier.Object]
-		);
-
+		var helm = new Helm(new DefenseItemSpec(1) { Modifiers = [modifier.Object] });
+		
 		_hero.Gear.Equip(helm, g => g.Helm);
 
 		var unequipped = _hero.Gear.Unequip(g => g.Helm);

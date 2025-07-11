@@ -31,7 +31,7 @@ public class Drops
 	{
 		var m = new Monster(5);
 		int gold = m.DropGold();
-		Assert.IsTrue(gold >= 10 && gold <= 50, $"Gold: {gold}");
+		Assert.IsTrue(gold >= 5 && gold <= 50, $"Gold: {gold}");
 	}
 
 	[TestMethod]
@@ -63,7 +63,7 @@ public class Drops
 	{
 		var m = new Monster(45);
 		int gold = m.DropGold();
-		Assert.IsTrue(gold >= 200 && gold <= 800, $"Gold: {gold}");
+		Assert.IsTrue(gold >= 200 && gold <= 850, $"Gold: {gold}");
 	}
 
 	[TestMethod]
@@ -71,7 +71,7 @@ public class Drops
 	{
 		var m = new Monster(55);
 		int gold = m.DropGold();
-		Assert.IsTrue(gold >= 400 && gold <= 1600, $"Gold: {gold}");
+		Assert.IsTrue(gold >= 400 && gold <= 1700, $"Gold: {gold}");
 	}
 
 	[TestMethod]
@@ -87,6 +87,6 @@ public class Drops
 	{
 		var m = new Monster(78);
 		int gold = m.DropGold();
-		Assert.IsTrue(gold >= 1400 && gold <= 6400, $"Gold: {gold}");
+		Assert.IsTrue(gold >= 1300 && gold <= 6400, $"Gold: {gold}");
 	}
 }

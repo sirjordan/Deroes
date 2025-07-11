@@ -14,14 +14,11 @@
 		/// </summary>
 		public virtual byte Height { get; protected set; }
 
-		public virtual int RequiredLevel { get; protected set; }
-
 		protected Item()
 		{
 			Name = GetType().Name;
 			Width = 1;
 			Height = 1;
-			RequiredLevel = 1;
 		}
 	}
 }

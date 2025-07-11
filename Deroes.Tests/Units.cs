@@ -1,5 +1,7 @@
 ﻿using Deroes.Core;
 using Deroes.Core.Items;
+using Deroes.Core.Items.Wearables;
+using Deroes.Core.Stats;
 using Deroes.Core.Stats.Modifiers;
 using System.Reflection.Emit;
 
@@ -14,7 +16,8 @@ namespace Deroes.Tests
 			var player = Hero.CreatePaladin();
 			var enemy = new Monster(1);
 
-			var sword = new Weapon(1, 1, 10, [new PhysicalDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10))]);
+			var sword = new Weapon(new WeaponItemSpec(5, 10));
+
 			player.Gear.Equip(sword, _ => _.LeftHand);
 
 			player.Attack(enemy);
@@ -30,12 +33,12 @@ namespace Deroes.Tests
 			var player = Hero.CreatePaladin();
 			var enemy = new Monster(84);
 
-			var sword = new Weapon(1, 1, 10, [
-				new PhysicalDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)),
-				new PhysicalDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)),
-				new ColdDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)),
-			]);
-			
+			var spec = new WeaponItemSpec(5, 10);
+			spec.Modifiers.Add(new PhysicalDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)));
+			spec.Modifiers.Add(new ColdDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)));
+
+			var sword = new Weapon(spec);
+
 			player.Gear.Equip(sword, _ => _.LeftHand);
 
 			player.Attack(enemy);
@@ -52,11 +55,11 @@ namespace Deroes.Tests
 
 			var player = Hero.CreatePaladin();
 
-			var sword = new Weapon(1, 1, 10, [
-				new PhysicalDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)),
-				new PhysicalDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)),
-				new ColdDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)),
-			]);
+			var spec = new WeaponItemSpec(5, 10);
+			spec.Modifiers.Add(new PhysicalDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)));
+			spec.Modifiers.Add(new ColdDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)));
+
+			var sword = new Weapon(spec);
 
 			player.Gear.Equip(sword, _ => _.LeftHand);
 
@@ -72,11 +75,15 @@ namespace Deroes.Tests
 
 			var player = Hero.CreatePaladin();
 
-			var sword = new Weapon(1, 1, 10, [
-				new PhysicalDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)),
-				new PhysicalDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)),
-				new ColdDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)),
-			]);
+			var spec = new WeaponItemSpec(5, 10)
+			{
+				Modifiers = [
+					new PhysicalDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)),
+					new ColdDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10))
+				]
+			};
+
+			var sword = new Weapon(spec);
 
 			player.Gear.Equip(sword, _ => _.LeftHand);
 
@@ -107,13 +114,13 @@ namespace Deroes.Tests
 			var player = Hero.CreatePaladin();
 			var enemy = new Monster(1);
 
-			var sword = new Weapon(1, 1, 10, [new PhysicalDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10))]);
+			var sword = new Weapon(new WeaponItemSpec(5, 10));
 			player.Gear.Equip(sword, _ => _.LeftHand);
 
 
 			new Combat(player, enemy)
 				.HeroAttacks()
-				.HeroAttacks(); 
+				.HeroAttacks();
 
 			Assert.IsFalse(enemy.IsAlive);
 			Assert.IsTrue(player.Experience > 0);

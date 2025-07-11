@@ -22,7 +22,7 @@ namespace Deroes.Core
 		// 13. Rare, Set and Unique items
 		// 14. Per character level modifiers
 		// 15. Sockets
-		// 16. Max Gold -> 10k per level, and drop gold when you die (max 20%)
+		// 16. Item durability
 
 		public int MaxGold => Level * 10000;
 		public Stat<Vital> Mana { get; private init; }
@@ -32,7 +32,7 @@ namespace Deroes.Core
 		// Attributes
 		public int Strength { get; private set; }
 		public int Dexterity { get; private set; }
-		public int Vitality { get; private set; }
+		public int Vitality { get; private set; }                                   
 		public int Energy { get; private set; }
 
 		// Inventory
