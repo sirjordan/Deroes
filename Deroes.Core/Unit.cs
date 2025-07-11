@@ -31,7 +31,7 @@ namespace Deroes.Core
 			return hitpoins;
 		}
 
-		public void Die() 
+		public virtual void Die() 
 		{
 			Console.WriteLine($"{Name} was killed");
 		}

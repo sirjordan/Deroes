@@ -16,9 +16,6 @@
 					var xp = _monster.CalcExperience();
 					_hero.AddExperience(xp);
 
-					var drop = _monster.DropItems();
-					var gold = _monster.DropGold();
-
 					_monster.Die();
 				}
 			}

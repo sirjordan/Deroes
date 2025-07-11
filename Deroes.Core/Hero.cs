@@ -19,12 +19,12 @@ namespace Deroes.Core
 		// 9. 1 and 2 handed weapons
 		// 10. Class only gear (ex. Amazon only)
 		// 11. Item drop factory
-		// 12. Monster xp calculation
 		// 13. Rare, Set and Unique items
 		// 14. Per character level modifiers
 		// 15. Sockets
 		// 16. Max Gold -> 10k per level, and drop gold when you die (max 20%)
 
+		public int MaxGold => Level * 10000;
 		public Stat<Vital> Mana { get; private init; }
 		public Stat<Vital> Stamina { get; private init; }
 		public long Experience { get; private set; }
@@ -118,6 +118,32 @@ namespace Deroes.Core
 			{
 				LevelUp();
 			}
+		}
+
+		public void CollectGold(int gold)
+		{
+			ArgumentOutOfRangeException.ThrowIfLessThan(gold, 0);
+
+			Gold += gold;
+
+			if (Gold > MaxGold)
+			{
+				var drop = Gold - MaxGold;
+
+				DropGold(drop);
+			}
+		}
+
+		public void DropGold(int gold)
+		{
+			Gold -= gold;
+			// TODO: Drop to the ground event
+		}
+
+		public override void Die()
+		{
+			// TODO: Drop gold (max 20%)
+			base.Die();
 		}
 
 		private void LevelUp()
