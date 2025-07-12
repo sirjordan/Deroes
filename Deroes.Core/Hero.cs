@@ -21,14 +21,14 @@ namespace Deroes.Core
 	// 17. Charms
 	// 18. Chest/Private stash - Stash (10x10) + Gold (with max per level * 2.5 * HeroMaxGoldPerLevel)
 	// 19, Anti-spells (aka Curses)
-	// 20. Avaliable Stat points - (+5 when you level up)
+	// 20. Avaliable Attr/Stat points - (+5 when you level up)
 
 	public class Hero : Unit
 	{
 		public const int MAX_LEVEL = 99;
 
-		public Stat<Vital> Mana { get; private init; }
-		public Stat<Vital> Stamina { get; private init; }
+		public Stat<Vital> Mana { get; private set; }
+		public Stat<Vital> Stamina { get; private set; }
 		public long Experience { get; private set; }
 
 		public int Strength { get; private set; }
@@ -38,7 +38,6 @@ namespace Deroes.Core
 
 		public Stash<Item> Inventory { get; private set; }
 		public Chest Chest { get; private set; }
-
 		public Gold Gold { get; private set; }
 		public Gear Gear { get; private set; }
 

@@ -21,7 +21,6 @@
 			}
 
 			return this;
-
 		}
 
 		public Combat MonsterAttacks()

@@ -4,31 +4,41 @@ namespace Deroes.Core
 {
 	public abstract class Unit
 	{
+		public bool IsAlive => Life.Value.Remaining > 0;
+		public Func<Unit, Attack> SelectedAttack {  get; private set; }
 		public string Name { get; protected set; }
 		public Stat<Vital> Life { get; protected set; }
 		public int Level { get; protected set; }
-		public Attack Damage { get; private set; }
+		public Attack Melee { get; private set; }
+		public Attack Spell { get; private set; }
 		public Defense Resistanse { get; private set; }
 
-		public bool IsAlive => (Life.Value.Remaining > 0);
-		
 		protected Unit()
 		{
 			Level = 1;
-			Damage = new Attack();
+			Melee = new Attack();
+			Spell = new Attack();
 			Resistanse = new Defense();
+
+			SelectAttack(_ => _.Melee);
 		}
 
 		/// <summary>
 		/// Do damage and returns the hitpoint
 		/// </summary>
 		/// <returns>Damage dealt calculated</returns>
-		public double Attack(Unit other)
+		public int Attack(Unit other)
 		{
-			var hitpoins = Damage.Apply(other);
+			var attack = SelectedAttack(this);
+			var hitpoins = attack.Apply(other);
 			Console.WriteLine($"{Name} did {hitpoins} of damage to {other.Name}");
 
 			return hitpoins;
+		}
+
+		public void SelectAttack(Func<Unit, Attack> selector)
+		{
+			SelectedAttack = selector;
 		}
 
 		public virtual void Die() 

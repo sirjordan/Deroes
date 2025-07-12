@@ -38,12 +38,12 @@
 	public class PhysicalDamageModifier(IStatModifier<Damage> min, IStatModifier<Damage> max) 
 		: DamageRangeModifier(min, max)
 	{
-		protected override Func<Hero, DamageRange> Selector => h => h.Damage.Physical;
+		protected override Func<Hero, DamageRange> Selector => h => h.Melee.Physical;
 	}
 
 	public class ColdDamageModifier(IStatModifier<Damage> min, IStatModifier<Damage> max)
 		: DamageRangeModifier(min, max)
 	{
-		protected override Func<Hero, DamageRange> Selector => h => h.Damage.Cold;
+		protected override Func<Hero, DamageRange> Selector => h => h.Melee.Cold;
 	}
 }

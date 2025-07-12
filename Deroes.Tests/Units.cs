@@ -63,8 +63,8 @@ namespace Deroes.Tests
 
 			player.Gear.Equip(sword, _ => _.LeftHand);
 
-			Assert.AreEqual(15 + defaultDmg_min, player.Damage.Min);
-			Assert.AreEqual(30 + defaultDmg_max, player.Damage.Max);
+			Assert.AreEqual(15 + defaultDmg_min, player.Melee.Min);
+			Assert.AreEqual(30 + defaultDmg_max, player.Melee.Max);
 		}
 
 		[TestMethod]
@@ -87,13 +87,13 @@ namespace Deroes.Tests
 
 			player.Gear.Equip(sword, _ => _.LeftHand);
 
-			Assert.AreEqual(15 + defaultDmg_min, player.Damage.Min);
-			Assert.AreEqual(30 + defaultDmg_max, player.Damage.Max);
+			Assert.AreEqual(15 + defaultDmg_min, player.Melee.Min);
+			Assert.AreEqual(30 + defaultDmg_max, player.Melee.Max);
 
 			var droped = player.Gear.Unequip(_ => _.LeftHand);
 
-			Assert.AreEqual(defaultDmg_min, player.Damage.Min);
-			Assert.AreEqual(defaultDmg_max, player.Damage.Max);
+			Assert.AreEqual(defaultDmg_min, player.Melee.Min);
+			Assert.AreEqual(defaultDmg_max, player.Melee.Max);
 		}
 
 		[TestMethod]

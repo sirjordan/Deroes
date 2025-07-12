@@ -8,7 +8,7 @@
 		public DamageRange Poison { get; private set; }
 		public DamageRange Lightining { get; private set; }
 
-		public DamageRange[] All => [Physical, Cold, Fire, Poison, Lightining];
+		private DamageRange[] All => [Physical, Cold, Fire, Poison, Lightining];
 		public int Min => All.Sum(d => d.Min.Value.Amount);
 		public int Max => All.Sum(d => d.Max.Value.Amount);
 
