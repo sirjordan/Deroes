@@ -1,4 +1,6 @@
-﻿namespace Deroes.Core.Stats
+﻿using Deroes.Core.Stats.Modifiers;
+
+namespace Deroes.Core.Stats
 {
 	/// <summary>
 	/// Phisycal, Cold, Fire, Lightining, Poison?, Magic

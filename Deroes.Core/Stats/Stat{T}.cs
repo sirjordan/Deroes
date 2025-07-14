@@ -1,6 +1,8 @@
-﻿namespace Deroes.Core.Stats
+﻿using Deroes.Core.Stats.Modifiers;
+
+namespace Deroes.Core.Stats
 {
-	public class Stat<T> where T: IStatModifiable<T>
+	public class Stat<T> where T : IStatModifiable<T>
 	{
 		private readonly List<IStatModifier<T>> _modifiers;
 

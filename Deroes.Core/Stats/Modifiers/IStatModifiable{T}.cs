@@ -1,4 +1,4 @@
-﻿namespace Deroes.Core.Stats
+﻿namespace Deroes.Core.Stats.Modifiers
 {
 	public interface IStatModifiable<T>
 	{

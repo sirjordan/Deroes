@@ -1,4 +1,7 @@
-﻿namespace Deroes.Core.Stats
+﻿using Deroes.Core.Stats.Modifiers;
+using Deroes.Core.Units;
+
+namespace Deroes.Core.Stats
 {
 	public class Damage : IStatModifiable<Damage>
 	{

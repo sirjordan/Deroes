@@ -1,6 +1,8 @@
-﻿namespace Deroes.Core.Stats
+﻿using Deroes.Core.Stats.Modifiers;
+
+namespace Deroes.Core.Stats
 {
-	public class Vital : IStatModifiable<Vital>
+	public class Vital : IStatModifiable<Vital>, ILevelUpSubscriber
 	{
 		public double Remaining { get; private set; }
 		public double Base { get; private init; }
@@ -35,6 +37,7 @@
 
 		public void OnAddAttribute()
 		{
+			// TODO: If Attr modifies correctly, this can be removed
 			Max += AttributeCoef;
 		}
 

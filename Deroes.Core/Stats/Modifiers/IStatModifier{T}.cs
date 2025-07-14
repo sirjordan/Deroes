@@ -1,4 +1,6 @@
-﻿namespace Deroes.Core.Stats
+﻿using Deroes.Core.Units;
+
+namespace Deroes.Core.Stats.Modifiers
 {
 	/// <summary>
 	/// Applies a modification on hero

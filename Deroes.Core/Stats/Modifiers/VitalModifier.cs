@@ -1,4 +1,6 @@
-﻿namespace Deroes.Core.Stats.Modifiers
+﻿using Deroes.Core.Units;
+
+namespace Deroes.Core.Stats.Modifiers
 {
 	public abstract class VitalFlatModifier(int value) : IStatModifier<Vital>, IStatModifier
 	{

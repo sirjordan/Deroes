@@ -1,6 +1,6 @@
 ﻿using Deroes.Core.Stats;
 
-namespace Deroes.Core
+namespace Deroes.Core.Units
 {
 	public abstract class Unit
 	{

@@ -1,7 +1,7 @@
-using Deroes.Core;
 using Deroes.Core.Items;
 using Deroes.Core.Items.Wearables;
-using Deroes.Core.Stats;
+using Deroes.Core.Stats.Modifiers;
+using Deroes.Core.Units;
 using Moq;
 
 namespace Deroes.Tests;
@@ -33,7 +33,7 @@ public class Gear
 	{
 		var itemSpec = new DefenseItemSpec(1)
 		{
-			RequiredStrength = _hero.Strength + 1
+			RequiredStrength = _hero.Attributes.Strength.Points + 1
 		};
 		var helm = new Helm(itemSpec);
 

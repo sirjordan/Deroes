@@ -1,4 +1,6 @@
-﻿namespace Deroes.Core.Items
+﻿using Deroes.Core.Units;
+
+namespace Deroes.Core.Items
 {
 	public interface IPotion
 	{

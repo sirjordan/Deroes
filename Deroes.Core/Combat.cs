@@ -1,4 +1,6 @@
-﻿namespace Deroes.Core
+﻿using Deroes.Core.Units;
+
+namespace Deroes.Core
 {
 	public class Combat(Hero h, Monster m)
 	{

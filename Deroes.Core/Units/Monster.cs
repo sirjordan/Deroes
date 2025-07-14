@@ -1,7 +1,7 @@
 ﻿using Deroes.Core.Items;
 using Deroes.Core.Stats;
 
-namespace Deroes.Core
+namespace Deroes.Core.Units
 {
 	public class Monster : Unit
 	{
@@ -17,15 +17,15 @@ namespace Deroes.Core
 		private Random _random = new Random();
 
 		/// <param name="level">1 - 85</param>
-		public Monster(int level)
+		public Monster(int level, string name = "Monster")
 		{
 			ArgumentOutOfRangeException.ThrowIfGreaterThan(level, MAX_LEVEL);
 			ArgumentOutOfRangeException.ThrowIfNegativeOrZero(level);
 
 			Level = level;
-			Name = "Monster";
+			Name = name;
 
-			var hp = 5 + (level * 3 * 2); // base + (level * 3 vitalityPerLevel * 2 coef)
+			var hp = 5 + level * 3 * 2; // base + (level * 3 vitalityPerLevel * 2 coef)
 			Life = new Stat<Vital>(new Vital(@base: hp, 0, 0));
 		}
 

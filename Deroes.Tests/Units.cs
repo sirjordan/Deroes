@@ -3,6 +3,7 @@ using Deroes.Core.Items;
 using Deroes.Core.Items.Wearables;
 using Deroes.Core.Stats;
 using Deroes.Core.Stats.Modifiers;
+using Deroes.Core.Units;
 using System.Reflection.Emit;
 
 namespace Deroes.Tests
@@ -166,6 +167,7 @@ namespace Deroes.Tests
 			// Assert
 			Assert.AreEqual(2, hero.Level);
 			Assert.AreEqual(xpToLevel2, hero.Experience);
+			Assert.AreEqual(5, hero.Attributes.StatPointsAvailable);
 		}
 
 		[TestMethod]
@@ -182,6 +184,7 @@ namespace Deroes.Tests
 			// Assert
 			Assert.AreEqual(13, hero.Level);
 			Assert.AreEqual(xpToLevel13, hero.Experience);
+			Assert.AreEqual(5 * 13 - 5, hero.Attributes.StatPointsAvailable);
 		}
 
 		[TestMethod]
@@ -314,14 +317,22 @@ namespace Deroes.Tests
 		{
 			var hero = Hero.CreatePaladin();
 
-			hero.AddVitality();
-			hero.AddVitality();
-			hero.AddVitality();
-			hero.AddVitality();
-			hero.AddVitality();
+			var xpToLevel26 = 538100;
+			var points = 5;
+			
+			hero.AddExperience(xpToLevel26);
 
-			Assert.AreEqual(hero.Life.Value.Base + hero.Life.Value.AttributeCoef * 5, hero.Life.Value.Max);
-			Assert.AreEqual(hero.Stamina.Value.Base + hero.Stamina.Value.AttributeCoef * 5, hero.Stamina.Value.Max);
+			hero.Attributes.AddVitality();
+			hero.Attributes.AddVitality();
+			hero.Attributes.AddVitality();
+			hero.Attributes.AddVitality();
+			hero.Attributes.AddVitality();
+
+			var expectedHp = (hero.Level * hero.Life.Value.LevelCoef - hero.Life.Value.LevelCoef) + (hero.Life.Value.Base + hero.Life.Value.AttributeCoef * points);
+			var expStamina = (hero.Level * hero.Stamina.Value.LevelCoef - hero.Stamina.Value.LevelCoef) + (hero.Stamina.Value.Base + hero.Stamina.Value.AttributeCoef * points);
+
+			Assert.AreEqual(expectedHp, hero.Life.Value.Max, 0.5);
+			Assert.AreEqual(expStamina, hero.Stamina.Value.Max, 0.5);
 
 		}
 
@@ -330,13 +341,22 @@ namespace Deroes.Tests
 		{
 			var hero = Hero.CreatePaladin();
 
-			for (int i = 0; i < 50; i++)
+			var xpToLevel26 = 538100;
+			var points = 50;
+			
+			hero.AddExperience(xpToLevel26);
+
+			for (int i = 0; i < points; i++)
 			{
-				hero.AddVitality();
+				hero.Attributes.AddVitality();
 			}
 
-			Assert.AreEqual(hero.Life.Value.Base + hero.Life.Value.AttributeCoef * 50, hero.Life.Value.Max);
-			Assert.AreEqual(hero.Stamina.Value.Base + hero.Stamina.Value.AttributeCoef * 50, hero.Stamina.Value.Max);
+			var expectedHp = (hero.Level * hero.Life.Value.LevelCoef - hero.Life.Value.LevelCoef) + (hero.Life.Value.Base + hero.Life.Value.AttributeCoef * points);
+			var expStamina = (hero.Level * hero.Stamina.Value.LevelCoef - hero.Stamina.Value.LevelCoef) + (hero.Stamina.Value.Base + hero.Stamina.Value.AttributeCoef * points);
+
+
+			Assert.AreEqual(expectedHp, hero.Life.Value.Max);
+			Assert.AreEqual(expStamina, hero.Stamina.Value.Max);
 		}
 
 		[TestMethod]
@@ -344,13 +364,19 @@ namespace Deroes.Tests
 		{
 			var hero = Hero.CreatePaladin();
 
-			hero.AddEnergy();
-			hero.AddEnergy();
-			hero.AddEnergy();
-			hero.AddEnergy();
-			hero.AddEnergy();
+			var xpToLevel26 = 538100;
+			var points = 5;
+			
+			hero.AddExperience(xpToLevel26);
 
-			Assert.AreEqual(hero.Mana.Value.Base + hero.Mana.Value.AttributeCoef * 5, hero.Mana.Value.Max);
+			hero.Attributes.AddEnergy();
+			hero.Attributes.AddEnergy();
+			hero.Attributes.AddEnergy();
+			hero.Attributes.AddEnergy();
+			hero.Attributes.AddEnergy();
+
+			var expected = (hero.Level * hero.Mana.Value.LevelCoef - hero.Mana.Value.LevelCoef) + (hero.Mana.Value.Base + hero.Mana.Value.AttributeCoef * points);
+			Assert.AreEqual(expected, hero.Mana.Value.Max, 0.5);
 		}
 
 		[TestMethod]
@@ -358,12 +384,18 @@ namespace Deroes.Tests
 		{
 			var hero = Hero.CreatePaladin();
 
-			for (int i = 0; i < 50; i++)
+			var xpToLevel26 = 538100;
+			var points = 50;
+
+			hero.AddExperience(xpToLevel26);
+
+			for (int i = 0; i < points; i++)
 			{
-				hero.AddEnergy();
+				hero.Attributes.AddEnergy();
 			}
 
-			Assert.AreEqual(hero.Mana.Value.Base + hero.Mana.Value.AttributeCoef * 50, hero.Mana.Value.Max);
+			var expected = (hero.Level * hero.Mana.Value.LevelCoef - hero.Mana.Value.LevelCoef) + (hero.Mana.Value.Base + hero.Mana.Value.AttributeCoef * points);
+			Assert.AreEqual(expected, hero.Mana.Value.Max, 0.5);
 		}
 
 		[TestMethod]

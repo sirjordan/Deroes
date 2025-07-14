@@ -1,7 +1,7 @@
 ﻿using Deroes.Core.Items;
 using Deroes.Core.Stats;
 
-namespace Deroes.Core
+namespace Deroes.Core.Units
 {
 	// TODO:
 	// 1. Range attack
@@ -21,25 +21,19 @@ namespace Deroes.Core
 	// 17. Charms
 	// 18. Chest/Private stash - Stash (10x10) + Gold (with max per level * 2.5 * HeroMaxGoldPerLevel)
 	// 19, Anti-spells (aka Curses)
-	// 20. Avaliable Attr/Stat points - (+5 when you level up)
 
-	public class Hero : Unit
+	public abstract class Hero : Unit
 	{
 		public const int MAX_LEVEL = 99;
 
-		public Stat<Vital> Mana { get; private set; }
-		public Stat<Vital> Stamina { get; private set; }
+		public Stat<Vital> Mana { get; protected set; }
+		public Stat<Vital> Stamina { get; protected set; }
+		public Attributes Attributes { get; protected set; }
+		public Stash<Item> Inventory { get; protected set; }
+		public Chest Chest { get; protected set; }
+		public Gold Gold { get; protected set; }
+		public Gear Gear { get; protected set; }
 		public long Experience { get; private set; }
-
-		public int Strength { get; private set; }
-		public int Dexterity { get; private set; }
-		public int Vitality { get; private set; }
-		public int Energy { get; private set; }
-
-		public Stash<Item> Inventory { get; private set; }
-		public Chest Chest { get; private set; }
-		public Gold Gold { get; private set; }
-		public Gear Gear { get; private set; }
 
 		protected Hero()
 		{
@@ -50,22 +44,7 @@ namespace Deroes.Core
 			Gear = new Gear(this);
 		}
 
-		public static Hero CreatePaladin()
-		{
-			return new Hero
-			{
-				Name = "Paladin",
-
-				Mana = new Stat<Vital>(new(@base: 15, levelCoef: 1.5, attrCoef: 2)),
-				Stamina = new Stat<Vital>(new(@base: 89, levelCoef: 1, attrCoef: 1)),
-				Life = new Stat<Vital>(new(@base: 55, levelCoef: 2, attrCoef: 3)),
-
-				Strength = 25,
-				Dexterity = 20,
-				Vitality = 25,
-				Energy = 15
-			};
-		}
+		public static Hero CreatePaladin() => new Paladin();
 
 		public static long XpToLevelUp(int fromLevel)
 		{
@@ -98,29 +77,6 @@ namespace Deroes.Core
 			}
 		}
 
-		public void AddStrenght()
-		{
-			Strength++;
-		}
-
-		public void AddDexterity()
-		{
-			Dexterity++;
-		}
-
-		public void AddVitality()
-		{
-			Vitality++;
-			Life.BaseValue.OnAddAttribute();
-			Stamina.BaseValue.OnAddAttribute();
-		}
-
-		public void AddEnergy()
-		{
-			Energy++;
-			Mana.BaseValue.OnAddAttribute();
-		}
-
 		public void AddExperience(long xp)
 		{
 			Experience += xp;
@@ -141,6 +97,7 @@ namespace Deroes.Core
 		{
 			Level++;
 
+			Attributes.OnLevelUp();
 			Life.BaseValue.OnLevelUp();
 			Mana.BaseValue.OnLevelUp();
 			Stamina.BaseValue.OnLevelUp();

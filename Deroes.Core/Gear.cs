@@ -1,4 +1,5 @@
 ﻿using Deroes.Core.Items.Wearables;
+using Deroes.Core.Units;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -28,8 +29,8 @@ namespace Deroes.Core
 		/// <returns>If gear can be equiped or compatible</returns>
 		public bool CanEquip(Wearable item)
 		{
-			return (_hero.Strength >= item.ItemSpec.RequiredStrength &&
-				_hero.Dexterity >= item.ItemSpec.RequiredDexterity &&
+			return (_hero.Attributes.Strength.Points >= item.ItemSpec.RequiredStrength &&
+				_hero.Attributes.Dexterity.Points >= item.ItemSpec.RequiredDexterity &&
 				_hero.Level >= item.ItemSpec.RequiredLevel);
 		}
 

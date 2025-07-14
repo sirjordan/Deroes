@@ -1,5 +1,5 @@
-using Deroes.Core;
 using Deroes.Core.Items;
+using Deroes.Core.Units;
 
 namespace Deroes.Tests;
 
@@ -12,21 +12,26 @@ public class Potions
 	public void Setup()
 	{
 		_paladin = Hero.CreatePaladin();
-		_paladin.AddVitality();
-		_paladin.AddVitality();
-		_paladin.AddVitality();
-		_paladin.AddVitality();
-		_paladin.AddVitality();
-		_paladin.AddEnergy();
-		_paladin.AddEnergy();
-		_paladin.AddEnergy();
-		_paladin.AddEnergy();
-		_paladin.AddEnergy();
-		_paladin.AddEnergy();
-		_paladin.AddEnergy();
-		_paladin.AddEnergy();
-		_paladin.AddEnergy();
-		_paladin.AddEnergy();
+
+		var xpToLevel26 = 538100;
+		// Act
+		_paladin.AddExperience(xpToLevel26);
+
+		_paladin.Attributes.AddVitality();
+		_paladin.Attributes.AddVitality();
+		_paladin.Attributes.AddVitality();
+		_paladin.Attributes.AddVitality();
+		_paladin.Attributes.AddVitality();
+		_paladin.Attributes.AddEnergy();
+		_paladin.Attributes.AddEnergy();
+		_paladin.Attributes.AddEnergy();
+		_paladin.Attributes.AddEnergy();
+		_paladin.Attributes.AddEnergy();
+		_paladin.Attributes.AddEnergy();
+		_paladin.Attributes.AddEnergy();
+		_paladin.Attributes.AddEnergy();
+		_paladin.Attributes.AddEnergy();
+		_paladin.Attributes.AddEnergy();
 		_paladin.Life.Value.OnAction(-_paladin.Life.Value.Max);     // drain to 0
 		_paladin.Mana.Value.OnAction(-_paladin.Mana.Value.Max);
 		_paladin.Stamina.Value.OnAction(-_paladin.Stamina.Value.Max);

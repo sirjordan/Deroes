@@ -1,4 +1,6 @@
-﻿namespace Deroes.Core.Stats
+﻿using Deroes.Core.Units;
+
+namespace Deroes.Core.Stats
 {
 	public class Attack
 	{

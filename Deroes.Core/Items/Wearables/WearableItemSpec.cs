@@ -1,4 +1,4 @@
-﻿using Deroes.Core.Stats;
+﻿using Deroes.Core.Stats.Modifiers;
 
 namespace Deroes.Core.Items.Wearables
 {
