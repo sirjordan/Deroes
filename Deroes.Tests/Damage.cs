@@ -4,7 +4,7 @@ using Deroes.Core.Stats;
 using Deroes.Core.Stats.Modifiers;
 using Deroes.Core.Units;
 
-namespace Deroes.Tests;
+namespace Deroes.Core.Tests;
 
 [TestClass]
 public class DamageTests

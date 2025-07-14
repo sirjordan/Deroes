@@ -1,7 +1,7 @@
 using Deroes.Core.Items;
 using Deroes.Core.Items.Wearables;
 
-namespace Deroes.Tests;
+namespace Deroes.Core.Tests;
 
 [TestClass]
 public class Gear_Belt

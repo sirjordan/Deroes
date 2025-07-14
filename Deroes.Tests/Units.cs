@@ -1,12 +1,9 @@
 ﻿using Deroes.Core;
-using Deroes.Core.Items;
 using Deroes.Core.Items.Wearables;
-using Deroes.Core.Stats;
 using Deroes.Core.Stats.Modifiers;
 using Deroes.Core.Units;
-using System.Reflection.Emit;
 
-namespace Deroes.Tests
+namespace Deroes.Core.Tests
 {
 	[TestClass]
 	public sealed class Units

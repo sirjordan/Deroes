@@ -4,7 +4,7 @@ using Deroes.Core.Stats.Modifiers;
 using Deroes.Core.Units;
 using Moq;
 
-namespace Deroes.Tests;
+namespace Deroes.Core.Tests;
 
 [TestClass]
 public class Gear

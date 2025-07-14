@@ -1,7 +1,7 @@
 using Deroes.Core.Items;
 using Deroes.Core.Units;
 
-namespace Deroes.Tests;
+namespace Deroes.Core.Tests;
 
 [TestClass]
 public class Potions

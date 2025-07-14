@@ -2,7 +2,7 @@ using Deroes.Core;
 using Deroes.Core.Items;
 using Moq;
 
-namespace Deroes.Tests;
+namespace Deroes.Core.Tests;
 
 [TestClass]
 public class StashTests
