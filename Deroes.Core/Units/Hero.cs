@@ -19,7 +19,6 @@ namespace Deroes.Core.Units
 	// 15. Sockets
 	// 16. Durability
 	// 17. Charms
-	// 18. Chest/Private stash - Stash (10x10) + Gold (with max per level * 2.5 * HeroMaxGoldPerLevel)
 	// 19, Anti-spells (aka Curses)
 
 	public abstract class Hero : Unit
@@ -35,8 +34,12 @@ namespace Deroes.Core.Units
 		public Gear Gear { get; protected set; }
 		public long Experience { get; private set; }
 
-		protected Hero()
+		protected Hero(string name, Stat<Vital> life, Stat<Vital> mana, Stat<Vital> stamina) 
+			: base(name, life)
 		{
+			Mana = mana;
+			Stamina = stamina;
+
 			Experience = 0;
 			Inventory = new Stash<Item>(10, 4);
 			Chest = new Chest(this);

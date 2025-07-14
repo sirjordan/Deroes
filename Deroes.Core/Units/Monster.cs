@@ -16,17 +16,17 @@ namespace Deroes.Core.Units
 
 		private Random _random = new Random();
 
+		/// <summary>
+		/// hp = base + (level * 3 vitalityPerLevel * 2 coef)
+		/// </summary>
 		/// <param name="level">1 - 85</param>
-		public Monster(int level, string name = "Monster")
+		public Monster(int level, string name = "Monster") 
+			: base(name, GetLifePerMonsterLevel(level))
 		{
 			ArgumentOutOfRangeException.ThrowIfGreaterThan(level, MAX_LEVEL);
 			ArgumentOutOfRangeException.ThrowIfNegativeOrZero(level);
 
 			Level = level;
-			Name = name;
-
-			var hp = 5 + level * 3 * 2; // base + (level * 3 vitalityPerLevel * 2 coef)
-			Life = new Stat<Vital>(new Vital(@base: hp, 0, 0));
 		}
 
 		public int CalcExperience()
@@ -65,6 +65,14 @@ namespace Deroes.Core.Units
 			// TODO: Drop to the ground event
 
 			base.Die();
+		}
+
+		/// <summary>
+		/// hp = base + (level * 3 vitalityPerLevel * 2 coef)
+		/// </summary>
+		private static Stat<Vital> GetLifePerMonsterLevel(int forLevel)
+		{
+			return new Stat<Vital>(new Vital(@base: (5 + forLevel * 3 * 2), 0, 0));
 		}
 	}
 }

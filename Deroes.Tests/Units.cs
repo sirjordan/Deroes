@@ -360,11 +360,8 @@ namespace Deroes.Core.Tests
 		public void Hero_Paladin_AddEnergy_5Points()
 		{
 			var hero = Hero.CreatePaladin();
-
-			var xpToLevel26 = 538100;
 			var points = 5;
-			
-			hero.AddExperience(xpToLevel26);
+			hero.AddExperience(Hero.XpToLevelUp(1));
 
 			hero.Attributes.AddEnergy();
 			hero.Attributes.AddEnergy();
@@ -380,11 +377,9 @@ namespace Deroes.Core.Tests
 		public void Hero_Paladin_AddEnergy_50Points()
 		{
 			var hero = Hero.CreatePaladin();
-
-			var xpToLevel26 = 538100;
+			
 			var points = 50;
-
-			hero.AddExperience(xpToLevel26);
+			hero.AddExperience(Hero.XpToLevelUp(10));
 
 			for (int i = 0; i < points; i++)
 			{

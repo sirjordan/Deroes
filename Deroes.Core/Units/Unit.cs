@@ -5,7 +5,9 @@ namespace Deroes.Core.Units
 	public abstract class Unit
 	{
 		public bool IsAlive => Life.Value.Remaining > 0;
+#nullable disable
 		public Func<Unit, Attack> SelectedAttack {  get; private set; }
+#nullable enable
 		public string Name { get; protected set; }
 		public Stat<Vital> Life { get; protected set; }
 		public int Level { get; protected set; }
@@ -13,13 +15,15 @@ namespace Deroes.Core.Units
 		public Attack Spell { get; private set; }
 		public Defense Resistanse { get; private set; }
 
-		protected Unit()
+		protected Unit(string name, Stat<Vital> life)
 		{
+			Name = name;
+			Life = life;
 			Level = 1;
 			Melee = new Attack();
 			Spell = new Attack();
 			Resistanse = new Defense();
-
+			
 			SelectAttack(_ => _.Melee);
 		}
 

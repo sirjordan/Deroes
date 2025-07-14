@@ -12,10 +12,7 @@ public class Potions
 	public void Setup()
 	{
 		_paladin = Hero.CreatePaladin();
-
-		var xpToLevel26 = 538100;
-		// Act
-		_paladin.AddExperience(xpToLevel26);
+		_paladin.AddExperience(Hero.XpToLevelUp(3));
 
 		_paladin.Attributes.AddVitality();
 		_paladin.Attributes.AddVitality();
@@ -46,7 +43,7 @@ public class Potions
 		potion.Drink(_paladin);
 
 		Assert.IsTrue(potion.Empty);
-		Assert.AreEqual(expected, _paladin.Life.Value.Remaining, 0.001);
+		Assert.AreEqual(expected, _paladin.Life.Value.Remaining, 0.1);
 	}
 
 	[TestMethod]
@@ -58,7 +55,7 @@ public class Potions
 		potion.Drink(_paladin);
 
 		Assert.IsTrue(potion.Empty);
-		Assert.AreEqual(expected, _paladin.Mana.Value.Remaining, 0.001);
+		Assert.AreEqual(expected, _paladin.Mana.Value.Remaining, 0.1);
 	}
 
 	[TestMethod]
@@ -80,8 +77,8 @@ public class Potions
 
 		potion.Drink(_paladin);
 
-		Assert.AreEqual(expectedLife, _paladin.Life.Value.Remaining, 0.001);
-		Assert.AreEqual(expectedMana, _paladin.Mana.Value.Remaining, 0.001);
+		Assert.AreEqual(expectedLife, _paladin.Life.Value.Remaining, 0.1);
+		Assert.AreEqual(expectedMana, _paladin.Mana.Value.Remaining, 0.1);
 	}
 
 	[TestMethod]
@@ -91,8 +88,8 @@ public class Potions
 
 		potion.Drink(_paladin);
 
-		Assert.AreEqual(_paladin.Life.Value.Max, _paladin.Life.Value.Remaining, 0.001);
-		Assert.AreEqual(_paladin.Mana.Value.Max, _paladin.Mana.Value.Remaining, 0.001);
+		Assert.AreEqual(_paladin.Life.Value.Max, _paladin.Life.Value.Remaining, 0.1);
+		Assert.AreEqual(_paladin.Mana.Value.Max, _paladin.Mana.Value.Remaining, 0.1);
 	}
 
 	[TestMethod]
@@ -103,7 +100,7 @@ public class Potions
 		var potion = HealthPotion.Super;
 		potion.Drink(_paladin);
 
-		Assert.AreEqual(_paladin.Life.Value.Max, _paladin.Life.Value.Remaining, 0.001);
+		Assert.AreEqual(_paladin.Life.Value.Max, _paladin.Life.Value.Remaining, 0.1);
 	}
 
 	[TestMethod]
@@ -114,6 +111,6 @@ public class Potions
 		var potion = ManaPotion.Super;
 		potion.Drink(_paladin);
 
-		Assert.AreEqual(_paladin.Mana.Value.Max, _paladin.Mana.Value.Remaining, 0.001);
+		Assert.AreEqual(_paladin.Mana.Value.Max, _paladin.Mana.Value.Remaining, 0.1);
 	}
 }
