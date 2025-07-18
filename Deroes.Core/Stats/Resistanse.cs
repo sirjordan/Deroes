@@ -7,8 +7,6 @@ namespace Deroes.Core.Stats
 		public bool Immune { get; protected set; }
 		public int Amount { get; protected set; }
 
-		protected Resistanse() : this(0) { }
-
 		protected Resistanse(int amount)
 		{
 			Amount = amount;
@@ -39,7 +37,7 @@ namespace Deroes.Core.Stats
 
 		public ElementalResistance() : this(0) { }
 
-		public ElementalResistance(int amount)
+		public ElementalResistance(int amount) : base(amount)
 		{
 			Max = 75;
 			Min = -75;

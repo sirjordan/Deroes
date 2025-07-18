@@ -146,7 +146,7 @@ public class DamageTests
 	[TestMethod]
 	public void CombinedDamage_ShouldDealReducedDamage()
 	{
-		var unit = Hero.CreatePaladin(); // 50% resistance + 5 defence
+		var unit = Hero.CreatePaladin(); // 50% resistance + 7 defence
 		var armor = new Armor(new DefenseItemSpec(1)
 		{
 			Modifiers = [
@@ -164,6 +164,6 @@ public class DamageTests
 		var ph = new Physical(10, 10);
 		ph.Apply(unit);
 
-		Assert.AreEqual(originalLife - 9, unit.Life.Value.Remaining);
+		Assert.AreEqual(originalLife - 8, unit.Life.Value.Remaining);
 	}
 }
