@@ -8,7 +8,7 @@ namespace Deroes.Core.Items.Wearables
 	}
 
 	public abstract class DefenseItem : Wearable
-	{
+	{ 
 		protected DefenseItem(DefenseItemSpec itemSpec) : base(itemSpec)
 		{
 			ArgumentOutOfRangeException.ThrowIfNegative(itemSpec.Defense);

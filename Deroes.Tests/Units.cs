@@ -243,7 +243,7 @@ namespace Deroes.Core.Tests
 			hero.AddExperience(lvl99Xp);
 
 			// Assert
-			Assert.AreEqual(Hero.MAX_LEVEL, hero.Level);
+			Assert.AreEqual(hero.Max_Level, hero.Level);
 		}
 
 		[TestMethod]

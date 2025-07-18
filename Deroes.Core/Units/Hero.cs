@@ -20,11 +20,13 @@ namespace Deroes.Core.Units
 	// 16. Durability
 	// 17. Charms
 	// 19, Anti-spells (aka Curses)
+	// 20. Skills: Attack modifiers (aka Vengeance, adds Fire, Ligt, Cold dmg)
+	// 21. Attributes as Stats modifiers 
+	// 22. Drink potions not only for Hero. (e.g monsters can heal)
 
 	public abstract class Hero : Unit
 	{
-		public const int MAX_LEVEL = 99;
-
+		public override int Max_Level => 99;
 		public Stat<Vital> Mana { get; protected set; }
 		public Stat<Vital> Stamina { get; protected set; }
 		public Attributes Attributes { get; protected set; }
@@ -84,7 +86,7 @@ namespace Deroes.Core.Units
 		{
 			Experience += xp;
 
-			while (Experience >= XpToLevelUp(Level) && Level < MAX_LEVEL)
+			while (Experience >= XpToLevelUp(Level) && Level < Max_Level)
 			{
 				LevelUp();
 			}

@@ -12,7 +12,7 @@ namespace Deroes.Core.Units
 		// 4. Dmg & Resists per monster level?
 		// 12. Monster xp calculation
 
-		public const int MAX_LEVEL = 85;
+		public override int Max_Level => 85;
 
 		private Random _random = new Random();
 
@@ -23,7 +23,7 @@ namespace Deroes.Core.Units
 		public Monster(int level, string name = "Monster") 
 			: base(name, GetLifePerMonsterLevel(level))
 		{
-			ArgumentOutOfRangeException.ThrowIfGreaterThan(level, MAX_LEVEL);
+			ArgumentOutOfRangeException.ThrowIfGreaterThan(level, Max_Level);
 			ArgumentOutOfRangeException.ThrowIfNegativeOrZero(level);
 
 			Level = level;

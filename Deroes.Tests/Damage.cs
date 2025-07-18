@@ -93,6 +93,44 @@ public class DamageTests
 	}
 
 	[TestMethod]
+	public void ColdDamageRange_MAX_Resist_ShouldDealPercentageReducedDamage()
+	{
+		var unit = Hero.CreatePaladin();
+		var armor = new Armor(new DefenseItemSpec(1)
+		{
+			Modifiers = [new ColdResistModifier(100)]   // Should be max 75%
+		});
+		unit.Gear.Equip(armor, _ => _.Armor);
+
+		var originalLife = unit.Life.Value.Remaining;
+
+		var cold = new Cold(10, 10);
+		int dmg = cold.Apply(unit);
+
+		Assert.AreEqual(2, dmg);
+		Assert.AreEqual(originalLife - 2, unit.Life.Value.Remaining);
+	}
+
+	[TestMethod]
+	public void ColdDamageRange_Negative_Resist_ShouldDeal_Increased_Damage()
+	{
+		var unit = Hero.CreatePaladin();
+		var armor = new Armor(new DefenseItemSpec(1)
+		{
+			Modifiers = [new ColdResistModifier(-50)]  
+		});
+		unit.Gear.Equip(armor, _ => _.Armor);
+
+		var originalLife = unit.Life.Value.Remaining;
+
+		var cold = new Cold(10, 10);
+		int dmg = cold.Apply(unit);
+
+		Assert.AreEqual(15, dmg);
+		Assert.AreEqual(originalLife - 15, unit.Life.Value.Remaining);
+	}
+
+	[TestMethod]
 	public void ColdDamageRange_Apply_ShouldDealNoDamage_WhenImmune()
 	{
 		var unit = Hero.CreatePaladin(); // Cold immune
@@ -112,7 +150,7 @@ public class DamageTests
 		var armor = new Armor(new DefenseItemSpec(1)
 		{
 			Modifiers = [
-				new ColdResistModifier(50), 
+				new ColdResistModifier(50),
 				new PhysicalResistModifier(6)
 				]
 		});

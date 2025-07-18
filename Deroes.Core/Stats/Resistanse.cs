@@ -2,25 +2,51 @@
 
 namespace Deroes.Core.Stats
 {
-	/// <summary>
-	/// Phisycal, Cold, Fire, Lightining, Poison?, Magic
-	/// </summary>
-	public class Resistanse : IStatModifiable<Resistanse>
+	public abstract class Resistanse : IStatModifiable<Resistanse>
 	{
-		public bool Immune { get; private set; }
-		public int Amount { get; private set; }
+		public bool Immune { get; protected set; }
+		public int Amount { get; protected set; }
 
-		public Resistanse() : this(0) { }
+		protected Resistanse() : this(0) { }
 
-		public Resistanse(int  amount)
+		protected Resistanse(int amount)
 		{
 			Amount = amount;
 			Immune = false;
 		}
 
-		public Resistanse Modify(int modificator)
+		public abstract Resistanse Modify(int modificator);
+	}
+
+	/// <summary>
+	/// E.g Defense
+	/// </summary>
+	public class PhysicalResistanse : Resistanse
+	{
+		public PhysicalResistanse() : this(0) { }
+		public PhysicalResistanse(int amount) : base(amount) { }
+
+		public override Resistanse Modify(int modificator) => new PhysicalResistanse(Amount + modificator);
+	}
+
+	/// <summary>
+	/// Cold, Fire, Lightining, Poison, Magic?
+	/// </summary>
+	public class ElementalResistance : Resistanse
+	{
+		public int Max { get; private set; }
+		public int Min { get; private set; }
+
+		public ElementalResistance() : this(0) { }
+
+		public ElementalResistance(int amount)
 		{
-			return new Resistanse(Amount + modificator);
+			Max = 75;
+			Min = -75;
+			Amount = Math.Clamp(amount, Min, Max);
+			Immune = false;
 		}
+
+		public override Resistanse Modify(int modificator) => new ElementalResistance(Amount + modificator);
 	}
 }

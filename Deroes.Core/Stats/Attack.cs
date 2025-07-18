@@ -4,13 +4,13 @@ namespace Deroes.Core.Stats
 {
 	public class Attack
 	{
+		private DamageRange[] All => [Physical, Cold, Fire, Poison, Lightining];
 		public DamageRange Physical { get; private set; }
 		public DamageRange Cold { get; private set; }
 		public DamageRange Fire { get; private set; }
 		public DamageRange Poison { get; private set; }
 		public DamageRange Lightining { get; private set; }
 
-		private DamageRange[] All => [Physical, Cold, Fire, Poison, Lightining];
 		public int Min => All.Sum(d => d.Min.Value.Amount);
 		public int Max => All.Sum(d => d.Max.Value.Amount);
 

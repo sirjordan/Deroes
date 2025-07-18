@@ -10,11 +10,11 @@
 
 		public Defense()
 		{
-			Physical = new Stat<Resistanse>(new Resistanse());
-			Cold = new Stat<Resistanse>(new Resistanse());
-			Fire = new Stat<Resistanse>(new Resistanse());
-			Poison = new Stat<Resistanse>(new Resistanse());
-			Lightining = new Stat<Resistanse>(new Resistanse());
+			Physical = new Stat<Resistanse>(new PhysicalResistanse());
+			Cold = new Stat<Resistanse>(new ElementalResistance());
+			Fire = new Stat<Resistanse>(new ElementalResistance());
+			Poison = new Stat<Resistanse>(new ElementalResistance());
+			Lightining = new Stat<Resistanse>(new ElementalResistance());
 		}
 	}
 }
