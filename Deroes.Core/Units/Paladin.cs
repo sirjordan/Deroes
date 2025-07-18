@@ -13,5 +13,8 @@ namespace Deroes.Core.Units
 		{
 			Attributes = new Attributes(this, str: 25, dex: 20, vitality: 25, energy: 15);
 		}
+
+		public void ActivateAura()
+		{ } // ??
 	}
 }
