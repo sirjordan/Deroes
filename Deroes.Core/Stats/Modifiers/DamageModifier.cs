@@ -12,6 +12,16 @@ namespace Deroes.Core.Stats.Modifiers
 		public int GetModificator(Damage @base) => _damage;
 	}
 
+	public class PercentageDamageModifier(int percentage) : IStatModifier<Damage>
+	{
+		private int _percentage = percentage;
+
+		public string Description => $"{_percentage}% damage";
+		public int Order => 100;
+
+		public int GetModificator(Damage @base) => (int)(@base.Amount * (_percentage / 100.0));
+	}
+
 	public abstract class DamageRangeModifier(IStatModifier<Damage> min, IStatModifier<Damage> max) 
 		: IStatModifier
 	{

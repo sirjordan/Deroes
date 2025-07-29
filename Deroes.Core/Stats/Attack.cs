@@ -1,4 +1,5 @@
-﻿using Deroes.Core.Units;
+﻿using Deroes.Core.Stats.Modifiers;
+using Deroes.Core.Units;
 
 namespace Deroes.Core.Stats
 {

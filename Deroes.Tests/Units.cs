@@ -66,6 +66,22 @@ namespace Deroes.Core.Tests
 		}
 
 		[TestMethod]
+		public void Unit_Percentage_Damage()
+		{
+			var player = Hero.CreatePaladin();
+
+			var spec = new WeaponItemSpec(9, 18); // 10-20 with the default
+			spec.Modifiers.Add(new PhysicalDamageModifier(new PercentageDamageModifier(50), new PercentageDamageModifier(50)));
+
+			var sword = new Weapon(spec);
+
+			player.Gear.Equip(sword, _ => _.LeftHand);
+
+			Assert.AreEqual(15, player.Melee.Min);
+			Assert.AreEqual(30, player.Melee.Max);
+		}
+
+		[TestMethod]
 		public void Unit_Min_Max_Damage_On_Equip_Unequip()
 		{
 			var defaultDmg_min = 1;

@@ -1,3 +1,5 @@
+using Deroes.Core.Units;
+
 namespace Deroes.Core.Tests;
 
 [TestClass]
@@ -9,6 +11,36 @@ public class Auras
 		double resist = ResistFire.CalculateBonusResist(1);
 
 		Assert.IsTrue(resist >= 59 && resist <= 61, $"Expected ~60%, got {resist}");
+	}
+
+	[TestMethod]
+	public void Resist_Fire_Activate_Level1_ShouldBeAround60_On_Hero()
+	{
+		var hero = Hero.CreatePaladin();
+		Assert.IsTrue(hero.Resistanse.Fire.Value.Amount == 0);
+
+		var resistFire = new ResistFire(1);
+		resistFire.Activate(hero);
+
+		Assert.IsTrue(hero.Resistanse.Fire.Value.Amount >= 59 && hero.Resistanse.Fire.Value.Amount <= 61, $"Expected ~60%, got {hero.Resistanse.Fire.Value.Amount}");
+
+		resistFire.Deactivate(hero);
+		Assert.IsTrue(hero.Resistanse.Fire.Value.Amount == 0);
+	}
+
+	[TestMethod]
+	public void Resist_Fire_Activate_Level5_ShouldBeAround85_On_Hero()
+	{
+		var hero = Hero.CreatePaladin();
+		Assert.IsTrue(hero.Resistanse.Fire.Value.Amount == 0);
+
+		var resistFire = new ResistFire(5); // ~85 but max is 75
+		resistFire.Activate(hero);
+
+		Assert.IsTrue(hero.Resistanse.Fire.Value.Amount == 75, $"Expected 75%, got {hero.Resistanse.Fire.Value.Amount}");
+
+		resistFire.Deactivate(hero);
+		Assert.IsTrue(hero.Resistanse.Fire.Value.Amount == 0);
 	}
 
 	[TestMethod]

@@ -4,23 +4,23 @@ using Deroes.Core.Units;
 
 namespace Deroes.Core
 {
-	public interface IAura // ??
+	public interface IAura
 	{
-		void Activate();
-		void Deactivate();
+		void Activate(Hero h);
+		void Deactivate(Hero h);
 	}
 
 	/// <summary>
-	/// Adds Damage and Attack Rating bonus to your attack
+	/// Adds Elemental Damage and Attack Rating bonus to your attack
 	/// </summary>
-	public class Fanaticism : IStatModifier
+	public class Fanaticism : IAura
 	{
-		public void ApplyModification(Hero h)
+		public void Activate(Hero h)
 		{
 			throw new NotImplementedException();
 		}
 
-		public void RemoveModification(Hero h)
+		public void Deactivate(Hero h)
 		{
 			throw new NotImplementedException();
 		}
@@ -29,7 +29,7 @@ namespace Deroes.Core
 	/// <summary>
 	/// Adds bonus to Fire resist and Max fire resist
 	/// </summary>
-	public class ResistFire : IStatModifier
+	public class ResistFire : IAura
 	{
 		private readonly IStatModifier<Resistanse> fireResist;
 
@@ -61,7 +61,12 @@ namespace Deroes.Core
 			return Math.Clamp(level, 0, 20);
 		}
 
-		public void ApplyModification(Hero h) => h.Resistanse.Fire.AddModifier(fireResist);
-		public void RemoveModification(Hero h) => h.Resistanse.Fire.RemoveModifier(fireResist);
+		public void Activate(Hero h)
+		{
+			h.Resistanse.Fire.AddModifier(fireResist); 
+			// TODO: Add MaxFireResHere
+		}
+
+		public void Deactivate(Hero h) => h.Resistanse.Fire.RemoveModifier(fireResist);
 	}
 }
