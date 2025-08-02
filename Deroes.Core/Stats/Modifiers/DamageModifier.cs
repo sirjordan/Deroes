@@ -58,4 +58,16 @@ namespace Deroes.Core.Stats.Modifiers
 	{
 		protected override Func<Hero, DamageRange> Selector => h => h.Melee.Cold;
 	}
+
+	public class FireDamageModifier(IStatModifier<Damage> min, IStatModifier<Damage> max)
+		: DamageRangeModifier(min, max)
+	{
+		protected override Func<Hero, DamageRange> Selector => h => h.Melee.Fire;
+	}
+
+	public class LightiningDamageModifier(IStatModifier<Damage> min, IStatModifier<Damage> max)
+		: DamageRangeModifier(min, max)
+	{
+		protected override Func<Hero, DamageRange> Selector => h => h.Melee.Lightining;
+	}
 }

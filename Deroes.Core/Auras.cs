@@ -1,9 +1,10 @@
-﻿using Deroes.Core.Stats;
-using Deroes.Core.Stats.Modifiers;
+﻿using Deroes.Core.Stats.Modifiers;
 using Deroes.Core.Units;
 
 namespace Deroes.Core
 {
+	// TODO: Max level for all spells is 60
+
 	public interface IAura
 	{
 		void Activate(Hero h);
@@ -11,19 +12,33 @@ namespace Deroes.Core
 	}
 
 	/// <summary>
-	/// Adds Elemental Damage and Attack Rating bonus to your attack
+	/// Increase damage dealt
 	/// </summary>
-	public class Fanaticism : IAura
+	public class Might : IAura
 	{
-		public void Activate(Hero h)
+		private readonly IStatModifier dmgBonus;
+
+		public Might(int level)
 		{
-			throw new NotImplementedException();
+			ArgumentOutOfRangeException.ThrowIfNegativeOrZero(level);
+
+			int percentage = CalculateBonusDmg(level);
+
+			dmgBonus = new PhysicalDamageModifier(
+				new PercentageDamageModifier(percentage), 
+				new PercentageDamageModifier(percentage));
 		}
 
-		public void Deactivate(Hero h)
+		/// <summary>
+		/// Percentage of Dmg
+		/// </summary>
+		public static int CalculateBonusDmg(int level)
 		{
-			throw new NotImplementedException();
+			return level * 10 + 30;
 		}
+
+		public void Activate(Hero h) => dmgBonus.ApplyModification(h);
+		public void Deactivate(Hero h) => dmgBonus.RemoveModification(h);
 	}
 
 	/// <summary>
@@ -31,7 +46,7 @@ namespace Deroes.Core
 	/// </summary>
 	public class ResistFire : IAura
 	{
-		private readonly IStatModifier<Resistanse> fireResist;
+		private readonly IStatModifier fireResist;
 
 		public ResistFire(int level)
 		{
@@ -63,10 +78,13 @@ namespace Deroes.Core
 
 		public void Activate(Hero h)
 		{
-			h.Resistanse.Fire.AddModifier(fireResist); 
+			fireResist.ApplyModification(h);
 			// TODO: Add MaxFireResHere
 		}
 
-		public void Deactivate(Hero h) => h.Resistanse.Fire.RemoveModifier(fireResist);
+		public void Deactivate(Hero h)
+		{
+			fireResist.RemoveModification(h);
+		}
 	}
 }

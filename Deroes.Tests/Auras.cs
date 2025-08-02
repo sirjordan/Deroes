@@ -1,3 +1,4 @@
+using Deroes.Core.Items.Wearables;
 using Deroes.Core.Units;
 
 namespace Deroes.Core.Tests;
@@ -5,6 +6,116 @@ namespace Deroes.Core.Tests;
 [TestClass]
 public class Auras
 {
+	[TestMethod]
+	public void Might_Activate_On_Paladin_Lvl_1()
+	{
+		//40% dmg
+
+		var player = Hero.CreatePaladin();
+		var sword = new Weapon(new WeaponItemSpec(5, 10));
+		player.Gear.Equip(sword, _ => _.LeftHand);
+
+		Assert.AreEqual(6, player.Melee.Min);
+		Assert.AreEqual(12, player.Melee.Max);
+
+		var might = new Might(1);
+		might.Activate(player);
+
+		Assert.AreEqual(8, player.Melee.Min, 0.5);
+		Assert.AreEqual(16, player.Melee.Max, 0.5);
+	}
+
+	[TestMethod]
+	public void Might_Activate_On_Paladin_Lvl_5()
+	{
+		// 80% dmg
+
+		var player = Hero.CreatePaladin();
+		var sword = new Weapon(new WeaponItemSpec(5, 10));
+		player.Gear.Equip(sword, _ => _.LeftHand);
+
+		Assert.AreEqual(6, player.Melee.Min);
+		Assert.AreEqual(12, player.Melee.Max);
+
+		var might = new Might(5);
+		might.Activate(player);
+
+		Assert.AreEqual(10, player.Melee.Min, 0.5);
+		Assert.AreEqual(21, player.Melee.Max, 0.5);
+	}
+
+	[TestMethod]
+	public void Might_Activate_On_Paladin_Lvl_17()
+	{
+		// 200% dmg
+
+		var player = Hero.CreatePaladin();
+		var sword = new Weapon(new WeaponItemSpec(5, 10));
+		player.Gear.Equip(sword, _ => _.LeftHand);
+
+		Assert.AreEqual(6, player.Melee.Min);
+		Assert.AreEqual(12, player.Melee.Max);
+
+		var might = new Might(17);
+		might.Activate(player);
+
+		Assert.AreEqual(18, player.Melee.Min, 0.5);
+		Assert.AreEqual(36, player.Melee.Max, 0.5);
+	}
+
+	[TestMethod]
+	public void Might_CalculateBonusDmg_Level1_Returns40()
+	{
+		int bonus = Might.CalculateBonusDmg(1);
+		Assert.AreEqual(40, bonus);
+	}
+
+	[TestMethod]
+	public void Might_CalculateBonusDmg_Level10_Returns130()
+	{
+		int bonus = Might.CalculateBonusDmg(10);
+		Assert.AreEqual(130, bonus);
+	}
+
+	[TestMethod]
+	public void Might_CalculateBonusDmg_Level30_Returns330()
+	{
+		int bonus = Might.CalculateBonusDmg(30);
+		Assert.AreEqual(330, bonus);
+	}
+
+	[TestMethod]
+	public void Might_CalculateBonusDmg_Level60_Returns630()
+	{
+		int bonus = Might.CalculateBonusDmg(60);
+		Assert.AreEqual(630, bonus);
+	}
+
+	[TestMethod]
+	public void Might_CalculateBonusDmg_AllLevelsFrom1To60_CorrectValues()
+	{
+		for (int level = 1; level <= 60; level++)
+		{
+			int expected = level * 10 + 30;
+			int actual = Might.CalculateBonusDmg(level);
+			Assert.AreEqual(expected, actual, $"Failed at level {level}");
+		}
+	}
+
+	[TestMethod]
+	[ExpectedException(typeof(ArgumentOutOfRangeException))]
+	public void Might_CalculateBonusDmg_ZeroLevel_ThrowsException()
+	{
+		Might m = new Might(0);
+	}
+
+	[TestMethod]
+	[ExpectedException(typeof(ArgumentOutOfRangeException))]
+	public void Might_CalculateBonusDmg_NegativeLevel_ThrowsException()
+	{
+		Might m = new Might(-5);
+	}
+
 	[TestMethod]
 	public void Resist_Fire_Level1_ShouldBeAround60()
 	{
