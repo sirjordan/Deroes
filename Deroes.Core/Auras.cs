@@ -3,8 +3,6 @@ using Deroes.Core.Units;
 
 namespace Deroes.Core
 {
-	// TODO: Max level for all spells is 60
-
 	public interface IAura
 	{
 		void Activate(Hero h);

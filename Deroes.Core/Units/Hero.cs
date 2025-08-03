@@ -27,7 +27,6 @@ namespace Deroes.Core.Units
 	public abstract class Hero : Unit
 	{
 		public override int Max_Level => 99;
-		public Stat<Vital> Mana { get; protected set; }
 		public Stat<Vital> Stamina { get; protected set; }
 		public Attributes Attributes { get; protected set; }
 		public Stash<Item> Inventory { get; protected set; }

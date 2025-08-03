@@ -9,6 +9,7 @@ namespace Deroes.Core.Units
 		public string Name { get; protected set; }
 		public bool IsAlive => Life.Value.Remaining > 0;
 		public Stat<Vital> Life { get; protected set; }
+		public Stat<Vital> Mana { get; protected set; }
 		public Attack Melee { get; private set; }
 		public Defense Resistanse { get; private set; }
 

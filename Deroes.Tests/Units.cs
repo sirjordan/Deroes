@@ -1,5 +1,4 @@
-﻿using Deroes.Core;
-using Deroes.Core.Items.Wearables;
+﻿using Deroes.Core.Items.Wearables;
 using Deroes.Core.Stats.Modifiers;
 using Deroes.Core.Units;
 

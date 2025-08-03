@@ -1,76 +1,82 @@
-﻿using Deroes.Core.Stats;
-using Deroes.Core.Stats.Modifiers;
+﻿using Deroes.Core.Stats.Modifiers;
 using Deroes.Core.Units;
 
 namespace Deroes.Core
 {
 	public abstract class Skill
 	{
+		public const int MAX_LEVEL = 60;
+		public int Level { get; private set; }
+		protected Unit Unit { get; private set; }
+
+		protected Skill(Unit u, int level)
+		{
+			ArgumentOutOfRangeException.ThrowIfLessThan(1, level);
+			ArgumentOutOfRangeException.ThrowIfGreaterThan(MAX_LEVEL, level);
+
+			Level = level;
+			Unit = u; 
+		}
+
+		/// <summary>
+		/// Use/start the skill
+		/// Animation event, Take mana, take arrows, etc
+		/// </summary>
+		/// <param name="target">Direction, Vector, Units' direction</param>
+		public abstract void Use(object target);
+
+		/// <summary>
+		/// On colusion/hit the target
+		/// Take dmg, apply curse, activate aura, etc
+		/// </summary>
+		/// <param name="target">Target context</param>
+		public abstract void Apply(Unit target);
+	}
+
+	public class NormalAttack(Unit u) : Skill(u, 1)
+	{
+		public override void Use(object target)
+		{
+			Console.WriteLine($"{Unit.Name} did normal attack");
+		}
+
+		public override void Apply(Unit target)
+		{
+			var hitpoins = Unit.Melee.Apply(target);
+			Console.WriteLine($"{Unit.Name} did {hitpoins} of damage to {target.Name}");
+		}
 	}
 
 	/// <summary>
-	/// Throws a Javelin, Knives etc
+	/// Adds elemental damage to your attack
 	/// </summary>
-	public class Throw : Skill { }
+	public class Vengeance : Skill
+	{
+		private readonly IStatModifier coldDmg;
+		public double ManaCost { get; private set; }
 
-	/// <summary>
-	/// Shoots with Bow or Crossbow 
-	/// </summary>
-	public class Shoot : Skill { }
+		public Vengeance(Unit u, int level): base(u, level) 
+		{
+			int dmgBonusPercentage = 20;
+			coldDmg = new PhysicalDamageModifier(
+				new PercentageDamageModifier(dmgBonusPercentage),
+				new PercentageDamageModifier(dmgBonusPercentage));
+			ManaCost = 5.0;
+		}
 
-	//public abstract class Spell
-	//{
-	//	private readonly Hero _hero;
+		public override void Use(object target)
+		{
+			if (target == null) return;
+			if (Unit.Mana.Value.Remaining < ManaCost) throw new InvalidOperationException("Not enough Mana");
 
-	//	public int RequiredCharLevel { get; private set; }
-	//	public int Level { get; private set; }
-	//	public double ManaCost { get; private set; }    // Change per level
+			Unit.Mana.Value.OnAction(-ManaCost);
 
-	//	public Spell(Hero h)
-	//	{
-	//		_hero = h;
-	//	}
+			Console.WriteLine($"{Unit.Name} did Vengeance attack");
+		}
 
-	//	/// <summary>
-	//	/// Execute the skill
-	//	/// </summary>
-	//	/// <param name="target">Target to apply the cast to.
-	//	/// Could be location, Monster, Self</param>
-	//	/// <returns>If cast is successfull or not</returns>
-	//	public bool Cast(object target)
-	//	{
-	//		// TODO: This could be moved in the caster
-	//		if (_hero.Mana.Value.Remaining >= ManaCost)
-	//		{
-	//			_hero.Mana.Value.OnAction(-ManaCost);
-	//			ApplyEffect(target);
-
-	//			return true; 
-	//		}
-	//		else
-	//		{
-	//			// I need mana
-	//			return false;
-	//		}
-	//	}
-
-	//	protected abstract void ApplyEffect(object target);
-	//}
-
-	//// [-v-Spells-v-]
-
-	//// Individual attack
-	//public class FireBolt : Spell
-	//{
-	//	public Fire Damage { get; private set; } // Change per level
-	//}
-
-	//// Modifier/Enchants
-	//public class Vengeance : Spell
-	//{
-	//	public DamageRange[] Damage { get; private set; } // Change per level
-	//}
-
-	//// Curse
-	//public class AmplifyDamage : Spell { }
+		public override void Apply(Unit target)
+		{
+			
+		}
+	}
 }
