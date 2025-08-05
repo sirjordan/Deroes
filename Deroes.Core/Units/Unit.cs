@@ -1,4 +1,5 @@
-﻿using Deroes.Core.Stats;
+﻿using Deroes.Core.Skills;
+using Deroes.Core.Stats;
 
 namespace Deroes.Core.Units
 {
@@ -12,6 +13,7 @@ namespace Deroes.Core.Units
 		public Stat<Vital> Mana { get; protected set; }
 		public Attack Melee { get; private set; }
 		public Defense Resistanse { get; private set; }
+		public SkillSet Skills { get; private set; }
 
 		protected Unit(string name, Stat<Vital> life)
 		{
@@ -20,18 +22,7 @@ namespace Deroes.Core.Units
 			Level = 1;
 			Melee = new Attack();
 			Resistanse = new Defense();
-		}
-
-		/// <summary>
-		/// Do damage and returns the hitpoint
-		/// </summary>
-		/// <returns>Damage dealt calculated</returns>
-		public int Attack(Unit other)
-		{
-			var hitpoins = Melee.Apply(other);
-			Console.WriteLine($"{Name} did {hitpoins} of damage to {other.Name}");
-
-			return hitpoins;
+			Skills = new SkillSet(this);
 		}
 
 		public virtual void Die()

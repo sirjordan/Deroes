@@ -1,9 +1,8 @@
-﻿using Deroes.Core.Stats.Modifiers;
-using Deroes.Core.Units;
+﻿using Deroes.Core.Units;
 
 namespace Deroes.Core.Stats
 {
-	public class Attack
+	public class Attack 
 	{
 		private DamageRange[] All => [Physical, Cold, Fire, Poison, Lightining];
 		public DamageRange Physical { get; private set; }
@@ -27,6 +26,9 @@ namespace Deroes.Core.Stats
 			Lightining = l;
 		}
 
+		/// <summary>
+		/// Do damage and returns the hitpoint
+		/// </summary>
 		public int Apply(Unit defender)
 		{
 			var hitPoints = 0;

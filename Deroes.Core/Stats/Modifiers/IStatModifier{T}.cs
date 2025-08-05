@@ -3,13 +3,13 @@
 namespace Deroes.Core.Stats.Modifiers
 {
 	/// <summary>
-	/// Applies a modification on hero
+	/// Applies a modification on unit
 	/// Holds the 'on what' modification is applied
 	/// </summary>
 	public interface IStatModifier
 	{
-		public void ApplyModification(Hero h);
-		public void RemoveModification(Hero h);
+		public void ApplyModification(Unit h);
+		public void RemoveModification(Unit h);
 	}
 
 	/// <summary>

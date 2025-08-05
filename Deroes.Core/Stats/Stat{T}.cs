@@ -7,11 +7,11 @@ namespace Deroes.Core.Stats
 		private readonly List<IStatModifier<T>> _modifiers;
 
 		/// <summary>
-		/// Original base value, without gear modifications
+		/// Original base value, without gear or other modifications
 		/// </summary>
 		public T BaseValue { get; private set; }
 		/// <summary>
-		/// Value with gear modifiers applied
+		/// Value with gear and other modifiers applied
 		/// </summary>
 		public T Value
 		{

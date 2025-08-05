@@ -8,11 +8,11 @@ namespace Deroes.Core.Stats.Modifiers
 
 		public int Order => 100;
 		public string Description => $"{_value} to {GetType().Name} resist";
-		protected abstract Func<Hero, Stat<Resistanse>> Selector { get; }
+		protected abstract Func<Unit, Stat<Resistanse>> Selector { get; }
 
-		public void ApplyModification(Hero h) => Selector(h).AddModifier(this);
+		public void ApplyModification(Unit h) => Selector(h).AddModifier(this);
 		public int GetModificator(Resistanse @base) => _value;
-		public void RemoveModification(Hero h) => Selector(h).RemoveModifier(this);
+		public void RemoveModification(Unit h) => Selector(h).RemoveModifier(this);
 	}
 
 	public abstract class MaxResistModifier (int value) : IStatModifier<Resistanse>, IStatModifier
@@ -21,25 +21,25 @@ namespace Deroes.Core.Stats.Modifiers
 
 		public string Description => $"{_value} to Maximum {GetType().Name} resist";
 		public int Order => 1;
-		protected abstract Func<Hero, Stat<Resistanse>> Selector { get; }
+		protected abstract Func<Unit, Stat<Resistanse>> Selector { get; }
 
-		public void ApplyModification(Hero h) => Selector(h).AddModifier(this);
+		public void ApplyModification(Unit h) => Selector(h).AddModifier(this);
 		public int GetModificator(Resistanse @base) => _value;
-		public void RemoveModification(Hero h) => Selector(h).RemoveModifier(this);
+		public void RemoveModification(Unit h) => Selector(h).RemoveModifier(this);
 	}
 
 	public class PhysicalResistModifier(int value) : FlatResistModifier(value)
 	{
-		protected override Func<Hero, Stat<Resistanse>> Selector => h => h.Resistanse.Physical;
+		protected override Func<Unit, Stat<Resistanse>> Selector => h => h.Resistanse.Physical;
 	}
 
 	public class ColdResistModifier(int value) : FlatResistModifier(value)
 	{
-		protected override Func<Hero, Stat<Resistanse>> Selector => h => h.Resistanse.Cold;
+		protected override Func<Unit, Stat<Resistanse>> Selector => h => h.Resistanse.Cold;
 	}
 
 	public class FireResistModifier(int value) : FlatResistModifier(value)
 	{
-		protected override Func<Hero, Stat<Resistanse>> Selector => h => h.Resistanse.Fire;
+		protected override Func<Unit, Stat<Resistanse>> Selector => h => h.Resistanse.Fire;
 	}
 }

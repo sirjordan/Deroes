@@ -1,29 +1,23 @@
 ﻿using Deroes.Core.Stats.Modifiers;
 using Deroes.Core.Units;
 
-namespace Deroes.Core
+namespace Deroes.Core.Skills
 {
-	public interface IAura
-	{
-		void Activate(Hero h);
-		void Deactivate(Hero h);
-	}
-
 	/// <summary>
-	/// Increase damage dealt
+	/// Aura, Increase damage dealt
 	/// </summary>
-	public class Might : IAura
+	public class Might : Skill
 	{
 		private readonly IStatModifier dmgBonus;
 
-		public Might(int level)
+		public Might(Unit u, int level) : base(u, level)
 		{
 			ArgumentOutOfRangeException.ThrowIfNegativeOrZero(level);
 
 			int percentage = CalculateBonusDmg(level);
 
 			dmgBonus = new PhysicalDamageModifier(
-				new PercentageDamageModifier(percentage), 
+				new PercentageDamageModifier(percentage),
 				new PercentageDamageModifier(percentage));
 		}
 
@@ -35,18 +29,22 @@ namespace Deroes.Core
 			return level * 10 + 30;
 		}
 
-		public void Activate(Hero h) => dmgBonus.ApplyModification(h);
-		public void Deactivate(Hero h) => dmgBonus.RemoveModification(h);
+		public override void Set() => dmgBonus.ApplyModification(Unit);
+		public override void Use(object target) { return; }
+		public override void Apply(Unit target) { return; }
+		public override bool CanUse() => true;
+		public override void Unset() => dmgBonus.RemoveModification(Unit);
+
 	}
 
 	/// <summary>
-	/// Adds bonus to Fire resist and Max fire resist
+	/// Aura, Adds bonus to Fire resist and Max fire resist
 	/// </summary>
-	public class ResistFire : IAura
+	public class ResistFire : Skill
 	{
 		private readonly IStatModifier fireResist;
 
-		public ResistFire(int level)
+		public ResistFire(Unit u, int level) : base(u, level)
 		{
 			ArgumentOutOfRangeException.ThrowIfNegativeOrZero(level);
 
@@ -74,15 +72,10 @@ namespace Deroes.Core
 			return Math.Clamp(level, 0, 20);
 		}
 
-		public void Activate(Hero h)
-		{
-			fireResist.ApplyModification(h);
-			// TODO: Add MaxFireResHere
-		}
-
-		public void Deactivate(Hero h)
-		{
-			fireResist.RemoveModification(h);
-		}
+		public override void Set() => fireResist.ApplyModification(Unit);
+		public override void Use(object target) { return; }
+		public override void Apply(Unit target) { return; }
+		public override bool CanUse() => true;
+		public override void Unset() => fireResist.RemoveModification(Unit);
 	}
 }

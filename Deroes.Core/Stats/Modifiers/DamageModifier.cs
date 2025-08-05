@@ -28,9 +28,9 @@ namespace Deroes.Core.Stats.Modifiers
 		private IStatModifier<Damage> _bonusMin = min;
 		private IStatModifier<Damage> _bonusMax = max;
 
-		protected abstract Func<Hero, DamageRange> Selector { get; }
+		protected abstract Func<Unit, DamageRange> Selector { get; }
 
-		public void ApplyModification(Hero h)
+		public void ApplyModification(Unit h)
 		{
 			var range = Selector(h);
 
@@ -38,7 +38,7 @@ namespace Deroes.Core.Stats.Modifiers
 			range.Max.AddModifier(_bonusMax);
 		}
 
-		public void RemoveModification(Hero h)
+		public void RemoveModification(Unit h)
 		{
 			var range = Selector(h);
 
@@ -50,24 +50,24 @@ namespace Deroes.Core.Stats.Modifiers
 	public class PhysicalDamageModifier(IStatModifier<Damage> min, IStatModifier<Damage> max) 
 		: DamageRangeModifier(min, max)
 	{
-		protected override Func<Hero, DamageRange> Selector => h => h.Melee.Physical;
+		protected override Func<Unit, DamageRange> Selector => h => h.Melee.Physical;
 	}
 
 	public class ColdDamageModifier(IStatModifier<Damage> min, IStatModifier<Damage> max)
 		: DamageRangeModifier(min, max)
 	{
-		protected override Func<Hero, DamageRange> Selector => h => h.Melee.Cold;
+		protected override Func<Unit, DamageRange> Selector => h => h.Melee.Cold;
 	}
 
 	public class FireDamageModifier(IStatModifier<Damage> min, IStatModifier<Damage> max)
 		: DamageRangeModifier(min, max)
 	{
-		protected override Func<Hero, DamageRange> Selector => h => h.Melee.Fire;
+		protected override Func<Unit, DamageRange> Selector => h => h.Melee.Fire;
 	}
 
 	public class LightiningDamageModifier(IStatModifier<Damage> min, IStatModifier<Damage> max)
 		: DamageRangeModifier(min, max)
 	{
-		protected override Func<Hero, DamageRange> Selector => h => h.Melee.Lightining;
+		protected override Func<Unit, DamageRange> Selector => h => h.Melee.Lightining;
 	}
 }

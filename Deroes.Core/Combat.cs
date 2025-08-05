@@ -11,7 +11,7 @@ namespace Deroes.Core
 		{
 			if (_monster.IsAlive)
 			{
-				_hero.Attack(_monster);
+				_hero.Skills.Attack.Normal.Apply(_monster);
 
 				if (!_monster.IsAlive)
 				{
@@ -27,7 +27,7 @@ namespace Deroes.Core
 
 		public Combat MonsterAttacks()
 		{
-			_monster.Attack(_hero);
+			_monster.Skills.Attack.Normal.Apply(_hero);
 			if (!_hero.IsAlive)
 			{
 				_hero.Die();

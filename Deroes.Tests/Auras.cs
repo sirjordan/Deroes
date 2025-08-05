@@ -1,4 +1,5 @@
 using Deroes.Core.Items.Wearables;
+using Deroes.Core.Skills;
 using Deroes.Core.Units;
 
 namespace Deroes.Core.Tests;
