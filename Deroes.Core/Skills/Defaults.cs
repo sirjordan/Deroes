@@ -2,6 +2,18 @@
 
 namespace Deroes.Core.Skills
 {
+	public class DefaultSkillSet
+	{
+		public Skill Normal { get; private set; }
+		public Skill Throw { get; private set; }
+		public Skill Shoot { get; private set; }
+
+		public DefaultSkillSet(Unit u)
+		{
+			Normal = new NormalAttack(u);
+		}
+	}
+
 	public class NormalAttack(Unit u) : Skill(u, 1)
 	{
 		public override void Use(object target)
@@ -19,8 +31,4 @@ namespace Deroes.Core.Skills
 		public override void Set() { return; }
 		public override void Unset() { return; }
 	}
-
-	// TODO:
-	// Range/shoot
-	// Throw
 }

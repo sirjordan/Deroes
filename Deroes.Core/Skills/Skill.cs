@@ -17,6 +17,9 @@ namespace Deroes.Core.Skills
 			Unit = u;
 		}
 
+		/// <summary>
+		/// Sets the modifications of the skill to the unit
+		/// </summary>
 		public abstract void Set();
 
 		/// <summary>
@@ -39,6 +42,9 @@ namespace Deroes.Core.Skills
 		/// <param name="target">Target context</param>
 		public abstract void Apply(Unit target);
 
+		/// <summary>
+		/// Unsets the modifications of the skill from the unit
+		/// </summary>
 		public abstract void Unset();
 	}
 }

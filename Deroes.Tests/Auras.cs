@@ -19,8 +19,8 @@ public class Auras
 		Assert.AreEqual(6, player.Melee.Min);
 		Assert.AreEqual(12, player.Melee.Max);
 
-		var might = new Might(1);
-		might.Activate(player);
+		var might = new Might(player, 1);
+		might.Set();
 
 		Assert.AreEqual(8, player.Melee.Min, 0.5);
 		Assert.AreEqual(16, player.Melee.Max, 0.5);
@@ -38,8 +38,8 @@ public class Auras
 		Assert.AreEqual(6, player.Melee.Min);
 		Assert.AreEqual(12, player.Melee.Max);
 
-		var might = new Might(5);
-		might.Activate(player);
+		var might = new Might(player, 5);
+		might.Set();
 
 		Assert.AreEqual(10, player.Melee.Min, 0.5);
 		Assert.AreEqual(21, player.Melee.Max, 0.5);
@@ -57,8 +57,8 @@ public class Auras
 		Assert.AreEqual(6, player.Melee.Min);
 		Assert.AreEqual(12, player.Melee.Max);
 
-		var might = new Might(17);
-		might.Activate(player);
+		var might = new Might(player, 17);
+		might.Set();
 
 		Assert.AreEqual(18, player.Melee.Min, 0.5);
 		Assert.AreEqual(36, player.Melee.Max, 0.5);
@@ -107,14 +107,16 @@ public class Auras
 	[ExpectedException(typeof(ArgumentOutOfRangeException))]
 	public void Might_CalculateBonusDmg_ZeroLevel_ThrowsException()
 	{
-		Might m = new Might(0);
+		var player = Hero.CreatePaladin();
+		Might m = new Might(player, 0);
 	}
 
 	[TestMethod]
 	[ExpectedException(typeof(ArgumentOutOfRangeException))]
 	public void Might_CalculateBonusDmg_NegativeLevel_ThrowsException()
 	{
-		Might m = new Might(-5);
+		var player = Hero.CreatePaladin();
+		Might m = new Might(player, -5);
 	}
 
 	[TestMethod]
@@ -131,12 +133,12 @@ public class Auras
 		var hero = Hero.CreatePaladin();
 		Assert.IsTrue(hero.Resistanse.Fire.Value.Amount == 0);
 
-		var resistFire = new ResistFire(1);
-		resistFire.Activate(hero);
+		var resistFire = new ResistFire(hero, 1);
+		resistFire.Set();
 
 		Assert.IsTrue(hero.Resistanse.Fire.Value.Amount >= 59 && hero.Resistanse.Fire.Value.Amount <= 61, $"Expected ~60%, got {hero.Resistanse.Fire.Value.Amount}");
 
-		resistFire.Deactivate(hero);
+		resistFire.Unset();
 		Assert.IsTrue(hero.Resistanse.Fire.Value.Amount == 0);
 	}
 
@@ -146,12 +148,12 @@ public class Auras
 		var hero = Hero.CreatePaladin();
 		Assert.IsTrue(hero.Resistanse.Fire.Value.Amount == 0);
 
-		var resistFire = new ResistFire(5); // ~85 but max is 75
-		resistFire.Activate(hero);
+		var resistFire = new ResistFire(hero, 5); // ~85 but max is 75
+		resistFire.Set();
 
 		Assert.IsTrue(hero.Resistanse.Fire.Value.Amount == 75, $"Expected 75%, got {hero.Resistanse.Fire.Value.Amount}");
 
-		resistFire.Deactivate(hero);
+		resistFire.Unset();
 		Assert.IsTrue(hero.Resistanse.Fire.Value.Amount == 0);
 	}
 

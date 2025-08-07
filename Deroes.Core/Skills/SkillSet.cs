@@ -37,17 +37,5 @@ namespace Deroes.Core.Skills
 			Secondary = skill ?? Attack.Normal;
 			Secondary.Set();
 		}
-
-		public class DefaultSkillSet
-		{
-			public Skill Normal { get; private set; }
-			public Skill Throw { get; private set; }
-			public Skill Shoot { get; private set; }
-
-			public DefaultSkillSet(Unit u)
-			{
-				Normal = new NormalAttack(u);
-			}
-		}
 	}
 }
