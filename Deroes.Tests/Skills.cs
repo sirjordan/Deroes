@@ -1,4 +1,6 @@
+using Deroes.Core.Items.Wearables;
 using Deroes.Core.Skills;
+using Deroes.Core.Units;
 
 namespace Deroes.Core.Tests;
 
@@ -51,5 +53,121 @@ public class Skills
 			double actual = Vengeance.CalculateManaCost(i);
 			Assert.AreEqual(expected[i], actual, 0.3, $"Mismatch at index {i}");
 		}
+	}
+
+	[TestMethod]
+	public void Vengeance_Set_Lvl_1()
+	{
+		var hero = Hero.CreatePaladin();
+		var min = 5;
+		var max = 10;
+		var sword = new Weapon(new WeaponItemSpec(min, max)); // 6-12 with default
+		var level = 1;
+		hero.Gear.Equip(sword, _ => _.LeftHand);
+
+		var vngns = new Vengeance(hero, level);
+		vngns.Set();
+
+		Assert.IsTrue(vngns.CanUse());
+
+		var expectedBonusPerc = Vengeance.CalculateBonusDmg(level) * 3; // cold + fire + light = 210%
+		var expMin = (min + 1) * (expectedBonusPerc / 100.0) + (min + 1); // 18.6
+		var expMax = (max + 2) * (expectedBonusPerc / 100.0) + (max + 2); // 37.2
+
+		Assert.AreEqual((int)expMin, hero.Melee.Min, 2);
+		Assert.AreEqual((int)expMax, hero.Melee.Max, 2);
+	}
+
+	[TestMethod]
+	public void Vengeance_Set_Lvl_6()
+	{
+		var hero = Hero.CreatePaladin();
+		var min = 5;
+		var max = 10;
+		var level = 6;
+		var sword = new Weapon(new WeaponItemSpec(min, max)); // 6-12 with default
+		hero.Gear.Equip(sword, _ => _.LeftHand);
+
+		var vngns = new Vengeance(hero, level);
+		vngns.Set();
+
+		Assert.IsTrue(vngns.CanUse());
+
+		var expectedBonusPerc = Vengeance.CalculateBonusDmg(level) * 3; // cold + fire + light = 300%
+		var expMin = (min + 1) * (expectedBonusPerc / 100.0) + (min + 1); // 24
+		var expMax = (max + 2) * (expectedBonusPerc / 100.0) + (max + 2); // 48
+
+		Assert.AreEqual((int)expMin, hero.Melee.Min, 2);
+		Assert.AreEqual((int)expMax, hero.Melee.Max, 2);
+	}
+
+	[TestMethod]
+	public void Vengeance_Set_Lvl_16()
+	{
+		var hero = Hero.CreatePaladin();
+		var min = 5;
+		var max = 10;
+		var level = 16;
+		var sword = new Weapon(new WeaponItemSpec(min, max)); // 6-12 with default
+		hero.Gear.Equip(sword, _ => _.LeftHand);
+
+		var vngns = new Vengeance(hero, level);
+		vngns.Set();
+
+		Assert.IsTrue(vngns.CanUse());
+
+		var expectedBonusPerc = Vengeance.CalculateBonusDmg(level) * 3; // cold + fire + light = 480%
+		var expMin = (min + 1) * (expectedBonusPerc / 100.0) + (min + 1); 
+		var expMax = (max + 2) * (expectedBonusPerc / 100.0) + (max + 2); 
+
+		Assert.AreEqual((int)expMin, hero.Melee.Min, 2);
+		Assert.AreEqual((int)expMax, hero.Melee.Max, 2);
+	}
+
+	[TestMethod]
+	public void Vengeance_Set_Lvl_30()
+	{
+		var hero = Hero.CreatePaladin();
+		var min = 5;
+		var max = 10;
+		var level = 30;
+		var sword = new Weapon(new WeaponItemSpec(min, max)); // 6-12 with default
+		hero.Gear.Equip(sword, _ => _.LeftHand);
+
+		var vngns = new Vengeance(hero, level);
+		vngns.Set();
+
+		Assert.IsTrue(vngns.CanUse());
+
+		var expectedBonusPerc = Vengeance.CalculateBonusDmg(level) * 3; // cold + fire + light = 732%
+		var expMin = (min + 1) * (expectedBonusPerc / 100.0) + (min + 1); 
+		var expMax = (max + 2) * (expectedBonusPerc / 100.0) + (max + 2); 
+
+		Assert.AreEqual((int)expMin, hero.Melee.Min, 2);
+		Assert.AreEqual((int)expMax, hero.Melee.Max, 2);
+	}
+
+	[TestMethod]
+	public void Combined_Vengeance_Lvl1_And_Aura_Lvl1()
+	{
+		throw new NotImplementedException();
+	}
+
+	[TestMethod]
+	public void Combined_Vengeance_Lvl6_And_Aura_Lvl1()
+	{
+		throw new NotImplementedException();
+	}
+
+	[TestMethod]
+	public void Combined_Vengeance_Lvl1_And_Aura_Lvl6()
+	{
+		throw new NotImplementedException();
+	}
+
+	[TestMethod]
+	public void Combined_Vengeance_Lvl6_And_Aura_Lvl6()
+	{
+		throw new NotImplementedException();
 	}
 }

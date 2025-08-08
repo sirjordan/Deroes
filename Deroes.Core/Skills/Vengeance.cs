@@ -17,16 +17,18 @@ namespace Deroes.Core.Skills
 		public Vengeance(Unit u, int level) : base(u, level)
 		{
 			int dmgBonusPercentage = CalculateBonusDmg(level);
+			int dmgBonusMin = (int)(u.Melee.Physical.Min.Value.Amount * (dmgBonusPercentage / 100.0));
+			int dmgBonusMax = (int)(u.Melee.Physical.Max.Value.Amount * (dmgBonusPercentage / 100.0));
 
 			coldDmg = new ColdDamageModifier(
-				new PercentageDamageModifier(dmgBonusPercentage),
-				new PercentageDamageModifier(dmgBonusPercentage));
+				new FlatDamageModifier(dmgBonusMin),
+				new FlatDamageModifier(dmgBonusMax));
 			fireDmg = new FireDamageModifier(
-				new PercentageDamageModifier(dmgBonusPercentage),
-				new PercentageDamageModifier(dmgBonusPercentage));
+				new FlatDamageModifier(dmgBonusMin),
+				new FlatDamageModifier(dmgBonusMax));
 			ligheningDmg = new LightiningDamageModifier(
-				new PercentageDamageModifier(dmgBonusPercentage),
-				new PercentageDamageModifier(dmgBonusPercentage));
+				new FlatDamageModifier(dmgBonusMin),
+				new FlatDamageModifier(dmgBonusMax));
 
 			ManaCost = CalculateManaCost(level);
 		}
