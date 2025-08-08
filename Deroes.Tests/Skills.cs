@@ -150,24 +150,80 @@ public class Skills
 	[TestMethod]
 	public void Combined_Vengeance_Lvl1_And_Aura_Lvl1()
 	{
-		throw new NotImplementedException();
+		var hero = Hero.CreatePaladin();
+		var min = 5;
+		var max = 10;
+		var level = 1;
+		var sword = new Weapon(new WeaponItemSpec(min, max)); // 6-12 with default
+		hero.Gear.Equip(sword, _ => _.LeftHand);
+
+		var vngns = new Vengeance(hero, level); // + 210% elemntal = +12 to 25 dmg in total
+		var might = new Might(hero, level); // + 40% = +2 to 4 dmg
+
+		hero.Skills.SetSecondary(might);
+		hero.Skills.SetPrimary(vngns);
+
+		Assert.AreEqual(vngns, hero.Skills.Primary);
+		Assert.AreEqual(might, hero.Skills.Secondary);
+
+		Assert.AreEqual(20, hero.Melee.Min, 2);
+		Assert.AreEqual(40, hero.Melee.Max, 2);
 	}
 
 	[TestMethod]
 	public void Combined_Vengeance_Lvl6_And_Aura_Lvl1()
 	{
-		throw new NotImplementedException();
+		var hero = Hero.CreatePaladin();
+		var min = 5;
+		var max = 10;
+		var sword = new Weapon(new WeaponItemSpec(min, max)); // 6-12 with default
+		hero.Gear.Equip(sword, _ => _.LeftHand);
+
+		var vngns = new Vengeance(hero, 6); // 300% = + 18 to 36
+		var might = new Might(hero, 1); // 40% = + 2 to 4 dmg
+
+		hero.Skills.SetPrimary(vngns);
+		hero.Skills.SetSecondary(might);
+
+		Assert.AreEqual(26, hero.Melee.Min, 2);
+		Assert.AreEqual(52, hero.Melee.Max, 2);
 	}
 
 	[TestMethod]
 	public void Combined_Vengeance_Lvl1_And_Aura_Lvl6()
 	{
-		throw new NotImplementedException();
+		var hero = Hero.CreatePaladin();
+		var min = 5;
+		var max = 10;
+		var sword = new Weapon(new WeaponItemSpec(min, max)); // 6-12 with default
+		hero.Gear.Equip(sword, _ => _.LeftHand);
+
+		var vngns = new Vengeance(hero, 1); // + 210% elemntal = +12 to 25 dmg in total
+		var might = new Might(hero, 6); // 90% = +5 to 10
+
+		hero.Skills.SetPrimary(vngns);
+		hero.Skills.SetSecondary(might);
+
+		Assert.AreEqual(23, hero.Melee.Min, 2);
+		Assert.AreEqual(47, hero.Melee.Max, 2);
 	}
 
 	[TestMethod]
 	public void Combined_Vengeance_Lvl6_And_Aura_Lvl6()
 	{
-		throw new NotImplementedException();
+		var hero = Hero.CreatePaladin();
+		var min = 5;
+		var max = 10;
+		var sword = new Weapon(new WeaponItemSpec(min, max)); // 6-12 with default
+		hero.Gear.Equip(sword, _ => _.LeftHand);
+
+		var vngns = new Vengeance(hero, 6);  // 300% = + 18 to 36
+		var might = new Might(hero, 6); // 90 % = +5 to 10
+
+		hero.Skills.SetPrimary(vngns);
+		hero.Skills.SetSecondary(might);
+
+		Assert.AreEqual(29, hero.Melee.Min, 2);
+		Assert.AreEqual(58, hero.Melee.Max, 2);
 	}
 }
