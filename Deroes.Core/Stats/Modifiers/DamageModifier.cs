@@ -6,7 +6,7 @@ namespace Deroes.Core.Stats.Modifiers
 	{
 		private int _damage = damage;
 
-		public string Description => $"{_damage}";
+		public string Description => $"+{_damage} damage";
 		public int Order => 1;
 
 		public int GetModificator(Damage @base) => _damage;
@@ -16,7 +16,7 @@ namespace Deroes.Core.Stats.Modifiers
 	{
 		private int _percentage = percentage;
 
-		public string Description => $"{_percentage}% damage";
+		public string Description => $"+{_percentage}% damage";
 		public int Order => 100;
 
 		public int GetModificator(Damage @base) => (int)(@base.Amount * (_percentage / 100.0));

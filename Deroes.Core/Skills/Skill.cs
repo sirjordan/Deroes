@@ -5,16 +5,38 @@ namespace Deroes.Core.Skills
 	public abstract class Skill
 	{
 		public const int MAX_LEVEL = 60;
+		/// <summary>
+		/// Level of the Skill
+		/// </summary>
 		public int Level { get; private set; }
+		/// <summary>
+		/// Tier of the skill
+		/// 1 - 6 Tiers
+		/// </summary>
+		public int Tier { get; private set; }
+		/// <summary>
+		/// Required level of the hero to set and use the skill
+		/// 1 - 30 level is required
+		/// </summary>
+		public int RequiredLevel => Tier * 6 - 6;
 		protected Unit Unit { get; private set; }
 
-		protected Skill(Unit u, int level)
+		/// <summary>
+		/// Create an instance of a skill
+		/// </summary>
+		/// <param name="u">Unit reference</param>
+		/// <param name="level">Level of the skill (1-60)</param>
+		/// <param name="tier">Tier of the skill (1-6)</param>
+		/// <exception cref="ArgumentOutOfRangeException">If arguments doenst match min/max alowed</exception>
+		protected Skill(Unit u, int level = 1, int tier = 1)
 		{
 			ArgumentOutOfRangeException.ThrowIfLessThan(level, 1);
 			ArgumentOutOfRangeException.ThrowIfGreaterThan(level, MAX_LEVEL);
+			if (tier < 1 || tier > 6) throw new ArgumentOutOfRangeException("Tier must be 1-6");
 
 			Level = level;
 			Unit = u;
+			Tier = tier;
 		}
 
 		/// <summary>

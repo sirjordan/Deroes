@@ -14,7 +14,7 @@ namespace Deroes.Core.Skills
 
 		public double ManaCost { get; private set; }
 
-		public Vengeance(Unit u, int level) : base(u, level)
+		public Vengeance(Unit u, int level = 1, int tier = 1) : base(u, level, tier)
 		{
 			int dmgBonusPercentage = CalculateBonusDmg(level);
 			int dmgBonusMin = (int)(u.Melee.Physical.Min.Value.Amount * (dmgBonusPercentage / 100.0));

@@ -4,8 +4,6 @@ namespace Deroes.Core.Skills
 {
 	public class SkillSet
 	{
-		// TODO: ILevelUpScubriber +1 skills
-
 		/// <summary>
 		/// Normal, throw, shoot attacks
 		/// </summary>

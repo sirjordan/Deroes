@@ -7,7 +7,7 @@ namespace Deroes.Core.Stats.Modifiers
 		private int _value = value;
 
 		public int Order => 100;
-		public string Description => $"{_value} to {GetType().Name} resist";
+		public string Description => $"+{_value} to {GetType().Name} resist";
 		protected abstract Func<Unit, Stat<Resistanse>> Selector { get; }
 
 		public void ApplyModification(Unit h) => Selector(h).AddModifier(this);
@@ -19,7 +19,7 @@ namespace Deroes.Core.Stats.Modifiers
 	{
 		private int _value = value;
 
-		public string Description => $"{_value} to Maximum {GetType().Name} resist";
+		public string Description => $"+{_value} to Maximum {GetType().Name} resist";
 		public int Order => 1;
 		protected abstract Func<Unit, Stat<Resistanse>> Selector { get; }
 

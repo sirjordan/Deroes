@@ -10,7 +10,7 @@ namespace Deroes.Core.Skills
 	{
 		private readonly IStatModifier dmgBonus;
 
-		public Might(Unit u, int level) : base(u, level)
+		public Might(Unit u, int level = 1) : base(u, level)
 		{
 			ArgumentOutOfRangeException.ThrowIfNegativeOrZero(level);
 
@@ -44,7 +44,7 @@ namespace Deroes.Core.Skills
 	{
 		private readonly IStatModifier fireResist;
 
-		public ResistFire(Unit u, int level) : base(u, level)
+		public ResistFire(Unit u, int level = 1) : base(u, level)
 		{
 			ArgumentOutOfRangeException.ThrowIfNegativeOrZero(level);
 

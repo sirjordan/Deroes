@@ -6,7 +6,7 @@ namespace Deroes.Core.Stats.Modifiers
 	{
 		private readonly int _value = value;
 
-		public string Description => $"{_value} to {GetType().Name}";
+		public string Description => $"+{_value} to {GetType().Name}";
 		public int Order => 1;
 		protected abstract Func<Unit, Stat<Vital>> Selector { get; }
 
@@ -19,7 +19,7 @@ namespace Deroes.Core.Stats.Modifiers
 	{
 		private readonly int _value = value;
 
-		public string Description => $"{_value} % to maximum {GetType().Name}";
+		public string Description => $"+{_value} % to maximum {GetType().Name}";
 		public int Order => 100;
 		protected abstract Func<Hero, Stat<Vital>> Selector { get; }
 

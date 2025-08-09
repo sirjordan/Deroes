@@ -8,6 +8,30 @@ namespace Deroes.Core.Tests;
 public class Skills
 {
 	[TestMethod]
+	public void Skill_Tier_RequiredLevel_1()
+	{
+		var skill = new Vengeance(Hero.CreatePaladin());
+		Assert.AreEqual(0, skill.RequiredLevel);
+		Assert.AreEqual(1, skill.Tier);
+	}
+
+	[TestMethod]
+	public void Skill_Tier_RequiredLevel_6()
+	{
+		var skill = new Vengeance(Hero.CreatePaladin(), 1, 2);
+		Assert.AreEqual(6, skill.RequiredLevel);
+		Assert.AreEqual(2, skill.Tier);
+	}
+
+	[TestMethod]
+	public void Skill_Tier_RequiredLevel_30()
+	{
+		var skill = new Vengeance(Hero.CreatePaladin(), 1, 6);
+		Assert.AreEqual(30, skill.RequiredLevel);
+		Assert.AreEqual(6, skill.Tier);
+	}
+
+	[TestMethod]
 	public void Vengeance_CalculateBonusDmg_Level1_Returns70()
 	{
 		int result = Vengeance.CalculateBonusDmg(1);

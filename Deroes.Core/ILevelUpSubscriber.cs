@@ -1,4 +1,4 @@
-﻿namespace Deroes.Core.Stats
+﻿namespace Deroes.Core
 {
 	public interface ILevelUpSubscriber
 	{
