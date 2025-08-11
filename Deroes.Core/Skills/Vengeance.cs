@@ -52,7 +52,7 @@ namespace Deroes.Core.Skills
 
 		public override void Apply(Unit target)
 		{
-			Unit.Skills.Attack.Normal.Apply(target);
+			Unit.Skills.Defaults.NormalAttack.Apply(target);
 		}
 
 		public override void Unset()

@@ -5,7 +5,6 @@ namespace Deroes.Core.Units
 {
 	// TODO:
 	// 1. Range attack
-	// 2. Auras
 	// 3. Spells
 	// 4. Strenth, Dex, Vitality and Energy as stats or something advanced? (modifing the hero)
 	// 5. Attack rating
@@ -26,6 +25,8 @@ namespace Deroes.Core.Units
 
 	public abstract class Hero : Unit
 	{
+		private ILevelUpSubscriber[] LevelUpSubscribers => [Attributes, Life.BaseValue, Mana.BaseValue, Stamina.BaseValue, Skills.Specials];
+
 		public override int Max_Level => 99;
 		public Stat<Vital> Stamina { get; protected set; }
 		public Attributes Attributes { get; protected set; }
@@ -101,10 +102,10 @@ namespace Deroes.Core.Units
 		{
 			Level++;
 
-			Attributes.OnLevelUp();
-			Life.BaseValue.OnLevelUp();
-			Mana.BaseValue.OnLevelUp();
-			Stamina.BaseValue.OnLevelUp();
+			foreach (var sub in LevelUpSubscribers)
+			{
+				sub.OnLevelUp();
+			}
 		}
 	}
 }

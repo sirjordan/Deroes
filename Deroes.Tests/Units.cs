@@ -17,8 +17,8 @@ namespace Deroes.Core.Tests
 
 			player.Gear.Equip(sword, _ => _.LeftHand);
 
-			player.Skills.Attack.Normal.Apply(enemy);
-			player.Skills.Attack.Normal.Apply(enemy);
+			player.Skills.Defaults.NormalAttack.Apply(enemy);
+			player.Skills.Defaults.NormalAttack.Apply(enemy);
 
 			Assert.IsTrue(enemy.Life.Value.Remaining <= 0);
 			Assert.IsFalse(enemy.IsAlive);
@@ -38,7 +38,7 @@ namespace Deroes.Core.Tests
 
 			player.Gear.Equip(sword, _ => _.LeftHand);
 
-			player.Skills.Attack.Normal.Apply(enemy);
+			player.Skills.Defaults.NormalAttack.Apply(enemy);
 
 			Assert.IsTrue(enemy.IsAlive);
 			Assert.IsTrue(enemy.Life.Value.Remaining <= (4000 - 15));
@@ -115,7 +115,7 @@ namespace Deroes.Core.Tests
 			var player = Hero.CreatePaladin();
 			var enemy = new Monster(10);
 
-			enemy.Skills.Attack.Normal.Apply(player);
+			enemy.Skills.Defaults.NormalAttack.Apply(player);
 
 			Assert.IsTrue(player.IsAlive);
 			Assert.IsTrue(53 <= player.Life.Value.Remaining || player.Life.Value.Remaining >= 54, $"Player life is : {player.Life.Value.Remaining}");
@@ -132,8 +132,8 @@ namespace Deroes.Core.Tests
 
 
 			new Combat(player, enemy)
-				.HeroAttacks()
-				.HeroAttacks();
+				.HeroAttacks(_ => _.Skills.Primary)
+				.HeroAttacks(_ => _.Skills.Primary);
 
 			Assert.IsFalse(enemy.IsAlive);
 			Assert.IsTrue(player.Experience > 0);
@@ -145,7 +145,8 @@ namespace Deroes.Core.Tests
 			var player = Hero.CreatePaladin();
 			var enemy = new Monster(10);
 
-			new Combat(player, enemy).MonsterAttacks();
+			new Combat(player, enemy)
+				.MonsterAttacks(_ => _.Skills.Primary);
 
 			Assert.IsTrue(player.IsAlive);
 			Assert.IsTrue(53 <= player.Life.Value.Remaining || player.Life.Value.Remaining >= 54, $"Player life is : {player.Life.Value.Remaining}");

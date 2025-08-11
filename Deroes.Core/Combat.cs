@@ -1,4 +1,5 @@
-﻿using Deroes.Core.Units;
+﻿using Deroes.Core.Skills;
+using Deroes.Core.Units;
 
 namespace Deroes.Core
 {
@@ -7,11 +8,11 @@ namespace Deroes.Core
 		private Hero _hero = h;
 		private Monster _monster = m;
 
-		public Combat HeroAttacks()
+		public Combat HeroAttacks(Func<Unit, Skill> attack)
 		{
 			if (_monster.IsAlive)
 			{
-				_hero.Skills.Attack.Normal.Apply(_monster);
+				attack.Invoke(_hero).Apply(_monster);
 
 				if (!_monster.IsAlive)
 				{
@@ -25,9 +26,9 @@ namespace Deroes.Core
 			return this;
 		}
 
-		public Combat MonsterAttacks()
+		public Combat MonsterAttacks(Func<Unit, Skill> attack)
 		{
-			_monster.Skills.Attack.Normal.Apply(_hero);
+			attack.Invoke(_monster).Apply(_hero);
 			if (!_hero.IsAlive)
 			{
 				_hero.Die();

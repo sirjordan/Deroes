@@ -4,13 +4,13 @@ namespace Deroes.Core.Skills
 {
 	public class DefaultSkillSet
 	{
-		public Skill Normal { get; private set; }
-		public Skill Throw { get; private set; }
-		public Skill Shoot { get; private set; }
+		public Skill NormalAttack { get; private set; }
+		public Skill Throwing { get; private set; }
+		public Skill Shooting { get; private set; }
 
 		public DefaultSkillSet(Unit u)
 		{
-			Normal = new NormalAttack(u);
+			NormalAttack = new NormalAttack(u);
 		}
 	}
 

@@ -7,32 +7,34 @@ namespace Deroes.Core.Skills
 		/// <summary>
 		/// Normal, throw, shoot attacks
 		/// </summary>
-		public DefaultSkillSet Attack { get; private set; } // TODO: This myght be private?
+		public DefaultSkillSet Defaults { get; private set; }
 		/// <summary>
-		/// Per hero class
+		/// Unique per hero class
 		/// </summary>
-		public List<Skill> SkillTree { get; private set; }
+		public SkillTree Specials { get; private set; }
 		public Skill Primary { get; private set; }
 		public Skill Secondary { get; private set; }
 
 		public SkillSet(Unit u)
 		{
-			Attack = new DefaultSkillSet(u);
-			Primary = Attack.Normal;
-			Secondary = Attack.Normal;
+			Defaults = new DefaultSkillSet(u);
+			Specials = new SkillTree();
+			Primary = Defaults.NormalAttack;
+			Secondary = Defaults.NormalAttack;
 		}
 
 		public void SetPrimary(Skill? skill)
 		{
+			// TODO: Should be some of the available skills
 			Primary.Unset();
-			Primary = skill ?? Attack.Normal;
+			Primary = skill ?? Defaults.NormalAttack;
 			Primary.Set();
 		}
 
 		public void SetSecondary(Skill? skill)
 		{
 			Secondary.Unset();
-			Secondary = skill ?? Attack.Normal;
+			Secondary = skill ?? Defaults.NormalAttack;
 			Secondary.Set();
 		}
 	}
