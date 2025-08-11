@@ -2,7 +2,7 @@
 {
 	public class SkillTree : ILevelUpSubscriber
 	{
-		public ICollection<SkillNode> Skills { get; private set; }
+		public IEnumerable<SkillNode> Skills { get; private set; }
 		public int AvaliableSkillPoints { get; private set; }
 
 		public SkillTree()
@@ -48,7 +48,7 @@
 				Skill = skill;
 			}
 
-			public void AddChild(SkillNode child)
+			public SkillNode AddChild(SkillNode child)
 			{
 				ArgumentNullException.ThrowIfNull(child, nameof(child));
 
@@ -62,6 +62,8 @@
 					Children.Add(child);
 					child.Parents.Add(this);
 				}
+
+				return this;
 			}
 		}
 	}

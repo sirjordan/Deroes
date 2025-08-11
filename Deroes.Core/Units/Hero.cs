@@ -3,26 +3,6 @@ using Deroes.Core.Stats;
 
 namespace Deroes.Core.Units
 {
-	// TODO:
-	// 1. Range attack
-	// 3. Spells
-	// 4. Strenth, Dex, Vitality and Energy as stats or something advanced? (modifing the hero)
-	// 5. Attack rating
-	// 6. Attack speed and any other speed concept
-	// 8. Primary and secondary attack
-	// 9. 1 and 2 handed weapons
-	// 10. Class only gear (ex. Amazon only)
-	// 11. Item drop factory
-	// 13. Rare, Set and Unique items
-	// 14. Per character level modifiers
-	// 15. Sockets
-	// 16. Durability
-	// 17. Charms
-	// 19, Anti-spells (aka Curses)
-	// 20. Skills: Attack modifiers (aka Vengeance, adds Fire, Ligt, Cold dmg)
-	// 21. Attributes as Stats modifiers 
-	// 22. Drink potions not only for Hero. (e.g monsters can heal)
-
 	public abstract class Hero : Unit
 	{
 		private ILevelUpSubscriber[] LevelUpSubscribers => [Attributes, Life.BaseValue, Mana.BaseValue, Stamina.BaseValue, Skills.Specials];

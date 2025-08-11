@@ -7,7 +7,7 @@ namespace Deroes.Core.Units
 		private static Stat<Vital> LifeInitial => new(new(@base: 55, levelCoef: 2, attrCoef: 3));
 		private static Stat<Vital> ManaInitial => new(new(@base: 15, levelCoef: 1.5, attrCoef: 2));
 		private static Stat<Vital> StaminaInitial => new(new(@base: 89, levelCoef: 1, attrCoef: 1));
-
+		
 		public Paladin(string name = "Paladin")
 			: base(name, LifeInitial, ManaInitial, StaminaInitial)
 		{

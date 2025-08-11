@@ -183,9 +183,12 @@ public class Skills
 
 		var vngns = new Vengeance(hero, level); // + 210% elemntal = +12 to 25 dmg in total
 		var might = new Might(hero, level); // + 40% = +2 to 4 dmg
+		
+		hero.Skills.Additional.Add(vngns);
+		hero.Skills.Additional.Add(might);
 
-		hero.Skills.SetSecondary(might);
-		hero.Skills.SetPrimary(vngns);
+		hero.Skills.SetSecondary(_ => _.Skills.Additional.First(s => s == might));
+		hero.Skills.SetPrimary(_ => _.Skills.Additional.First(s => s == vngns));
 
 		Assert.AreEqual(vngns, hero.Skills.Primary);
 		Assert.AreEqual(might, hero.Skills.Secondary);
@@ -206,8 +209,14 @@ public class Skills
 		var vngns = new Vengeance(hero, 6); // 300% = + 18 to 36
 		var might = new Might(hero, 1); // 40% = + 2 to 4 dmg
 
-		hero.Skills.SetPrimary(vngns);
-		hero.Skills.SetSecondary(might);
+		hero.Skills.Additional.Add(vngns);
+		hero.Skills.Additional.Add(might);
+
+		hero.Skills.SetPrimary(_ => _.Skills.Additional.First(s => s == vngns));
+		hero.Skills.SetSecondary(_ => _.Skills.Additional.First(s => s == might));
+
+		Assert.AreEqual(vngns, hero.Skills.Primary);
+		Assert.AreEqual(might, hero.Skills.Secondary);
 
 		Assert.AreEqual(26, hero.Melee.Min, 2);
 		Assert.AreEqual(52, hero.Melee.Max, 2);
@@ -225,8 +234,14 @@ public class Skills
 		var vngns = new Vengeance(hero, 1); // + 210% elemntal = +12 to 25 dmg in total
 		var might = new Might(hero, 6); // 90% = +5 to 10
 
-		hero.Skills.SetPrimary(vngns);
-		hero.Skills.SetSecondary(might);
+		hero.Skills.Additional.Add(vngns);
+		hero.Skills.Additional.Add(might);
+
+		hero.Skills.SetPrimary(_ => _.Skills.Additional.First(s => s == vngns));
+		hero.Skills.SetSecondary(_ => _.Skills.Additional.First(s => s == might));
+
+		Assert.AreEqual(vngns, hero.Skills.Primary);
+		Assert.AreEqual(might, hero.Skills.Secondary);
 
 		Assert.AreEqual(23, hero.Melee.Min, 2);
 		Assert.AreEqual(47, hero.Melee.Max, 2);
@@ -244,8 +259,14 @@ public class Skills
 		var vngns = new Vengeance(hero, 6);  // 300% = + 18 to 36
 		var might = new Might(hero, 6); // 90 % = +5 to 10
 
-		hero.Skills.SetPrimary(vngns);
-		hero.Skills.SetSecondary(might);
+		hero.Skills.Additional.Add(vngns);
+		hero.Skills.Additional.Add(might);
+
+		hero.Skills.SetPrimary(_ => _.Skills.Additional.First(s => s == vngns));
+		hero.Skills.SetSecondary(_ => _.Skills.Additional.First(s => s == might));
+
+		Assert.AreEqual(vngns, hero.Skills.Primary);
+		Assert.AreEqual(might, hero.Skills.Secondary);
 
 		Assert.AreEqual(29, hero.Melee.Min, 2);
 		Assert.AreEqual(58, hero.Melee.Max, 2);
