@@ -34,7 +34,6 @@ namespace Deroes.Core.Skills
 		public override void Apply(Unit target) { return; }
 		public override bool CanUse() => true;
 		public override void Unset() => dmgBonus.RemoveModification(Unit);
-
 	}
 
 	/// <summary>

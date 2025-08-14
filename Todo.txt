@@ -15,3 +15,4 @@
 19, Anti-spells (aka Curses)
 21. Attributes as Stats modifiers 
 22. Drink potions not only for Hero. (e.g monsters can heal)
+23. Event dispatcher (middleware)

@@ -15,16 +15,16 @@ namespace Deroes.Core.Stats.Modifiers
 		public void RemoveModification(Unit h) => Selector(h).RemoveModifier(this);
 	}
 
-	public abstract class MaxResistModifier (int value) : IStatModifier<Resistanse>, IStatModifier
+	public abstract class MaxResistModifier (int value) : IStatModifier<MaxResist>, IStatModifier
 	{
 		private int _value = value;
 
 		public string Description => $"+{_value} to Maximum {GetType().Name} resist";
 		public int Order => 1;
-		protected abstract Func<Unit, Stat<Resistanse>> Selector { get; }
+		protected abstract Func<Unit, Stat<MaxResist>> Selector { get; }
 
 		public void ApplyModification(Unit h) => Selector(h).AddModifier(this);
-		public int GetModificator(Resistanse @base) => _value;
+		public int GetModificator(MaxResist @base) => _value;
 		public void RemoveModification(Unit h) => Selector(h).RemoveModifier(this);
 	}
 

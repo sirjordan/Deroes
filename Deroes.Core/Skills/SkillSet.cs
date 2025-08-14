@@ -5,6 +5,8 @@ namespace Deroes.Core.Skills
 	public class SkillSet
 	{
 		private readonly Unit _unit;
+		private Skill _primary; 
+		private Skill _secondary;
 
 		/// <summary>
 		/// Normal, throw, shoot attacks
@@ -17,11 +19,11 @@ namespace Deroes.Core.Skills
 		/// <summary>
 		/// Skill selected as Primary from available
 		/// </summary>
-		public Skill Primary { get; private set; }
+		public Skill Primary => _primary;
 		/// <summary>
 		/// Skill selected as Secondary from available
 		/// </summary>
-		public Skill Secondary { get; private set; }
+		public Skill Secondary => _secondary;
 		/// <summary>
 		/// Added additionaly by Items
 		/// </summary>
@@ -31,36 +33,33 @@ namespace Deroes.Core.Skills
 		{
 			_unit = u;
 			Defaults = new DefaultSkillSet(u);
-			Specials = new SkillTree();
+			Specials = new SkillTree(u);
 			Additional = [];
-			Primary = Defaults.NormalAttack;
-			Secondary = Defaults.NormalAttack;
+			_primary = Defaults.NormalAttack;
+			_secondary = Defaults.NormalAttack;
 		}
 
 		public void SetPrimary(Func<Unit, Skill>? skillToSet)
 		{
-			Primary.Unset();
-			Primary = Defaults.NormalAttack;
-
-			if (skillToSet != null)
-			{
-				Primary = skillToSet.Invoke(_unit);
-			}
-
-			Primary.Set();
+			Set(ref _primary, skillToSet);
 		}
 
 		public void SetSecondary(Func<Unit, Skill>? skillToSet)
 		{
-			Secondary.Unset();
-			Secondary = Defaults.NormalAttack;
+			Set(ref _secondary, skillToSet);
+		}
+
+		private void Set(ref Skill target, Func<Unit, Skill>? skillToSet)
+		{
+			target.Unset();
+			target = Defaults.NormalAttack;
 
 			if (skillToSet != null)
 			{
-				Secondary = skillToSet.Invoke(_unit);
+				target = skillToSet.Invoke(_unit);
 			}
 
-			Secondary.Set();
+			target.Set();
 		}
 	}
 }

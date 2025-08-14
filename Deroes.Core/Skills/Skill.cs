@@ -5,6 +5,8 @@ namespace Deroes.Core.Skills
 	public abstract class Skill
 	{
 		public const int MAX_LEVEL = 60;
+		public const int MAX_TIER = 6;
+
 		/// <summary>
 		/// Level of the Skill
 		/// </summary>
@@ -30,9 +32,8 @@ namespace Deroes.Core.Skills
 		/// <exception cref="ArgumentOutOfRangeException">If arguments doenst match min/max alowed</exception>
 		protected Skill(Unit u, int level = 1, int tier = 1)
 		{
-			ArgumentOutOfRangeException.ThrowIfLessThan(level, 1);
-			ArgumentOutOfRangeException.ThrowIfGreaterThan(level, MAX_LEVEL);
-			if (tier < 1 || tier > 6) throw new ArgumentOutOfRangeException("Tier must be 1-6");
+			if (level < 1 || level > MAX_LEVEL) throw new ArgumentOutOfRangeException($"Level must be 1-{MAX_LEVEL}");
+			if (tier < 1 || tier > MAX_TIER) throw new ArgumentOutOfRangeException($"Tier must be 1-{MAX_TIER}");
 
 			Level = level;
 			Unit = u;

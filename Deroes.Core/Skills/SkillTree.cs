@@ -1,33 +1,57 @@
-﻿namespace Deroes.Core.Skills
+﻿using Deroes.Core.Units;
+
+namespace Deroes.Core.Skills
 {
 	public class SkillTree : ILevelUpSubscriber
 	{
-		public IEnumerable<SkillNode> Skills { get; private set; }
+		private Unit _hero;
+		private IEnumerable<SkillNode> RootSkills { get; set; }
 		public int AvaliableSkillPoints { get; private set; }
 
-		public SkillTree()
+		public SkillTree(Unit hero)
 		{
-			Skills = new HashSet<SkillNode>();
+			RootSkills = new HashSet<SkillNode>();
 			AvaliableSkillPoints = 0;
+			_hero = hero;
 		}
 
-		public Skill[] GetAll()
+		public IEnumerable<SkillNode> GetAllSkills()
 		{
-			throw new NotImplementedException();
-		}
+			// BFS
+			var visited = new HashSet<SkillNode>();
+			var queue = new Queue<SkillNode>(RootSkills);
 
-		public void AddSkillPoint(Skill skill)
-		{
-			if (AvaliableSkillPoints == 0)
+			while (queue.Count > 0)
 			{
-				throw new InvalidOperationException("Not enough skill points");
+				var node = queue.Dequeue();
+				if (!visited.Add(node))
+					continue;
+
+				yield return node;
+
+				foreach (var child in node.Children)
+					queue.Enqueue(child);
 			}
+		}
 
-			// TODO: Traverse and Find the skill
-			// TODO: Check if parent has at least 1 level
-			// TODO: Level up the skill
+		public void AddSkillPoint(SkillNode skill)
+		{
+			ArgumentNullException.ThrowIfNull(nameof(skill));
 
-			AvaliableSkillPoints--;
+			if (AvaliableSkillPoints == 0)
+				throw new InvalidOperationException("Not enough skill points");
+
+			var found = GetAllSkills().First(_ => _ == skill); // TODO: This might be weak (ref only?) Consider IComparable/IEquitable
+			if (found.CanUpSkill(_hero))
+			{
+				AvaliableSkillPoints--;
+				// TODO: Upskill?
+				// TODO: Add bonus to childs "synergies"
+			}
+			else
+			{
+				throw new InvalidOperationException("Cannot upskill");
+			}
 		}
 
 		public void OnLevelUp()
@@ -48,13 +72,20 @@
 				Skill = skill;
 			}
 
+			public bool CanUpSkill(Unit hero)
+			{
+				return
+					hero.Level >= Skill.RequiredLevel &&    // Hero reached level required
+					Parents.All(p => p.Skill.Level > 1);    // All parents must have at least 1 skill point
+			}
+
 			public SkillNode AddChild(SkillNode child)
 			{
 				ArgumentNullException.ThrowIfNull(child, nameof(child));
 
 				if (child.Skill.Tier < Skill.Tier)
 				{
-					throw new ArgumentOutOfRangeException("Child must be equal or grater Tier");
+					throw new ArgumentOutOfRangeException("Child node must be equal or grater Tier");
 				}
 
 				if (!Children.Contains(child))
