@@ -6,19 +6,19 @@ namespace Deroes.Core.Skills
 	/// <summary>
 	/// Adds elemental damage to your attack
 	/// </summary>
-	public class Vengeance : Skill
+	public class Vengeance(Unit u) : Skill(u, 6)
 	{
-		private readonly IStatModifier coldDmg;
-		private readonly IStatModifier fireDmg;
-		private readonly IStatModifier ligheningDmg;
+		private IStatModifier coldDmg;
+		private IStatModifier fireDmg;
+		private IStatModifier ligheningDmg;
 
 		public double ManaCost { get; private set; }
 
-		public Vengeance(Unit u, int level = 1, int tier = 1) : base(u, level, tier)
+		public override void SetupLevel(int level)
 		{
 			int dmgBonusPercentage = CalculateBonusDmg(level);
-			int dmgBonusMin = (int)(u.Melee.Physical.Min.Value.Amount * (dmgBonusPercentage / 100.0));
-			int dmgBonusMax = (int)(u.Melee.Physical.Max.Value.Amount * (dmgBonusPercentage / 100.0));
+			int dmgBonusMin = (int)(Unit.Melee.Physical.Min.Value.Amount * (dmgBonusPercentage / 100.0));
+			int dmgBonusMax = (int)(Unit.Melee.Physical.Max.Value.Amount * (dmgBonusPercentage / 100.0));
 
 			coldDmg = new ColdDamageModifier(
 				new FlatDamageModifier(dmgBonusMin),
@@ -31,6 +31,8 @@ namespace Deroes.Core.Skills
 				new FlatDamageModifier(dmgBonusMax));
 
 			ManaCost = CalculateManaCost(level);
+
+			base.SetupLevel(level);
 		}
 
 		public override void Set()
@@ -62,7 +64,12 @@ namespace Deroes.Core.Skills
 			ligheningDmg.RemoveModification(Unit);
 		}
 
-		public override bool CanUse() => Unit.Mana.Value.Remaining > ManaCost;
+		public override bool CanUse() 
+		{ 
+			return 
+				base.CanUse() && 
+				Unit.Mana.Value.Remaining > ManaCost; 
+		}
 
 		/// <summary>
 		/// Dmg Percantage

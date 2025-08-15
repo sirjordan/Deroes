@@ -34,19 +34,20 @@ namespace Deroes.Core.Skills
 			}
 		}
 
-		public void AddSkillPoint(SkillNode skill)
+		public void AddSkillPoint(SkillNode node)
 		{
-			ArgumentNullException.ThrowIfNull(nameof(skill));
+			ArgumentNullException.ThrowIfNull(nameof(node));
 
 			if (AvaliableSkillPoints == 0)
 				throw new InvalidOperationException("Not enough skill points");
 
-			var found = GetAllSkills().First(_ => _ == skill); // TODO: This might be weak (ref only?) Consider IComparable/IEquitable
-			if (found.CanUpSkill(_hero))
+			if (!GetAllSkills().Contains(node))
+				throw new ArgumentException("Node not part of current skill tree");
+
+			if (node.CanUpSkill(_hero))
 			{
+				node.Skill.SetupLevel(node.Skill.Level + 1);
 				AvaliableSkillPoints--;
-				// TODO: Upskill?
-				// TODO: Add bonus to childs "synergies"
 			}
 			else
 			{
@@ -75,7 +76,7 @@ namespace Deroes.Core.Skills
 			public bool CanUpSkill(Unit hero)
 			{
 				return
-					hero.Level >= Skill.RequiredLevel &&    // Hero reached level required
+					hero.Level > Skill.RequiredLevel &&    // Hero reached level required for next
 					Parents.All(p => p.Skill.Level > 1);    // All parents must have at least 1 skill point
 			}
 

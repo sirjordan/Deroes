@@ -6,20 +6,9 @@ namespace Deroes.Core.Skills
 	/// <summary>
 	/// Aura, Increase damage dealt
 	/// </summary>
-	public class Might : Skill
+	public class Might(Unit u) : Skill(u, 1)
 	{
-		private readonly IStatModifier dmgBonus;
-
-		public Might(Unit u, int level = 1) : base(u, level)
-		{
-			ArgumentOutOfRangeException.ThrowIfNegativeOrZero(level);
-
-			int percentage = CalculateBonusDmg(level);
-
-			dmgBonus = new PhysicalDamageModifier(
-				new PercentageDamageModifier(percentage),
-				new PercentageDamageModifier(percentage));
-		}
+		private IStatModifier dmgBonus;
 
 		/// <summary>
 		/// Percentage of Dmg
@@ -29,30 +18,36 @@ namespace Deroes.Core.Skills
 			return level * 10 + 30;
 		}
 
+		public override void SetupLevel(int level)
+		{
+			int percentage = CalculateBonusDmg(level);
+
+			dmgBonus = new PhysicalDamageModifier(
+				new PercentageDamageModifier(percentage),
+				new PercentageDamageModifier(percentage));
+
+			base.SetupLevel(level); 
+		}
+
 		public override void Set() => dmgBonus.ApplyModification(Unit);
 		public override void Use(object target) { return; }
 		public override void Apply(Unit target) { return; }
-		public override bool CanUse() => true;
 		public override void Unset() => dmgBonus.RemoveModification(Unit);
 	}
 
 	/// <summary>
 	/// Aura, Adds bonus to Fire resist and Max fire resist
 	/// </summary>
-	public class ResistFire : Skill
+	public class ResistFire(Unit u) : Skill(u, 1)
 	{
-		private readonly IStatModifier fireResist;
-
-		public ResistFire(Unit u, int level = 1) : base(u, level)
-		{
-			ArgumentOutOfRangeException.ThrowIfNegativeOrZero(level);
-
-			fireResist = new FireResistModifier(CalculateBonusResist(level));
-		}
+		private IStatModifier fireResist;
 
 		public static int CalculateBonusResist(int level)
 		{
-			ArgumentOutOfRangeException.ThrowIfNegativeOrZero(level);
+			ArgumentOutOfRangeException.ThrowIfNegative(level);
+
+			if (level == 0)
+				return 0;
 
 			// Exponential saturation
 			double _L = 150;   // Asymptotic max resistance (%)
@@ -66,15 +61,23 @@ namespace Deroes.Core.Skills
 
 		public static int CalculateBonusMaxResist(int level)
 		{
-			ArgumentOutOfRangeException.ThrowIfNegativeOrZero(level);
+			ArgumentOutOfRangeException.ThrowIfNegative(level);
+
+			if (level == 0)
+				return 0;
 
 			return Math.Clamp(level, 0, 20);
+		}
+
+		public override void SetupLevel(int level)
+		{
+			fireResist = new FireResistModifier(CalculateBonusResist(level));
+			base.SetupLevel(level);
 		}
 
 		public override void Set() => fireResist.ApplyModification(Unit);
 		public override void Use(object target) { return; }
 		public override void Apply(Unit target) { return; }
-		public override bool CanUse() => true;
 		public override void Unset() => fireResist.RemoveModification(Unit);
 	}
 }

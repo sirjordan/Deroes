@@ -8,25 +8,61 @@ namespace Deroes.Core.Tests;
 public class Skills
 {
 	[TestMethod]
-	public void Skill_Tier_RequiredLevel_1()
+	public void Skill_Tier_No_RequiredLevel()
 	{
 		var skill = new Vengeance(Hero.CreatePaladin());
 		Assert.AreEqual(0, skill.RequiredLevel);
-		Assert.AreEqual(1, skill.Tier);
+		Assert.AreEqual(6, skill.Tier);
 	}
 
 	[TestMethod]
-	public void Skill_Tier_RequiredLevel_6()
+	public void Skill_Tier_RequiredLevel_31()
 	{
-		var skill = new Vengeance(Hero.CreatePaladin(), 1, 2);
-		Assert.AreEqual(6, skill.RequiredLevel);
-		Assert.AreEqual(2, skill.Tier);
+		var skill = new Vengeance(Hero.CreatePaladin());
+		skill.SetupLevel(2);
+		Assert.AreEqual(31, skill.RequiredLevel);
+		Assert.AreEqual(6, skill.Tier);
+	}
+
+	[TestMethod]
+	public void Skill_Tier_RequiredLevel_32()
+	{
+		var skill = new Vengeance(Hero.CreatePaladin());
+		skill.SetupLevel(3);
+		Assert.AreEqual(32, skill.RequiredLevel);
+		Assert.AreEqual(6, skill.Tier);
+	}
+
+	[TestMethod]
+	public void Skill_Tier_RequiredLevel_60()
+	{
+		var skill = new Vengeance(Hero.CreatePaladin());
+		skill.SetupLevel(31);
+		Assert.AreEqual(60, skill.RequiredLevel);
+		Assert.AreEqual(6, skill.Tier);
+	}
+
+	[TestMethod]
+	[ExpectedException(typeof(ArgumentOutOfRangeException))]
+	public void Skill_Setup_61_Throw_Exception()
+	{
+		var skill = new Vengeance(Hero.CreatePaladin());
+		skill.SetupLevel(61);
+	}
+
+	public void Skill_Tier_RequiredLevel_89()
+	{
+		var skill = new Vengeance(Hero.CreatePaladin());
+		skill.SetupLevel(60);
+		Assert.AreEqual(89, skill.RequiredLevel);
+		Assert.AreEqual(6, skill.Tier);
 	}
 
 	[TestMethod]
 	public void Skill_Tier_RequiredLevel_30()
 	{
-		var skill = new Vengeance(Hero.CreatePaladin(), 1, 6);
+		var skill = new Vengeance(Hero.CreatePaladin());
+		skill.SetupLevel(1);
 		Assert.AreEqual(30, skill.RequiredLevel);
 		Assert.AreEqual(6, skill.Tier);
 	}
@@ -89,7 +125,8 @@ public class Skills
 		var level = 1;
 		hero.Gear.Equip(sword, _ => _.LeftHand);
 
-		var vngns = new Vengeance(hero, level);
+		var vngns = new Vengeance(hero);
+		vngns.SetupLevel(level);
 		vngns.Set();
 
 		Assert.IsTrue(vngns.CanUse());
@@ -112,7 +149,8 @@ public class Skills
 		var sword = new Weapon(new WeaponItemSpec(min, max)); // 6-12 with default
 		hero.Gear.Equip(sword, _ => _.LeftHand);
 
-		var vngns = new Vengeance(hero, level);
+		var vngns = new Vengeance(hero);
+		vngns.SetupLevel(level);
 		vngns.Set();
 
 		Assert.IsTrue(vngns.CanUse());
@@ -135,7 +173,8 @@ public class Skills
 		var sword = new Weapon(new WeaponItemSpec(min, max)); // 6-12 with default
 		hero.Gear.Equip(sword, _ => _.LeftHand);
 
-		var vngns = new Vengeance(hero, level);
+		var vngns = new Vengeance(hero);
+		vngns.SetupLevel(level);
 		vngns.Set();
 
 		Assert.IsTrue(vngns.CanUse());
@@ -158,7 +197,8 @@ public class Skills
 		var sword = new Weapon(new WeaponItemSpec(min, max)); // 6-12 with default
 		hero.Gear.Equip(sword, _ => _.LeftHand);
 
-		var vngns = new Vengeance(hero, level);
+		var vngns = new Vengeance(hero);
+		vngns.SetupLevel(level);
 		vngns.Set();
 
 		Assert.IsTrue(vngns.CanUse());
@@ -181,9 +221,12 @@ public class Skills
 		var sword = new Weapon(new WeaponItemSpec(min, max)); // 6-12 with default
 		hero.Gear.Equip(sword, _ => _.LeftHand);
 
-		var vngns = new Vengeance(hero, level); // + 210% elemntal = +12 to 25 dmg in total
-		var might = new Might(hero, level); // + 40% = +2 to 4 dmg
+		var vngns = new Vengeance(hero); // + 210% elemntal = +12 to 25 dmg in total
+		var might = new Might(hero); // + 40% = +2 to 4 dmg
 		
+		vngns.SetupLevel(level);
+		might.SetupLevel(level);
+
 		hero.Skills.Additional.Add(vngns);
 		hero.Skills.Additional.Add(might);
 
@@ -206,8 +249,11 @@ public class Skills
 		var sword = new Weapon(new WeaponItemSpec(min, max)); // 6-12 with default
 		hero.Gear.Equip(sword, _ => _.LeftHand);
 
-		var vngns = new Vengeance(hero, 6); // 300% = + 18 to 36
-		var might = new Might(hero, 1); // 40% = + 2 to 4 dmg
+		var vngns = new Vengeance(hero); 
+		var might = new Might(hero); 
+
+		vngns.SetupLevel(6);	// 300% = + 18 to 36
+		might.SetupLevel(1);	// 40% = + 2 to 4 dmg
 
 		hero.Skills.Additional.Add(vngns);
 		hero.Skills.Additional.Add(might);
@@ -231,8 +277,11 @@ public class Skills
 		var sword = new Weapon(new WeaponItemSpec(min, max)); // 6-12 with default
 		hero.Gear.Equip(sword, _ => _.LeftHand);
 
-		var vngns = new Vengeance(hero, 1); // + 210% elemntal = +12 to 25 dmg in total
-		var might = new Might(hero, 6); // 90% = +5 to 10
+		var vngns = new Vengeance(hero); 
+		var might = new Might(hero); 
+
+		vngns.SetupLevel(1);    // + 210% elemntal = +12 to 25 dmg in total
+		might.SetupLevel(6);    // 90% = +5 to 10
 
 		hero.Skills.Additional.Add(vngns);
 		hero.Skills.Additional.Add(might);
@@ -256,8 +305,11 @@ public class Skills
 		var sword = new Weapon(new WeaponItemSpec(min, max)); // 6-12 with default
 		hero.Gear.Equip(sword, _ => _.LeftHand);
 
-		var vngns = new Vengeance(hero, 6);  // 300% = + 18 to 36
-		var might = new Might(hero, 6); // 90 % = +5 to 10
+		var vngns = new Vengeance(hero);  
+		var might = new Might(hero); 
+
+		vngns.SetupLevel(6);    // 300% = + 18 to 36
+		might.SetupLevel(6);    // 90 % = +5 to 10
 
 		hero.Skills.Additional.Add(vngns);
 		hero.Skills.Additional.Add(might);

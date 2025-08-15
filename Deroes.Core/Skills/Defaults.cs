@@ -30,5 +30,6 @@ namespace Deroes.Core.Skills
 		public override bool CanUse() => true;
 		public override void Set() { return; }
 		public override void Unset() { return; }
+		public override void SetupLevel(int level) { return; }
 	}
 }
