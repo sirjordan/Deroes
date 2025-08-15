@@ -1,4 +1,3 @@
-using Deroes.Core.Items;
 using Deroes.Core.Items.Wearables;
 using Deroes.Core.Stats;
 using Deroes.Core.Stats.Modifiers;
@@ -28,7 +27,7 @@ public class DamageTests
 	[TestMethod]
 	public void PhysicalDamageRange_Apply_ShouldDealMin1Damage_WhenResistanceTooHigh()
 	{
-		var unit = Hero.CreatePaladin();
+		var unit = new Paladin();
 
 		var armor = new Armor(new DefenseItemSpec(999));
 
@@ -46,7 +45,7 @@ public class DamageTests
 	[TestMethod]
 	public void PhysicalDamageRange_Apply_ShouldDealReducedDamage_WhenResistsPresent()
 	{
-		var unit = Hero.CreatePaladin();
+		var unit = new Paladin();
 		var armor = new Armor(new DefenseItemSpec(5));
 		unit.Gear.Equip(armor, _ => _.Armor);
 
@@ -63,7 +62,7 @@ public class DamageTests
 	public void PhysicalDamageRange_Apply_ShouldDealNoDamage_WhenImmune()
 	{
 		// Unit with phisical immune
-		var unit = Hero.CreatePaladin();
+		var unit = new Monster(1);
 		var originalLife = unit.Life.Value.Remaining;
 
 		var physical = new Physical(10, 15);
@@ -76,7 +75,7 @@ public class DamageTests
 	[TestMethod]
 	public void ColdDamageRange_Apply_ShouldDealPercentageReducedDamage()
 	{
-		var unit = Hero.CreatePaladin(); // 50% resistance
+		var unit = new Paladin(); // 50% resistance
 		var armor = new Armor(new DefenseItemSpec(1)
 		{
 			Modifiers = [new ColdResistModifier(50)]
@@ -95,7 +94,7 @@ public class DamageTests
 	[TestMethod]
 	public void ColdDamageRange_MAX_Resist_ShouldDealPercentageReducedDamage()
 	{
-		var unit = Hero.CreatePaladin();
+		var unit = new Paladin();
 		var armor = new Armor(new DefenseItemSpec(1)
 		{
 			Modifiers = [new ColdResistModifier(100)]   // Should be max 75%
@@ -114,7 +113,7 @@ public class DamageTests
 	[TestMethod]
 	public void ColdDamageRange_Negative_Resist_ShouldDeal_Increased_Damage()
 	{
-		var unit = Hero.CreatePaladin();
+		var unit = new Paladin();
 		var armor = new Armor(new DefenseItemSpec(1)
 		{
 			Modifiers = [new ColdResistModifier(-50)]  
@@ -133,7 +132,7 @@ public class DamageTests
 	[TestMethod]
 	public void ColdDamageRange_Apply_ShouldDealNoDamage_WhenImmune()
 	{
-		var unit = Hero.CreatePaladin(); // Cold immune
+		var unit = new Monster(1); // Cold immune
 		var originalLife = unit.Life.Value.Remaining;
 
 		var cold = new Cold(10, 20);
@@ -146,7 +145,7 @@ public class DamageTests
 	[TestMethod]
 	public void CombinedDamage_ShouldDealReducedDamage()
 	{
-		var unit = Hero.CreatePaladin(); // 50% resistance + 7 defence
+		var unit = new Paladin(); // 50% resistance + 7 defence
 		var armor = new Armor(new DefenseItemSpec(1)
 		{
 			Modifiers = [

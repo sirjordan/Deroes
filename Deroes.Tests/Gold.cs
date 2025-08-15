@@ -12,9 +12,9 @@ public class GoldTests
 	[TestInitialize]
 	public void Setup()
 	{
-		_hero = Hero.CreatePaladin();
+		_hero = new Paladin();
 
-		_lvl13Hero = Hero.CreatePaladin();
+		_lvl13Hero = new Paladin();
 		var xpToLevel13 = 57810;
 		_lvl13Hero.AddExperience(xpToLevel13);
 	}

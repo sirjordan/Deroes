@@ -34,6 +34,10 @@ namespace Deroes.Core.Skills
 			}
 		}
 
+		/// <summary>
+		/// Upgrade a skill by 1 point. 
+		/// Skill must be a reference from the current skill tree.
+		/// </summary>
 		public void AddSkillPoint(SkillNode node)
 		{
 			ArgumentNullException.ThrowIfNull(nameof(node));

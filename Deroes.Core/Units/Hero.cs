@@ -29,8 +29,6 @@ namespace Deroes.Core.Units
 			Gear = new Gear(this);
 		}
 
-		public static Hero CreatePaladin() => new Paladin();
-
 		public static long XpToLevelUp(int fromLevel)
 		{
 			double xp;

@@ -10,7 +10,7 @@ public class Skills
 	[TestMethod]
 	public void Skill_Tier_No_RequiredLevel()
 	{
-		var skill = new Vengeance(Hero.CreatePaladin());
+		var skill = new Vengeance(new Paladin());
 		Assert.AreEqual(0, skill.RequiredLevel);
 		Assert.AreEqual(6, skill.Tier);
 	}
@@ -18,7 +18,7 @@ public class Skills
 	[TestMethod]
 	public void Skill_Tier_RequiredLevel_31()
 	{
-		var skill = new Vengeance(Hero.CreatePaladin());
+		var skill = new Vengeance(new Paladin());
 		skill.SetupLevel(2);
 		Assert.AreEqual(31, skill.RequiredLevel);
 		Assert.AreEqual(6, skill.Tier);
@@ -27,7 +27,7 @@ public class Skills
 	[TestMethod]
 	public void Skill_Tier_RequiredLevel_32()
 	{
-		var skill = new Vengeance(Hero.CreatePaladin());
+		var skill = new Vengeance(new Paladin());
 		skill.SetupLevel(3);
 		Assert.AreEqual(32, skill.RequiredLevel);
 		Assert.AreEqual(6, skill.Tier);
@@ -36,7 +36,7 @@ public class Skills
 	[TestMethod]
 	public void Skill_Tier_RequiredLevel_60()
 	{
-		var skill = new Vengeance(Hero.CreatePaladin());
+		var skill = new Vengeance(new Paladin());
 		skill.SetupLevel(31);
 		Assert.AreEqual(60, skill.RequiredLevel);
 		Assert.AreEqual(6, skill.Tier);
@@ -46,13 +46,13 @@ public class Skills
 	[ExpectedException(typeof(ArgumentOutOfRangeException))]
 	public void Skill_Setup_61_Throw_Exception()
 	{
-		var skill = new Vengeance(Hero.CreatePaladin());
+		var skill = new Vengeance(new Paladin());
 		skill.SetupLevel(61);
 	}
 
 	public void Skill_Tier_RequiredLevel_89()
 	{
-		var skill = new Vengeance(Hero.CreatePaladin());
+		var skill = new Vengeance(new Paladin());
 		skill.SetupLevel(60);
 		Assert.AreEqual(89, skill.RequiredLevel);
 		Assert.AreEqual(6, skill.Tier);
@@ -61,7 +61,7 @@ public class Skills
 	[TestMethod]
 	public void Skill_Tier_RequiredLevel_30()
 	{
-		var skill = new Vengeance(Hero.CreatePaladin());
+		var skill = new Vengeance(new Paladin());
 		skill.SetupLevel(1);
 		Assert.AreEqual(30, skill.RequiredLevel);
 		Assert.AreEqual(6, skill.Tier);
@@ -118,7 +118,7 @@ public class Skills
 	[TestMethod]
 	public void Vengeance_Set_Lvl_1()
 	{
-		var hero = Hero.CreatePaladin();
+		var hero = new Paladin();
 		var min = 5;
 		var max = 10;
 		var sword = new Weapon(new WeaponItemSpec(min, max)); // 6-12 with default
@@ -142,7 +142,7 @@ public class Skills
 	[TestMethod]
 	public void Vengeance_Set_Lvl_6()
 	{
-		var hero = Hero.CreatePaladin();
+		var hero = new Paladin();
 		var min = 5;
 		var max = 10;
 		var level = 6;
@@ -166,7 +166,7 @@ public class Skills
 	[TestMethod]
 	public void Vengeance_Set_Lvl_16()
 	{
-		var hero = Hero.CreatePaladin();
+		var hero = new Paladin();
 		var min = 5;
 		var max = 10;
 		var level = 16;
@@ -190,7 +190,7 @@ public class Skills
 	[TestMethod]
 	public void Vengeance_Set_Lvl_30()
 	{
-		var hero = Hero.CreatePaladin();
+		var hero = new Paladin();
 		var min = 5;
 		var max = 10;
 		var level = 30;
@@ -214,7 +214,7 @@ public class Skills
 	[TestMethod]
 	public void Combined_Vengeance_Lvl1_And_Aura_Lvl1()
 	{
-		var hero = Hero.CreatePaladin();
+		var hero = new Paladin();
 		var min = 5;
 		var max = 10;
 		var level = 1;
@@ -243,7 +243,7 @@ public class Skills
 	[TestMethod]
 	public void Combined_Vengeance_Lvl6_And_Aura_Lvl1()
 	{
-		var hero = Hero.CreatePaladin();
+		var hero = new Paladin();
 		var min = 5;
 		var max = 10;
 		var sword = new Weapon(new WeaponItemSpec(min, max)); // 6-12 with default
@@ -271,7 +271,7 @@ public class Skills
 	[TestMethod]
 	public void Combined_Vengeance_Lvl1_And_Aura_Lvl6()
 	{
-		var hero = Hero.CreatePaladin();
+		var hero = new Paladin();
 		var min = 5;
 		var max = 10;
 		var sword = new Weapon(new WeaponItemSpec(min, max)); // 6-12 with default
@@ -299,7 +299,7 @@ public class Skills
 	[TestMethod]
 	public void Combined_Vengeance_Lvl6_And_Aura_Lvl6()
 	{
-		var hero = Hero.CreatePaladin();
+		var hero = new Paladin();
 		var min = 5;
 		var max = 10;
 		var sword = new Weapon(new WeaponItemSpec(min, max)); // 6-12 with default
