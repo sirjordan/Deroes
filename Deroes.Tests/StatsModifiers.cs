@@ -8,11 +8,18 @@ namespace Deroes.Core.Tests;
 [TestClass]
 public class StatsModifiers
 {
+	private Hero hero;
+
+	[TestInitialize]
+	public void Setup()
+	{
+		hero = new Hero("", new PaladinSetup());
+	}
+
 	[TestMethod]
 	public void ManaFlatModifier_IncreasesManaValueCorrectly()
 	{
 		// Arrange
-		var hero = new Paladin();
 		var startMana = hero.Mana.Value.Max;
 
 		var modifier = new ManaFlatModifier(10);
@@ -29,7 +36,6 @@ public class StatsModifiers
 	public void ManaFlatModifier_Removed_CorrectlyRestoresBaseValue()
 	{
 		// Arrange
-		var hero = new Paladin();
 		var startMana = hero.Mana.Value.Max;
 
 		var modifier = new ManaFlatModifier(15);
@@ -47,7 +53,6 @@ public class StatsModifiers
 	public void MultipleModifiers_AreAppliedInCorrectOrder()
 	{
 		// Arrange
-		var hero = new Paladin();
 		var startMana = hero.Mana.Value.Max;
 
 		var mod1 = new ManaFlatModifier(5);
@@ -67,7 +72,6 @@ public class StatsModifiers
 	public void Equip_HelmWithManaModifier_IncreasesHeroMana()
 	{
 		// Arrange
-		var hero = new Paladin();
 		var startMana = hero.Mana.Value.Max;
 
 		var modifier = new ManaFlatModifier(10);
@@ -86,7 +90,6 @@ public class StatsModifiers
 	public void Equip_IncompatibleHelm_DoesNotApplyModifier()
 	{
 		// Arrange
-		var hero = new Paladin();
 		var startMana = hero.Mana.Value.Max;
 
 		var modifier = new ManaFlatModifier(20);
@@ -113,7 +116,6 @@ public class StatsModifiers
 	public void Unequip_Helm_RemovesModifierCorrectly()
 	{
 		// Arrange
-		var hero = new Paladin();
 		var modifier = new ManaFlatModifier(15);
 		var helm = new Helm(new DefenseItemSpec(10) { Modifiers = [modifier] });
 
@@ -134,7 +136,6 @@ public class StatsModifiers
 	public void Equip_SameSlotTwice_ThrowsException()
 	{
 		// Arrange
-		var hero = new Paladin();
 		var helm1 = new Helm(new DefenseItemSpec(10));
 		var helm2 = new Helm(new DefenseItemSpec(10));
 

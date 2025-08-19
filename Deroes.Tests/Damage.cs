@@ -8,6 +8,14 @@ namespace Deroes.Core.Tests;
 [TestClass]
 public class DamageTests
 {
+	private Hero unit;
+
+	[TestInitialize]
+	public void Setup()
+	{
+		unit = new Hero("", new PaladinSetup());
+	}
+
 	[TestMethod]
 	public void Damage_CannotBeNegative()
 	{
@@ -27,8 +35,6 @@ public class DamageTests
 	[TestMethod]
 	public void PhysicalDamageRange_Apply_ShouldDealMin1Damage_WhenResistanceTooHigh()
 	{
-		var unit = new Paladin();
-
 		var armor = new Armor(new DefenseItemSpec(999));
 
 		unit.Gear.Equip(armor, _ => _.Armor);
@@ -45,7 +51,6 @@ public class DamageTests
 	[TestMethod]
 	public void PhysicalDamageRange_Apply_ShouldDealReducedDamage_WhenResistsPresent()
 	{
-		var unit = new Paladin();
 		var armor = new Armor(new DefenseItemSpec(5));
 		unit.Gear.Equip(armor, _ => _.Armor);
 
@@ -75,7 +80,7 @@ public class DamageTests
 	[TestMethod]
 	public void ColdDamageRange_Apply_ShouldDealPercentageReducedDamage()
 	{
-		var unit = new Paladin(); // 50% resistance
+		// 50% resistance
 		var armor = new Armor(new DefenseItemSpec(1)
 		{
 			Modifiers = [new ColdResistModifier(50)]
@@ -94,7 +99,6 @@ public class DamageTests
 	[TestMethod]
 	public void ColdDamageRange_MAX_Resist_ShouldDealPercentageReducedDamage()
 	{
-		var unit = new Paladin();
 		var armor = new Armor(new DefenseItemSpec(1)
 		{
 			Modifiers = [new ColdResistModifier(100)]   // Should be max 75%
@@ -113,7 +117,6 @@ public class DamageTests
 	[TestMethod]
 	public void ColdDamageRange_Negative_Resist_ShouldDeal_Increased_Damage()
 	{
-		var unit = new Paladin();
 		var armor = new Armor(new DefenseItemSpec(1)
 		{
 			Modifiers = [new ColdResistModifier(-50)]  
@@ -145,7 +148,7 @@ public class DamageTests
 	[TestMethod]
 	public void CombinedDamage_ShouldDealReducedDamage()
 	{
-		var unit = new Paladin(); // 50% resistance + 7 defence
+		// 50% resistance + 7 defence
 		var armor = new Armor(new DefenseItemSpec(1)
 		{
 			Modifiers = [

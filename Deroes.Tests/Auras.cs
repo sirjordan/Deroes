@@ -12,7 +12,7 @@ public class Auras
 	{
 		//40% dmg
 
-		var player = new Paladin();
+		var player = new Hero("", new PaladinSetup());
 		var sword = new Weapon(new WeaponItemSpec(5, 10));
 		player.Gear.Equip(sword, _ => _.LeftHand);
 
@@ -32,7 +32,7 @@ public class Auras
 	{
 		// 80% dmg
 
-		var player = new Paladin();
+		var player = new Hero("", new PaladinSetup());
 		var sword = new Weapon(new WeaponItemSpec(5, 10));
 		player.Gear.Equip(sword, _ => _.LeftHand);
 
@@ -52,7 +52,7 @@ public class Auras
 	{
 		// 200% dmg
 
-		var player = new Paladin();
+		var player = new Hero("", new PaladinSetup());
 		var sword = new Weapon(new WeaponItemSpec(5, 10));
 		player.Gear.Equip(sword, _ => _.LeftHand);
 
@@ -111,7 +111,7 @@ public class Auras
 	[ExpectedException(typeof(ArgumentOutOfRangeException))]
 	public void Might_CalculateBonusDmg_NegativeLevel_ThrowsException()
 	{
-		var player = new Paladin();
+		var player = new Hero("", new PaladinSetup());
 		Might m = new Might(player);
 		m.SetupLevel(-5);
 	}
@@ -127,7 +127,7 @@ public class Auras
 	[TestMethod]
 	public void Resist_Fire_Activate_Level1_ShouldBeAround60_On_Hero()
 	{
-		var hero = new Paladin();
+		var hero = new Hero("", new PaladinSetup());
 		Assert.IsTrue(hero.Resistanse.Fire.Value.Amount == 0);
 
 		var resistFire = new ResistFire(hero);
@@ -143,7 +143,7 @@ public class Auras
 	[TestMethod]
 	public void Resist_Fire_Activate_Level5_ShouldBeAround85_On_Hero()
 	{
-		var hero = new Paladin();
+		var hero = new Hero("", new PaladinSetup());
 		Assert.IsTrue(hero.Resistanse.Fire.Value.Amount == 0);
 
 		var resistFire = new ResistFire(hero); 

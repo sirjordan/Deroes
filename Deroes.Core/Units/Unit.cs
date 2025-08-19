@@ -7,22 +7,23 @@ namespace Deroes.Core.Units
 	{
 		public abstract int Max_Level { get; }
 		public int Level { get; protected set; }
-		public string Name { get; protected set; }
-		public bool IsAlive => Life.Value.Remaining > 0;
-		public Stat<Vital> Life { get; protected set; }
-		public Stat<Vital> Mana { get; protected set; }
+		public string Name { get; private set; }
+		public Stat<Vital> Life { get; private set; }
+		public Stat<Vital> Mana { get; private set; }
 		public Attack Melee { get; private set; }
 		public Defense Resistanse { get; private set; }
 		public SkillSet Skills { get; private set; }
+		public bool IsAlive => Life.Value.Remaining > 0;
 
-		protected Unit(string name, Stat<Vital> life)
+		protected Unit(string name, IUnitSetupFactory unitSetup)
 		{
 			Name = name;
-			Life = life;
+			Life = unitSetup.Life();
+			Mana = unitSetup.Mana();
 			Level = 1;
 			Melee = new Attack();
 			Resistanse = new Defense();
-			Skills = new SkillSet(this);
+			Skills = unitSetup.Skills(this);
 		}
 
 		public virtual void Die()

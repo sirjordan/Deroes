@@ -28,22 +28,19 @@ namespace Deroes.Core.Skills
 		}
 
 		/// <summary>
-		/// Tier of the skill
+		/// Tier of the skill.
 		/// 1 - 6 Tiers
 		/// </summary>
 		public int Tier { get; private set; }
 
 		/// <summary>
 		/// Required level of the hero to set and use the skill.
-		/// 1 - 30 level is required Initialy
+		/// 1 - 30 level is required initialy, based on the Tier
 		/// </summary>
 		public int RequiredLevel
 		{
 			get
 			{
-				if (Level == 0) 
-					return 0;
-
 				return (Tier * 6 - 6) + Level - 1;
 			}
 		}

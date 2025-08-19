@@ -1,27 +1,14 @@
 ﻿using Deroes.Core.Items;
-using Deroes.Core.Stats;
 
 namespace Deroes.Core.Units
 {
 	public class Monster : Unit
 	{
-		// TODO:
-		// 1. Chance to drop (37.5% chance))
-		// 2. Fine tune (and test) monster health per level
-		// 3. Ensure monsetr is dead before drop items/gold
-		// 4. Dmg & Resists per monster level?
-		// 12. Monster xp calculation
-
-		public override int Max_Level => 85;
-
 		private Random _random = new Random();
-
-		/// <summary>
-		/// hp = base + (level * 3 vitalityPerLevel * 2 coef)
-		/// </summary>
-		/// <param name="level">1 - 85</param>
-		public Monster(int level, string name = "Monster") 
-			: base(name, GetLifePerMonsterLevel(level))
+		public override int Max_Level => 85;
+		
+		public Monster(int level, string name = "Monster")
+			: base(name, new MonsterBaseSetup(level))
 		{
 			ArgumentOutOfRangeException.ThrowIfGreaterThan(level, Max_Level);
 			ArgumentOutOfRangeException.ThrowIfNegativeOrZero(level);
@@ -38,7 +25,7 @@ namespace Deroes.Core.Units
 
 		public Item[] DropItems()
 		{
-			return []; 
+			return [];
 		}
 
 		public int DropGold()
@@ -65,14 +52,6 @@ namespace Deroes.Core.Units
 			// TODO: Drop to the ground event
 
 			base.Die();
-		}
-
-		/// <summary>
-		/// hp = base + (level * 3 vitalityPerLevel * 2 coef)
-		/// </summary>
-		private static Stat<Vital> GetLifePerMonsterLevel(int forLevel)
-		{
-			return new Stat<Vital>(new Vital(@base: (5 + forLevel * 3 * 2), 0, 0));
 		}
 	}
 }

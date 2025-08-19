@@ -5,12 +5,13 @@ namespace Deroes.Core.Skills
 	public class SkillTree : ILevelUpSubscriber
 	{
 		private Unit _hero;
-		private IEnumerable<SkillNode> RootSkills { get; set; }
+		private IEnumerable<SkillNode> _skills;
+
 		public int AvaliableSkillPoints { get; private set; }
 
-		public SkillTree(Unit hero)
+		public SkillTree(Unit hero, IEnumerable<SkillNode> skills)
 		{
-			RootSkills = new HashSet<SkillNode>();
+			_skills = new HashSet<SkillNode>();
 			AvaliableSkillPoints = 0;
 			_hero = hero;
 		}
@@ -19,7 +20,7 @@ namespace Deroes.Core.Skills
 		{
 			// BFS
 			var visited = new HashSet<SkillNode>();
-			var queue = new Queue<SkillNode>(RootSkills);
+			var queue = new Queue<SkillNode>(_skills);
 
 			while (queue.Count > 0)
 			{

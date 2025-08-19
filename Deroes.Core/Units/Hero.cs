@@ -3,25 +3,24 @@ using Deroes.Core.Stats;
 
 namespace Deroes.Core.Units
 {
-	public abstract class Hero : Unit
+	public class Hero : Unit
 	{
 		private ILevelUpSubscriber[] LevelUpSubscribers => [Attributes, Life.BaseValue, Mana.BaseValue, Stamina.BaseValue, Skills.Specials];
 
 		public override int Max_Level => 99;
-		public Stat<Vital> Stamina { get; protected set; }
-		public Attributes Attributes { get; protected set; }
-		public Stash<Item> Inventory { get; protected set; }
-		public Chest Chest { get; protected set; }
-		public Gold Gold { get; protected set; }
-		public Gear Gear { get; protected set; }
+		public Stat<Vital> Stamina { get; private set; }
+		public Attributes Attributes { get; private set; }
+		public Stash<Item> Inventory { get; private set; }
+		public Chest Chest { get; private set; }
+		public Gold Gold { get; private set; }
+		public Gear Gear { get; private set; }
 		public long Experience { get; private set; }
 
-		protected Hero(string name, Stat<Vital> life, Stat<Vital> mana, Stat<Vital> stamina) 
-			: base(name, life)
+		public Hero(string name, IHeroSetupFactory heroSetup)
+			: base(name, heroSetup)
 		{
-			Mana = mana;
-			Stamina = stamina;
-
+			Stamina = heroSetup.Stamina();
+			Attributes = heroSetup.Attributes(this);
 			Experience = 0;
 			Inventory = new Stash<Item>(10, 4);
 			Chest = new Chest(this);

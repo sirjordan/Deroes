@@ -11,7 +11,7 @@ public class Potions
 	[TestInitialize]
 	public void Setup()
 	{
-		_paladin = new Paladin();
+		_paladin = new Hero("", new PaladinSetup());
 		_paladin.AddExperience(Hero.XpToLevelUp(3));
 
 		_paladin.Attributes.AddVitality();

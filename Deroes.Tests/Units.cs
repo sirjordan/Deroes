@@ -7,18 +7,25 @@ namespace Deroes.Core.Tests
 	[TestClass]
 	public sealed class Units
 	{
+		private Hero hero;
+
+		[TestInitialize]
+		public void Setup()
+		{
+			hero = new Hero("", new PaladinSetup());
+		}
+
 		[TestMethod]
 		public void Unit_Paladin_Attack_Monster()
 		{
-			var player = new Paladin();
 			var enemy = new Monster(1);
 
 			var sword = new Weapon(new WeaponItemSpec(5, 10));
 
-			player.Gear.Equip(sword, _ => _.LeftHand);
+			hero.Gear.Equip(sword, _ => _.LeftHand);
 
-			player.Skills.Defaults.NormalAttack.Apply(enemy);
-			player.Skills.Defaults.NormalAttack.Apply(enemy);
+			hero.Skills.Defaults.NormalAttack.Apply(enemy);
+			hero.Skills.Defaults.NormalAttack.Apply(enemy);
 
 			Assert.IsTrue(enemy.Life.Value.Remaining <= 0);
 			Assert.IsFalse(enemy.IsAlive);
@@ -27,7 +34,6 @@ namespace Deroes.Core.Tests
 		[TestMethod]
 		public void Unit_Paladin_Attack_Monster_Multiple_Damage()
 		{
-			var player = new Paladin();
 			var enemy = new Monster(84);
 
 			var spec = new WeaponItemSpec(5, 10);
@@ -36,9 +42,9 @@ namespace Deroes.Core.Tests
 
 			var sword = new Weapon(spec);
 
-			player.Gear.Equip(sword, _ => _.LeftHand);
+			hero.Gear.Equip(sword, _ => _.LeftHand);
 
-			player.Skills.Defaults.NormalAttack.Apply(enemy);
+			hero.Skills.Defaults.NormalAttack.Apply(enemy);
 
 			Assert.IsTrue(enemy.IsAlive);
 			Assert.IsTrue(enemy.Life.Value.Remaining <= (4000 - 15));
@@ -50,34 +56,30 @@ namespace Deroes.Core.Tests
 			var defaultDmg_min = 1;
 			var defaultDmg_max = 2;
 
-			var player = new Paladin();
-
 			var spec = new WeaponItemSpec(5, 10);
 			spec.Modifiers.Add(new PhysicalDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)));
 			spec.Modifiers.Add(new ColdDamageModifier(new FlatDamageModifier(5), new FlatDamageModifier(10)));
 
 			var sword = new Weapon(spec);
 
-			player.Gear.Equip(sword, _ => _.LeftHand);
+			hero.Gear.Equip(sword, _ => _.LeftHand);
 
-			Assert.AreEqual(15 + defaultDmg_min, player.Melee.Min);
-			Assert.AreEqual(30 + defaultDmg_max, player.Melee.Max);
+			Assert.AreEqual(15 + defaultDmg_min, hero.Melee.Min);
+			Assert.AreEqual(30 + defaultDmg_max, hero.Melee.Max);
 		}
 
 		[TestMethod]
 		public void Unit_Percentage_Damage()
 		{
-			var player = new Paladin();
-
 			var spec = new WeaponItemSpec(9, 18); // 10-20 with the default
 			spec.Modifiers.Add(new PhysicalDamageModifier(new PercentageDamageModifier(50), new PercentageDamageModifier(50)));
 
 			var sword = new Weapon(spec);
 
-			player.Gear.Equip(sword, _ => _.LeftHand);
+			hero.Gear.Equip(sword, _ => _.LeftHand);
 
-			Assert.AreEqual(15, player.Melee.Min);
-			Assert.AreEqual(30, player.Melee.Max);
+			Assert.AreEqual(15, hero.Melee.Min);
+			Assert.AreEqual(30, hero.Melee.Max);
 		}
 
 		[TestMethod]
@@ -85,8 +87,6 @@ namespace Deroes.Core.Tests
 		{
 			var defaultDmg_min = 1;
 			var defaultDmg_max = 2;
-
-			var player = new Paladin();
 
 			var spec = new WeaponItemSpec(5, 10)
 			{
@@ -98,65 +98,61 @@ namespace Deroes.Core.Tests
 
 			var sword = new Weapon(spec);
 
-			player.Gear.Equip(sword, _ => _.LeftHand);
+			hero.Gear.Equip(sword, _ => _.LeftHand);
 
-			Assert.AreEqual(15 + defaultDmg_min, player.Melee.Min);
-			Assert.AreEqual(30 + defaultDmg_max, player.Melee.Max);
+			Assert.AreEqual(15 + defaultDmg_min, hero.Melee.Min);
+			Assert.AreEqual(30 + defaultDmg_max, hero.Melee.Max);
 
-			var droped = player.Gear.Unequip(_ => _.LeftHand);
+			var droped = hero.Gear.Unequip(_ => _.LeftHand);
 
-			Assert.AreEqual(defaultDmg_min, player.Melee.Min);
-			Assert.AreEqual(defaultDmg_max, player.Melee.Max);
+			Assert.AreEqual(defaultDmg_min, hero.Melee.Min);
+			Assert.AreEqual(defaultDmg_max, hero.Melee.Max);
 		}
 
 		[TestMethod]
 		public void Unit_Monster_Attack_Paladin()
 		{
-			var player = new Paladin();
 			var enemy = new Monster(10);
 
-			enemy.Skills.Defaults.NormalAttack.Apply(player);
+			enemy.Skills.Defaults.NormalAttack.Apply(hero);
 
-			Assert.IsTrue(player.IsAlive);
-			Assert.IsTrue(53 <= player.Life.Value.Remaining || player.Life.Value.Remaining >= 54, $"Player life is : {player.Life.Value.Remaining}");
+			Assert.IsTrue(hero.IsAlive);
+			Assert.IsTrue(53 <= hero.Life.Value.Remaining || hero.Life.Value.Remaining >= 54, $"Player life is : {hero.Life.Value.Remaining}");
 		}
 
 		[TestMethod]
 		public void Attack_By_Hero_Kill()
 		{
-			var player = new Paladin();
 			var enemy = new Monster(1);
 
 			var sword = new Weapon(new WeaponItemSpec(5, 10));
-			player.Gear.Equip(sword, _ => _.LeftHand);
+			hero.Gear.Equip(sword, _ => _.LeftHand);
 
 
-			new Combat(player, enemy)
+			new Combat(hero, enemy)
 				.HeroAttacks(_ => _.Skills.Primary)
 				.HeroAttacks(_ => _.Skills.Primary);
 
 			Assert.IsFalse(enemy.IsAlive);
-			Assert.IsTrue(player.Experience > 0);
+			Assert.IsTrue(hero.Experience > 0);
 		}
 
 		[TestMethod]
 		public void Attack_By_Monster()
 		{
-			var player = new Paladin();
 			var enemy = new Monster(10);
 
-			new Combat(player, enemy)
+			new Combat(hero, enemy)
 				.MonsterAttacks(_ => _.Skills.Primary);
 
-			Assert.IsTrue(player.IsAlive);
-			Assert.IsTrue(53 <= player.Life.Value.Remaining || player.Life.Value.Remaining >= 54, $"Player life is : {player.Life.Value.Remaining}");
+			Assert.IsTrue(hero.IsAlive);
+			Assert.IsTrue(53 <= hero.Life.Value.Remaining || hero.Life.Value.Remaining >= 54, $"Player life is : {hero.Life.Value.Remaining}");
 		}
 
 		[TestMethod]
 		public void Hero_AddExperience()
 		{
 			// Arrange
-			var hero = new Paladin();
 			int xpToAdd = 100;
 
 			// Act
@@ -171,7 +167,6 @@ namespace Deroes.Core.Tests
 		public void Hero_AddExperience_Level_Up_Single_From_1()
 		{
 			// Arrange
-			var hero = new Paladin();
 			int xpToLevel2 = 500; // XP needed from level 1 to 2
 
 			// Act
@@ -187,8 +182,6 @@ namespace Deroes.Core.Tests
 		public void Hero_AddExperience_Level_Up_To_13_From_1()
 		{
 			// Arrange
-			var hero = new Paladin();
-
 			var xpToLevel13 = 57810;
 
 			// Act
@@ -204,8 +197,6 @@ namespace Deroes.Core.Tests
 		public void Hero_AddExperience_Level_Up_To_26_From_1()
 		{
 			// Arrange
-			var hero = new Paladin();
-
 			var xpToLevel26 = 538100;
 
 			// Act
@@ -219,8 +210,6 @@ namespace Deroes.Core.Tests
 		public void Hero_AddExperience_Level_Up_To_50_From_1()
 		{
 			// Arrange
-			var hero = new Paladin();
-
 			var xpToLevel50 = 47254998;
 
 			// Act
@@ -234,7 +223,6 @@ namespace Deroes.Core.Tests
 		public void Hero_AddExperience_Reach_Level_95_From_1()
 		{
 			// Arrange
-			var hero = new Paladin();
 			var lvl95Xp = 3520485254;
 
 			// Act
@@ -249,7 +237,6 @@ namespace Deroes.Core.Tests
 		public void Hero_AddExperience_Level_To_Max_Limit_From_1()
 		{
 			// Arrange
-			var hero = new Paladin();
 			var lvl99Xp = 3520485254765675;
 
 			// Act
@@ -265,25 +252,23 @@ namespace Deroes.Core.Tests
 		[TestMethod]
 		public void Hero_Paladin_Mana_Life_Leveling_lvl1_lvl_2()
 		{
-			var lvl2 = new Paladin();
-			lvl2.AddExperience(Hero.XpToLevelUp(1));
+			hero.AddExperience(Hero.XpToLevelUp(1));
 
-			Assert.AreEqual(2, lvl2.Level);
-			Assert.AreEqual(57, lvl2.Life.Value.Max);
-			Assert.AreEqual(16.5, lvl2.Mana.Value.Max);
+			Assert.AreEqual(2, hero.Level);
+			Assert.AreEqual(57, hero.Life.Value.Max);
+			Assert.AreEqual(16.5, hero.Mana.Value.Max);
 
-			lvl2.AddExperience(Hero.XpToLevelUp(2));
+			hero.AddExperience(Hero.XpToLevelUp(2));
 
-			Assert.AreEqual(3, lvl2.Level);
-			Assert.AreEqual(59, lvl2.Life.Value.Max);
-			Assert.AreEqual(18, lvl2.Mana.Value.Max);
+			Assert.AreEqual(3, hero.Level);
+			Assert.AreEqual(59, hero.Life.Value.Max);
+			Assert.AreEqual(18, hero.Mana.Value.Max);
 		}
 
 		[TestMethod]
 		public void Hero_Paladin_Mana_Life_Leveling_lvl_26()
 		{
 			// Arrange
-			var hero = new Paladin();
 			var xpToLevel26 = 538100;
 			// Act
 			hero.AddExperience(xpToLevel26);
@@ -298,22 +283,20 @@ namespace Deroes.Core.Tests
 		[TestMethod]
 		public void Hero_Paladin_Mana_Life_Leveling_lvl_50()
 		{
-			var lvl50 = new Paladin();
 			var xpToLevel50 = 47254998;
 
-			lvl50.AddExperience(xpToLevel50);
+			hero.AddExperience(xpToLevel50);
 
-			Assert.AreEqual(50, lvl50.Level);
-			Assert.AreEqual(153, lvl50.Life.Value.Max);
-			Assert.AreEqual(88.5, lvl50.Mana.Value.Max);
-			Assert.AreEqual(138, lvl50.Stamina.Value.Max);
+			Assert.AreEqual(50, hero.Level);
+			Assert.AreEqual(153, hero.Life.Value.Max);
+			Assert.AreEqual(88.5, hero.Mana.Value.Max);
+			Assert.AreEqual(138, hero.Stamina.Value.Max);
 		}
 
 		[TestMethod]
 		public void Hero_Paladin_Mana_Life_Leveling_lvl_95()
 		{
 			// Arrange
-			var hero = new Paladin();
 			var lvl95Xp = 3520485254;
 
 			// Act
@@ -328,8 +311,6 @@ namespace Deroes.Core.Tests
 		[TestMethod]
 		public void Hero_Paladin_AddVitality_5Points()
 		{
-			var hero = new Paladin();
-
 			var xpToLevel26 = 538100;
 			var points = 5;
 			
@@ -352,8 +333,6 @@ namespace Deroes.Core.Tests
 		[TestMethod]
 		public void Hero_Paladin_AddVitality_50Points()
 		{
-			var hero = new Paladin();
-
 			var xpToLevel26 = 538100;
 			var points = 50;
 			
@@ -375,7 +354,6 @@ namespace Deroes.Core.Tests
 		[TestMethod]
 		public void Hero_Paladin_AddEnergy_5Points()
 		{
-			var hero = new Paladin();
 			var points = 5;
 			hero.AddExperience(Hero.XpToLevelUp(1));
 
@@ -392,8 +370,6 @@ namespace Deroes.Core.Tests
 		[TestMethod]
 		public void Hero_Paladin_AddEnergy_50Points()
 		{
-			var hero = new Paladin();
-			
 			var points = 50;
 			hero.AddExperience(Hero.XpToLevelUp(10));
 

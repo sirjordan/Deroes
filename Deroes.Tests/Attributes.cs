@@ -9,7 +9,7 @@ public class AttributesTests
 	[TestMethod]
 	public void OnLevelUp_IncreasesStatPointsAvailableBy5()
 	{
-		var hero = new Paladin();
+		var hero = new Hero("", new PaladinSetup());
 		var attributes = new Attributes(hero, 10, 10, 10, 10);
 
 		attributes.OnLevelUp();
@@ -20,7 +20,7 @@ public class AttributesTests
 	[TestMethod]
 	public void AddStrength_IncreasesStrengthPoints_WhenStatPointsAvailable()
 	{
-		var hero = new Paladin();
+		var hero = new Hero("", new PaladinSetup());
 		var attributes = new Attributes(hero, 5, 5, 5, 5);
 		attributes.OnLevelUp();
 
@@ -33,7 +33,7 @@ public class AttributesTests
 	[TestMethod]
 	public void AddDexterity_IncreasesDexterityPoints_WhenStatPointsAvailable()
 	{
-		var hero = new Paladin();
+		var hero = new Hero("", new PaladinSetup());
 		var attributes = new Attributes(hero, 5, 5, 5, 5);
 		attributes.OnLevelUp();
 
@@ -46,7 +46,7 @@ public class AttributesTests
 	[TestMethod]
 	public void AddVitality_IncreasesVitalityPoints_AndCallsHeroMethods()
 	{
-		var hero_lvl2 = new Paladin();
+		var hero_lvl2 = new Hero("", new PaladinSetup());
 		hero_lvl2.AddExperience(Hero.XpToLevelUp(1));
 
 		var initial = hero_lvl2.Attributes.Vitality.Points;
@@ -60,7 +60,7 @@ public class AttributesTests
 	[TestMethod]
 	public void AddEnergy_IncreasesEnergyPoints_AndCallsHeroMana()
 	{
-		var hero_lvl2 = new Paladin();
+		var hero_lvl2 = new Hero("", new PaladinSetup());
 		hero_lvl2.AddExperience(Hero.XpToLevelUp(1));
 
 		var initial = hero_lvl2.Attributes.Energy.Points;
@@ -75,7 +75,7 @@ public class AttributesTests
 	[ExpectedException(typeof(InvalidOperationException))]
 	public void AddStrength_Throws_WhenNoStatPointsAvailable()
 	{
-		var hero = new Paladin();
+		var hero = new Hero("", new PaladinSetup());
 		var attributes = new Attributes(hero, 5, 5, 5, 5);
 
 		attributes.AddStrenght();

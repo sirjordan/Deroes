@@ -13,7 +13,7 @@ public class Gear
 	[TestInitialize]
 	public void Setup()
 	{
-		_hero = new Paladin();
+		_hero = new Hero("", new PaladinSetup());
 	}
 
 	[TestMethod]

@@ -8,12 +8,18 @@ namespace Deroes.Core.Tests;
 [TestClass]
 public class SkillTreeTests
 {
+	private Hero hero;
+
+	[TestInitialize]
+	public void Setup()
+	{
+		hero = new Hero("", new PaladinSetup());
+	}
+
 	[TestMethod]
 	public void GetAllSkills_ReturnsAllNodes_BFS()
 	{
 		// Arrange
-		var hero = new Paladin();
-		var tree = new SkillTree(hero);
 
 		var root = new SkillTree.SkillNode(new Might(hero));
 		var child1 = new SkillTree.SkillNode(new ResistFire(hero));
@@ -22,10 +28,12 @@ public class SkillTreeTests
 		root.AddChild(child1);
 		root.AddChild(child2);
 
+		var tree = new SkillTree(hero, [root]);
+
 		// Hacky way to set private RootSkills for test
-		typeof(SkillTree)
-			.GetProperty("RootSkills", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-			.SetValue(tree, new[] { root });
+		//typeof(SkillTree)
+		//	.GetProperty("RootSkills", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+		//	.SetValue(tree, new[] { root });
 
 		// Act
 		var skills = tree.GetAllSkills().ToList();
@@ -41,13 +49,13 @@ public class SkillTreeTests
 	[ExpectedException(typeof(InvalidOperationException))]
 	public void AddSkillPoint_ThrowsIfNoPoints()
 	{
-		var hero = new Paladin();
-		var tree = new SkillTree(hero);
-
 		var root = new SkillTree.SkillNode(new Might(hero));
-		typeof(SkillTree)
-			.GetProperty("RootSkills", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-			.SetValue(tree, new[] { root });
+
+		var tree = new SkillTree(hero, [root]);
+
+		//typeof(SkillTree)
+		//	.GetProperty("RootSkills", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+		//	.SetValue(tree, new[] { root });
 
 		tree.AddSkillPoint(root);
 	}
@@ -56,15 +64,14 @@ public class SkillTreeTests
 	[ExpectedException(typeof(ArgumentException))]
 	public void AddSkillPoint_ThrowsIfNodeNotInTree()
 	{
-		var hero = new Paladin();
-		var tree = new SkillTree(hero);
-
 		var root = new SkillTree.SkillNode(new Might(hero));
+		var tree = new SkillTree(hero, [root]);
+
 		var outsider = new SkillTree.SkillNode(new Vengeance(hero));
 
-		typeof(SkillTree)
-			.GetProperty("RootSkills", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-			.SetValue(tree, new[] { root });
+		//typeof(SkillTree)
+		//	.GetProperty("RootSkills", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+		//	.SetValue(tree, new[] { root });
 
 		tree.OnLevelUp(); // +1 point
 		tree.AddSkillPoint(outsider); // not in tree
@@ -73,15 +80,13 @@ public class SkillTreeTests
 	[TestMethod]
 	public void AddSkillPoint_UpgradesSkillAndConsumesPoint()
 	{
-		var hero = new Paladin();
-		var tree = new SkillTree(hero);
-
 		var rootSkill = new Might(hero);
 		var root = new SkillTree.SkillNode(rootSkill);
+		var tree = new SkillTree(hero, [root]);
 
-		typeof(SkillTree)
-			.GetProperty("RootSkills", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-			.SetValue(tree, new[] { root });
+		//typeof(SkillTree)
+		//	.GetProperty("RootSkills", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+		//	.SetValue(tree, new[] { root });
 
 		tree.OnLevelUp(); // +1 point
 
@@ -97,11 +102,38 @@ public class SkillTreeTests
 	[ExpectedException(typeof(ArgumentOutOfRangeException))]
 	public void AddChild_ThrowsIfChildTierLessThanParent()
 	{
-		var hero = new Paladin();
 		var parent = new SkillTree.SkillNode(new Vengeance(hero));
 		var child = new SkillTree.SkillNode(new Might(hero)); // lower tier
 
 		parent.AddChild(child);
+	}
+
+	[TestMethod]
+	public void CanUpSkill_ReturnsTrue_WhenHeroMeetsLevelAndParentsHavePoints()
+	{
+		// Arrange
+		var skill = new Might(hero);
+		var node = new SkillTree.SkillNode(skill);
+
+		var tree = new SkillTree(hero, [node]);
+		tree.OnLevelUp();
+
+		// Act
+		bool result = node.CanUpSkill(hero);
+
+		// Assert
+		Assert.IsTrue(result);
+	}
+
+	[TestMethod]
+	public void CanUpSkill_ReturnsFalse_WhenHeroTooLowLevel()
+	{
+		var skill = new Vengeance(hero);
+		var node = new SkillTree.SkillNode(skill);
+
+		var tree = new SkillTree(hero, [node]);
+
+		Assert.IsFalse(node.CanUpSkill(hero));
 	}
 }
 

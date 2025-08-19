@@ -1,3 +1,6 @@
+
+Hero:
+------
 1. Range attack
 3. Spells
 4. Strenth, Dex, Vitality and Energy as stats or something advanced? (modifing the hero)
@@ -16,3 +19,11 @@
 21. Attributes as Stats modifiers 
 22. Drink potions not only for Hero. (e.g monsters can heal)
 23. Event dispatcher (middleware)
+
+Monster:
+------
+1. Chance to drop (37.5% chance))
+2. Fine tune (and test) monster health per level
+3. Ensure monsetr is dead before drop items/gold
+4. Dmg & Resists per monster level?
+12. Monster xp calculation

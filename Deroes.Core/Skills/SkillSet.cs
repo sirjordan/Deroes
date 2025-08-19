@@ -15,7 +15,7 @@ namespace Deroes.Core.Skills
 		/// <summary>
 		/// Unique per hero class
 		/// </summary>
-		public SkillTree Specials { get; private set; }
+		public SkillTree? Specials { get; private set; }
 		/// <summary>
 		/// Skill selected as Primary from available
 		/// </summary>
@@ -29,11 +29,11 @@ namespace Deroes.Core.Skills
 		/// </summary>
 		public ICollection<Skill> Additional { get; private set; }
 
-		public SkillSet(Unit u)
+		public SkillSet(Unit u, SkillTree? specials)
 		{
 			_unit = u;
 			Defaults = new DefaultSkillSet(u);
-			Specials = new SkillTree(u);
+			Specials = specials;
 			Additional = [];
 			_primary = Defaults.NormalAttack;
 			_secondary = Defaults.NormalAttack;
