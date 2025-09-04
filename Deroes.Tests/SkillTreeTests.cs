@@ -30,11 +30,6 @@ public class SkillTreeTests
 
 		var tree = new SkillTree(hero, [root]);
 
-		// Hacky way to set private RootSkills for test
-		//typeof(SkillTree)
-		//	.GetProperty("RootSkills", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-		//	.SetValue(tree, new[] { root });
-
 		// Act
 		var skills = tree.GetAllSkills().ToList();
 
@@ -50,12 +45,7 @@ public class SkillTreeTests
 	public void AddSkillPoint_ThrowsIfNoPoints()
 	{
 		var root = new SkillTree.SkillNode(new Might(hero));
-
 		var tree = new SkillTree(hero, [root]);
-
-		//typeof(SkillTree)
-		//	.GetProperty("RootSkills", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-		//	.SetValue(tree, new[] { root });
 
 		tree.AddSkillPoint(root);
 	}
@@ -69,10 +59,6 @@ public class SkillTreeTests
 
 		var outsider = new SkillTree.SkillNode(new Vengeance(hero));
 
-		//typeof(SkillTree)
-		//	.GetProperty("RootSkills", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-		//	.SetValue(tree, new[] { root });
-
 		tree.OnLevelUp(); // +1 point
 		tree.AddSkillPoint(outsider); // not in tree
 	}
@@ -83,10 +69,6 @@ public class SkillTreeTests
 		var rootSkill = new Might(hero);
 		var root = new SkillTree.SkillNode(rootSkill);
 		var tree = new SkillTree(hero, [root]);
-
-		//typeof(SkillTree)
-		//	.GetProperty("RootSkills", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-		//	.SetValue(tree, new[] { root });
 
 		tree.OnLevelUp(); // +1 point
 

@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://bni4d672qf5gx"]
+
+[ext_resource type="Script" uid="uid://dq65paon58oul" path="res://Rain.cs" id="1_kwfd8"]
+
+[sub_resource type="Curve" id="Curve_dg77c"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ycdy4"]
+_limits = [0.0, 30.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 18.23), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_w48qg"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_vivmo"]
+curve_x = SubResource("Curve_dg77c")
+curve_y = SubResource("Curve_ycdy4")
+curve_z = SubResource("Curve_w48qg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dg77c"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(600, 1, 1)
+gravity = Vector3(100, 2000, 0)
+scale_min = 0.3
+scale_max = 0.8
+scale_over_velocity_curve = SubResource("CurveXYZTexture_vivmo")
+color = Color(1, 1, 1, 0.470588)
+
+[node name="Rain" type="GPUParticles2D"]
+emitting = false
+amount = 100
+visibility_rect = Rect2(-500, 0, 600, 600)
+process_material = SubResource("ParticleProcessMaterial_dg77c")
+script = ExtResource("1_kwfd8")
+
+[node name="LightiningTime" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+enabled = false
+
+[connection signal="timeout" from="LightiningTime" to="." method="_on_lightining_timeout"]

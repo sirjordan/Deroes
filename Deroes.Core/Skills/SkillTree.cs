@@ -4,18 +4,21 @@ namespace Deroes.Core.Skills
 {
 	public class SkillTree : ILevelUpSubscriber
 	{
-		private Unit _hero;
+		private readonly Unit _hero;
 		private IEnumerable<SkillNode> _skills;
 
 		public int AvaliableSkillPoints { get; private set; }
 
 		public SkillTree(Unit hero, IEnumerable<SkillNode> skills)
 		{
-			_skills = new HashSet<SkillNode>();
-			AvaliableSkillPoints = 0;
+			_skills = skills;
 			_hero = hero;
+			AvaliableSkillPoints = 0;
 		}
 
+		/// <summary>
+		/// Gets all skills and child skills from the tree
+		/// </summary>
 		public IEnumerable<SkillNode> GetAllSkills()
 		{
 			// BFS

@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{02EA681E-C
 		Todo.txt = Todo.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deroes.Game", "Deroes.Game\Deroes.Game.csproj", "{D1B3AF46-77B7-8703-0FAE-1AEE608B94E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{371BE44A-3D5B-408F-97E2-08D2225615A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{371BE44A-3D5B-408F-97E2-08D2225615A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{371BE44A-3D5B-408F-97E2-08D2225615A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1B3AF46-77B7-8703-0FAE-1AEE608B94E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1B3AF46-77B7-8703-0FAE-1AEE608B94E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1B3AF46-77B7-8703-0FAE-1AEE608B94E2}.Release|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{D1B3AF46-77B7-8703-0FAE-1AEE608B94E2}.Release|Any CPU.Build.0 = ExportDebug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
