@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dliiwyry2hh76"
-path="res://.godot/imported/SW.png-9368030f1412bb0ba6d1f79a13740012.ctex"
+uid="uid://4q82e111vlqv"
+path="res://.godot/imported/woodWallCorner_E_128.png-3afe156d91fa4643c8e5a5793f8393ab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/movementSprites/SW.png"
-dest_files=["res://.godot/imported/SW.png-9368030f1412bb0ba6d1f79a13740012.ctex"]
+source_file="res://assets/environment/walls/woodWallCorner_E_128.png"
+dest_files=["res://.godot/imported/woodWallCorner_E_128.png-3afe156d91fa4643c8e5a5793f8393ab.ctex"]
 
 [params]
 

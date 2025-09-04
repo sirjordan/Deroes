@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6j7lwh0tsrwb"
-path="res://.godot/imported/Base1_128.png-70d51cc6c189482afcadae320aa9d307.ctex"
+uid="uid://bpe3vqoypdqvn"
+path="res://.godot/imported/woodWallSupport_E_128.png-bc86625f787310cce42db929b5fa532f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/scenery/Base1_128.png"
-dest_files=["res://.godot/imported/Base1_128.png-70d51cc6c189482afcadae320aa9d307.ctex"]
+source_file="res://assets/environment/walls/woodWallSupport_E_128.png"
+dest_files=["res://.godot/imported/woodWallSupport_E_128.png-bc86625f787310cce42db929b5fa532f.ctex"]
 
 [params]
 

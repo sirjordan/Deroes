@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crnqk8tvjf3lo"
-path="res://.godot/imported/BaseStone_128.png-a872757665786217c54ca329cc521338.ctex"
+uid="uid://c7wbkhevxw38p"
+path="res://.godot/imported/NE.png-56b0644b5128c821bc1425e2929da328.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/scenery/BaseStone_128.png"
-dest_files=["res://.godot/imported/BaseStone_128.png-a872757665786217c54ca329cc521338.ctex"]
+source_file="res://assets/characters/NE.png"
+dest_files=["res://.godot/imported/NE.png-56b0644b5128c821bc1425e2929da328.ctex"]
 
 [params]
 

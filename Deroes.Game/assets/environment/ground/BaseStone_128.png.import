@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cutp6pypsn2yf"
-path="res://.godot/imported/BaseStone2.0_128.png-ef41b05d2c1eeb0b2863f586753977a5.ctex"
+uid="uid://crnqk8tvjf3lo"
+path="res://.godot/imported/BaseStone_128.png-70a9608cac7978599dc548d04fa3d51d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/scenery/BaseStone2.0_128.png"
-dest_files=["res://.godot/imported/BaseStone2.0_128.png-ef41b05d2c1eeb0b2863f586753977a5.ctex"]
+source_file="res://assets/environment/ground/BaseStone_128.png"
+dest_files=["res://.godot/imported/BaseStone_128.png-70a9608cac7978599dc548d04fa3d51d.ctex"]
 
 [params]
 
