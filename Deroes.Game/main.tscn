@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://b2gvgwi23h5jn"]
+[gd_scene load_steps=44 format=4 uid="uid://b2gvgwi23h5jn"]
 
 [ext_resource type="Texture2D" uid="uid://c6j7lwh0tsrwb" path="res://assets/environment/ground/Base1_128.png" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://cutp6pypsn2yf" path="res://assets/environment/ground/BaseStone2.0_128.png" id="2_0xm2m"]
@@ -12,11 +12,12 @@
 [ext_resource type="Texture2D" uid="uid://jt083vr0w5d2" path="res://assets/environment/trees/Tree12.0_128.png" id="8_4c57u"]
 [ext_resource type="PackedScene" uid="uid://dqatlso66kfuq" path="res://player.tscn" id="8_5vw27"]
 [ext_resource type="Texture2D" uid="uid://cdk83g8utfyta" path="res://assets/environment/ground/water_128.png" id="9_efxa6"]
+[ext_resource type="Texture2D" uid="uid://bpe3vqoypdqvn" path="res://assets/environment/walls/woodWallSupport_E_128.png" id="12_074og"]
 [ext_resource type="PackedScene" uid="uid://b1m3t042y631y" path="res://lighter_node.tscn" id="12_dg77c"]
+[ext_resource type="Texture2D" uid="uid://c6er7il74ey7k" path="res://assets/environment/walls/woodWallSupport_S_128.png" id="13_cegan"]
 [ext_resource type="PackedScene" uid="uid://hy6rqx67d6t4" path="res://monster.tscn" id="14_w48qg"]
 [ext_resource type="Script" uid="uid://dhc5vguqkvsdt" path="res://Monster.cs" id="15_vivmo"]
 [ext_resource type="Texture2D" uid="uid://dkv1tl27cjgkq" path="res://assets/environment/walls/woodWallSupport_W_128.png" id="16_074og"]
-[ext_resource type="Texture2D" uid="uid://4q82e111vlqv" path="res://assets/environment/walls/woodWallCorner_E_128.png" id="17_cegan"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4c57u"]
 vertices = PackedVector2Array(64, 0, 0, 32, -64, 0, 0, -32)
@@ -146,14 +147,31 @@ texture_region_size = Vector2i(128, 128)
 0:1/0/texture_origin = Vector2i(0, 32)
 0:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_82xsv")
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(64, 0, 0, 32, -9.63895, 27.1805, 58.423, -7.90263)
+0:0/0 = 0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_074og"]
+polygon = PackedVector2Array(7.49394, -28.253, -58.5224, 2.7388, -64, 0, 0, -32)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_82xsv"]
+texture = ExtResource("12_074og")
+margins = Vector2i(0, 86)
+texture_region_size = Vector2i(128, 170)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 52)
+0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_074og")
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(5.23605, -29.382, -58.0708, 2.9646, -64, 0, 0, -32)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cegan"]
+polygon = PackedVector2Array(-8.17131, -27.9143, 56.2645, 3.86776, 64, 0, 0, -32)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ryguw"]
-texture = ExtResource("17_cegan")
-texture_region_size = Vector2i(128, 128)
-0:2/0 = 0
-0:3/0 = 0
-0:1/0 = 0
-0:1/0/texture_origin = Vector2i(0, 32)
+texture = ExtResource("13_cegan")
+margins = Vector2i(0, 74)
+texture_region_size = Vector2i(128, 180)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 56)
+0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_cegan")
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8.3971, -27.8014, 56.4903, 3.75486, 64, 0, 0, -32)
 
 [sub_resource type="TileSet" id="TileSet_w48qg"]
 tile_shape = 1
@@ -164,7 +182,8 @@ navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_ycdy4")
 sources/4 = SubResource("TileSetAtlasSource_yaehf")
 sources/5 = SubResource("TileSetAtlasSource_getpj")
-sources/6 = SubResource("TileSetAtlasSource_ryguw")
+sources/7 = SubResource("TileSetAtlasSource_82xsv")
+sources/9 = SubResource("TileSetAtlasSource_ryguw")
 
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
@@ -183,21 +202,19 @@ navigation_polygon = SubResource("NavigationPolygon_kek77")
 [node name="Scenery" type="TileMapLayer" parent="."]
 y_sort_enabled = true
 position = Vector2(-9, 32)
-tile_map_data = PackedByteArray("AAACAAsAAAAAAAAAAAAFABIAAAAAAAAAAAAEAA8AAAAAAAAAAAADAAwAAAAAAAAAAAADAAMAAAAAAAAAAAD//xQAAAAAAAAAAAD9/xcAAAAAAAAAAAAEAPv/AAAAAAAAAAD//wAAAAAAAAAAAAAAAAMAAAAAAAAAAAD6/w4ABAAAAAEAAAD6/w8ABAAAAAEAAAD7/xAABAAAAAEAAAD6/woABQAAAAEAAAD6/wkABQAAAAEAAAD7/w8ABQAAAAEAAAD8/w4ABQAAAAEAAAD8/w0ABQAAAAEAAAD7/wkABAAAAAEAAAD8/woABAAAAAEAAAD8/wsABAAAAAEAAAD9/wwABAAAAAEAAAD5/wwABQAAAAEAAAD5/wsABQAAAAEAAAD9/w0ABgAAAAEAAAA=")
+tile_map_data = PackedByteArray("AAACAAsAAAAAAAAAAAAFABIAAAAAAAAAAAAEAA8AAAAAAAAAAAADAAwAAAAAAAAAAAADAAMAAAAAAAAAAAD//xQAAAAAAAAAAAD9/xcAAAAAAAAAAAAEAPv/AAAAAAAAAAD//wAAAAAAAAAAAAAAAAMAAAAAAAAAAAD7/wkABAAAAAEAAAD8/woABAAAAAEAAAD8/wsABAAAAAEAAAD5/wwABQAAAAEAAAD5/wsABQAAAAEAAAD9/w4ABwAAAAAAAAD8/xAABwAAAAAAAAD7/xEABwAAAAAAAAD9/wwABAAAAAEAAAD6/xEACQAAAAAAAAD6/xAACQAAAAAAAAD5/w8ACQAAAAAAAAD5/w4ACQAAAAAAAAD6/wkABQAAAAEAAAA=")
 tile_set = SubResource("TileSet_w48qg")
 
 [node name="Player" parent="." instance=ExtResource("8_5vw27")]
 y_sort_enabled = true
-position = Vector2(370, 289)
-
-[node name="Rain" parent="Player" instance=ExtResource("2_ycdy4")]
-position = Vector2(6, -328)
+position = Vector2(-62, 485)
 
 [node name="Monster" parent="." instance=ExtResource("14_w48qg")]
 position = Vector2(45, 941)
 script = ExtResource("15_vivmo")
 
 [node name="Lights" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="Lighter" parent="Lights" instance=ExtResource("12_dg77c")]
 position = Vector2(-201, 811)
@@ -212,7 +229,7 @@ position = Vector2(217, 572)
 position = Vector2(-190, 370)
 
 [node name="Lighter5" parent="Lights" instance=ExtResource("12_dg77c")]
-position = Vector2(569, 156)
+position = Vector2(656, 2)
 
 [node name="Lighter6" parent="Lights" instance=ExtResource("12_dg77c")]
 position = Vector2(-7, 143)
@@ -224,10 +241,13 @@ position = Vector2(311, -158)
 position = Vector2(1041, 419)
 
 [node name="Lighter9" parent="Lights" instance=ExtResource("12_dg77c")]
-position = Vector2(522, 907)
+position = Vector2(449, 896)
 
 [node name="Lighter10" parent="Lights" instance=ExtResource("12_dg77c")]
 position = Vector2(-848, 435)
+
+[node name="Lighter13" parent="Lights" instance=ExtResource("12_dg77c")]
+position = Vector2(-468, 558)
 
 [node name="Lighter12" parent="Lights" instance=ExtResource("12_dg77c")]
 position = Vector2(-568, 268)
@@ -237,3 +257,9 @@ position = Vector2(-523, 517)
 
 [node name="Darkness" type="CanvasModulate" parent="."]
 color = Color(0.627992, 0.633435, 0.506093, 1)
+
+[node name="Weather" type="CanvasLayer" parent="."]
+
+[node name="Rain" parent="Weather" instance=ExtResource("2_ycdy4")]
+position = Vector2(-56, 157)
+visibility_rect = Rect2(0, 0, 600, 600)

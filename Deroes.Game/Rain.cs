@@ -1,4 +1,5 @@
 using Godot;
+using GodotPlugins.Game;
 using System;
 
 public partial class Rain : GpuParticles2D
@@ -15,6 +16,19 @@ public partial class Rain : GpuParticles2D
 
 		_lightining = GetNode<DirectionalLight2D>("DirectionalLight2D");
 		_lightining.Enabled = false;
+
+		// Center the position and cover full screen
+		var viewportSize = GetViewportRect().Size;
+		 Position = viewportSize / 2;
+		if (ProcessMaterial is ParticleProcessMaterial material)
+		{
+			material.EmissionShape = ParticleProcessMaterial.EmissionShapeEnum.Box;
+			material.EmissionBoxExtents = new Vector3(
+			   viewportSize.X / 2f,
+			   viewportSize.Y / 2f,
+			   0f // not used in 2D
+		   );
+		}
 	}
 
 	public override void _Process(double delta)

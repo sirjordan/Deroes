@@ -5,7 +5,7 @@ public partial class Terrain : TileMapLayer
 {
 	[Export] public int Transparent_TileId { get; set; } = 3;
 
-	public TileMapLayer Trees { get { return GetNode<TileMapLayer>("../Trees"); } }
+	public TileMapLayer Scenery { get { return GetNode<TileMapLayer>("../Scenery"); } }
 
 	public override void _Ready()
 	{
@@ -25,7 +25,7 @@ public partial class Terrain : TileMapLayer
 
 	public override bool _UseTileDataRuntimeUpdate(Vector2I coords)
 	{
-		if (Trees != null && Trees.GetUsedCells().Contains(coords))
+		if (Scenery != null && Scenery.GetUsedCells().Contains(coords))
 		{
 			GD.Print("Contains");
 			return true;
@@ -36,7 +36,7 @@ public partial class Terrain : TileMapLayer
 
 	public override void _TileDataRuntimeUpdate(Vector2I coords, TileData tileData)
 	{
-		if (Trees != null && Trees.GetUsedCells().Contains(coords))
+		if (Scenery != null && Scenery.GetUsedCells().Contains(coords))
 		{
 			GD.Print("Set");
 			tileData.SetNavigationPolygon(0, null);
