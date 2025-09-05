@@ -5,7 +5,6 @@ public partial class Player : CharacterBody2D
 	private NavigationAgent2D _agent;
 	private Vector2 _dirOrientation;
 	private float _movementSpeed;
-	//private AnimatedSprite2D _idle;
 
 	[Export] public float WalkSpeed { get; set; } = 180f;
 	[Export] public float RunSpeed { get; set; } = 260f;
@@ -34,6 +33,7 @@ public partial class Player : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		// Handle moving and directional sprites
 		if (_agent.IsNavigationFinished())
 		{
 			// Still

@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://hy6rqx67d6t4"]
+[gd_scene load_steps=89 format=3 uid="uid://hy6rqx67d6t4"]
 
 [ext_resource type="Texture2D" uid="uid://betdtpwyvxa2u" path="res://assets/characters/E.png" id="2_iyrhi"]
 [ext_resource type="Texture2D" uid="uid://bkxj8me6o40co" path="res://assets/characters/N.png" id="3_o46hk"]
@@ -590,6 +590,9 @@ fill = 1
 fill_from = Vector2(0.517, 0.491)
 fill_to = Vector2(0.863248, 0.166667)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_481d3"]
+radius = 317.128
+
 [node name="Monster" type="CharacterBody2D"]
 motion_mode = 1
 
@@ -597,7 +600,7 @@ motion_mode = 1
 position = Vector2(1, -1)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_xuqvo")
-frame_progress = 0.0213195
+frame_progress = 0.715164
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, 37)
@@ -611,3 +614,8 @@ energy = 0.5
 shadow_enabled = true
 shadow_filter = 1
 texture = SubResource("GradientTexture2D_nvl01")
+
+[node name="DetectionZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
+shape = SubResource("CircleShape2D_481d3")

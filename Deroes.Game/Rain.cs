@@ -1,5 +1,4 @@
 using Godot;
-using GodotPlugins.Game;
 using System;
 
 public partial class Rain : GpuParticles2D
@@ -19,7 +18,8 @@ public partial class Rain : GpuParticles2D
 
 		// Center the position and cover full screen
 		var viewportSize = GetViewportRect().Size;
-		 Position = viewportSize / 2;
+		Position = viewportSize / 2;
+
 		if (ProcessMaterial is ParticleProcessMaterial material)
 		{
 			material.EmissionShape = ParticleProcessMaterial.EmissionShapeEnum.Box;
