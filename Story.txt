@@ -1,0 +1,19 @@
+Act 1 - Apollonia
+	Introduction:
+	Town is sick and plagued. Monsters terrorized when dark.
+	There is a legend, tells all the uunfortunate comes from a curse, fed by the evil {Boss}
+
+	Chapter 1 - The lost artefacts/relic - 3 artefacts/parts
+		- {BossName} lock himself in a mythical place and locked in with a relic who split and spread across the area.
+		- You must search and find those 3 pieces.
+		- Every piece is protected by 1 evil monster
+	Chapter 2 - Restore the artefact from the 3 parts
+		- You find out, that you need some additional things (stones, bones etc)
+		- You need to find a blacksmith to restore it for you. 
+		- Blacksmith died many years ago. You have to "talk" to him as undead (via the witch)
+	Chapter 3 - Place the artefact to open a new world/zone/portal
+		- You need to solve few puzzles to find a secret place
+	Chapter 4 - Find and destroy the terror boss
+		- The area is guarded
+		- When you found him, you leanred he was locked out by {the person's father who gave you the quest}
+		- Get back to the town and find the traitor {who was the real Boss living between us}

@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=3 uid="uid://hy6rqx67d6t4"]
+[gd_scene load_steps=90 format=3 uid="uid://hy6rqx67d6t4"]
 
 [ext_resource type="Texture2D" uid="uid://betdtpwyvxa2u" path="res://assets/characters/E.png" id="2_iyrhi"]
 [ext_resource type="Texture2D" uid="uid://bkxj8me6o40co" path="res://assets/characters/N.png" id="3_o46hk"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dliiwyry2hh76" path="res://assets/characters/SW.png" id="8_wdu3u"]
 [ext_resource type="Texture2D" uid="uid://dyljkqoaw2dyl" path="res://assets/characters/W.png" id="9_5105l"]
 [ext_resource type="Texture2D" uid="uid://21qe7bgctkc7" path="res://assets/monsters/itchian/Idle_BattlePose_Body_135.png" id="10_481d3"]
+[ext_resource type="Script" uid="uid://drwrcmk5bd7au" path="res://DetectionZone.cs" id="10_iyrhi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xuqvo"]
 atlas = ExtResource("2_iyrhi")
@@ -600,7 +601,7 @@ motion_mode = 1
 position = Vector2(1, -1)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_xuqvo")
-frame_progress = 0.715164
+frame_progress = 0.0785772
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, 37)
@@ -615,7 +616,10 @@ shadow_enabled = true
 shadow_filter = 1
 texture = SubResource("GradientTexture2D_nvl01")
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
 [node name="DetectionZone" type="Area2D" parent="."]
+script = ExtResource("10_iyrhi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
 shape = SubResource("CircleShape2D_481d3")

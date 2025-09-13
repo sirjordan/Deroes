@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{02EA681E-C
 		Misc\gold_drop_function.png = Misc\gold_drop_function.png
 		Misc\leveling_function.png = Misc\leveling_function.png
 		Misc\resist_fire_funcion.png = Misc\resist_fire_funcion.png
+		Story.txt = Story.txt
 		Todo.txt = Todo.txt
 	EndProjectSection
 EndProject

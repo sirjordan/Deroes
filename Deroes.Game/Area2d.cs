@@ -13,7 +13,6 @@ public partial class Area2d : Area2D
 	{
 		if (body is CharacterBody2D)
 		{
-			//Visible = false;
 			Modulate = new Color(1, 1, 1, 0.4f);
 		}
 	}
@@ -23,7 +22,6 @@ public partial class Area2d : Area2D
 		if (body is CharacterBody2D)
 		{
 			Modulate = new Color(1, 1, 1, 1);
-			//Visible = true;
 		}
 	}
 }

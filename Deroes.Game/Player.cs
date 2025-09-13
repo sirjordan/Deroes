@@ -12,9 +12,6 @@ public partial class Player : CharacterBody2D
 
 	public override void _Ready()
 	{
-		//var idle = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		//idle.Play();
-
 		_agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
 		_movementSpeed = WalkSpeed;
 	}
