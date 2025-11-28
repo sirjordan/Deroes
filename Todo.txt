@@ -27,3 +27,11 @@ Monster:
 3. Ensure monsetr is dead before drop items/gold
 4. Dmg & Resists per monster level?
 12. Monster xp calculation
+
+UI
+------
+1. In-Game menu 
+	a. Toggle debug features
+2. Main Menu
+3. Fog of war
+4. Mini-map

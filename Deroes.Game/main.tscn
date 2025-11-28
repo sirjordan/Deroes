@@ -404,3 +404,17 @@ texture = ExtResource("22_d13ii")
 [node name="ChimneyTopW" type="Sprite2D" parent="Roof/Area2D"]
 position = Vector2(-83, 237)
 texture = ExtResource("25_0odxb")
+
+[node name="Menu" type="Control" parent="."]
+top_level = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CheckButton" type="CheckButton" parent="Menu"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = -38.0
+offset_right = 120.0
+offset_bottom = -14.0

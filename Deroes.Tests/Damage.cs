@@ -67,7 +67,7 @@ public class DamageTests
 	public void PhysicalDamageRange_Apply_ShouldDealNoDamage_WhenImmune()
 	{
 		// Unit with phisical immune
-		var unit = new Monster(1);
+		var unit = new Monster(1, DropChance.Always());
 		var originalLife = unit.Life.Value.Remaining;
 
 		var physical = new Physical(10, 15);
@@ -135,7 +135,7 @@ public class DamageTests
 	[TestMethod]
 	public void ColdDamageRange_Apply_ShouldDealNoDamage_WhenImmune()
 	{
-		var unit = new Monster(1); // Cold immune
+		var unit = new Monster(1, DropChance.Always()); // Cold immune
 		var originalLife = unit.Life.Value.Remaining;
 
 		var cold = new Cold(10, 20);

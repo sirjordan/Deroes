@@ -16,7 +16,7 @@ namespace Deroes.Core
 
 				if (!_monster.IsAlive)
 				{
-					var xp = _monster.CalcExperience();
+					var xp = _monster.GetExperience();
 					_hero.AddExperience(xp);
 
 					_monster.Die();
