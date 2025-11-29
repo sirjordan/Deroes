@@ -2,7 +2,7 @@
 
 namespace Deroes.Core
 {
-	public class Gold
+	public class GoldBag
 	{
 		private double _maxGoldCoef;
 		private Hero _hero;
@@ -10,7 +10,7 @@ namespace Deroes.Core
 		public int Max => (int)(_maxGoldCoef * _hero.Level * 10000);
 		public int Amount { get; private set; }
 
-		public Gold(Hero h, double maxGoldCoef = 1.0)
+		public GoldBag(Hero h, double maxGoldCoef = 1.0)
 		{
 			_maxGoldCoef = maxGoldCoef;
 			_hero = h;

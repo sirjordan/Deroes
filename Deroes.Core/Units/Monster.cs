@@ -8,7 +8,7 @@ namespace Deroes.Core.Units
 		private DropChance _dropChance;
 		public override int Max_Level => 85;
 
-		public Monster(int level, DropChance dropChance = null, string name = nameof(Monster))
+		public Monster(int level, DropChance? dropChance = null, string name = nameof(Monster))
 			: base(name, new MonsterBaseSetup(level))
 		{
 			ArgumentOutOfRangeException.ThrowIfGreaterThan(level, Max_Level);

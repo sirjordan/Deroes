@@ -1,0 +1,97 @@
+ACT 1 – APOLLONIA
+
+	INTRODUCTION – The Sick Town
+
+		Apollonia, once a proud medieval settlement built atop the ruins of an ancient magical empire, is dying. 
+		A creeping plague blackens the fields, sickens the townsfolk, and twists animals into horrors. 
+		When the sun sets behind the shattered towers of the old world, monsters rise—aberrations born of corrupted magic.
+
+		A legend whispers that all this suffering is tied to an ancient curse, fed by an awakening evil known only as "Pigg". 
+		Some say {Boss} was human once. Others believe it is a relic of the apocalypse, a creature older than the Cataclysm. 
+		Whatever the truth, Apollonia’s people believe one thing:
+
+		The curse is growing stronger, and time is running out.
+
+		The town elder’s child approaches you, pleading for your help. You must follow the legend and uncover the truth.
+
+
+CHAPTER 1 – The Lost Relic
+
+	The Relic of Binding
+
+		Long ago, a powerful object known as the Relic of Binding was used to imprison Pigg. 
+		But when the warlock Pigg attempted to harness its power, the relic shattered, and he became trapped in a mythical sealed sanctuary.
+
+		The relic broke into three fragments, scattered across the corrupted landscape. 
+		Your task: recover all three pieces.
+
+	Each Fragment & Guardian
+
+		Fragment I – The Verdant Shard
+			Location: Rotwood Grove, a once-sacred druid forest now overrun by mutating plant-flesh creatures.
+			Guardian: The Moss-Tyrant, a colossal tree-beast fused with old-world metal and bone.
+
+		Fragment II – The Ember Core
+			Location: The Ashen Quarry, a collapsed settlement suffocated by toxic fog and molten fissures.
+			Guardian: The Scorchbound Golem, a living furnace of cursed ore and relentless fire.
+
+		Fragment III – The Umbral Lens
+			Location: The Hollowed Academy, ruins of a magical university fractured by unstable reality.
+			Guardian: The Echo Wraith, a spectral mage that splits into mirror illusions.
+
+
+CHAPTER 2 – Restoring the Relic
+
+		After collecting all fragments, you learn they cannot be restored without rare ritual materials:
+			- Tears of Stone
+			- Boneglass
+			- Furnace Dust
+
+		Only one person knew the restoration ritual: Aldren Ironshaper, Apollonia’s legendary blacksmith.
+
+		He died decades ago.
+
+		You seek Old Mother Ysera, the last witch of Apollonia, who performs a forbidden spirit-binding ritual.
+		Through her magic, you speak with Aldren’s undead spirit in the spectral plane.
+
+		Aldren reforges the Relic of Binding with your help, but warns before fading:
+
+			“Someone in Apollonia has lied to you.”
+
+
+CHAPTER 3 – The Secret Portal
+
+		The restored relic reveals a hidden location beneath an ancient citadel older than Apollonia itself.
+
+		To access it, you must:
+			- Solve magical rune puzzles
+			- Decipher post-apocalyptic glyphs
+			- Navigate a labyrinth that shifts with moonlight
+
+		Deep within the sanctum, you place the relic into a stone mechanism. 
+		A portal tears open, revealing a new realm:
+
+		The Forsaken Expanse — a fusion of medieval magic and post-apocalyptic debris.
+
+
+CHAPTER 4 – Confronting the Terror
+
+		The Forsaken Expanse is guarded by twisted creatures and ancient magical constructs. 
+		Defeating them brings you to the true horror:
+
+		Pigg, the ancient evil feeding on the curse.
+
+		In battle, Pigg reveals a chilling truth:
+
+			“I was sealed away not by heroes… 
+			 but by {the father who gave you the quest}. He feared what I knew.”
+
+		After defeating Pigg, you return to Apollonia. 
+		The town celebrates, but the elder’s child has vanished.
+
+		Clues reveal the darkest truth yet:
+
+		The real traitor—the true mastermind—was living among you all along.
+
+		Act 1 ends with the revelation:
+			The one who sent you on the quest is the real Boss.

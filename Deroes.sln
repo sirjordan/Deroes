@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.13.35818.85
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11217.181 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deroes.Core", "Deroes.Core\Deroes.Core.csproj", "{2683E909-15FB-4EEB-8A20-68673BACDB37}"
 EndProject
@@ -12,11 +12,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{02EA681E-C
 		Misc\gold_drop_function.png = Misc\gold_drop_function.png
 		Misc\leveling_function.png = Misc\leveling_function.png
 		Misc\resist_fire_funcion.png = Misc\resist_fire_funcion.png
-		Story.txt = Story.txt
 		Todo.txt = Todo.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deroes.Game", "Deroes.Game\Deroes.Game.csproj", "{D1B3AF46-77B7-8703-0FAE-1AEE608B94E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Story", "Story", "{84F5648E-48D6-4DE4-A0C0-5492CC249ADD}"
+	ProjectSection(SolutionItems) = preProject
+		Act 1.txt = Act 1.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{84F5648E-48D6-4DE4-A0C0-5492CC249ADD} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6C1FF6DF-7F59-48A1-9951-244ED7C0DF32}

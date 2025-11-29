@@ -12,7 +12,7 @@ namespace Deroes.Core.Units
 		public Attributes Attributes { get; private set; }
 		public Stash<Item> Inventory { get; private set; }
 		public Chest Chest { get; private set; }
-		public Gold Gold { get; private set; }
+		public GoldBag Gold { get; private set; }
 		public Gear Gear { get; private set; }
 		public long Experience { get; private set; }
 
@@ -24,7 +24,7 @@ namespace Deroes.Core.Units
 			Experience = 0;
 			Inventory = new Stash<Item>(10, 4);
 			Chest = new Chest(this);
-			Gold = new Gold(this);
+			Gold = new GoldBag(this);
 			Gear = new Gear(this);
 		}
 

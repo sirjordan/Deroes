@@ -95,7 +95,7 @@ public class GoldTests
 	[TestMethod]
 	public void MaxGold_ShouldRespectHeroLevelAndCoefficient()
 	{
-		var gold = new Gold(_hero, maxGoldCoef: 2.5);
+		var gold = new GoldBag(_hero, maxGoldCoef: 2.5);
 
 		int expectedMax = (int)(2.5 * _hero.Level * 10000);
 

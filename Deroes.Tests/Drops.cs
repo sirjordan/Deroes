@@ -127,4 +127,52 @@ public class Drops
 		Assert.IsTrue(ratio > 0.40 && ratio < 0.60,
 			$"Expected hit ratio around 0.5, but got {ratio}");
 	}
+
+	[DataTestMethod]
+	[DataRow(0, 0)]
+	[DataRow(50, 50)]
+	[DataRow(100, 100)]
+	public void FromPercentage_ValidValues_ShouldSetPercentage(int input, int expected)
+	{
+		var dc = DropChance.Explicit(input);
+
+		Assert.AreEqual(expected, dc.Chance);
+	}
+
+	[DataTestMethod]
+	[DataRow(-1, 0)]
+	[DataRow(-50, 0)]
+	[DataRow(101, 100)]
+	[DataRow(999, 100)]
+	public void FromPercentage_OutOfRange_ShouldClamp(int input, int expected)
+	{
+		var dc = DropChance.Explicit(input);
+
+		Assert.AreEqual(expected, dc.Chance);
+	}
+
+	[TestMethod]
+	public void Always_ShouldReturnPercentage100()
+	{
+		var dc = DropChance.Always();
+
+		Assert.AreEqual(100, dc.Chance);
+	}
+
+	[TestMethod]
+	public void Never_ShouldReturnPercentage0()
+	{
+		var dc = DropChance.Never();
+
+		Assert.AreEqual(0, dc.Chance);
+	}
+
+	[TestMethod]
+	public void Percentage_ShouldRemainConstantAfterCreation()
+	{
+		var dc = DropChance.Always();
+
+		// Ensures the property does not change since the setter is private
+		Assert.AreEqual(100, dc.Chance);
+	}
 }
