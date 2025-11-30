@@ -3,9 +3,9 @@ using System;
 
 public partial class LighterNode : Node2D
 {
-	[Export] public float MinEnergy { get; set; } = 0.4f;
+	[Export] public float MinEnergy { get; set; } = 0.25f;
 	[Export] public float MaxEnergy { get; set; } = 0.6f;
-	[Export] public float Speed { get; set; } = 0.4f;
+	[Export] public float Speed { get; set; } = 0.3f;
 
 
 	private bool _glowing = false;

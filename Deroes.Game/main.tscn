@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=4 uid="uid://b2gvgwi23h5jn"]
+[gd_scene load_steps=70 format=4 uid="uid://b2gvgwi23h5jn"]
 
 [ext_resource type="Texture2D" uid="uid://c6j7lwh0tsrwb" path="res://assets/environment/ground/Base1_128.png" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://cutp6pypsn2yf" path="res://assets/environment/ground/BaseStone2.0_128.png" id="2_0xm2m"]
@@ -33,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://cdeg11kleppxc" path="res://assets/environment/roofs/woodWallRoofLeft_E.png" id="23_1u8w0"]
 [ext_resource type="Texture2D" uid="uid://bavqnyxtr1c" path="res://assets/environment/roofs/woodWallRoofRight_E.png" id="24_0odxb"]
 [ext_resource type="Texture2D" uid="uid://bkcncgjit5503" path="res://assets/environment/roofs/chimneyTop_W.png" id="25_0odxb"]
+[ext_resource type="PackedScene" uid="uid://dnxm8mla65rtu" path="res://in_game_menu.tscn" id="34_4k2k6"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4c57u"]
 vertices = PackedVector2Array(64, 0, 0, 32, -64, 0, 0, -32)
@@ -352,9 +353,11 @@ position = Vector2(-4, -4)
 color = Color(0.627992, 0.633435, 0.506093, 1)
 
 [node name="Weather" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Rain" parent="Weather" instance=ExtResource("2_ycdy4")]
 position = Vector2(-56, 157)
+emitting = true
 visibility_rect = Rect2(0, 0, 600, 600)
 
 [node name="Roof" type="Node2D" parent="."]
@@ -405,16 +408,5 @@ texture = ExtResource("22_d13ii")
 position = Vector2(-83, 237)
 texture = ExtResource("25_0odxb")
 
-[node name="Menu" type="Control" parent="."]
-top_level = true
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="CheckButton" type="CheckButton" parent="Menu"]
-layout_mode = 0
-offset_left = 76.0
-offset_top = -38.0
-offset_right = 120.0
-offset_bottom = -14.0
+[node name="CanvasLayer" parent="." instance=ExtResource("34_4k2k6")]
+layer = 2

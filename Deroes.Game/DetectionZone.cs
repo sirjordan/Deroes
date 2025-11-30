@@ -9,7 +9,7 @@ public partial class DetectionZone : Area2D
 	{
 		BodyEntered += Area_BodyEntered;
 		BodyExited += Area_BodyExited;
-		_monster = GetNode<CharacterBody2D>("../Monster");
+		//_monster = GetNode<CharacterBody2D>("../Monster");
 	}
 
 	private void Area_BodyEntered(Node2D body)

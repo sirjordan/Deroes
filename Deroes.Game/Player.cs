@@ -18,6 +18,10 @@ public partial class Player : CharacterBody2D
 
 	public override void _Input(InputEvent @event)
 	{
+		// If the click is over a Control, do NOT move the character
+		if (GetViewport().GuiGetHoveredControl() != null) 
+			return;
+
 		if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
 		{
 			var target = GetGlobalMousePosition();
