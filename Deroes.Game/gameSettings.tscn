@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2bn68opfr0n7"]
+[gd_scene load_steps=3 format=3 uid="uid://c2bn68opfr0n7"]
+
+[ext_resource type="PackedScene" uid="uid://bjur3h8ugdrwv" path="res://close_window.tscn" id="1_skyyv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kyf72"]
 bg_color = Color(0, 0, 0, 0.64705884)
@@ -47,3 +49,13 @@ layout_mode = 2
 [node name="CheckButton" type="CheckButton" parent="HBoxContainer/ToggleVBoxContainer"]
 layout_mode = 2
 button_pressed = true
+
+[node name="CloseWindow" parent="." instance=ExtResource("1_skyyv")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_bottom = 0.0
+offset_left = -1600.0
+offset_right = -1600.0
+grow_horizontal = 0
+grow_vertical = 1
