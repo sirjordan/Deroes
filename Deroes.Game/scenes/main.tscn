@@ -2,15 +2,15 @@
 
 [ext_resource type="Texture2D" uid="uid://c6j7lwh0tsrwb" path="res://assets/environment/ground/Base1_128.png" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://cutp6pypsn2yf" path="res://assets/environment/ground/BaseStone2.0_128.png" id="2_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://bni4d672qf5gx" path="res://rain.tscn" id="2_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://bni4d672qf5gx" path="res://scenes/rain.tscn" id="2_ycdy4"]
 [ext_resource type="Texture2D" uid="uid://crnqk8tvjf3lo" path="res://assets/environment/ground/BaseStone_128.png" id="3_h2yge"]
 [ext_resource type="Texture2D" uid="uid://d3ska4d70j7oj" path="res://assets/environment/ground/transparent_128.png" id="4_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://dnpa57ilxfdcg" path="res://assets/environment/walls/woodWallSupport_N_128.png" id="4_2cqfq"]
-[ext_resource type="Script" uid="uid://bqokfkub5pw2f" path="res://Terrain.cs" id="5_272bh"]
+[ext_resource type="Script" uid="uid://bqokfkub5pw2f" path="res://scenes/Terrain.cs" id="5_272bh"]
 [ext_resource type="Texture2D" uid="uid://jewaxovtscj6" path="res://assets/environment/ground/level_2_128_1.png" id="5_kek77"]
 [ext_resource type="Texture2D" uid="uid://cki6d6sxwcgdc" path="res://assets/environment/ground/level_2_128_2.png" id="6_4c57u"]
 [ext_resource type="Texture2D" uid="uid://jt083vr0w5d2" path="res://assets/environment/trees/Tree12.0_128.png" id="8_4c57u"]
-[ext_resource type="PackedScene" uid="uid://dqatlso66kfuq" path="res://player.tscn" id="8_5vw27"]
+[ext_resource type="PackedScene" uid="uid://dqatlso66kfuq" path="res://scenes/player.tscn" id="8_5vw27"]
 [ext_resource type="Texture2D" uid="uid://odnih2lohfvy" path="res://assets/environment/ground/dirt_E_128.png" id="8_cegan"]
 [ext_resource type="Texture2D" uid="uid://c5k4vuxvmw1f" path="res://assets/environment/ground/Water_Corner_3_128.png" id="8_qsp4k"]
 [ext_resource type="Texture2D" uid="uid://cdk83g8utfyta" path="res://assets/environment/ground/water_128.png" id="9_efxa6"]
@@ -19,21 +19,21 @@
 [ext_resource type="Texture2D" uid="uid://dx76ixrcs8xdj" path="res://assets/environment/ground/Water_side_2_128.png" id="11_4k2k6"]
 [ext_resource type="Texture2D" uid="uid://lk7mecjgrleo" path="res://assets/environment/ground/Water_side_3_128.png" id="12_0rl1p"]
 [ext_resource type="Texture2D" uid="uid://bpe3vqoypdqvn" path="res://assets/environment/walls/woodWallSupport_E_128.png" id="12_074og"]
-[ext_resource type="PackedScene" uid="uid://b1m3t042y631y" path="res://lighter_node.tscn" id="12_dg77c"]
+[ext_resource type="PackedScene" uid="uid://b1m3t042y631y" path="res://scenes/lighter_node.tscn" id="12_dg77c"]
 [ext_resource type="Texture2D" uid="uid://c6er7il74ey7k" path="res://assets/environment/walls/woodWallSupport_S_128.png" id="13_cegan"]
 [ext_resource type="Texture2D" uid="uid://64gxfpmtrh2n" path="res://assets/environment/ground/Water_side_4_128.png" id="13_ok6jj"]
-[ext_resource type="PackedScene" uid="uid://hy6rqx67d6t4" path="res://monster.tscn" id="14_w48qg"]
-[ext_resource type="Script" uid="uid://dhc5vguqkvsdt" path="res://Monster.cs" id="15_vivmo"]
+[ext_resource type="PackedScene" uid="uid://hy6rqx67d6t4" path="res://scenes/monster.tscn" id="14_w48qg"]
+[ext_resource type="Script" uid="uid://dhc5vguqkvsdt" path="res://scenes/Monster.cs" id="15_vivmo"]
 [ext_resource type="Texture2D" uid="uid://dkv1tl27cjgkq" path="res://assets/environment/walls/woodWallSupport_W_128.png" id="16_074og"]
 [ext_resource type="Texture2D" uid="uid://bgjmtrmq7arsw" path="res://assets/environment/ground/Water_Corner_1_128.png" id="16_seu75"]
 [ext_resource type="Texture2D" uid="uid://00pfr8leguvw" path="res://assets/environment/ground/Water_Corner_2_128.png" id="17_htxhm"]
-[ext_resource type="Script" uid="uid://5t6mrfwnglcs" path="res://Area2d.cs" id="20_getpj"]
+[ext_resource type="Script" uid="uid://5t6mrfwnglcs" path="res://scenes/Area2d.cs" id="20_getpj"]
 [ext_resource type="Texture2D" uid="uid://cfujkmhjkjvnb" path="res://assets/environment/roofs/roof_W.png" id="21_ryguw"]
 [ext_resource type="Texture2D" uid="uid://dkhe2am145ik8" path="res://assets/environment/roofs/roof_E.png" id="22_d13ii"]
 [ext_resource type="Texture2D" uid="uid://cdeg11kleppxc" path="res://assets/environment/roofs/woodWallRoofLeft_E.png" id="23_1u8w0"]
 [ext_resource type="Texture2D" uid="uid://bavqnyxtr1c" path="res://assets/environment/roofs/woodWallRoofRight_E.png" id="24_0odxb"]
 [ext_resource type="Texture2D" uid="uid://bkcncgjit5503" path="res://assets/environment/roofs/chimneyTop_W.png" id="25_0odxb"]
-[ext_resource type="PackedScene" uid="uid://dnxm8mla65rtu" path="res://in_game_menu.tscn" id="34_4k2k6"]
+[ext_resource type="PackedScene" uid="uid://dnxm8mla65rtu" path="res://scenes/in_game_menu.tscn" id="34_4k2k6"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4c57u"]
 vertices = PackedVector2Array(64, 0, 0, 32, -64, 0, 0, -32)
@@ -408,5 +408,5 @@ texture = ExtResource("22_d13ii")
 position = Vector2(-83, 237)
 texture = ExtResource("25_0odxb")
 
-[node name="CanvasLayer" parent="." instance=ExtResource("34_4k2k6")]
+[node name="InGameMenuLayer" parent="." instance=ExtResource("34_4k2k6")]
 layer = 2

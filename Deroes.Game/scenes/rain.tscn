@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bni4d672qf5gx"]
 
-[ext_resource type="Script" uid="uid://dq65paon58oul" path="res://Rain.cs" id="1_kwfd8"]
+[ext_resource type="Script" uid="uid://dq65paon58oul" path="res://scenes/Rain.cs" id="1_kwfd8"]
 
 [sub_resource type="Curve" id="Curve_dg77c"]
 _limits = [0.0, 3.0, 0.0, 1.0]

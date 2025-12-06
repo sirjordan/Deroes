@@ -9,6 +9,7 @@ public partial class Terrain : TileMapLayer
 
 	public override void _Ready()
 	{
+		// Fill edges with transparent tile (world border)
 		var filled_tiles = GetUsedCells();
 		foreach (var filled_tile in filled_tiles)
 		{
@@ -22,24 +23,4 @@ public partial class Terrain : TileMapLayer
 			}
 		}
 	}
-
-	//public override bool _UseTileDataRuntimeUpdate(Vector2I coords)
-	//{
-	//	if (Scenery != null && Scenery.GetUsedCells().Contains(coords))
-	//	{
-	//		GD.Print("Contains");
-	//		return true;
-	//	}
-
-	//	return false;
-	//}
-
-	//public override void _TileDataRuntimeUpdate(Vector2I coords, TileData tileData)
-	//{
-	//	if (Scenery != null && Scenery.GetUsedCells().Contains(coords))
-	//	{
-	//		GD.Print("Set");
-	//		tileData.SetNavigationPolygon(0, null);
-	//	}
-	//}
 }
