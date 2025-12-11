@@ -1,22 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2bn68opfr0n7"]
+[gd_scene load_steps=4 format=3 uid="uid://c2bn68opfr0n7"]
 
+[ext_resource type="Script" uid="uid://c5317jkoggpkc" path="res://scenes/GameSettings.cs" id="1_t6p7j"]
 [ext_resource type="PackedScene" uid="uid://8q8tufi1odbb" path="res://scenes/window.tscn" id="1_vtnhb"]
 [ext_resource type="Script" uid="uid://o2ivvg5w5cmo" path="res://scenes/WeatherCheckButton.cs" id="2_yo8eh"]
 
 [node name="GameSettings" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -800.0
-offset_bottom = -300.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 800.0
+offset_bottom = 600.0
+script = ExtResource("1_t6p7j")
 
 [node name="Window" parent="." instance=ExtResource("1_vtnhb")]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 1
+[node name="HBoxContainer" type="HBoxContainer" parent="Window"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -29,19 +26,19 @@ offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LabelVBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="LabelVBoxContainer" type="VBoxContainer" parent="Window/HBoxContainer"]
 layout_mode = 2
 
-[node name="WeatherLabel" type="Label" parent="HBoxContainer/LabelVBoxContainer"]
+[node name="WeatherLabel" type="Label" parent="Window/HBoxContainer/LabelVBoxContainer"]
 layout_mode = 2
 text = "Weather"
 
-[node name="ToggleVBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="ToggleVBoxContainer" type="VBoxContainer" parent="Window/HBoxContainer"]
 layout_mode = 2
 
-[node name="WeatherCheckButton" type="CheckButton" parent="HBoxContainer/ToggleVBoxContainer"]
+[node name="WeatherCheckButton" type="CheckButton" parent="Window/HBoxContainer/ToggleVBoxContainer"]
 layout_mode = 2
 button_pressed = true
 script = ExtResource("2_yo8eh")
 
-[connection signal="toggled" from="HBoxContainer/ToggleVBoxContainer/WeatherCheckButton" to="HBoxContainer/ToggleVBoxContainer/WeatherCheckButton" method="_on_toggled"]
+[connection signal="toggled" from="Window/HBoxContainer/ToggleVBoxContainer/WeatherCheckButton" to="Window/HBoxContainer/ToggleVBoxContainer/WeatherCheckButton" method="_on_toggled"]

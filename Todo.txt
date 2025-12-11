@@ -22,7 +22,6 @@ Hero:
 
 Monster:
 ------
-2. Fine tune (and test) monster health per level
 3. Ensure monsetr is dead before drop items/gold
 4. Dmg & Resists per monster level?
 12. Monster xp calculation

@@ -10,7 +10,7 @@ public partial class Rain : GpuParticles2D
 
 	public override void _Ready()
 	{
-		SignalManager.Instance.SettingsWeatherToggle += WeatherToggle;
+		SignalManager.Instance.Settings_WeatherToggle += WeatherToggle;
 
 		var timer = GetNode<Timer>("LightiningTime");
 		timer.Timeout += LightiningStrike;

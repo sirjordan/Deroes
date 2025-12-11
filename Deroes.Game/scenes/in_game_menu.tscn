@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dnxm8mla65rtu"]
 
-[ext_resource type="Script" uid="uid://b5ximu0p3i83h" path="res://scenes/Settings.cs" id="1_if5jv"]
-[ext_resource type="PackedScene" uid="uid://c2bn68opfr0n7" path="res://scenes/gameSettings.tscn" id="1_ioadw"]
+[ext_resource type="Script" uid="uid://bam74fv62ag3b" path="res://scenes/SettingsBtn.cs" id="1_0rq4b"]
+[ext_resource type="Script" uid="uid://by6f6jjv5odyb" path="res://scenes/HeroBtn.cs" id="2_0rq4b"]
 
 [node name="InGameMenyLayer" type="CanvasLayer"]
 
@@ -17,36 +17,27 @@ mouse_force_pass_scroll_events = false
 [node name="VBoxContainer" type="VBoxContainer" parent="InGameMenu"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 70.0
-grow_vertical = 2
+offset_right = 200.0
+offset_bottom = 270.0
 
-[node name="Settings" type="Button" parent="InGameMenu/VBoxContainer"]
+[node name="SettingsBtn" type="Button" parent="InGameMenu/VBoxContainer"]
 layout_mode = 2
 tooltip_text = "Open Settings Menu"
 mouse_default_cursor_shape = 2
 text = "Settings"
-script = ExtResource("1_if5jv")
+script = ExtResource("1_0rq4b")
 
-[node name="Hero" type="Button" parent="InGameMenu/VBoxContainer"]
+[node name="HeroBtn" type="Button" parent="InGameMenu/VBoxContainer"]
 layout_mode = 2
 tooltip_text = "Open Settings Menu"
 mouse_default_cursor_shape = 2
-text = "Hero"
+text = "Inventory"
+script = ExtResource("2_0rq4b")
 
 [node name="Minimap" type="ColorRect" parent="InGameMenu/VBoxContainer"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 color = Color(0.47007585, 0.47007585, 0.47007585, 1)
 
-[node name="GameSettings" parent="." instance=ExtResource("1_ioadw")]
-visible = false
-offset_left = 391.0
-offset_top = 137.0
-offset_right = -409.0
-offset_bottom = -163.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[connection signal="pressed" from="InGameMenu/VBoxContainer/Settings" to="InGameMenu/VBoxContainer/Settings" method="_on_pressed"]
+[connection signal="pressed" from="InGameMenu/VBoxContainer/SettingsBtn" to="InGameMenu/VBoxContainer/SettingsBtn" method="_on_pressed"]
+[connection signal="pressed" from="InGameMenu/VBoxContainer/HeroBtn" to="InGameMenu/VBoxContainer/HeroBtn" method="_on_pressed"]
