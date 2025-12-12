@@ -1,4 +1,5 @@
 using Godot;
+using static System.Formats.Asn1.AsnWriter;
 
 public partial class SignalManager : Node
 {
@@ -25,16 +26,18 @@ public partial class SignalManager : Node
 
 	private void SignalManager_CloseWindow(string scene)
 	{
+		GD.Print($"SignalManager_CloseWindow: {scene}");
 		_windowManager.Close(scene);
 	}
 
 	private void SignalManager_OpenWindow(string scene)
 	{
+		GD.Print($"SignalManager_OpenWindow: {scene}");
 		_windowManager.Open(scene);
 	}
 
 	private void SignalManager_SettingsWeatherToggle(bool toggle)
 	{
-		// Other things we want to have as middleware
+		GD.Print($"SignalManager_SettingsWeatherToggle: {toggle}");
 	}
 }

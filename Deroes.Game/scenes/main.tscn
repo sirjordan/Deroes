@@ -282,6 +282,7 @@ sources/9 = SubResource("TileSetAtlasSource_ryguw")
 y_sort_enabled = true
 
 [node name="Ground" type="TileMapLayer" parent="."]
+unique_name_in_owner = true
 z_index = -1
 y_sort_enabled = true
 position = Vector2(567, 320)
@@ -295,7 +296,7 @@ navigation_polygon = SubResource("NavigationPolygon_kek77")
 [node name="Scenery" type="TileMapLayer" parent="."]
 y_sort_enabled = true
 position = Vector2(-9, 30)
-tile_map_data = PackedByteArray("AAACAAsAAAAAAAAAAAAFABIAAAAAAAAAAAAEAA8AAAAAAAAAAAADAAwAAAAAAAAAAAADAAMAAAAAAAAAAAD//xQAAAAAAAAAAAD9/xcAAAAAAAAAAAAEAPv/AAAAAAAAAAD//wAAAAAAAAAAAAAAAAMAAAAAAAAAAAD7/wkABAAAAAEAAAD8/woABAAAAAEAAAD8/wsABAAAAAEAAAD5/wwABQAAAAEAAAD5/wsABQAAAAEAAAD9/w4ABwAAAAAAAAD8/xAABwAAAAAAAAD7/xEABwAAAAAAAAD9/wwABAAAAAEAAAD6/xEACQAAAAAAAAD6/xAACQAAAAAAAAD5/w8ACQAAAAAAAAD5/w4ACQAAAAAAAAD6/wkABQAAAAEAAAD3/xMABAAAAAEAAAD4/xQABAAAAAEAAAD4/xUABAAAAAEAAAA=")
+tile_map_data = PackedByteArray("AAACAAsAAAAAAAAAAAAEAA8AAAAAAAAAAAADAAwAAAAAAAAAAAADAAMAAAAAAAAAAAD//xQAAAAAAAAAAAD9/xcAAAAAAAAAAAAEAPv/AAAAAAAAAAD//wAAAAAAAAAAAAAAAAMAAAAAAAAAAAD7/wkABAAAAAEAAAD8/woABAAAAAEAAAD8/wsABAAAAAEAAAD5/wwABQAAAAEAAAD5/wsABQAAAAEAAAD9/w4ABwAAAAAAAAD8/xAABwAAAAAAAAD7/xEABwAAAAAAAAD9/wwABAAAAAEAAAD6/xEACQAAAAAAAAD6/xAACQAAAAAAAAD5/w8ACQAAAAAAAAD5/w4ACQAAAAAAAAD6/wkABQAAAAEAAAD3/xMABAAAAAEAAAD4/xQABAAAAAEAAAD4/xUABAAAAAEAAAD3/xQAAAAAAAAAAAD3/xUAAAAAAAAAAAD4/xYABQAAAAEAAAD3/xcABQAAAAEAAAD3/xYAAAAAAAAAAAD2/xUAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_w48qg")
 
 [node name="Player" parent="." instance=ExtResource("8_5vw27")]
@@ -350,6 +351,9 @@ position = Vector2(-588, 371)
 
 [node name="Lighter14" parent="Lights" instance=ExtResource("12_dg77c")]
 position = Vector2(-615, 1010)
+
+[node name="Lighter15" parent="Lights" instance=ExtResource("12_dg77c")]
+position = Vector2(-1214, 769)
 
 [node name="Darkness" type="CanvasModulate" parent="."]
 position = Vector2(-4, -4)

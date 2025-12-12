@@ -8,9 +8,7 @@ public partial class CloseButton : Button
 	{
 		if (Context != null)
 		{
-			SignalManager.Instance.EmitSignal(SignalManager.SignalName.CloseWindow, Context.SceneFilePath);
-
-			//Context.GetParent().SceneFilePath.QueueFree();
+			SignalManager.Instance.EmitSignal(SignalManager.SignalName.CloseWindow, Context.GetParent().GetParent().SceneFilePath);
 		}
 		else
 		{
