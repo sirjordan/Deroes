@@ -32,5 +32,4 @@ UI
 	a. Main, Exit game, Save etc
 2. Main Menu
 3. Fog of war
-4. Mini-map
 5. Foot steps

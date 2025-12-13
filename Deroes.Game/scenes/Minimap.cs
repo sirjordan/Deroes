@@ -2,38 +2,48 @@ using Godot;
 
 public partial class Minimap : TextureRect
 {
-	private Viewport miniMapViewport;
-	//private TextureRect miniMapRect;
-	private TileMapLayer tilemapCopy;
+	private Viewport _miniMapViewport;
+	private TileMapLayer _tilemapCopy;
+	private Camera2D _minimapCamera;
+	private CharacterBody2D _player;
 
 	public override void _Ready()
 	{
 		// UI control where minimap appears
-		//miniMapRect = GetNode<TextureRect>("UI/MiniMapRect");
-
-		// Create viewport
-		miniMapViewport = new SubViewport()
+		_miniMapViewport = new SubViewport()
 		{
-			Size = new Vector2I(200, 200),
+			Size = new Vector2I((int)Size.X, (int)Size.Y), 
 			RenderTargetUpdateMode = SubViewport.UpdateMode.Always,
 			RenderTargetClearMode = SubViewport.ClearMode.Always,
-			TransparentBg = true
+			//TransparentBg = true
 		};
-		AddChild(miniMapViewport);
+		AddChild(_miniMapViewport);
 
-		var minimapCamera = new Camera2D
+		_player = GetTree().Root.FindChild("Player", true, false) as CharacterBody2D;
+		_minimapCamera = new Camera2D
 		{
-			Zoom = new Vector2(0.05f, 0.05f), // Increase this to zoom OUT
-			Position = new Vector2(),// player.GlobalPosition,
+			Zoom = new Vector2(0.1f, 0.1f), 
+			Position = _player.GlobalPosition,
 			Enabled = true
 		};
-		miniMapViewport.AddChild(minimapCamera);
+		_miniMapViewport.AddChild(_minimapCamera);
 
 		// Duplicate tilemap into viewport
 		var tilemap = GetTree().Root.FindChild("Ground", true, false);
-		tilemapCopy = tilemap.Duplicate() as TileMapLayer;
-		miniMapViewport.AddChild(tilemapCopy);
+		_tilemapCopy = tilemap.Duplicate() as TileMapLayer;
+		_miniMapViewport.AddChild(_tilemapCopy);
 
-		Texture = miniMapViewport.GetTexture();
+		Texture = _miniMapViewport.GetTexture();
+	}
+
+	public override void _Process(double delta)
+	{
+		_minimapCamera.GlobalPosition = _player.GlobalPosition;
+	}
+
+	public override void _Draw()
+	{
+		base._Draw();
+		//DrawCircle(_player.GlobalPosition, 25, Colors.DarkRed, filled: true);
 	}
 }
