@@ -5,6 +5,8 @@ public partial class SignalManager : Node
 	private WindowManager _windowManager;
 
 	[Signal] public delegate void Settings_WeatherToggleEventHandler(bool toggle);
+	[Signal] public delegate void Settings_FogToggleEventHandler(bool toggle);
+
 	[Signal] public delegate void OpenWindowEventHandler(string scene);
 	[Signal] public delegate void CloseWindowEventHandler(string scene);
 

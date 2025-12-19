@@ -1,11 +1,8 @@
 using Godot;
-using System;
 
 public partial class Terrain : TileMapLayer
 {
 	[Export] public int Transparent_TileId { get; set; } = 3;
-
-	public TileMapLayer Scenery { get { return GetNode<TileMapLayer>("../Scenery"); } }
 
 	public override void _Ready()
 	{

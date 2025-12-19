@@ -31,3 +31,4 @@ project/assembly_name="godot-test-grid"
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.1148968, 0.11489681, 0.11489678, 1)

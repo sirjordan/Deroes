@@ -5,15 +5,18 @@ public partial class Player : CharacterBody2D
 	private NavigationAgent2D _agent;
 	private Vector2 _dirOrientation;
 	private float _movementSpeed;
+	private Fog _fog;
 
 	[Export] public float WalkSpeed { get; set; } = 180f;
 	[Export] public float RunSpeed { get; set; } = 260f;
 	[Export] public AnimatedSprite2D MovementSprite { get; set; }
+	[Export] public int LightRadius { get; set; } = 8;
 
 	public override void _Ready()
 	{
 		_agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
 		_movementSpeed = WalkSpeed;
+		_fog = GetNode<Fog>("../Fog");
 	}
 
 	public override void _Input(InputEvent @event)
@@ -69,9 +72,13 @@ public partial class Player : CharacterBody2D
 
 			_dirOrientation = (nextPosCartesian - GlobalPosition).Normalized();
 		}
+
+		UpdateVisibility();
 	}
 
-	// Convert world grid position (x, y) → isometric screen position
+	/// <summary>
+	/// Convert world grid position (x, y) → isometric screen position
+	/// </summary>
 	private static Vector2 ToIso(Vector2 cartesian)
 	{
 		return new Vector2(
@@ -80,7 +87,9 @@ public partial class Player : CharacterBody2D
 		);
 	}
 
-	// Convert isometric screen position → world grid position
+	/// <summary>
+	/// Convert isometric screen position → world grid position
+	/// </summary>
 	private static Vector2 FromIso(Vector2 iso)
 	{
 		return new Vector2(
@@ -92,8 +101,6 @@ public partial class Player : CharacterBody2D
 	private static string GetDirectionByAngle(Vector2 directionVector)
 	{
 		float angle = Mathf.Atan2(-directionVector.Y, directionVector.X);
-
-		// Convert to degrees for easier reading
 		var deg = Mathf.RadToDeg(angle);
 
 		if (deg < 0)
@@ -115,5 +122,11 @@ public partial class Player : CharacterBody2D
 			return "S";
 		else
 			return "SE";
+	}
+
+	public void UpdateVisibility()
+	{
+		_fog.Reveal(GlobalPosition, LightRadius);
+		// TODO: Mask the new viewport with fog of war
 	}
 }

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2bn68opfr0n7"]
+[gd_scene load_steps=5 format=3 uid="uid://c2bn68opfr0n7"]
 
 [ext_resource type="Script" uid="uid://c5317jkoggpkc" path="res://scenes/GameSettings.cs" id="1_t6p7j"]
 [ext_resource type="PackedScene" uid="uid://8q8tufi1odbb" path="res://scenes/window.tscn" id="1_vtnhb"]
 [ext_resource type="Script" uid="uid://o2ivvg5w5cmo" path="res://scenes/WeatherCheckButton.cs" id="2_yo8eh"]
+[ext_resource type="Script" uid="uid://becf5xggxf82q" path="res://scenes/FogCheckButton.cs" id="4_t6p7j"]
 
 [node name="GameSettings" type="Control"]
 layout_mode = 3
@@ -13,7 +14,58 @@ script = ExtResource("1_t6p7j")
 
 [node name="Window" parent="." instance=ExtResource("1_vtnhb")]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Window"]
+[node name="TabContainer" type="TabContainer" parent="Window"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -388.0
+offset_top = -287.0
+offset_right = 385.0
+offset_bottom = 288.0
+grow_horizontal = 2
+grow_vertical = 2
+tab_alignment = 1
+current_tab = 0
+
+[node name="Game Menu" type="Control" parent="Window/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Window/TabContainer/Game Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Return To Game" type="Button" parent="Window/TabContainer/Game Menu/VBoxContainer"]
+layout_mode = 2
+text = "Return To Game"
+
+[node name="Leave Game" type="Button" parent="Window/TabContainer/Game Menu/VBoxContainer"]
+layout_mode = 2
+text = "Leave Game"
+
+[node name="Save Game" type="Button" parent="Window/TabContainer/Game Menu/VBoxContainer"]
+layout_mode = 2
+text = "Save Game"
+
+[node name="Exit Game" type="Button" parent="Window/TabContainer/Game Menu/VBoxContainer"]
+layout_mode = 2
+text = "Exit Game"
+
+[node name="Game Settings" type="Control" parent="Window/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="HboxContainer" type="HBoxContainer" parent="Window/TabContainer/Game Settings"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -26,19 +78,29 @@ offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LabelVBoxContainer" type="VBoxContainer" parent="Window/HBoxContainer"]
+[node name="LabelVBoxContainer" type="VBoxContainer" parent="Window/TabContainer/Game Settings/HboxContainer"]
 layout_mode = 2
 
-[node name="WeatherLabel" type="Label" parent="Window/HBoxContainer/LabelVBoxContainer"]
+[node name="WeatherLabel" type="Label" parent="Window/TabContainer/Game Settings/HboxContainer/LabelVBoxContainer"]
 layout_mode = 2
 text = "Weather"
 
-[node name="ToggleVBoxContainer" type="VBoxContainer" parent="Window/HBoxContainer"]
+[node name="FogLabel" type="Label" parent="Window/TabContainer/Game Settings/HboxContainer/LabelVBoxContainer"]
+layout_mode = 2
+text = "Fog"
+
+[node name="ToggleVBoxContainer" type="VBoxContainer" parent="Window/TabContainer/Game Settings/HboxContainer"]
 layout_mode = 2
 
-[node name="WeatherCheckButton" type="CheckButton" parent="Window/HBoxContainer/ToggleVBoxContainer"]
+[node name="WeatherCheckButton" type="CheckButton" parent="Window/TabContainer/Game Settings/HboxContainer/ToggleVBoxContainer"]
 layout_mode = 2
 button_pressed = true
 script = ExtResource("2_yo8eh")
 
-[connection signal="toggled" from="Window/HBoxContainer/ToggleVBoxContainer/WeatherCheckButton" to="Window/HBoxContainer/ToggleVBoxContainer/WeatherCheckButton" method="_on_toggled"]
+[node name="FogCheckButton" type="CheckButton" parent="Window/TabContainer/Game Settings/HboxContainer/ToggleVBoxContainer"]
+layout_mode = 2
+button_pressed = true
+script = ExtResource("4_t6p7j")
+
+[connection signal="toggled" from="Window/TabContainer/Game Settings/HboxContainer/ToggleVBoxContainer/WeatherCheckButton" to="Window/TabContainer/Game Settings/HboxContainer/ToggleVBoxContainer/WeatherCheckButton" method="_on_toggled"]
+[connection signal="toggled" from="Window/TabContainer/Game Settings/HboxContainer/ToggleVBoxContainer/FogCheckButton" to="Window/TabContainer/Game Settings/HboxContainer/ToggleVBoxContainer/FogCheckButton" method="_on_toggled"]
