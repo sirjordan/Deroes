@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=3 uid="uid://dqatlso66kfuq"]
+[gd_scene load_steps=97 format=3 uid="uid://dqatlso66kfuq"]
 
 [ext_resource type="Script" uid="uid://cfmcet3rqhfvs" path="res://scenes/Player.cs" id="1_n7ghd"]
 [ext_resource type="Texture2D" uid="uid://betdtpwyvxa2u" path="res://assets/characters/E.png" id="2_nvl01"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dliiwyry2hh76" path="res://assets/characters/SW.png" id="8_op7ga"]
 [ext_resource type="Texture2D" uid="uid://dyljkqoaw2dyl" path="res://assets/characters/W.png" id="9_q13i1"]
 [ext_resource type="Texture2D" uid="uid://c4kocrpt1ema1" path="res://assets/characters/Knight_Idle_dir1.png" id="10_pylmc"]
+[ext_resource type="Script" uid="uid://b2bdjl6b0igd" path="res://scenes/SelectionCircle.cs" id="11_d2wvv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xuqvo"]
 atlas = ExtResource("2_nvl01")
@@ -648,7 +649,26 @@ MovementSprite = NodePath("AnimatedSprite2D")
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 
+[node name="Indicators" type="Node2D" parent="."]
+
+[node name="SelectionCircle" type="Line2D" parent="Indicators"]
+closed = true
+width = 2.0
+default_color = Color(0.07320746, 0.33774495, 0.6576756, 0.627451)
+antialiased = true
+script = ExtResource("11_d2wvv")
+
+[node name="SelectionCircle2" type="Line2D" parent="Indicators"]
+closed = true
+width = 1.0
+default_color = Color(0.07320746, 0.33774495, 0.6576756, 0.627451)
+antialiased = true
+script = ExtResource("11_d2wvv")
+RadiusX = 40.0
+RadiusY = 20.0
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
 position = Vector2(1, -1)
 sprite_frames = SubResource("SpriteFrames_xuqvo")
 animation = &"SE"

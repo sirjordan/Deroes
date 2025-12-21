@@ -5,18 +5,15 @@ public partial class Player : CharacterBody2D
 	private NavigationAgent2D _agent;
 	private Vector2 _dirOrientation;
 	private float _movementSpeed;
-	private Fog _fog;
 
 	[Export] public float WalkSpeed { get; set; } = 180f;
 	[Export] public float RunSpeed { get; set; } = 260f;
 	[Export] public AnimatedSprite2D MovementSprite { get; set; }
-	[Export] public int LightRadius { get; set; } = 8;
 
 	public override void _Ready()
 	{
 		_agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
 		_movementSpeed = WalkSpeed;
-		_fog = GetNode<Fog>("../Fog");
 	}
 
 	public override void _Input(InputEvent @event)
@@ -126,7 +123,6 @@ public partial class Player : CharacterBody2D
 
 	public void UpdateVisibility()
 	{
-		_fog.Reveal(GlobalPosition, LightRadius);
-		// TODO: Mask the new viewport with fog of war
+		SignalManager.Instance.EmitSignal(SignalManager.SignalName.PlayerMoving, GlobalPosition);
 	}
 }

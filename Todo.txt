@@ -31,5 +31,5 @@ UI
 1. In-Game menu 
 	a. Main, Exit game, Save etc
 2. Main Menu
-3. Fog of war
 5. Foot steps
+6. Day/night changing (remove and add darkness) (Add clock or planet moving to day/night)
