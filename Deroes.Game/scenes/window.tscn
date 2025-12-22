@@ -18,6 +18,7 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [node name="Control" type="CanvasLayer"]
+layer = 2
 
 [node name="Control" type="Control" parent="."]
 custom_minimum_size = Vector2(800, 600)

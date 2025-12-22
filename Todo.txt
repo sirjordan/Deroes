@@ -31,7 +31,7 @@ UI
 1. In-Game menu 
 	a. Main, Exit game, Save etc
 2. Main Menu
-5. Foot steps
+5. Footprints
 6. Day/night changing 
 	a. remove and add darkness
 	b. turn on/off lights) 

@@ -667,6 +667,46 @@ script = ExtResource("11_d2wvv")
 RadiusX = 40.0
 RadiusY = 20.0
 
+[node name="HealthBar" type="ProgressBar" parent="Indicators"]
+modulate = Color(0.55845475, 0, 0.041277856, 1)
+custom_minimum_size = Vector2(550, 40)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -86.0
+offset_right = 525.0
+offset_bottom = -54.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+step = 1.0
+value = 76.0
+rounded = true
+show_percentage = false
+
+[node name="ManaBar" type="ProgressBar" parent="Indicators"]
+modulate = Color(0.101113044, 0.22812858, 1, 1)
+custom_minimum_size = Vector2(550, 40)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -86.0
+offset_right = 525.0
+offset_bottom = -46.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+step = 1.0
+value = 58.0
+rounded = true
+show_percentage = false
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(1, -1)
@@ -690,6 +730,7 @@ rotation = 1.0472
 shape = SubResource("CircleShape2D_n7ghd")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-3, -34)
 color = Color(0.977138, 0.851003, 0.352297, 1)
 energy = 0.5
 shadow_enabled = true
