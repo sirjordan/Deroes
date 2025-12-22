@@ -32,4 +32,10 @@ UI
 	a. Main, Exit game, Save etc
 2. Main Menu
 5. Foot steps
-6. Day/night changing (remove and add darkness) (Add clock or planet moving to day/night)
+6. Day/night changing 
+	a. remove and add darkness
+	b. turn on/off lights) 
+	c. Add clock or planet moving to day/night
+7. Birds 
+	a. flying randomly
+	b. landing on roofs

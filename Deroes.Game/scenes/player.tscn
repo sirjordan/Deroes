@@ -678,6 +678,7 @@ frame_progress = 0.578171
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 16.0
 target_desired_distance = 16.0
+path_postprocessing = 1
 avoidance_enabled = true
 debug_enabled = true
 debug_use_custom = true

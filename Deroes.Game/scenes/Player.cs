@@ -5,22 +5,28 @@ public partial class Player : CharacterBody2D
 	private NavigationAgent2D _agent;
 	private Vector2 _dirOrientation;
 	private float _movementSpeed;
+	private Vector2 _playerPosition;
 
 	[Export] public float WalkSpeed { get; set; } = 180f;
 	[Export] public float RunSpeed { get; set; } = 260f;
 	[Export] public AnimatedSprite2D MovementSprite { get; set; }
+	[Export] public int SightRange { get; set; } = 8;
 
 	public override void _Ready()
 	{
 		_agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
 		_movementSpeed = WalkSpeed;
+
+		RevealMap();
 	}
 
 	public override void _Input(InputEvent @event)
 	{
 		// If the click is over a Control, do NOT move the character
-		if (GetViewport().GuiGetHoveredControl() != null) 
+		if (GetViewport().GuiGetHoveredControl() != null)
+		{
 			return;
+		}
 
 		if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
 		{
@@ -34,43 +40,49 @@ public partial class Player : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		// Handle moving and directional sprites
 		if (_agent.IsNavigationFinished())
 		{
-			// Still
-
-			MovementSprite.Play("default");
-
-			Velocity = Vector2.Zero;
-			MoveAndSlide();
+			Stand();
 		}
 		else
 		{
-			// Moving
-
-			var dir_sprite = GetDirectionByAngle(_dirOrientation);
-			MovementSprite.Play(dir_sprite);
-
-			// Cartesian target from Navigation
-			Vector2 nextPosCartesian = _agent.GetNextPathPosition();
-
-			// Convert both current position and target to isometric space
-			Vector2 currentIso = ToIso(GlobalPosition);
-			Vector2 targetIso = ToIso(nextPosCartesian);
-
-			// Compute direction in iso space
-			Vector2 directionIso = (targetIso - currentIso).Normalized();
-
-			// Option A: Move directly in iso space (and convert back to world velocity)
-			Vector2 velocityCartesian = FromIso(directionIso) * _movementSpeed;
-
-			Velocity = velocityCartesian;
-			MoveAndSlide();
-
-			_dirOrientation = (nextPosCartesian - GlobalPosition).Normalized();
+			Move();
+			RevealMap();
 		}
+	}
 
-		UpdateVisibility();
+	private void Stand()
+	{
+		MovementSprite.Play("default");
+
+		Velocity = Vector2.Zero;
+		MoveAndSlide();
+	}
+
+	private void Move()
+	{
+		// Handle moving and directional sprites
+
+		var dir_sprite = GetDirectionByAngle(_dirOrientation);
+		MovementSprite.Play(dir_sprite);
+
+		// Cartesian target from Navigation
+		Vector2 nextPosCartesian = _agent.GetNextPathPosition();
+
+		// Convert both current position and target to isometric space
+		Vector2 currentIso = ToIso(GlobalPosition);
+		Vector2 targetIso = ToIso(nextPosCartesian);
+
+		// Compute direction in iso space
+		Vector2 directionIso = (targetIso - currentIso).Normalized();
+
+		// Option A: Move directly in iso space (and convert back to world velocity)
+		Vector2 velocityCartesian = FromIso(directionIso) * _movementSpeed;
+
+		Velocity = velocityCartesian;
+		MoveAndSlide();
+
+		_dirOrientation = (nextPosCartesian - GlobalPosition).Normalized();
 	}
 
 	/// <summary>
@@ -121,8 +133,13 @@ public partial class Player : CharacterBody2D
 			return "SE";
 	}
 
-	public void UpdateVisibility()
+	public void RevealMap()
 	{
-		SignalManager.Instance.EmitSignal(SignalManager.SignalName.PlayerMoving, GlobalPosition);
+		// Reveal only if player is changing position
+		if (_playerPosition != GlobalPosition)
+		{
+			_playerPosition = GlobalPosition;
+			SignalManager.Instance.EmitSignal(SignalManager.SignalName.RevealMap, GlobalPosition, SightRange);
+		}
 	}
 }

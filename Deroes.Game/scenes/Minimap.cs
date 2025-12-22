@@ -40,10 +40,4 @@ public partial class Minimap : TextureRect
 	{
 		_minimapCamera.GlobalPosition = _player.GlobalPosition;
 	}
-
-	public override void _Draw()
-	{
-		base._Draw();
-		//DrawCircle(_player.GlobalPosition, 25, Colors.DarkRed, filled: true);
-	}
 }

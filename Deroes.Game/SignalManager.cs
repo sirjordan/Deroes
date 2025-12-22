@@ -10,7 +10,7 @@ public partial class SignalManager : Node
 	[Signal] public delegate void OpenWindowEventHandler(string scene);
 	[Signal] public delegate void CloseWindowEventHandler(string scene);
 
-	[Signal] public delegate void PlayerMovingEventHandler(Vector2 position);
+	[Signal] public delegate void RevealMapEventHandler(Vector2 position, int radius);
 
 	public static SignalManager Instance { get; private set; }
 
