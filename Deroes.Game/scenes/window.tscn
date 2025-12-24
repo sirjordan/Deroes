@@ -11,11 +11,11 @@ corner_radius_top_right = 3
 bg_color = Color(0, 0, 0, 0.64705884)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qvkcj"]
-bg_color = Color(0.3048741, 0.03608957, 0.015913796, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
+bg_color = Color(0.3137255, 0.039215688, 0.019607844, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [node name="Control" type="CanvasLayer"]
 layer = 2
@@ -70,6 +70,7 @@ offset_right = 30.0
 offset_bottom = -6.0
 tooltip_text = "Close window"
 mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.9019608, 0.8235294, 0.50980395, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_qvkcj")
 text = "X"
 script = ExtResource("1_oya5r")
