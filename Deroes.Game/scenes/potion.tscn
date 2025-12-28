@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6jyq60ewywvt"]
+
+[ext_resource type="Texture2D" uid="uid://dci4mvm05872e" path="res://assets/misc/PotionsPack1.png" id="1_ym5ma"]
+
+[node name="Potion" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ym5ma")
+region_enabled = true
+region_rect = Rect2(0, 32, 32, 32)
+
+[node name="Count" type="Label" parent="."]
+offset_left = -11.0
+offset_top = -17.0
+offset_right = 29.0
+offset_bottom = 6.0
+theme_override_colors/font_color = Color(0.9019608, 0.8235294, 0.47058824, 1)
+theme_override_font_sizes/font_size = 10
+text = "3"

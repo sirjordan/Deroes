@@ -1,11 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://ctkrcq5epwehh"]
+[gd_scene load_steps=15 format=3 uid="uid://ctkrcq5epwehh"]
 
 [ext_resource type="Texture2D" uid="uid://cuena8er2n6c0" path="res://assets/misc/circle_blue_200.png" id="1_gw6dx"]
 [ext_resource type="Texture2D" uid="uid://dd2imjsnarr1u" path="res://assets/characters/dh_icon.png" id="1_pq34g"]
 [ext_resource type="Texture2D" uid="uid://c17o58ulyo5ol" path="res://assets/misc/circle_red_200.png" id="2_xx6ec"]
+[ext_resource type="Texture2D" uid="uid://b75y4lyfacld6" path="res://assets/misc/pointy-sword.png" id="4_qsas3"]
+[ext_resource type="PackedScene" uid="uid://b6jyq60ewywvt" path="res://scenes/potion.tscn" id="4_xx6ec"]
+[ext_resource type="Texture2D" uid="uid://s6adswjccs3d" path="res://assets/misc/shield-bash.png" id="5_iay36"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4r5p3"]
-bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+bg_color = Color(0.19607843, 0.19607843, 0.19607843, 0.8627451)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 
@@ -41,11 +44,39 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qsas3"]
+bg_color = Color(0.3137255, 0.039215688, 0.019607844, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0.15859479, 0, 0.0045330655, 0.6)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iay36"]
+bg_color = Color(0.11789521, 0.10882441, 0.10882429, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.43930712, 0.3444338, 0.12996319, 1)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0.11858138, 0.11858138, 0.11858138, 0.6)
+shadow_size = 5
+
 [node name="CharacterControl" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -14.0
+offset_right = 8.0
+offset_bottom = -14.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -82,6 +113,7 @@ scale = Vector2(0.5, 0.5)
 layout_mode = 0
 offset_right = 200.0
 offset_bottom = 200.0
+tooltip_text = "Mana"
 value = 69.0
 rounded = true
 fill_mode = 4
@@ -93,6 +125,7 @@ texture_progress = ExtResource("1_gw6dx")
 layout_mode = 0
 offset_right = 200.0
 offset_bottom = 200.0
+tooltip_text = "Health"
 value = 100.0
 rounded = true
 fill_mode = 5
@@ -108,6 +141,7 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 90.0
 offset_bottom = 90.0
+tooltip_text = "[I] Inventory (Click to Open)"
 theme_override_styles/panel = SubResource("StyleBoxFlat_gw6dx")
 
 [node name="TextureRect" type="TextureRect" parent="CharacterIcon/IconContainer"]
@@ -156,3 +190,84 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_ok7br")
 step = 1.0
 value = 63.0
 show_percentage = false
+
+[node name="GoToLocation" type="Label" parent="."]
+layout_mode = 0
+offset_left = 147.0
+offset_top = 37.000008
+offset_right = 171.0
+offset_bottom = 61.000008
+rotation = 0.7853982
+tooltip_text = "Go To Hero Location"
+mouse_filter = 0
+theme_override_colors/font_color = Color(0.9019608, 0.8235294, 0.50980395, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_qsas3")
+text = "➢"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Minimize" type="Label" parent="."]
+layout_mode = 0
+offset_left = 188.0
+offset_top = 42.0
+offset_right = 212.0
+offset_bottom = 66.0
+tooltip_text = "Go To Hero Location"
+mouse_filter = 0
+theme_override_colors/font_color = Color(0.9019608, 0.8235294, 0.50980395, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_qsas3")
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Skill_1" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 8.0
+offset_right = 137.0
+offset_bottom = 40.0
+tooltip_text = "Primary Skill (Left Click)"
+theme_override_styles/panel = SubResource("StyleBoxFlat_iay36")
+
+[node name="PointySword" type="Sprite2D" parent="Skill_1"]
+position = Vector2(16.000006, 16)
+scale = Vector2(0.8124998, 0.81249994)
+texture = ExtResource("4_qsas3")
+
+[node name="Skill_2" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 155.0
+offset_top = 8.0
+offset_right = 187.0
+offset_bottom = 40.0
+tooltip_text = "Secondary Skill (Right Click)"
+theme_override_styles/panel = SubResource("StyleBoxFlat_iay36")
+
+[node name="ShieldBash" type="Sprite2D" parent="Skill_2"]
+position = Vector2(16, 16)
+scale = Vector2(0.9375, 0.9375)
+texture = ExtResource("5_iay36")
+
+[node name="Potion_1" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 68.0
+offset_right = 137.0
+offset_bottom = 100.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_iay36")
+
+[node name="Potion" parent="Potion_1" instance=ExtResource("4_xx6ec")]
+position = Vector2(16, 17)
+
+[node name="Potion_2" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 155.0
+offset_top = 68.0
+offset_right = 187.0
+offset_bottom = 100.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_iay36")
+
+[node name="Potion" parent="Potion_2" instance=ExtResource("4_xx6ec")]
+position = Vector2(16, 17)
