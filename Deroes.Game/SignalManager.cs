@@ -7,7 +7,7 @@ public partial class SignalManager : Node
 	[Signal] public delegate void Settings_WeatherToggleEventHandler(bool toggle);
 	[Signal] public delegate void Settings_FogToggleEventHandler(bool toggle);
 
-	[Signal] public delegate void OpenWindowEventHandler(string scene);
+	[Signal] public delegate void OpenWindowEventHandler(string scene, string title);
 	[Signal] public delegate void CloseWindowEventHandler(string scene);
 
 	[Signal] public delegate void RevealMapEventHandler(Vector2 position, int radius);
@@ -33,10 +33,10 @@ public partial class SignalManager : Node
 		_windowManager.Close(scene);
 	}
 
-	private void SignalManager_OpenWindow(string scene)
+	private void SignalManager_OpenWindow(string scene, string title)
 	{
 		GD.Print($"SignalManager_OpenWindow: {scene}");
-		_windowManager.Open(scene);
+		_windowManager.Open(scene, title);
 	}
 
 	private void SignalManager_SettingsWeatherToggle(bool toggle)

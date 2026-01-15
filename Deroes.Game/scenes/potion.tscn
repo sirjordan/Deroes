@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b6jyq60ewywvt"]
 
-[ext_resource type="Texture2D" uid="uid://dci4mvm05872e" path="res://assets/misc/PotionsPack1.png" id="1_ym5ma"]
+[ext_resource type="Texture2D" uid="uid://dci4mvm05872e" path="res://assets/items/PotionsPack1.png" id="1_ym5ma"]
 
 [node name="Potion" type="Node2D"]
 

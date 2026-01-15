@@ -31,6 +31,7 @@ shape = SubResource("CircleShape2D_mcq7c")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 color = Color(0.982491, 0.861243, 0.569161, 1)
 energy = 0.75
+range_item_cull_mask = 3
 shadow_enabled = true
 shadow_filter = 2
 texture = SubResource("GradientTexture2D_mcq7c")

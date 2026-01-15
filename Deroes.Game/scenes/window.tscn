@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://8q8tufi1odbb"]
+[gd_scene load_steps=6 format=3 uid="uid://8q8tufi1odbb"]
 
 [ext_resource type="Script" uid="uid://djpehuokim5mv" path="res://scenes/CloseButton.cs" id="1_oya5r"]
+[ext_resource type="Script" uid="uid://dj7qavt5k7m4i" path="res://scenes/GameWindow.cs" id="1_to7fh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oya5r"]
 bg_color = Color(0.22670761, 0.22670746, 0.22670746, 0.8862745)
@@ -19,8 +20,9 @@ corner_radius_bottom_left = 4
 
 [node name="Control" type="CanvasLayer"]
 layer = 2
+script = ExtResource("1_to7fh")
 
-[node name="Control" type="Control" parent="."]
+[node name="Wrapper" type="Control" parent="."]
 custom_minimum_size = Vector2(800, 600)
 layout_mode = 3
 anchors_preset = 8
@@ -35,7 +37,7 @@ offset_bottom = 300.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Top" type="Panel" parent="Control"]
+[node name="Top" type="Panel" parent="Wrapper"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -47,14 +49,14 @@ grow_horizontal = 2
 size_flags_horizontal = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_oya5r")
 
-[node name="Background" type="Panel" parent="Control"]
+[node name="Background" type="Panel" parent="Wrapper"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_to7fh")
 
-[node name="Title" type="Label" parent="Control"]
+[node name="Title" type="Label" parent="Wrapper"]
 layout_mode = 0
 offset_left = 142.0
 offset_top = -30.0
@@ -62,7 +64,7 @@ offset_right = 264.0
 offset_bottom = -7.0
 text = "{WindowName}"
 
-[node name="Close" type="Button" parent="Control" node_paths=PackedStringArray("Context")]
+[node name="Close" type="Button" parent="Wrapper" node_paths=PackedStringArray("Context")]
 layout_mode = 0
 offset_left = 6.0
 offset_top = -30.0

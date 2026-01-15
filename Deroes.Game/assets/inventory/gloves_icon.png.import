@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b75y4lyfacld6"
-path="res://.godot/imported/pointy-sword.png-4fc5ac38764872ce8992fa3bb1d21042.ctex"
+uid="uid://dlm88hslc2nuj"
+path="res://.godot/imported/gloves_icon.png-bbafbc06c80e56b964858fcb8dd69eae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/misc/pointy-sword.png"
-dest_files=["res://.godot/imported/pointy-sword.png-4fc5ac38764872ce8992fa3bb1d21042.ctex"]
+source_file="res://assets/inventory/gloves_icon.png"
+dest_files=["res://.godot/imported/gloves_icon.png-bbafbc06c80e56b964858fcb8dd69eae.ctex"]
 
 [params]
 

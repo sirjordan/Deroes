@@ -1,9 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://crscsogo8tqbt"]
+[gd_scene load_steps=14 format=3 uid="uid://crscsogo8tqbt"]
 
 [ext_resource type="Script" uid="uid://vheuvo62vmcw" path="res://scenes/Inventory.cs" id="1_hj2ta"]
 [ext_resource type="PackedScene" uid="uid://8q8tufi1odbb" path="res://scenes/window.tscn" id="1_qw0r6"]
 [ext_resource type="Texture2D" uid="uid://d33kmnfv55nkb" path="res://assets/characters/character_example.png" id="3_ty45s"]
 [ext_resource type="Script" uid="uid://cxsnbpt377fr4" path="res://scenes/InventoryCell.cs" id="4_53g1v"]
+[ext_resource type="Texture2D" uid="uid://dxj8dqvi1j0t1" path="res://assets/inventory/lock_icon.png" id="5_s887n"]
+[ext_resource type="Texture2D" uid="uid://cd4adj2j4m6rl" path="res://assets/inventory/shield_icon.png" id="6_g71ie"]
+[ext_resource type="Texture2D" uid="uid://dlm88hslc2nuj" path="res://assets/inventory/gloves_icon.png" id="6_sr8g6"]
+[ext_resource type="Texture2D" uid="uid://bhneiguudv6ef" path="res://assets/inventory/sword_icon.png" id="7_sr8g6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_53g1v"]
 bg_color = Color(0.11764706, 0.11764706, 0.11764706, 1)
@@ -18,6 +22,9 @@ corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 shadow_color = Color(0.24477637, 0.2447764, 0.24477637, 0.6)
 shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g71ie"]
+bg_color = Color(0.6117647, 0.5882353, 0.46666667, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yyk2a"]
 bg_color = Color(0.15206999, 0.15790778, 0.14038444, 1)
@@ -56,10 +63,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = -5.0
-offset_right = 8.0
-offset_bottom = -5.0
+offset_left = -80.0
+offset_top = 52.0
+offset_right = -80.0
+offset_bottom = 52.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hj2ta")
@@ -98,25 +105,53 @@ offset_right = 280.0
 offset_bottom = 314.0
 theme_override_constants/separation = 18
 
-[node name="Panel" type="Panel" parent="Window/TabContainer/Gear/LeftColumn"]
+[node name="HelmetPanel" type="Panel" parent="Window/TabContainer/Gear/LeftColumn"]
 custom_minimum_size = Vector2(60, 70)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_53g1v")
+script = ExtResource("4_53g1v")
 
-[node name="Panel2" type="Panel" parent="Window/TabContainer/Gear/LeftColumn"]
-custom_minimum_size = Vector2(60, 70)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_53g1v")
+[node name="SwordIcon" type="Sprite2D" parent="Window/TabContainer/Gear/LeftColumn/HelmetPanel"]
+modulate = Color(0.8268028, 0.6602407, 0.6175203, 1)
+position = Vector2(30, 35)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("7_sr8g6")
 
-[node name="Panel3" type="Panel" parent="Window/TabContainer/Gear/LeftColumn"]
+[node name="ChestArmorPanel" type="Panel" parent="Window/TabContainer/Gear/LeftColumn"]
 custom_minimum_size = Vector2(60, 70)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_53g1v")
+script = ExtResource("4_53g1v")
 
-[node name="Panel4" type="Panel" parent="Window/TabContainer/Gear/LeftColumn"]
+[node name="SwordIcon" type="Sprite2D" parent="Window/TabContainer/Gear/LeftColumn/ChestArmorPanel"]
+modulate = Color(0.8268028, 0.6602407, 0.6175203, 1)
+position = Vector2(30, 35)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("7_sr8g6")
+
+[node name="BeltPanel" type="Panel" parent="Window/TabContainer/Gear/LeftColumn"]
 custom_minimum_size = Vector2(60, 70)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_53g1v")
+script = ExtResource("4_53g1v")
+
+[node name="SwordIcon" type="Sprite2D" parent="Window/TabContainer/Gear/LeftColumn/BeltPanel"]
+modulate = Color(0.8268028, 0.6602407, 0.6175203, 1)
+position = Vector2(30, 35)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("7_sr8g6")
+
+[node name="LegsArmorPanel" type="Panel" parent="Window/TabContainer/Gear/LeftColumn"]
+custom_minimum_size = Vector2(60, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_53g1v")
+script = ExtResource("4_53g1v")
+
+[node name="SwordIcon" type="Sprite2D" parent="Window/TabContainer/Gear/LeftColumn/LegsArmorPanel"]
+modulate = Color(0.8268028, 0.6602407, 0.6175203, 1)
+position = Vector2(30, 35)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("7_sr8g6")
 
 [node name="RightColumn" type="VBoxContainer" parent="Window/TabContainer/Gear"]
 layout_mode = 0
@@ -126,53 +161,134 @@ offset_right = 560.0
 offset_bottom = 314.0
 theme_override_constants/separation = 18
 
-[node name="Panel" type="Panel" parent="Window/TabContainer/Gear/RightColumn"]
+[node name="WeaponPanel" type="Panel" parent="Window/TabContainer/Gear/RightColumn"]
 custom_minimum_size = Vector2(60, 70)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_53g1v")
+script = ExtResource("4_53g1v")
 
-[node name="Panel2" type="Panel" parent="Window/TabContainer/Gear/RightColumn"]
+[node name="SwordIcon" type="Sprite2D" parent="Window/TabContainer/Gear/RightColumn/WeaponPanel"]
+modulate = Color(0.8268028, 0.6602407, 0.6175203, 1)
+position = Vector2(30, 35)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("7_sr8g6")
+
+[node name="ShieldPanel" type="Panel" parent="Window/TabContainer/Gear/RightColumn"]
 custom_minimum_size = Vector2(60, 70)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_53g1v")
+script = ExtResource("4_53g1v")
 
-[node name="Panel3" type="Panel" parent="Window/TabContainer/Gear/RightColumn"]
+[node name="ShieldIcon" type="Sprite2D" parent="Window/TabContainer/Gear/RightColumn/ShieldPanel"]
+position = Vector2(30, 35)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("6_g71ie")
+
+[node name="GlovesPanel" type="Panel" parent="Window/TabContainer/Gear/RightColumn"]
 custom_minimum_size = Vector2(60, 70)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_53g1v")
+script = ExtResource("4_53g1v")
 
-[node name="Panel4" type="Panel" parent="Window/TabContainer/Gear/RightColumn"]
+[node name="GlovesIcon" type="Sprite2D" parent="Window/TabContainer/Gear/RightColumn/GlovesPanel"]
+modulate = Color(0.7347132, 0.7149221, 0.67325443, 1)
+position = Vector2(30, 35)
+texture = ExtResource("6_sr8g6")
+
+[node name="BootsPanel" type="Panel" parent="Window/TabContainer/Gear/RightColumn"]
 custom_minimum_size = Vector2(60, 70)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_53g1v")
+script = ExtResource("4_53g1v")
 
-[node name="GridContainer" type="GridContainer" parent="Window/TabContainer/Gear"]
+[node name="SwordIcon" type="Sprite2D" parent="Window/TabContainer/Gear/RightColumn/BootsPanel"]
+modulate = Color(0.8268028, 0.6602407, 0.6175203, 1)
+position = Vector2(30, 35)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("7_sr8g6")
+
+[node name="CenterGridContainer" type="GridContainer" parent="Window/TabContainer/Gear"]
 layout_mode = 0
-offset_left = 340.0
+offset_left = 330.0
 offset_top = 300.0
-offset_right = 439.0
-offset_bottom = 350.0
-columns = 2
+offset_right = 461.0
+offset_bottom = 351.0
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 6
+columns = 3
 
-[node name="Label" type="Label" parent="Window/TabContainer/Gear/GridContainer"]
+[node name="SilverLabel" type="Label" parent="Window/TabContainer/Gear/CenterGridContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.69803923, 0.61960787, 0.3882353, 1)
 theme_override_font_sizes/font_size = 14
-text = "Silver"
+text = "🜛 Silver"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="Window/TabContainer/Gear/GridContainer"]
+[node name="Del1" type="Panel" parent="Window/TabContainer/Gear/CenterGridContainer"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g71ie")
+
+[node name="JewLabel" type="Label" parent="Window/TabContainer/Gear/CenterGridContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6745098, 0.6, 0.3764706, 1)
 theme_override_font_sizes/font_size = 14
 text = "Jewelry"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Label3" type="Label" parent="Window/TabContainer/Gear/GridContainer"]
+[node name="Del3" type="Panel" parent="Window/TabContainer/Gear/CenterGridContainer"]
+custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
-text = "Silver"
+theme_override_styles/panel = SubResource("StyleBoxFlat_g71ie")
 
-[node name="Label4" type="Label" parent="Window/TabContainer/Gear/GridContainer"]
+[node name="Del4Center" type="Panel" parent="Window/TabContainer/Gear/CenterGridContainer"]
+custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
-text = "Silver"
+theme_override_styles/panel = SubResource("StyleBoxFlat_g71ie")
+
+[node name="Del5" type="Panel" parent="Window/TabContainer/Gear/CenterGridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g71ie")
+
+[node name="SilverHBoxContainer" type="HBoxContainer" parent="Window/TabContainer/Gear/CenterGridContainer"]
+layout_mode = 2
+
+[node name="SilverCountLabel" type="Label" parent="Window/TabContainer/Gear/CenterGridContainer/SilverHBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.69803923, 0.61960787, 0.3882353, 1)
+theme_override_font_sizes/font_size = 14
+text = "120,010"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Del2" type="Panel" parent="Window/TabContainer/Gear/CenterGridContainer"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g71ie")
+
+[node name="JewelryHBoxContainer" type="HBoxContainer" parent="Window/TabContainer/Gear/CenterGridContainer"]
+layout_mode = 2
+
+[node name="Jew1Panel" type="Panel" parent="Window/TabContainer/Gear/CenterGridContainer/JewelryHBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+tooltip_text = "Locked until level 18"
+theme_override_styles/panel = SubResource("StyleBoxFlat_53g1v")
+script = ExtResource("4_53g1v")
+
+[node name="LockIcon" type="Sprite2D" parent="Window/TabContainer/Gear/CenterGridContainer/JewelryHBoxContainer/Jew1Panel"]
+modulate = Color(0.8678474, 0.73928255, 0.64150786, 1)
+position = Vector2(12, 12)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_s887n")
+
+[node name="Jew2Panel" type="Panel" parent="Window/TabContainer/Gear/CenterGridContainer/JewelryHBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_53g1v")
+script = ExtResource("4_53g1v")
 
 [node name="Inventory" type="Panel" parent="Window/TabContainer/Gear"]
 layout_mode = 0
@@ -370,7 +486,7 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_uae8j")
 script = ExtResource("4_53g1v")
 
-[node name="Label" type="Label" parent="Window/TabContainer/Gear"]
+[node name="InvLabel" type="Label" parent="Window/TabContainer/Gear"]
 layout_mode = 0
 offset_left = 354.0
 offset_top = 523.0
@@ -382,6 +498,18 @@ theme_override_colors/font_color = Color(0.84313726, 0.74509805, 0.4627451, 1)
 theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_s887n")
 text = "Inventory"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HeroNameLabel" type="Label" parent="Window/TabContainer/Gear"]
+layout_mode = 0
+offset_left = 348.0
+offset_top = 22.0
+offset_right = 439.0
+offset_bottom = 42.0
+theme_override_colors/font_color = Color(0.69803923, 0.61960787, 0.3882353, 1)
+theme_override_font_sizes/font_size = 14
+text = "{Hero_Name}"
 horizontal_alignment = 1
 vertical_alignment = 1
 

@@ -12,16 +12,16 @@ internal class WindowManager
 		_root = root;
 	}
 
-	public void Open(string scene, bool closeOthers = true)
+	public void Open(string scene, string title = null, bool closeOthers = true)
 	{
 		var loadedScene = GD.Load<PackedScene>(scene);
 		var node = loadedScene.Instantiate<Control>();
 
-		if(!_openedWindows.ContainsKey(scene))
+		if (!_openedWindows.ContainsKey(scene))
 		{
 			if (closeOthers)
 			{
-				foreach (var win in _openedWindows) 
+				foreach (var win in _openedWindows)
 				{
 					Close(win.Key);
 				}
@@ -29,6 +29,7 @@ internal class WindowManager
 
 			node.Name = scene;
 			node.Visible = true;
+			node.SetMeta("title", title ?? scene);
 
 			_root.AddChild(node);
 			_openedWindows.Add(scene, node);

@@ -32,7 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://dkhe2am145ik8" path="res://assets/environment/roofs/roof_E.png" id="22_d13ii"]
 [ext_resource type="Texture2D" uid="uid://cdeg11kleppxc" path="res://assets/environment/roofs/woodWallRoofLeft_E.png" id="23_1u8w0"]
 [ext_resource type="Texture2D" uid="uid://bavqnyxtr1c" path="res://assets/environment/roofs/woodWallRoofRight_E.png" id="24_0odxb"]
-[ext_resource type="Texture2D" uid="uid://bvitgidmo6373" path="res://assets/misc/black_128.png" id="24_fuf3a"]
+[ext_resource type="Texture2D" uid="uid://bvitgidmo6373" path="res://assets/environment/ground/black_128.png" id="24_fuf3a"]
 [ext_resource type="Texture2D" uid="uid://bkcncgjit5503" path="res://assets/environment/roofs/chimneyTop_W.png" id="25_0odxb"]
 [ext_resource type="PackedScene" uid="uid://dnxm8mla65rtu" path="res://scenes/in_game_menu.tscn" id="34_4k2k6"]
 [ext_resource type="Script" uid="uid://45r2lm15vxng" path="res://scenes/Fog.cs" id="36_kmb1v"]
@@ -389,9 +389,10 @@ position = Vector2(-1399, 484)
 
 [node name="Darkness" type="CanvasModulate" parent="."]
 position = Vector2(-4, -4)
-color = Color(0.4741919, 0.46674603, 0.3356737, 1)
+color = Color(0.56241494, 0.5540512, 0.41259432, 1)
 
 [node name="Weather" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Rain" parent="Weather" instance=ExtResource("2_ycdy4")]
 position = Vector2(-56, 157)
