@@ -1,13 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://crscsogo8tqbt"]
+[gd_scene load_steps=15 format=3 uid="uid://crscsogo8tqbt"]
 
-[ext_resource type="Script" uid="uid://vheuvo62vmcw" path="res://scenes/Inventory.cs" id="1_hj2ta"]
-[ext_resource type="PackedScene" uid="uid://8q8tufi1odbb" path="res://scenes/window.tscn" id="1_qw0r6"]
+[ext_resource type="Script" uid="uid://vheuvo62vmcw" path="res://scenes/ui/Inventory.cs" id="1_hj2ta"]
+[ext_resource type="PackedScene" uid="uid://8q8tufi1odbb" path="res://scenes/ui/window.tscn" id="1_qw0r6"]
 [ext_resource type="Texture2D" uid="uid://d33kmnfv55nkb" path="res://assets/characters/character_example.png" id="3_ty45s"]
-[ext_resource type="Script" uid="uid://cxsnbpt377fr4" path="res://scenes/InventoryCell.cs" id="4_53g1v"]
+[ext_resource type="Script" uid="uid://cxsnbpt377fr4" path="res://scenes/ui/InventoryCell.cs" id="4_53g1v"]
 [ext_resource type="Texture2D" uid="uid://dxj8dqvi1j0t1" path="res://assets/inventory/lock_icon.png" id="5_s887n"]
 [ext_resource type="Texture2D" uid="uid://cd4adj2j4m6rl" path="res://assets/inventory/shield_icon.png" id="6_g71ie"]
 [ext_resource type="Texture2D" uid="uid://dlm88hslc2nuj" path="res://assets/inventory/gloves_icon.png" id="6_sr8g6"]
 [ext_resource type="Texture2D" uid="uid://bhneiguudv6ef" path="res://assets/inventory/sword_icon.png" id="7_sr8g6"]
+[ext_resource type="PackedScene" uid="uid://c2bu88oum14oi" path="res://scenes/items/item.tscn" id="9_i8fht"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_53g1v"]
 bg_color = Color(0.11764706, 0.11764706, 0.11764706, 1)
@@ -317,6 +318,9 @@ custom_minimum_size = Vector2(32, 45)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_uae8j")
 script = ExtResource("4_53g1v")
+
+[node name="Item" parent="Window/TabContainer/Gear/Inventory/GridContainer/Panel2" instance=ExtResource("9_i8fht")]
+layout_mode = 0
 
 [node name="Panel3" type="Panel" parent="Window/TabContainer/Gear/Inventory/GridContainer"]
 custom_minimum_size = Vector2(32, 45)

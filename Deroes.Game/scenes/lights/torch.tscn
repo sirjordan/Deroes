@@ -1,0 +1,80 @@
+[gd_scene load_steps=12 format=3 uid="uid://bamj41k4m23px"]
+
+[ext_resource type="PackedScene" uid="uid://b1m3t042y631y" path="res://scenes/lights/lighter_node.tscn" id="1_emx0e"]
+[ext_resource type="Texture2D" uid="uid://y3733sctiwk8" path="res://assets/environment/objects/Torch Animated.png" id="2_uhjpv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykioh"]
+atlas = ExtResource("2_uhjpv")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oigla"]
+atlas = ExtResource("2_uhjpv")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ganj2"]
+atlas = ExtResource("2_uhjpv")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmkbd"]
+atlas = ExtResource("2_uhjpv")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3jnj"]
+atlas = ExtResource("2_uhjpv")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nes6f"]
+atlas = ExtResource("2_uhjpv")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32aw1"]
+atlas = ExtResource("2_uhjpv")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_873d8"]
+atlas = ExtResource("2_uhjpv")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kh7hg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ykioh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oigla")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ganj2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hmkbd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3jnj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nes6f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32aw1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_873d8")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 8.0
+}]
+
+[node name="Torch" type="Node2D"]
+
+[node name="Lighter" parent="." instance=ExtResource("1_emx0e")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = -0.5235988
+sprite_frames = SubResource("SpriteFrames_kh7hg")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame = 1
+frame_progress = 0.98519707

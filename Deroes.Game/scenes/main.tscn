@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=4 uid="uid://b2gvgwi23h5jn"]
+[gd_scene load_steps=85 format=4 uid="uid://b2gvgwi23h5jn"]
 
 [ext_resource type="Texture2D" uid="uid://c6j7lwh0tsrwb" path="res://assets/environment/ground/Base1_128.png" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://cutp6pypsn2yf" path="res://assets/environment/ground/BaseStone2.0_128.png" id="2_0xm2m"]
@@ -21,7 +21,6 @@
 [ext_resource type="Texture2D" uid="uid://lk7mecjgrleo" path="res://assets/environment/ground/Water_side_3_128.png" id="12_0rl1p"]
 [ext_resource type="Texture2D" uid="uid://bpe3vqoypdqvn" path="res://assets/environment/walls/woodWallSupport_E_128.png" id="12_074og"]
 [ext_resource type="Texture2D" uid="uid://bsfpoiqbrqtpf" path="res://assets/environment/ground/Flat_Brick_01-SW-64x96.png" id="12_c6pm6"]
-[ext_resource type="PackedScene" uid="uid://b1m3t042y631y" path="res://scenes/lighter_node.tscn" id="12_dg77c"]
 [ext_resource type="Texture2D" uid="uid://c6er7il74ey7k" path="res://assets/environment/walls/woodWallSupport_S_128.png" id="13_cegan"]
 [ext_resource type="Texture2D" uid="uid://64gxfpmtrh2n" path="res://assets/environment/ground/Water_side_4_128.png" id="13_ok6jj"]
 [ext_resource type="PackedScene" uid="uid://hy6rqx67d6t4" path="res://scenes/monster.tscn" id="14_w48qg"]
@@ -37,7 +36,9 @@
 [ext_resource type="Texture2D" uid="uid://bavqnyxtr1c" path="res://assets/environment/roofs/woodWallRoofRight_E.png" id="24_0odxb"]
 [ext_resource type="Texture2D" uid="uid://bvitgidmo6373" path="res://assets/environment/ground/black_128.png" id="24_fuf3a"]
 [ext_resource type="Texture2D" uid="uid://bkcncgjit5503" path="res://assets/environment/roofs/chimneyTop_W.png" id="25_0odxb"]
-[ext_resource type="PackedScene" uid="uid://dnxm8mla65rtu" path="res://scenes/in_game_menu.tscn" id="34_4k2k6"]
+[ext_resource type="PackedScene" uid="uid://bamj41k4m23px" path="res://scenes/lights/torch.tscn" id="31_c6pm6"]
+[ext_resource type="PackedScene" uid="uid://bagktndap8fga" path="res://scenes/lights/campfire.tscn" id="32_5he1u"]
+[ext_resource type="PackedScene" uid="uid://dnxm8mla65rtu" path="res://scenes/ui/in_game_menu.tscn" id="34_4k2k6"]
 [ext_resource type="Script" uid="uid://45r2lm15vxng" path="res://scenes/Fog.cs" id="36_kmb1v"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4c57u"]
@@ -387,98 +388,122 @@ texture = ExtResource("22_5he1u")
 texture_region_size = Vector2i(500, 500)
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, 200)
+0:0/0/modulate = Color(0.735357, 0.735357, 0.735357, 1)
 0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5he1u")
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 1:0/0 = 0
 1:0/0/texture_origin = Vector2i(0, 200)
+1:0/0/modulate = Color(0.735357, 0.735357, 0.735357, 1)
 1:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5he1u")
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 2:0/0 = 0
 2:0/0/texture_origin = Vector2i(0, 200)
+2:0/0/modulate = Color(0.735357, 0.735357, 0.735357, 1)
 2:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5he1u")
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 3:0/0 = 0
 3:0/0/texture_origin = Vector2i(0, 200)
+3:0/0/modulate = Color(0.735357, 0.735357, 0.735357, 1)
 3:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5he1u")
 3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 4:0/0 = 0
 4:0/0/texture_origin = Vector2i(0, 200)
+4:0/0/modulate = Color(0.735357, 0.735357, 0.735357, 1)
 4:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5he1u")
 4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 5:0/0 = 0
 5:0/0/texture_origin = Vector2i(0, 200)
+5:0/0/modulate = Color(0.735357, 0.735357, 0.735357, 1)
 5:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5he1u")
 5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 5:1/0 = 0
 5:1/0/texture_origin = Vector2i(0, 200)
+5:1/0/modulate = Color(0.735357, 0.735357, 0.735357, 1)
 5:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5he1u")
 5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 4:1/0 = 0
 4:1/0/texture_origin = Vector2i(0, 200)
+4:1/0/modulate = Color(0.735357, 0.735357, 0.735357, 1)
 4:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5he1u")
 4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 3:1/0 = 0
 3:1/0/texture_origin = Vector2i(0, 200)
+3:1/0/modulate = Color(0.735357, 0.735357, 0.735357, 1)
 3:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5he1u")
 3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 2:1/0 = 0
 2:1/0/texture_origin = Vector2i(0, 200)
+2:1/0/modulate = Color(0.735357, 0.735357, 0.735357, 1)
 2:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5he1u")
 2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 1:1/0 = 0
 1:1/0/texture_origin = Vector2i(0, 200)
+1:1/0/modulate = Color(0.735357, 0.735357, 0.735357, 1)
 1:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5he1u")
 1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 0:1/0 = 0
 0:1/0/texture_origin = Vector2i(0, 200)
+0:1/0/modulate = Color(0.735357, 0.735357, 0.735357, 1)
 0:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5he1u")
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 0:2/0 = 0
 0:2/0/texture_origin = Vector2i(0, 200)
+0:2/0/modulate = Color(0.735357, 0.735357, 0.735357, 1)
 0:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5he1u")
 0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 1:2/0 = 0
 1:2/0/texture_origin = Vector2i(0, 200)
+1:2/0/modulate = Color(0.735357, 0.735357, 0.735357, 1)
 1:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5he1u")
 1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 2:2/0 = 0
 2:2/0/texture_origin = Vector2i(0, 200)
+2:2/0/modulate = Color(0.735357, 0.735357, 0.735357, 1)
 2:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5he1u")
 2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 3:2/0 = 0
 3:2/0/texture_origin = Vector2i(0, 200)
+3:2/0/modulate = Color(0.735357, 0.735357, 0.735357, 1)
 3:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5he1u")
 3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 4:2/0 = 0
 4:2/0/texture_origin = Vector2i(0, 200)
+4:2/0/modulate = Color(0.735357, 0.735357, 0.735357, 1)
 4:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5he1u")
 4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 5:2/0 = 0
 5:2/0/texture_origin = Vector2i(0, 200)
+5:2/0/modulate = Color(0.735357, 0.735357, 0.735357, 1)
 5:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5he1u")
 5:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 5:3/0 = 0
 5:3/0/texture_origin = Vector2i(0, 200)
+5:3/0/modulate = Color(0.735357, 0.735357, 0.735357, 1)
 5:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5he1u")
 5:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 4:3/0 = 0
 4:3/0/texture_origin = Vector2i(0, 200)
+4:3/0/modulate = Color(0.735357, 0.735357, 0.735357, 1)
 4:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5he1u")
 4:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 3:3/0 = 0
 3:3/0/texture_origin = Vector2i(0, 200)
+3:3/0/modulate = Color(0.735357, 0.735357, 0.735357, 1)
 3:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5he1u")
 3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 2:3/0 = 0
 2:3/0/texture_origin = Vector2i(0, 200)
+2:3/0/modulate = Color(0.735357, 0.735357, 0.735357, 1)
 2:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5he1u")
 2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 1:3/0 = 0
 1:3/0/texture_origin = Vector2i(0, 200)
+1:3/0/modulate = Color(0.735357, 0.735357, 0.735357, 1)
 1:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5he1u")
 1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 0:3/0 = 0
 0:3/0/texture_origin = Vector2i(0, 200)
+0:3/0/modulate = Color(0.735357, 0.735357, 0.735357, 1)
 0:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5he1u")
 0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, 0, 32, 64, 0)
 
@@ -577,8 +602,9 @@ navigation_polygon = SubResource("NavigationPolygon_kek77")
 
 [node name="Scenery" type="TileMapLayer" parent="."]
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAADAAMAAAAAAAAAAAAEAPv/AAAAAAAAAAD//wAAAAAAAAAAAAAAAAMAAAAAAAAAAAD3/xQAAAAAAAAAAAD3/xUAAAAAAAAAAAD3/xYAAQAEAAEAAAD2/xUAAAAAAAAAAADx/w4AAQAAAAMAAADx/w8AAQADAAEAAADx/xAAAQAEAAAAAADx/xEAAQABAAEAAAD2/wgACQAAAAAAAAD1/wcACQAAAAAAAAD1/wYACQAAAAAAAAD1/wUACQAAAAAAAAD0/wUACQAAAAAAAAD3/wMACQAAAAAAAAD3/wIACQAAAAAAAAD2/wEACQAAAAAAAAD4/wQACQAAAAAAAAD7/xgAAAAAAAAAAADz//j/AQAAAAMAAADy//n/AQAFAAEAAAAAAPL/AQAFAAEAAAD//xgAAQAEAAEAAAD+/xUAAQAEAAAAAAAEAA4AAQAEAAAAAAD3/+//AAAAAAAAAAD3//D/AAAAAAAAAAD3//H/AAAAAAAAAAD3//L/AAAAAAAAAAD2//P/AAAAAAAAAAD3//T/AQABAAEAAAD8/wsAAAAAAAAAAAD8/woAAAAAAAAAAAD7/wsAAQABAAMAAAD7/woAAAAAAAAAAAD7/wgAAAAAAAAAAAD///b/AQAEAAEAAAD///f/AQAEAAEAAAAIAAQAAQABAAEAAAAHAAUAAQAAAAEAAAAIAAYAAQAAAAMAAAD9/wMAAQAEAAAAAAD+/wwAAQAEAAAAAAAFABAAAQAAAAEAAAADABEAAQAEAAAAAAAIAAUAAQAEAAEAAAD2/xcAAQAAAAMAAAD3//X/AQABAAEAAAD3//b/AQAEAAAAAAD2//f/AQACAAAAAADs/wEAAQACAAEAAADt/wIAAQAFAAEAAADt/w4AAQAEAAAAAADu/xAAAQAEAAEAAADt/xEAAQACAAEAAAD7////AQAEAAEAAAAEAA0AAQABAAEAAAD3/xoAAQABAAEAAAD6/wMAAQABAAEAAAD6/wAAAQABAAEAAAD+//H/AQABAAEAAAD///L/AQABAAEAAAD///P/AQABAAEAAAD///T/AQABAAEAAAD///X/AQABAAEAAAAEABMAAQABAAEAAAADABMAAQAAAAMAAAD6/wQAAQAAAAMAAAADAB0AAQAAAAMAAAADAPP/AQAAAAMAAAD7/+//AQAAAAMAAAD0//f/AQAAAAMAAADt/xAAAQAAAAMAAADy//f/AQAAAAMAAAAAABgAAQAAAAMAAAAAABUAAQACAAEAAADz//z/AQAEAAMAAAD4/wcAAQAEAAMAAAAEAPj/AQAEAAMAAADx/x0AAQAEAAMAAADw/xYAAQAEAAMAAADw//n/AQAEAAMAAAD3//v/AQAEAAIAAADv/wYAAQAEAAIAAAD1/xoAAQAEAAIAAAA=")
+tile_map_data = PackedByteArray("AAD3/xYAAQAEAAEAAADx/w4AAQAAAAMAAADx/w8AAQADAAEAAADx/xAAAQAEAAAAAADx/xEAAQABAAEAAAD2/wgACQAAAAAAAAD1/wcACQAAAAAAAAD1/wYACQAAAAAAAAD0/wUACQAAAAAAAAD3/wMACQAAAAAAAAD3/wIACQAAAAAAAAD2/wEACQAAAAAAAAD4/wQACQAAAAAAAADz//j/AQAAAAMAAADy//n/AQAFAAEAAAAAAPL/AQAFAAEAAAD//xgAAQAEAAEAAAAEAA4AAQAEAAAAAAD3//T/AQABAAEAAAD7/wsAAQABAAMAAAD///b/AQAEAAEAAAD///f/AQAEAAEAAAAIAAQAAQABAAEAAAAHAAUAAQAAAAEAAAAIAAYAAQAAAAMAAAD9/wMAAQAEAAAAAAD+/wwAAQAEAAAAAAAFABAAAQAAAAEAAAADABEAAQAEAAAAAAAIAAUAAQAEAAEAAAD2/xcAAQAAAAMAAAD3//X/AQABAAEAAAD3//b/AQAEAAAAAAD2//f/AQACAAAAAADs/wEAAQACAAEAAADt/wIAAQAFAAEAAADt/w4AAQAEAAAAAADu/xAAAQAEAAEAAADt/xEAAQACAAEAAAD7////AQAEAAEAAAAEAA0AAQABAAEAAAD3/xoAAQABAAEAAAD6/wMAAQABAAEAAAD6/wAAAQABAAEAAAD+//H/AQABAAEAAAD///L/AQABAAEAAAD///P/AQABAAEAAAD///T/AQABAAEAAAD///X/AQABAAEAAAAEABMAAQABAAEAAAADABMAAQAAAAMAAAD6/wQAAQAAAAMAAAADAB0AAQAAAAMAAAADAPP/AQAAAAMAAAD7/+//AQAAAAMAAAD0//f/AQAAAAMAAADt/xAAAQAAAAMAAADy//f/AQAAAAMAAAAAABgAAQAAAAMAAADz//z/AQAEAAMAAAD4/wcAAQAEAAMAAAAEAPj/AQAEAAMAAADx/x0AAQAEAAMAAADw/xYAAQAEAAMAAADw//n/AQAEAAMAAAD3//v/AQAEAAIAAADv/wYAAQAEAAIAAAD1/xoAAQAEAAIAAAACAP7/AQACAAIAAAA=")
 tile_set = SubResource("TileSet_w48qg")
+navigation_enabled = false
 
 [node name="Fog" type="TileMapLayer" parent="."]
 light_mask = 0
@@ -593,71 +619,48 @@ SemiFogTileId = 1
 
 [node name="Player" parent="." instance=ExtResource("8_5vw27")]
 unique_name_in_owner = true
-position = Vector2(-101, 125)
+position = Vector2(-327, 193)
 
 [node name="Monster" parent="." instance=ExtResource("14_w48qg")]
-position = Vector2(-1261, 785)
+position = Vector2(-1466, 479)
 script = ExtResource("15_vivmo")
 
 [node name="Lights" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="Lighter" parent="Lights" instance=ExtResource("12_dg77c")]
-position = Vector2(-2476, -156)
+[node name="Torch" parent="Lights" instance=ExtResource("31_c6pm6")]
+position = Vector2(-300, -213)
 
-[node name="Lighter2" parent="Lights" instance=ExtResource("12_dg77c")]
-position = Vector2(-1515, 918)
+[node name="Torch2" parent="Lights" instance=ExtResource("31_c6pm6")]
+position = Vector2(-616, -370)
 
-[node name="Lighter3" parent="Lights" instance=ExtResource("12_dg77c")]
-position = Vector2(217, 572)
+[node name="Torch3" parent="Lights" instance=ExtResource("31_c6pm6")]
+position = Vector2(204, 41)
 
-[node name="Lighter4" parent="Lights" instance=ExtResource("12_dg77c")]
-position = Vector2(-101, 386)
+[node name="Torch4" parent="Lights" instance=ExtResource("31_c6pm6")]
+position = Vector2(-2014, -49)
 
-[node name="Lighter5" parent="Lights" instance=ExtResource("12_dg77c")]
-position = Vector2(266, 73)
+[node name="Torch5" parent="Lights" instance=ExtResource("31_c6pm6")]
+position = Vector2(-1465, 225)
 
-[node name="Lighter6" parent="Lights" instance=ExtResource("12_dg77c")]
-position = Vector2(-217, -337)
+[node name="Torch6" parent="Lights" instance=ExtResource("31_c6pm6")]
+position = Vector2(-1066, 420)
 
-[node name="Lighter7" parent="Lights" instance=ExtResource("12_dg77c")]
-position = Vector2(311, -158)
+[node name="Torch7" parent="Lights" instance=ExtResource("31_c6pm6")]
+position = Vector2(-354, 781)
 
-[node name="Lighter8" parent="Lights" instance=ExtResource("12_dg77c")]
-position = Vector2(-657, -231)
+[node name="Campfire" parent="Lights" instance=ExtResource("32_5he1u")]
+position = Vector2(-544, 202)
 
-[node name="Lighter9" parent="Lights" instance=ExtResource("12_dg77c")]
-position = Vector2(-2016, 497)
-
-[node name="Lighter10" parent="Lights" instance=ExtResource("12_dg77c")]
-position = Vector2(-853, 437)
-
-[node name="Lighter13" parent="Lights" instance=ExtResource("12_dg77c")]
-position = Vector2(-1589, 42)
-
-[node name="Lighter12" parent="Lights" instance=ExtResource("12_dg77c")]
-position = Vector2(-568, 268)
-
-[node name="Lighter11" parent="Lights" instance=ExtResource("12_dg77c")]
-position = Vector2(-2435, 223)
-
-[node name="Lighter14" parent="Lights" instance=ExtResource("12_dg77c")]
-position = Vector2(-1063, 125)
-
-[node name="Lighter15" parent="Lights" instance=ExtResource("12_dg77c")]
-position = Vector2(-1399, 484)
-
-[node name="Lighter16" parent="Lights" instance=ExtResource("12_dg77c")]
-position = Vector2(-104, 11)
-
-[node name="Lighter16" parent="Lights/Lighter16" instance=ExtResource("12_dg77c")]
-position = Vector2(-1286, 175)
+[node name="Campfire2" parent="Lights" instance=ExtResource("32_5he1u")]
+position = Vector2(-1214, 156)
 
 [node name="Darkness" type="CanvasModulate" parent="."]
 position = Vector2(-4, -4)
 color = Color(0.56241494, 0.5540512, 0.41259432, 1)
 
 [node name="Weather" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Rain" parent="Weather" instance=ExtResource("2_ycdy4")]
 position = Vector2(-56, 157)

@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://c2bn68opfr0n7"]
 
-[ext_resource type="Script" uid="uid://c5317jkoggpkc" path="res://scenes/GameSettings.cs" id="1_t6p7j"]
-[ext_resource type="PackedScene" uid="uid://8q8tufi1odbb" path="res://scenes/window.tscn" id="1_vtnhb"]
-[ext_resource type="Script" uid="uid://o2ivvg5w5cmo" path="res://scenes/WeatherCheckButton.cs" id="2_yo8eh"]
-[ext_resource type="Script" uid="uid://becf5xggxf82q" path="res://scenes/FogCheckButton.cs" id="4_t6p7j"]
+[ext_resource type="Script" uid="uid://c5317jkoggpkc" path="res://scenes/ui/GameSettings.cs" id="1_t6p7j"]
+[ext_resource type="PackedScene" uid="uid://8q8tufi1odbb" path="res://scenes/ui/window.tscn" id="1_vtnhb"]
+[ext_resource type="Script" uid="uid://o2ivvg5w5cmo" path="res://scenes/ui/WeatherCheckButton.cs" id="2_yo8eh"]
+[ext_resource type="Script" uid="uid://becf5xggxf82q" path="res://scenes/ui/FogCheckButton.cs" id="4_t6p7j"]
 
 [node name="GameSettings" type="Control"]
 layout_mode = 3

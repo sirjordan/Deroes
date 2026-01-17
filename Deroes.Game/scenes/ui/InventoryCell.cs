@@ -1,4 +1,5 @@
 using Godot;
+using System.Linq;
 
 public partial class InventoryCell : Panel
 {
@@ -12,6 +13,8 @@ public partial class InventoryCell : Panel
 	private Tween _tween;
 	private Vector2 _originalScale;
 	private StyleBoxFlat _style;
+
+	private static Item _picked;
 
 	public override void _Ready()
 	{
@@ -27,6 +30,51 @@ public partial class InventoryCell : Panel
 
 		MouseEntered += OnMouseEntered;
 		MouseExited += OnMouseExited;
+		GuiInput += InventoryCell_GuiInput;
+
+		_picked = null;
+	}
+
+	public override void _PhysicsProcess(double delta)
+	{
+		if (_picked != null)
+		{
+			// Move the picked item with the mouse
+			_picked.GlobalPosition = GetViewport().GetMousePosition() - _picked.Size * 0.5f;
+		}
+	}
+
+	private void InventoryCell_GuiInput(InputEvent @event)
+	{
+		if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
+		{
+			var cellItem = GetChildren().FirstOrDefault(c => c is Item) as Item;
+			if (_picked == null)
+			{
+				if (cellItem != null)
+				{
+					// Pick
+					cellItem.Scale = HoverScale;
+					_picked = cellItem;
+				}
+			}
+			else
+			{
+				if (cellItem == null)
+				{
+					// Place
+					_picked.GetParent().RemoveChild(_picked);
+					AddChild(_picked);
+					_picked.Position = Vector2.Zero;
+					_picked.Scale = _originalScale;
+					_picked = null;
+				}
+				else
+				{
+					// Replace and pick
+				}
+			}
+		}
 	}
 
 	private void OnMouseEntered()

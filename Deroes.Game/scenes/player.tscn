@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dliiwyry2hh76" path="res://assets/characters/SW.png" id="8_op7ga"]
 [ext_resource type="Texture2D" uid="uid://dyljkqoaw2dyl" path="res://assets/characters/W.png" id="9_q13i1"]
 [ext_resource type="Texture2D" uid="uid://c4kocrpt1ema1" path="res://assets/characters/Knight_Idle_dir1.png" id="10_pylmc"]
-[ext_resource type="Script" uid="uid://b2bdjl6b0igd" path="res://scenes/SelectionCircle.cs" id="11_d2wvv"]
+[ext_resource type="Script" uid="uid://b2bdjl6b0igd" path="res://scenes/ui/SelectionCircle.cs" id="11_d2wvv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xuqvo"]
 atlas = ExtResource("2_nvl01")
@@ -733,12 +733,12 @@ rotation = 1.0472
 shape = SubResource("CircleShape2D_n7ghd")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
 position = Vector2(-1, -53)
-color = Color(0.977138, 0.851003, 0.352297, 1)
+color = Color(0.9980077, 0.835852, 0.4430228, 1)
 energy = 0.5
 shadow_enabled = true
 shadow_filter = 1
+shadow_item_cull_mask = 2
 texture = SubResource("GradientTexture2D_nvl01")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]

@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=3 uid="uid://bagktndap8fga"]
+
+[ext_resource type="PackedScene" uid="uid://b1m3t042y631y" path="res://scenes/lights/lighter_node.tscn" id="1_x720n"]
+[ext_resource type="Texture2D" uid="uid://bemosmsis2gyl" path="res://assets/environment/objects/campfire-Sheet.png" id="2_7wpd0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gki1p"]
+atlas = ExtResource("2_7wpd0")
+region = Rect2(0, 0, 36, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4oyc4"]
+atlas = ExtResource("2_7wpd0")
+region = Rect2(36, 0, 36, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1kld"]
+atlas = ExtResource("2_7wpd0")
+region = Rect2(72, 0, 36, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jslsh"]
+atlas = ExtResource("2_7wpd0")
+region = Rect2(108, 0, 36, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cicb4"]
+atlas = ExtResource("2_7wpd0")
+region = Rect2(144, 0, 36, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0t0lm"]
+atlas = ExtResource("2_7wpd0")
+region = Rect2(180, 0, 36, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p1nhy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gki1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4oyc4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j1kld")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jslsh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cicb4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0t0lm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="Campfire" type="Node2D"]
+
+[node name="Lighter" parent="." instance=ExtResource("1_x720n")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_p1nhy")
+autoplay = "default"
+frame_progress = 0.23789078

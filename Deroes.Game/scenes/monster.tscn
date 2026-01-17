@@ -609,11 +609,13 @@ rotation = 1.0472
 shape = SubResource("CircleShape2D_rux75")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 position = Vector2(-1, 35)
 color = Color(0.977138, 0.851003, 0.352297, 1)
 energy = 0.5
 shadow_enabled = true
 shadow_filter = 1
+shadow_item_cull_mask = 0
 texture = SubResource("GradientTexture2D_nvl01")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

@@ -50,7 +50,6 @@ public partial class Player : CharacterBody2D
 			RevealMap();
 		}
 	}
-
 	private void Stand()
 	{
 		MovementSprite.Play("default");
