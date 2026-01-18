@@ -18,9 +18,9 @@ public partial class InventoryCell : Panel
 
 	public override void _Ready()
 	{
+		_picked = null;
 		_originalScale = Scale;
 		PivotOffset = Size / 2;
-		Resized += () => PivotOffset = Size / 2;
 
 		// Clone the panel style
 		_style = (StyleBoxFlat)GetThemeStylebox("panel").Duplicate();
@@ -30,12 +30,11 @@ public partial class InventoryCell : Panel
 
 		MouseEntered += OnMouseEntered;
 		MouseExited += OnMouseExited;
-		GuiInput += InventoryCell_GuiInput;
-
-		_picked = null;
+		GuiInput += OnGuiInput;
+		Resized += () => PivotOffset = Size / 2;
 	}
 
-	public override void _PhysicsProcess(double delta)
+	public override void _Process(double delta)
 	{
 		if (_picked != null)
 		{
@@ -44,7 +43,7 @@ public partial class InventoryCell : Panel
 		}
 	}
 
-	private void InventoryCell_GuiInput(InputEvent @event)
+	private void OnGuiInput(InputEvent @event)
 	{
 		if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
 		{
@@ -54,8 +53,8 @@ public partial class InventoryCell : Panel
 				if (cellItem != null)
 				{
 					// Pick
-					cellItem.Scale = HoverScale;
-					_picked = cellItem;
+					Pick(cellItem);
+
 				}
 			}
 			else
@@ -63,17 +62,45 @@ public partial class InventoryCell : Panel
 				if (cellItem == null)
 				{
 					// Place
-					_picked.GetParent().RemoveChild(_picked);
-					AddChild(_picked);
-					_picked.Position = Vector2.Zero;
-					_picked.Scale = _originalScale;
-					_picked = null;
+					Place();
 				}
 				else
 				{
-					// Replace and pick
+					if (_picked == cellItem)
+					{
+						// Return it if the same cell
+						Unpick();
+					}
+					else
+					{
+						// Replace and pick
+						Place();
+						Pick(cellItem);
+					}
 				}
 			}
+		}
+
+		void Unpick()
+		{
+			_picked.Position = Vector2.Zero;
+			_picked.Scale = _originalScale;
+			_picked.ZIndex -= 1;
+			_picked = null;
+		}
+
+		void Pick(Item cellItem)
+		{
+			cellItem.Scale = HoverScale;
+			_picked = cellItem;
+			_picked.ZIndex += 1;
+		}
+
+		void Place()
+		{
+			_picked.GetParent().RemoveChild(_picked);
+			AddChild(_picked);
+			Unpick();
 		}
 	}
 
@@ -81,12 +108,14 @@ public partial class InventoryCell : Panel
 	{
 		EnableShadow();
 		StartTween(HoverScale);
+		ZIndex += 1;
 	}
 
 	private void OnMouseExited()
 	{
 		DisableShadow();
 		StartTween(_originalScale);
+		ZIndex -= 1;
 	}
 
 	private void StartTween(Vector2 targetScale)

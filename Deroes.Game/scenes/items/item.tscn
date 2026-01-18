@@ -15,6 +15,6 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jgeia")
 script = ExtResource("1_jgeia")
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Image" type="Sprite2D" parent="."]
 position = Vector2(16, 21)
 texture = ExtResource("2_fat2f")

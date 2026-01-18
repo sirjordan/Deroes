@@ -12,14 +12,14 @@ gradient = SubResource("Gradient_tcx0w")
 width = 800
 height = 800
 fill = 1
-fill_from = Vector2(0.487179, 0.482906)
-fill_to = Vector2(0.85470086, 0.23931624)
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.239)
 
 [node name="Lighter" type="Node2D"]
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_mcq7c")
-MinEnergy = 0.2
-MaxEnergy = 0.75
+MinEnergy = 0.5
+MaxEnergy = 0.6
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -29,7 +29,7 @@ shape = SubResource("CircleShape2D_mcq7c")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 color = Color(0.982491, 0.861243, 0.569161, 1)
-energy = 0.75
+energy = 0.6
 range_item_cull_mask = 3
 shadow_enabled = true
 shadow_filter = 2
@@ -37,5 +37,5 @@ texture = SubResource("GradientTexture2D_mcq7c")
 texture_scale = 1.5
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.05
+wait_time = 0.1
 autostart = true

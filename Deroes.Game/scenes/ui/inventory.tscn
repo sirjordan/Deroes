@@ -45,10 +45,11 @@ expand_margin_bottom = 3.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uae8j"]
 bg_color = Color(0.61085254, 0.5896407, 0.46553952, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
+border_color = Color(0.5288135, 0.5099969, 0.39105093, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s887n"]
 bg_color = Color(0.07450981, 0.07450981, 0.07450981, 1)

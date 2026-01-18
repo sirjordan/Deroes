@@ -3,13 +3,13 @@ using System;
 
 public partial class LighterNode : Node2D
 {
-	[Export] public float MinEnergy { get; set; } = 0.25f;
+	[Export] public float MinEnergy { get; set; } = 0.5f;
 	[Export] public float MaxEnergy { get; set; } = 0.6f;
 	[Export] public float Speed { get; set; } = 0.3f;
 
-
-	private bool _glowing = false;
-	private PointLight2D _light; 
+	private bool _glowing;
+	private PointLight2D _light;
+	private Random _rnd;
 
 	public override void _Ready()
 	{
@@ -17,6 +17,9 @@ public partial class LighterNode : Node2D
 		timer.Timeout += Timer_Timeout;
 
 		_light = GetNode<PointLight2D>("PointLight2D");
+
+		_rnd = new Random();
+		_glowing = false;
 	}
 
 	public override void _Process(double delta)
@@ -27,6 +30,7 @@ public partial class LighterNode : Node2D
 			{
 				_light.Energy -= (float)delta * Speed;
 			}
+
 		}
 		else
 		{
@@ -39,13 +43,14 @@ public partial class LighterNode : Node2D
 
 	private void Timer_Timeout()
 	{
-		var chance = 0.5;
-		var rnd = new Random();
-		var prob = rnd.NextDouble();
+		var chance = 0.5f;
+		var prob = (float)_rnd.NextDouble();
 
 		if (prob < chance)
 		{
 			_glowing = !_glowing;
 		}
+
+		Position = new Vector2(prob / 2, prob / 2);
 	}
 }
