@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dd2imjsnarr1u" path="res://assets/characters/dh_icon.png" id="1_pq34g"]
 [ext_resource type="Texture2D" uid="uid://c17o58ulyo5ol" path="res://assets/misc/circle_red_200.png" id="2_xx6ec"]
 [ext_resource type="Texture2D" uid="uid://b75y4lyfacld6" path="res://assets/skills/pointy-sword.png" id="4_qsas3"]
-[ext_resource type="PackedScene" uid="uid://b6jyq60ewywvt" path="res://scenes/potion.tscn" id="4_xx6ec"]
+[ext_resource type="PackedScene" uid="uid://b6jyq60ewywvt" path="res://scenes/ui/potion_indicator.tscn" id="4_xx6ec"]
 [ext_resource type="Texture2D" uid="uid://s6adswjccs3d" path="res://assets/skills/shield-bash.png" id="5_iay36"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4r5p3"]

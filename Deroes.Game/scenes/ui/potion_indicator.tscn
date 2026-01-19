@@ -1,15 +1,17 @@
 [gd_scene load_steps=2 format=3 uid="uid://b6jyq60ewywvt"]
 
-[ext_resource type="Texture2D" uid="uid://dci4mvm05872e" path="res://assets/items/PotionsPack1.png" id="1_ym5ma"]
+[ext_resource type="Texture2D" uid="uid://dci4mvm05872e" path="res://assets/items/PotionsPack1.png" id="1_dt2wy"]
 
-[node name="Potion" type="Node2D"]
+[node name="Potion" type="Panel"]
+offset_right = 32.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_ym5ma")
+texture = ExtResource("1_dt2wy")
 region_enabled = true
 region_rect = Rect2(0, 32, 32, 32)
 
 [node name="Count" type="Label" parent="."]
+layout_mode = 0
 offset_left = -11.0
 offset_top = -17.0
 offset_right = 29.0

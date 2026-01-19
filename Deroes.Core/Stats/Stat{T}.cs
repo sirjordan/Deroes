@@ -10,6 +10,7 @@ namespace Deroes.Core.Stats
 		/// Original base value, without gear or other modifications
 		/// </summary>
 		public T BaseValue { get; private set; }
+
 		/// <summary>
 		/// Value with gear and other modifiers applied
 		/// </summary>

@@ -12,18 +12,22 @@ namespace Deroes.Core.Skills
 		/// Normal, throw, shoot attacks
 		/// </summary>
 		public DefaultSkillSet Defaults { get; private set; }
+
 		/// <summary>
 		/// Unique per hero class
 		/// </summary>
 		public SkillTree? Specials { get; private set; }
+
 		/// <summary>
 		/// Skill selected as Primary from available
 		/// </summary>
 		public Skill Primary => _primary;
+
 		/// <summary>
 		/// Skill selected as Secondary from available
 		/// </summary>
 		public Skill Secondary => _secondary;
+
 		/// <summary>
 		/// Added additionaly by Items
 		/// </summary>

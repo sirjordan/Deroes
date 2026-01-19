@@ -5,15 +5,18 @@ namespace Deroes.Core.Stats
 	public class Vital : IStatModifiable<Vital>, ILevelUpSubscriber
 	{
 		public double Remaining { get; private set; }
+
 		public double Base { get; private init; }
 		/// <summary>
 		/// Value received per level
 		/// </summary>
 		public double LevelCoef { get; private init; }
+
 		/// <summary>
 		/// Value received per arrtibute
 		/// </summary>
 		public double AttributeCoef { get; private init; }
+
 		public double Max { get; private set; }
 
 		public Vital(double @base, double levelCoef, double attrCoef)

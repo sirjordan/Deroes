@@ -40,10 +40,11 @@ public partial class Fog : TileMapLayer
 			{
 				int manhattan = Mathf.Abs(x) + Mathf.Abs(y);
 				if (manhattan > radius)
+				{
 					continue;
+				}
 
 				Vector2I cell = center + new Vector2I(x, y);
-
 				EraseCell(cell);
 			}
 		}
