@@ -3,7 +3,6 @@ using Godot;
 public partial class Minimap : TextureRect
 {
 	private Viewport _miniMapViewport;
-	private TileMapLayer _tilemapCopy;
 	private Camera2D _minimapCamera;
 	private CharacterBody2D _player;
 
@@ -12,10 +11,9 @@ public partial class Minimap : TextureRect
 		// UI control where minimap appears
 		_miniMapViewport = new SubViewport()
 		{
-			Size = new Vector2I((int)Size.X, (int)Size.Y), 
+			Size = new Vector2I((int)Size.X,(int)Size.Y),
 			RenderTargetUpdateMode = SubViewport.UpdateMode.Always,
-			RenderTargetClearMode = SubViewport.ClearMode.Always,
-			//TransparentBg = true
+			RenderTargetClearMode = SubViewport.ClearMode.Always
 		};
 		AddChild(_miniMapViewport);
 
@@ -30,10 +28,23 @@ public partial class Minimap : TextureRect
 
 		// Duplicate tilemap into viewport
 		var tilemap = GetTree().Root.FindChild("Ground", true, false);
-		_tilemapCopy = tilemap.Duplicate() as TileMapLayer;
+		var _tilemapCopy = tilemap.Duplicate() as TileMapLayer;
+		_tilemapCopy.ProcessMode = ProcessModeEnum.Disabled;
 		_miniMapViewport.AddChild(_tilemapCopy);
 
+		var scenery = GetTree().Root.FindChild("Scenery", true, false) as TileMapLayer;
+		var sceneryCopy = scenery.Duplicate() as TileMapLayer;
+		sceneryCopy.ProcessMode = ProcessModeEnum.Disabled;
+		_miniMapViewport.AddChild(sceneryCopy);
+
+		var fog = GetTree().Root.FindChild("Fog", true, false) as TileMapLayer;
+		var fogCopy = fog.Duplicate() as TileMapLayer;
+		fogCopy.ProcessMode = ProcessModeEnum.Disabled;
+		_miniMapViewport.AddChild(fogCopy);
+
 		Texture = _miniMapViewport.GetTexture();
+		TextureFilter = TextureFilterEnum.NearestWithMipmaps;
+		TextureRepeat = TextureRepeatEnum.Disabled;
 	}
 
 	public override void _Process(double delta)

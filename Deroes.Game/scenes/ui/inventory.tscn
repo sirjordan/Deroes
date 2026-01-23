@@ -90,9 +90,10 @@ offset_bottom = 290.0
 grow_horizontal = 2
 grow_vertical = 2
 tab_alignment = 1
-current_tab = 0
+current_tab = 2
 
 [node name="Gear" type="Control" parent="Window/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -552,7 +553,6 @@ grow_vertical = 2
 color = Color(0.19607843, 0.19607843, 0.19607843, 1)
 
 [node name="Skills" type="Control" parent="Window/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 

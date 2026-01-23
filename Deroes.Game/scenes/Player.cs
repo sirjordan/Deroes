@@ -1,11 +1,18 @@
 using Godot;
+using System;
 
 public partial class Player : CharacterBody2D
 {
-	private NavigationAgent2D _agent;
+	private NavigationAgent2D _navAgent;
 	private Vector2 _dirOrientation;
 	private float _movementSpeed;
 	private Vector2 _playerPosition;
+
+	// Stairs only
+	private TileMapLayer _ground;
+	public float _stepHeight = 4f;     
+	public float _stepSpeed = 10f;   
+	private float _stepTimer = 0f;
 
 	[Export] public float WalkSpeed { get; set; } = 180f;
 	[Export] public float RunSpeed { get; set; } = 260f;
@@ -14,7 +21,8 @@ public partial class Player : CharacterBody2D
 
 	public override void _Ready()
 	{
-		_agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
+		_navAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
+		_ground = GetNode<TileMapLayer>("../Ground");
 		_movementSpeed = WalkSpeed;
 
 		RevealMap();
@@ -32,7 +40,7 @@ public partial class Player : CharacterBody2D
 		{
 			var target = GetGlobalMousePosition();
 
-			_agent.TargetPosition = target;
+			_navAgent.TargetPosition = target;
 			_dirOrientation = (target - GlobalPosition).Normalized();
 			_movementSpeed = mouseEvent.DoubleClick ? RunSpeed : WalkSpeed;
 		}
@@ -40,12 +48,13 @@ public partial class Player : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (_agent.IsNavigationFinished())
+		if (_navAgent.IsNavigationFinished())
 		{
 			Stand();
 		}
 		else
 		{
+			CheckStairs(delta);
 			Move();
 			RevealMap();
 		}
@@ -60,13 +69,11 @@ public partial class Player : CharacterBody2D
 
 	private void Move()
 	{
-		// Handle moving and directional sprites
-
 		var dir_sprite = GetDirectionByAngle(_dirOrientation);
 		MovementSprite.Play(dir_sprite);
 
 		// Cartesian target from Navigation
-		Vector2 nextPosCartesian = _agent.GetNextPathPosition();
+		Vector2 nextPosCartesian = _navAgent.GetNextPathPosition();
 
 		// Convert both current position and target to isometric space
 		Vector2 currentIso = ToIso(GlobalPosition);
@@ -132,13 +139,37 @@ public partial class Player : CharacterBody2D
 			return "SE";
 	}
 
-	public void RevealMap()
+	private void RevealMap()
 	{
 		// Reveal only if player is changing position
 		if (_playerPosition != GlobalPosition)
 		{
 			_playerPosition = GlobalPosition;
 			SignalManager.Instance.EmitSignal(SignalManager.SignalName.RevealMap, GlobalPosition, SightRange);
+		}
+	}
+
+	private void CheckStairs(double delta)
+	{
+		Vector2I tilePos = _ground.LocalToMap(GlobalPosition);
+		TileData data = _ground.GetCellTileData(tilePos);
+
+		bool onStairs = data != null && (string)data.GetCustomData("type") == "stairs";
+
+		if (onStairs && Velocity.Length() > 0.1f)
+		{
+			_movementSpeed = WalkSpeed / 1.75f;
+			_stepTimer += (float)delta * _stepSpeed;
+
+			float step = Mathf.Floor(_stepTimer) % 2 == 0 ? 0f : _stepHeight;
+			MovementSprite.Position = new Vector2(MovementSprite.Position.X, step);
+		}
+		else
+		{
+			_movementSpeed = WalkSpeed;
+			_stepTimer = 0f;
+
+			MovementSprite.Position = Vector2.Zero;
 		}
 	}
 }

@@ -10,6 +10,7 @@ public partial class Terrain : TileMapLayer
 		var filled_tiles = GetUsedCells();
 		foreach (var filled_tile in filled_tiles)
 		{
+			
 			var neighboring_tiles = GetSurroundingCells(filled_tile);
 			foreach (var neighbor in neighboring_tiles)
 			{

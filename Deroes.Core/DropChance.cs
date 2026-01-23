@@ -16,7 +16,7 @@
 		p8/8 = 1.64%
 		*/
 
-		public static double DefaultChance => 37.5;
+		public const double DefaultChance = 37.5;
 		public double Chance { get; private set; }
 
 		private DropChance(double perentage)
